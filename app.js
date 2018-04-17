@@ -4,8 +4,8 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     port = 8080;
 
-console.log(path.join(__dirname, '/templates/pdxbikesafe/'));
-app.use(express.static(path.join(__dirname, '/templates/pdxbikesafe/')));
+console.log(path.join(__dirname, '/templates/biketag/'));
+app.use(express.static(path.join(__dirname, '/templates/biketag/')));
 app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 
 app.use("/assets", function(req, res) {
