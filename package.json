@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "A website for biketag.org",
   "author": "Ken Eucker <keneucker@gmail.com>",
-  "contributors": [
-
-  ],
+  "contributors": [],
   "bin": {},
   "scripts": {},
   "main": "index.js",
