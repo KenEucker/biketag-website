@@ -1,0 +1,29 @@
+{
+  "name": "biketag-website",
+  "version": "0.1.0",
+  "description": "A website for biketag.org",
+  "author": "Ken Eucker <keneucker@gmail.com>",
+  "contributors": [
+
+  ],
+  "bin": {},
+  "scripts": {},
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KenEucker/biketag-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KenEucker/biketag-website/issues"
+  },
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.14.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.4.3"
+  },
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  },
+  "license": "Unlicense"
+}
