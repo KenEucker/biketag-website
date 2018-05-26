@@ -11,11 +11,11 @@ var imgurRefreshToken = null,
     imgurAccessToken = null,
     imgurProfile = null;
 
-    // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
 
 passport.use(new ImgurStrategy({
     clientID: '79ea70333c45883',
