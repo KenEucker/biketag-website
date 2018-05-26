@@ -5,6 +5,34 @@
         imgurAuthorization: 'Client-ID 79ea70333c45883',
         imgurAlbumPictures: null,
 
+        createAlbum: function(ids) {
+
+            var url = 'https://api.imgur.com/3/album/';
+
+            var formData = new FormData();
+            formData.append("ids", ids);
+
+            $.ajax({
+                async: false,
+                crossDomain: true,
+                processData: false,
+                contentType: false,
+                url: url,
+                data: formData,
+                type: 'POST',
+                url: url,
+                headers: {
+                    Authorization: window.imgurIntegration.imgurAuthorization,
+                    Accept: 'application/json'
+                },
+                mimeType: 'multipart/form-data'
+            }).done(function (response) {
+                debugger;
+                console.log(response);
+            });
+
+        },
+
         getImgurAlbumPictures: function (albumHash, callback) {
             if (!albumHash) {
                 albumHash = this.imgurAlbumHash;
@@ -40,18 +68,31 @@
                 albumHash = this.imgurAlbumHash;
             }
 
-            $.ajax({
-                url: 'https://api.imgur.com/3/album/' + albumHash + '/add',
-                data: { ids: ids },
-                success: function (data) {
+            var url = 'https://api.imgur.com/3/album/' + albumHash + '/add';
+            console.log('we want to add the following ids to the album ' + albumHash + ' using the URL ' + url, ids);
 
+            var formData = new FormData();
+            formData.append("ids", ids);
+            formData.append("deleteHashes", ids);
+
+            $.ajax({
+                async: false,
+                crossDomain: true,
+                processData: false,
+                contentType: false,
+                url: url,
+                data: formData,
+                type: 'POST',
+                url: url,
+                headers: {
+                    Authorization: window.imgurIntegration.imgurAuthorization,
+                    Accept: 'application/json'
                 },
-                error: function (err) {
-                    console.log('error assigning images to album from imgur', err);
-                },
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", window.imgurIntegration.imgurAuthorization);
-                },
+                mimeType: 'multipart/form-data'
+            }).done(function (response) {
+                debugger;
+                console.log(response);
+                // window.imgurIntegration.addImagesToAlbum();
             });
         },
 
@@ -116,11 +157,17 @@
         },
 
         init: function() {
-           this.getImgurAlbumPictures();
+           this.showLatestTagImages();
            console.log('imgur integration initialized.');
         }
     };
 
     window.imgurIntegration = imgurIntegration;
     imgurIntegration.init();
+
+    $('form #submitTheDamnFuckingForm').click(function(e) {
+        e.preventDefault();
+        var inputs = $(e.currentTarget.parentNode).find('input[type="file"]');
+        imgurIntegration.uploadFilesToImgur(inputs);
+    });
 })(jQuery);

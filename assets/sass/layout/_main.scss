@@ -78,6 +78,18 @@
 			}
 		}
 
+		#theDamnForm {
+			input[type="file"] {
+				border-width: 2px;
+				border-color: aliceblue;
+				border-style: solid;
+				border-radius: 5px;
+				line-height: 25px;
+				padding: 0 2em;
+				margin-bottom: 1.5em;
+			}
+		}
+
 		@include breakpoint(small) {
 			article {
 				@include padding(2rem, 2rem, (1.5rem, 0, 0.5rem, 0));

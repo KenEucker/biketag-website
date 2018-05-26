@@ -47,6 +47,22 @@
 			}
 		}
 
+		.headingText {
+
+			> * {
+				position: absolute;
+				top: -122px;
+			}
+
+			:nth-child(1) {
+				left: -150px;
+			}
+
+			:nth-child(2) {
+				right: -135px;
+			}
+		}
+
 		.logo {
 			width: 5.5rem;
 			height: 5.5rem;
@@ -78,6 +94,10 @@
 				padding: 3rem 2rem;
 				max-height: 40rem;
 				overflow: hidden;
+				
+				img {
+					max-width: 50vw;
+				}
 
 				> :last-child {
 					margin-bottom: 0;
@@ -193,6 +213,21 @@
 				&:before {
 					top: calc(-2rem - 1px);
 					height: calc(2rem + 1px);
+				}
+			}
+
+			.headingText {
+
+				h1 {
+					top: -80px;
+				}
+
+				:nth-child(1) {
+					left: -120px;
+				}
+	
+				:nth-child(2) {
+					right: -105px;
 				}
 			}
 

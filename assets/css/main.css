@@ -858,10 +858,10 @@ button {
   -webkit-transition: -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out, opacity 0.325s ease-in-out;
   -ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out, opacity 0.325s ease-in-out;
   transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out, opacity 0.325s ease-in-out;
-  background-image: -moz-radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
-  background-image: -webkit-radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
-  background-image: -ms-radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
-  background-image: radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
+  background-image: -moz-radial-gradient(rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 0) 55%);
+  background-image: -webkit-radial-gradient(rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 0) 55%);
+  background-image: -ms-radial-gradient(rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 0) 55%);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 0) 55%);
   max-width: 100%;
   text-align: center; }
   #header > * {
@@ -884,6 +884,13 @@ button {
     margin-top: 0; }
     #header > :first-child:before {
       display: none; }
+  #header .headingText > * {
+    position: absolute;
+    top: -122px; }
+  #header .headingText :nth-child(1) {
+    left: -150px; }
+  #header .headingText :nth-child(2) {
+    right: -135px; }
   #header .logo {
     width: 5.5rem;
     height: 5.5rem;
@@ -910,6 +917,8 @@ button {
       padding: 3rem 2rem;
       max-height: 40rem;
       overflow: hidden; }
+      #header .content .inner img {
+        max-width: 50vw; }
       #header .content .inner > :last-child {
         margin-bottom: 0; }
     #header .content p {
@@ -988,6 +997,12 @@ button {
       #header > *:before {
         top: calc(-2rem - 1px);
         height: calc(2rem + 1px); }
+    #header .headingText h1 {
+      top: -80px; }
+    #header .headingText :nth-child(1) {
+      left: -120px; }
+    #header .headingText :nth-child(2) {
+      right: -105px; }
     #header .logo {
       width: 4.75rem;
       height: 4.75rem;
@@ -1106,6 +1121,14 @@ button {
         background-color: rgba(255, 255, 255, 0.075); }
       #main article .close:active:before {
         background-color: rgba(255, 255, 255, 0.175); }
+  #main #theDamnForm input[type="file"] {
+    border-width: 2px;
+    border-color: aliceblue;
+    border-style: solid;
+    border-radius: 5px;
+    line-height: 25px;
+    padding: 0 2em;
+    margin-bottom: 1.5em; }
   @media screen and (max-width: 736px) {
     #main article {
       padding: 3.5rem 2rem 0.5rem 2rem ; }
