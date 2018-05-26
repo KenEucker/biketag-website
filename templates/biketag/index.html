@@ -43,10 +43,21 @@
 						<!-- Intro -->
 							<article id="tagit">
 								<form id="theDamnForm">
-									<span>Proof you found the mystery location (image)</span><input type="file" name="currentTag" /><br>
-									<span>Next Tag location (image)</span><input type="file" name="nextTag" /><br>
-									<span>Who are you?</span><input type="text" name="name" placeholder="name" /><br>
-									<button id="submitTheDamnFuckingForm">Tag IT!</button>
+									<div class="field half first">
+										<label for="currentTag">Image proof you found the mystery location</label>
+										<input type="file" name="currentTag" />
+									</div>
+									<div class="field half">
+										<label for="nextTag">Image of the next tag location</label>
+										<input type="file" name="nextTag" />
+									</div>
+									<div class="field">
+										<label for="name">Who are you?</label>
+										<input type="text" name="name" placeholder="name" />
+									</div>
+									<ul class="actions">
+										<li><button id="submitTheDamnFuckingForm">Tag IT!</button></li>
+									</ul>
 								</form>
 								
 							</article>

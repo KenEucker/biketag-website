@@ -1120,14 +1120,6 @@ button {
         background-color: rgba(255, 255, 255, 0.075); }
       #main article .close:active:before {
         background-color: rgba(255, 255, 255, 0.175); }
-  #main #theDamnForm input[type="file"] {
-    border-width: 2px;
-    border-color: aliceblue;
-    border-style: solid;
-    border-radius: 5px;
-    line-height: 25px;
-    padding: 0 2em;
-    margin-bottom: 1.5em; }
   @media screen and (max-width: 736px) {
     #main article {
       padding: 3.5rem 2rem 0.5rem 2rem ; }
