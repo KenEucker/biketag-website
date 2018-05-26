@@ -28,7 +28,7 @@ passport.use(new ImgurStrategy({
         imgurProfile = profile;
 
         console.log('received imgur info', accessToken, refreshToken, profile);
-        done();
+        return done(null, user);
     }
 ));
 
