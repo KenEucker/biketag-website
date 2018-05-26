@@ -18,8 +18,7 @@ var imgurTokens = {
 imgurTokens["default"] = imgurTokens["pdx"];
 
 function getSubdomainPrefix (req) {
-    console.log(req.subdomains);
-    return "default";
+    return req.subdomains.length ? req.subdomains[0] : "default";
 }
 
 passport.use(new ImgurStrategy({
