@@ -41,10 +41,12 @@ passport.use(new ImgurStrategy({
         // imgurTokens[subdomain].imgurAccessToken = accessToken;
         // imgurTokens[subdomain].imgurProfile = profile;
 
-        for (var i = 0; i < imgurTokens.length; ++i) {
-            imgurTokens[i].imgurRefreshToken = refreshToken;
-            imgurTokens[i].imgurAccessToken = accessToken;
-            imgurTokens[i].imgurProfile = profile;
+        for (var subdomain in imgurTokens) {
+            if (p.hasOwnProperty(subdomain)) {
+                imgurTokens[subdomain].imgurRefreshToken = refreshToken;
+                imgurTokens[subdomain].imgurAccessToken = accessToken;
+                imgurTokens[subdomain].imgurProfile = profile;
+            }
         }
 
         // console.log('received imgur info', accessToken, refreshToken, profile);
