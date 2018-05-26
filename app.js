@@ -34,6 +34,11 @@ app.use("/assets", function(req, res) {
     res.sendFile(path.join(__dirname, "assets/", req.url));
 });
 
+app.get('/login', function(req, res) {
+    res.write(req.body ? req.body.toString() : "No body");
+    res.end();
+});
+
 // Imgur OAuth2 Integration
 app.get('/auth/imgur', passport.authenticate('imgur'));
 app.get('/auth/imgur/callback', 
