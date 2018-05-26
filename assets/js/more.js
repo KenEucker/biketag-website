@@ -168,20 +168,25 @@
         },
 
         getImgurAccessToken: function (success) {
+            var self = this;
             fetch('/auth/imgur/getToken', {
                 method: 'POST',
                 body: JSON.stringify({ hello: 'world' }),
                 headers:{
                   'Content-Type': 'application/json'
                 }
-              }).then(res => res.json())
-              .catch(error => console.error('Error:', error))
-              .then(response => success(response));
+              }).then(function(res) { res.json() })
+              .catch(function (error) { console.error('Error:', error) })
+              .then(function (response) {
+                  self.imgurAccessToken = response.imgurAccessToken || self.imgurAccessToken;
+                  success(response);
+                });
         },
 
         init: function() {
             var self = this;
             this.getImgurAccessToken(function(response){
+                
                 self.showLatestTagImages();
                 console.log('imgur integration initialized.');
             });
