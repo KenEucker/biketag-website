@@ -41,7 +41,11 @@ app.use("/assets", function(req, res) {
 app.get('/auth/imgur', passport.authenticate('imgur'));
 app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
 app.post('/auth/imgur/getToken', function(req, res) {
-    res.json({ origin: req.get('origin') || 'none', imgurAccessToken });
+    var origin = req.get('origin') || 'none';
+    var tokenValue = origin == 'http://biketag.org' ?  imgurAccessToken : 'unauthorized access';
+
+    // This will only return the imgur access token if the request is coming from the site itself
+    res.json({ origin, imgurAccessToken: tokenValue });
 });
 
 app.listen(port, function () {
