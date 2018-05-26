@@ -99,7 +99,7 @@
 
         showLatestTagImages: function () {
             if (!window.imgurIntegration.imgurAlbumPictures) {
-                window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
+                return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
             }
 
             var images = window.imgurIntegration.imgurAlbumPictures;
