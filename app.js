@@ -28,13 +28,14 @@ passport.use(new ImgurStrategy({
         imgurProfile = profile;
 
         console.log('received imgur info', accessToken, refreshToken, profile);
-        return done(null, user);
+        return done(null, profile);
     }
 ));
 
 console.log(path.join(__dirname, '/templates/biketag/'));
 app.use(express.static(path.join(__dirname, '/templates/biketag/')));
 app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
+app.use(passport.initialize());
 
 app.use("/assets", function(req, res) {
     var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
