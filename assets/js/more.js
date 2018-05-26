@@ -104,10 +104,20 @@
             var images = window.imgurIntegration.imgurAlbumPictures;
             var lastImage = images[images.length - 1];
             var secondToLastImage = images.length > 1 ? images[images.length - 2] : null;
+            var thirdToLastImage = images.length > 2 ? images[images.length - 3] : null;
+            var lastImageThumbnail = lastImage.link.substr(0, lastImage.link.length - 4) + 'l' + lastImage.link.substr(-4);
 
-            $('.content .inner').append($('<img src="' + lastImage.link + '">'));
+            $('.content .inner').append('<h1>Current Tag</h1>');
+            $('.content .inner').append($('<a href="' + lastImage.link + '" target="_blank"><img src="' + lastImageThumbnail + '"></a>'));
             if (secondToLastImage) {
-                $('.content .inner').append($('<img src="' + secondToLastImage.link + '">'));
+                var secondToLastImageThumbnail = secondToLastImage.link.substr(0, secondToLastImage.link.length - 4) + 'l' + secondToLastImage.link.substr(-4);
+                $('.content .inner').append('<h2>Proof</h2>');
+                $('.content .inner').append($('<a href="' + secondToLastImage.link + '" target="_blank"><img src="' + secondToLastImageThumbnail + '"></a>'));
+            }
+            if (thirdToLastImage) {
+                var thirdToLastImageThumbnail = thirdToLastImage.link.substr(0, thirdToLastImage.link.length - 4) + 'l' + thirdToLastImage.link.substr(-4);
+                $('.content .inner').append('<h2>Previous Tag</h2>');
+                $('.content .inner').append($('<a href="' + thirdToLastImage.link + '" target="_blank"><img src="' + thirdToLastImageThumbnail + '"></a>'));
             }
         },
 

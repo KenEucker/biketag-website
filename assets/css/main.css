@@ -915,9 +915,8 @@ button {
       -ms-transition-delay: 0.25s;
       transition-delay: 0.25s;
       padding: 3rem 2rem;
-      max-height: 40rem;
       overflow: hidden; }
-      #header .content .inner img {
+      #header .content .inner a {
         max-width: 50vw; }
       #header .content .inner > :last-child {
         margin-bottom: 0; }
