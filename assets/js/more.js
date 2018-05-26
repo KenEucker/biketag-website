@@ -167,7 +167,7 @@
             }
         },
 
-        getImgurAccessToken: function (success) {
+        getImgurTokens: function (success) {
             var self = this;
             fetch('/auth/imgur/getToken', {
                 method: 'POST',
@@ -178,14 +178,17 @@
               }).then( function(res) { return res.json() })
               .catch( function (error) { console.error('Error:', error) })
               .then( function (response) {
-                  self.imgurAccessToken = response.imgurAccessToken || self.imgurAccessToken;
+                self.imgurAccessToken = response.imgurAccessToken || self.imgurAccessToken;
+                self.imgurAlbumHash = response.imgurAlbumHash || self.imgurAlbumHash;
+                self.imgurAuthorization = 'Client-ID ' + response.imgurAuthorization || self.imgurAuthorization;
+
                   return success(response);
                 });
         },
 
         init: function() {
             var self = this;
-            this.getImgurAccessToken( function(response) {
+            this.getImgurTokens( function(response) {
                 self.showLatestTagImages();
                 console.log('imgur integration initialized.');
             });

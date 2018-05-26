@@ -6,21 +6,36 @@ const express = require('express'),
     ImgurStrategy = require('passport-imgur').Strategy,
     port = 8080;
 
-var imgurRefreshToken = null,
-    imgurAccessToken = null,
-    imgurProfile = null;
+var imgurTokens = {
+    "pdx": {
+        imgurAlbumHash: '3OMZJ6a',
+        imgurAuthorization: '79ea70333c45883',
+        imgurRefreshToken: null,
+        imgurAccessToken: null,
+        imgurProfile: null
+    }
+}
+imgurTokens["default"] = imgurTokens["pdx"];
+
+function getSubdomainPrefix (req) {
+    console.log(req.subdomains);
+    return "default";
+}
 
 passport.use(new ImgurStrategy({
     clientID: '79ea70333c45883',
     clientSecret: '947d003902b25c7c8b72830898f9f5f07beddfb5',
-    callbackURL: "http://biketag.org/auth/imgur/callback"
+    callbackURL: "http://biketag.org/auth/imgur/callback",
+    passReqToCallback: true
     },
-    function(accessToken, refreshToken, profile, done) {
-        imgurRefreshToken = refreshToken;
-        imgurAccessToken = accessToken;
-        imgurProfile = profile;
+    function(req, accessToken, refreshToken, profile, done) {
+        var subdomain = getSubdomainPrefix(req);
 
-        console.log('received imgur info', accessToken, refreshToken, profile);
+        imgurTokens[subdomain].imgurRefreshToken = refreshToken;
+        imgurTokens[subdomain].imgurAccessToken = accessToken;
+        imgurTokens[subdomain].imgurProfile = profile;
+
+        // console.log('received imgur info', accessToken, refreshToken, profile);
         return done(null, profile);
     }
 ));
@@ -39,13 +54,16 @@ app.use("/assets", function(req, res) {
 
 // Imgur OAuth2 Integration
 app.get('/auth/imgur', passport.authenticate('imgur'));
-app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
+app.get('/auth/imgur/callback', function(req, res, next) {
+    passport.authenticate('imgur', { session: false });
+});
 app.post('/auth/imgur/getToken', function(req, res) {
     var origin = req.get('origin') || 'none';
-    var tokenValue = origin == 'http://biketag.org' ?  imgurAccessToken : 'unauthorized access';
+    var subdomain = getSubdomainPrefix(req);
+    var tokensValue = origin == `http://${ subdomain == "default" ? '' : subdomain + '.' }biketag.org` ?  imgurTokens[subdomain] : 'unauthorized access';
 
     // This will only return the imgur access token if the request is coming from the site itself
-    res.json({ origin, imgurAccessToken: tokenValue });
+    res.json({ origin, imgurTokens: tokensValue });
 });
 
 app.listen(port, function () {
