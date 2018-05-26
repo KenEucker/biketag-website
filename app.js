@@ -7,6 +7,13 @@ const express = require('express'),
     port = 8080;
 
 var imgurTokens = {
+    "default": {
+        imgurAlbumHash: '3OMZJ6a',
+        imgurAuthorization: '79ea70333c45883',
+        imgurRefreshToken: null,
+        imgurAccessToken: null,
+        imgurProfile: null
+    },
     "pdx": {
         imgurAlbumHash: '3OMZJ6a',
         imgurAuthorization: '79ea70333c45883',
@@ -15,7 +22,6 @@ var imgurTokens = {
         imgurProfile: null
     }
 }
-imgurTokens["default"] = imgurTokens["pdx"];
 
 function getSubdomainPrefix (req) {
     return req.subdomains.length ? req.subdomains[0] : "default";
