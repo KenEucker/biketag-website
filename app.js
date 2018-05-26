@@ -4,18 +4,11 @@ const express = require('express'),
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
-    bodyParser = require('body-parser'),
     port = 8080;
 
 var imgurRefreshToken = null,
     imgurAccessToken = null,
     imgurProfile = null;
-
-// parse application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: false }))
- 
-// parse application/json
-// app.use(bodyParser.json())
 
 passport.use(new ImgurStrategy({
     clientID: '79ea70333c45883',
@@ -44,7 +37,7 @@ app.use("/assets", function(req, res) {
 
 // Imgur OAuth2 Integration
 app.get('/auth/imgur', passport.authenticate('imgur'));
-app.get('/auth/imgur/callback', passport.authenticate('imgur', { failureRedirect: '/fail', successRedirect: '/' }));
+app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
 
 app.get('/fail', function(req, res) {
     res.write('url: ' + req.url);
