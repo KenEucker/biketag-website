@@ -175,18 +175,17 @@
                 headers:{
                   'Content-Type': 'application/json'
                 }
-              }).then(function(res) { res.json() })
-              .catch(function (error) { console.error('Error:', error) })
-              .then(function (response) {
+              }).then( function(res) { return res.json() })
+              .catch( function (error) { console.error('Error:', error) })
+              .then( function (response) {
                   self.imgurAccessToken = response.imgurAccessToken || self.imgurAccessToken;
-                  success(response);
+                  return success(response);
                 });
         },
 
         init: function() {
             var self = this;
-            this.getImgurAccessToken(function(response){
-                
+            this.getImgurAccessToken( function(response) {
                 self.showLatestTagImages();
                 console.log('imgur integration initialized.');
             });
