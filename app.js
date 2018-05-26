@@ -43,6 +43,12 @@ app.get('/auth/imgur/callback',
     res.redirect(`/?refreshToken=${imgurRefreshToken}&accessToken=${accessToken}`);
   });
 
+app.get('/fail', function(req, res) {
+    res.write('url: ' + req.url);
+    res.write('\r\nbody: ' + req.body);
+    res.end();
+});
+
 app.listen(port, function () {
     console.log("App listening on: http://localhost:" + port);
 });
