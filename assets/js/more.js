@@ -3,6 +3,7 @@
     var imgurIntegration = {
         imgurAlbumHash: '3OMZJ6a',
         imgurAuthorization: 'Client-ID 79ea70333c45883',
+        imgurAccessToken: null,
         imgurAlbumPictures: null,
 
         createAlbum: function(ids) {
@@ -166,9 +167,25 @@
             }
         },
 
+        getImgurAccessToken: function (success) {
+            fetch('/auth/imgur/getToken', {
+                method: 'POST',
+                body: JSON.stringify({ hello: 'world' }),
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+              }).then(res => res.json())
+              .catch(error => console.error('Error:', error))
+              .then(response => success(response));
+        },
+
         init: function() {
-           this.showLatestTagImages();
-           console.log('imgur integration initialized.');
+            var self = this;
+            this.getImgurAccessToken(function(response){
+                self.showLatestTagImages();
+                console.log('imgur integration initialized.');
+            });
+           
         }
     };
 
