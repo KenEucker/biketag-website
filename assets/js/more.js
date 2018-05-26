@@ -6,7 +6,7 @@
         imgurAccessToken: null,
         imgurAlbumPictures: null,
 
-        createAlbum: function(ids) {
+        createAlbum: function (ids) {
 
             var url = 'https://api.imgur.com/3/album/';
 
@@ -57,7 +57,7 @@
             });
         },
 
-        addImagesToAlbum: function(ids, albumHash) {
+        addImagesToAlbum: function (ids, albumHash) {
             if (!ids) {
                 console.log("I can't just add nothing:", ids);
                 return;
@@ -172,34 +172,38 @@
             fetch('/auth/imgur/getToken', {
                 method: 'POST',
                 body: JSON.stringify({ hello: 'world' }),
-                headers:{
-                  'Content-Type': 'application/json'
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-              }).then( function(res) { return res.json() })
-              .catch( function (error) { console.error('Error:', error) })
-              .then( function (response) {
-                self.imgurAccessToken = response.imgurAccessToken || self.imgurAccessToken;
-                self.imgurAlbumHash = response.imgurAlbumHash || self.imgurAlbumHash;
-                self.imgurAuthorization = 'Client-ID ' + response.imgurAuthorization || self.imgurAuthorization;
+            }).then(function (res) { return res.json() })
+                .catch(function (error) { console.error('Error:', error) })
+                .then(function (response) {
+                    var imgurTokens = response.imgurTokens;
 
-                  return success(response);
+                    if (imgurTokens && typeof imgurTokens == 'object') {
+                        self.imgurAccessToken = imgurTokens.imgurAccessToken || self.imgurAccessToken;
+                        self.imgurAlbumHash = imgurTokens.imgurAlbumHash || self.imgurAlbumHash;
+                        self.imgurAuthorization = 'Client-ID ' + imgurTokens.imgurAuthorization || self.imgurAuthorization;
+
+                        return success(response);
+                    }
                 });
         },
 
-        init: function() {
+        init: function () {
             var self = this;
-            this.getImgurTokens( function(response) {
+            this.getImgurTokens(function (response) {
                 self.showLatestTagImages();
                 console.log('imgur integration initialized.');
             });
-           
+
         }
     };
 
     window.imgurIntegration = imgurIntegration;
     imgurIntegration.init();
 
-    $('form #submitTheDamnFuckingForm').click(function(e) {
+    $('form #submitTheDamnFuckingForm').click(function (e) {
         e.preventDefault();
         var inputs = $(e.currentTarget.parentNode).find('input[type="file"]');
         imgurIntegration.uploadFilesToImgur(inputs);

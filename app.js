@@ -54,9 +54,7 @@ app.use("/assets", function(req, res) {
 
 // Imgur OAuth2 Integration
 app.get('/auth/imgur', passport.authenticate('imgur'));
-app.get('/auth/imgur/callback', function(req, res, next) {
-    passport.authenticate('imgur', { session: false });
-});
+app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
 app.post('/auth/imgur/getToken', function(req, res) {
     var origin = req.get('origin') || 'none';
     var subdomain = getSubdomainPrefix(req);
