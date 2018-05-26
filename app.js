@@ -34,11 +34,18 @@ passport.use(new ImgurStrategy({
     passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
-        var subdomain = getSubdomainPrefix(req);
+        // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
+        // var subdomain = getSubdomainPrefix(req);
 
-        imgurTokens[subdomain].imgurRefreshToken = refreshToken;
-        imgurTokens[subdomain].imgurAccessToken = accessToken;
-        imgurTokens[subdomain].imgurProfile = profile;
+        // imgurTokens[subdomain].imgurRefreshToken = refreshToken;
+        // imgurTokens[subdomain].imgurAccessToken = accessToken;
+        // imgurTokens[subdomain].imgurProfile = profile;
+
+        for (var i = 0; i < imgurTokens.length; ++i) {
+            imgurTokens[i].imgurRefreshToken = refreshToken;
+            imgurTokens[i].imgurAccessToken = accessToken;
+            imgurTokens[i].imgurProfile = profile;
+        }
 
         // console.log('received imgur info', accessToken, refreshToken, profile);
         return done(null, profile);
