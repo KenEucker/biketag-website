@@ -36,16 +36,15 @@ app.use("/assets", function(req, res) {
 
 // Imgur OAuth2 Integration
 app.get('/auth/imgur', passport.authenticate('imgur'));
-app.get('/auth/imgur/callback', function(req, res) {
+app.get('/auth/imgur/callback', function(req, res, next) {
     console.log(req.url);
     passport.authenticate('imgur', function(err, user, info) {
-        res.write("authenticate");
-        res.write(err.toString());
-        res.write(user.toString());
-        res.write(info.toString());
-        res.end();
+        console.log("authenticate");
+        console.log(err);
+        console.log(user);
+        console.log(info);
         // res.redirect(`/?refreshToken=${imgurRefreshToken}&accessToken=${accessToken}`);
-    })(req, res);
+    })(req, res, next);
   });
 
 app.get('/fail', function(req, res) {
