@@ -38,10 +38,8 @@ app.use("/assets", function(req, res) {
 // Imgur OAuth2 Integration
 app.get('/auth/imgur', passport.authenticate('imgur'));
 app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
-
-app.get('/gimme', function(req, res) {
-    res.write('imgur info -> token:' + imgurAccessToken);
-    res.end();
+app.get('/auth/imgur/getToken', function(req, res) {
+    res.json({ imgurAccessToken });
 });
 
 app.listen(port, function () {
