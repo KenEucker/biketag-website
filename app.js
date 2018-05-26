@@ -42,7 +42,7 @@ passport.use(new ImgurStrategy({
         // imgurTokens[subdomain].imgurProfile = profile;
 
         for (var subdomain in imgurTokens) {
-            if (p.hasOwnProperty(subdomain)) {
+            if (imgurTokens.hasOwnProperty(subdomain)) {
                 imgurTokens[subdomain].imgurRefreshToken = refreshToken;
                 imgurTokens[subdomain].imgurAccessToken = accessToken;
                 imgurTokens[subdomain].imgurProfile = profile;
