@@ -39,9 +39,8 @@ app.use("/assets", function(req, res) {
 app.get('/auth/imgur', passport.authenticate('imgur'));
 app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
 
-app.get('/fail', function(req, res) {
-    res.write('url: ' + req.url);
-    res.write('\r\nbody: ' + req.body);
+app.get('/gimme', function(req, res) {
+    res.write('imgur info -> token:' + imgurAccessToken);
     res.end();
 });
 
