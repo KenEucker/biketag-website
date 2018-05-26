@@ -29,6 +29,8 @@ console.log(path.join(__dirname, '/templates/biketag/'));
 app.use(express.static(path.join(__dirname, '/templates/biketag/')));
 app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 app.use(passport.initialize());
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded()); // to support URL-encoded bodies
 
 app.use("/assets", function(req, res) {
     var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
@@ -38,7 +40,8 @@ app.use("/assets", function(req, res) {
 // Imgur OAuth2 Integration
 app.get('/auth/imgur', passport.authenticate('imgur'));
 app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
-app.get('/auth/imgur/getToken', function(req, res) {
+app.post('/auth/imgur/getToken', function(req, res) {
+    console.log(req);
     res.json({ imgurAccessToken });
 });
 
