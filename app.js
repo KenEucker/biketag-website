@@ -4,11 +4,18 @@ const express = require('express'),
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
+    bodyParser = require('body-parser'),
     port = 8080;
 
 var imgurRefreshToken = null,
     imgurAccessToken = null,
     imgurProfile = null;
+
+    // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
 
 passport.use(new ImgurStrategy({
     clientID: '79ea70333c45883',
