@@ -138,50 +138,37 @@
             }
         },
 
-        uploadFilesToImgur: function (inputs) {
+        uploadFileToImgur: function (file, description, input, next) {
+            // Begin file upload
+            console.log("Uploading file to Imgur..");
+            $input.after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
-            for (var i = 0; i < inputs.length; ++i) {
-                var $files = inputs[i].files;
+            var settings = {
+                async: false,
+                crossDomain: true,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                url: 'https://api.imgur.com/3/image',
+                headers: {
+                    Authorization: window.imgurIntegration.imgurAccessToken,
+                    Accept: 'application/json'
+                },
+                mimeType: 'multipart/form-data'
+            };
 
-                if ($files.length) {
+            var formData = new FormData();
+            formData.append("image", $files[0]);
+            formData.append("album", window.imgurIntegration.imgurAlbumHash);
+            formData.append("description", description);
+            settings.data = formData;
 
-                    // Reject big files
-                    if ($files[0].size > $(this).data("max-size") * 1024) {
-                        console.log("Please select a smaller file");
-                        return false;
-                    }
-
-                    // Begin file upload
-                    console.log("Uploading file to Imgur..");
-
-                    var settings = {
-                        async: false,
-                        crossDomain: true,
-                        processData: false,
-                        contentType: false,
-                        type: 'POST',
-                        url: 'https://api.imgur.com/3/image',
-                        headers: {
-                            Authorization: window.imgurIntegration.imgurAccessToken,
-                            Accept: 'application/json'
-                        },
-                        mimeType: 'multipart/form-data'
-                    };
-
-                    var formData = new FormData();
-                    formData.append("image", $files[0]);
-                    formData.append("album", window.imgurIntegration.imgurAlbumHash);
-                    settings.data = formData;
-
-                    // Response contains stringified JSON
-                    // Image URL available at response.data.link
-                    $.ajax(settings).done(function (response) {
-                        debugger;
-                        console.log(response);
-                        // window.imgurIntegration.addImagesToAlbum();
-                    });
-                }
-            }
+            // Response contains stringified JSON
+            // Image URL available at response.data.link
+            $.ajax(settings).done(function (response) {
+                $input.next().remove();
+                next();
+            });
         },
 
         getImgurTokens: function (success) {
@@ -223,6 +210,36 @@
     $('form #submitTheDamnFuckingForm').click(function (e) {
         e.preventDefault();
         var inputs = $(e.currentTarget).closest('form').find('input[type="file"]');
-        imgurIntegration.uploadFilesToImgur(inputs);
+        var files = [], user = '';
+
+        // get the latest tag number
+        var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length + 1;
+
+        for (var i = 0; i < inputs.length; ++i) {
+            var $files = inputs[i].files;
+            var $input = $(inputs[i]);
+
+            if ($files.length) {
+
+                // Reject big files
+                if ($files[0].size > $(this).data("max-size") * 1024) {
+                    console.log("Please select a smaller file");
+                    return false;
+                }
+
+                files.push($files[0]);
+                descriptions.push();
+            } else {
+                console.log('I need both files!');
+                return;
+            }
+        }
+
+        imgurIntegration.uploadFilesToImgur(files[0], '#' + nextTagNumber + ' tag by ' + user, inputs[0], function() {
+            imgurIntegration.uploadFilesToImgur(files[1], '#' + (nextTagNumber - 1) + ' proof for ' + user, inputs[1], function() {
+                window.reload(true);
+            });
+        });
+        
     });
 })(jQuery);
