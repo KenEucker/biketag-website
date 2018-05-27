@@ -43,7 +43,7 @@
                 success: function (data) {
                     console.log(data);
                     window.imgurIntegration.imgurAlbumPictures = data.data.sort(function(image1, image2){
-                        return image1.datetime < image2.datetime; 
+                        return new Date(image2.datetime) - new Date(image1.datetime);
                     });
 
                     if (callback) {
@@ -236,8 +236,8 @@
             }
         }
 
-        window.imgurIntegration.uploadFileToImgur(files[0], '#' + nextTagNumber + ' tag by ' + user, fileInputs[0], function() {
-            window.imgurIntegration.uploadFileToImgur(files[1], '#' + (nextTagNumber - 1) + ' proof for ' + user, fileInputs[1], function() {
+        window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof for ' + user, fileInputs[0], function() {
+            window.imgurIntegration.uploadFileToImgur(files[1], '#' + nextTagNumber + ' tag by ' + user, fileInputs[1], function() {
                 location.reload(true);
             });
         });
