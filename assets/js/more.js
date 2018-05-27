@@ -107,7 +107,7 @@
             var images = window.imgurIntegration.imgurAlbumPictures;
             var lastImage = images[0];
             var secondToLastImage = images.length > 1 ? images[1] : null;
-            var thirdToLastImage = images.length > 2 ? images[i2] : null;
+            var thirdToLastImage = images.length > 2 ? images[2] : null;
             var lastImageThumbnail = lastImage.link.substr(0, lastImage.link.length - 4) + 'l' + lastImage.link.substr(-4);
 
             $('.content .inner').append('<h1>Current Tag</h1>');
