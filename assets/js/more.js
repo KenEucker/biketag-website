@@ -206,7 +206,7 @@
 
     $('form #submitTheDamnFuckingForm').click(function (e) {
         e.preventDefault();
-        var inputs = $(e.currentTarget.parentNode).find('input[type="file"]');
+        var inputs = $(e.currentTarget).closest('form').find('input[type="file"]');
         imgurIntegration.uploadFilesToImgur(inputs);
     });
 })(jQuery);
