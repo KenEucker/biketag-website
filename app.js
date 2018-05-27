@@ -4,23 +4,24 @@ const express = require('express'),
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
-    port = 8080;
+    debug = true,
+    port = debug ? 8080 : 80;
 
 var imgurTokens = {
     "default": {
-        imgurAlbumHash: '3OMZJ6a',
+        imgurAlbumHash: 'Y9PKtpI',
         imgurAuthorization: '79ea70333c45883',
         imgurRefreshToken: null,
         imgurAccessToken: null,
         imgurProfile: null
     },
     "pdx": {
-        imgurAlbumHash: '3OMZJ6a',
+        imgurAlbumHash: 'Y9PKtpI',
         imgurAuthorization: '79ea70333c45883',
         imgurRefreshToken: null,
         imgurAccessToken: null,
         imgurProfile: null
-    }
+    },
 }
 
 function getSubdomainPrefix (req) {
@@ -72,7 +73,8 @@ app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false,
 app.post('/auth/imgur/getToken', function(req, res) {
     var origin = req.get('origin') || 'none';
     var subdomain = getSubdomainPrefix(req);
-    var tokensValue = origin == `http://${ subdomain == "default" ? '' : subdomain + '.' }biketag.org` ?  imgurTokens[subdomain] : 'unauthorized access';
+    var originIsValid = (origin == `http://${ subdomain == "default" ? '' : subdomain + '.' }biketag.org`) || (debug && origin == `http://localhost:${port}`);
+    var tokensValue = originIsValid ?  imgurTokens[subdomain] : 'unauthorized access';
 
     // This will only return the imgur access token if the request is coming from the site itself
     res.json({ origin, imgurTokens: tokensValue });

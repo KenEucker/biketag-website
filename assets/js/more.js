@@ -146,7 +146,7 @@
                         type: 'POST',
                         url: 'https://api.imgur.com/3/image',
                         headers: {
-                            Authorization: window.imgurIntegration.imgurAuthorization,
+                            Authorization: window.imgurIntegration.imgurAccessToken,
                             Accept: 'application/json'
                         },
                         mimeType: 'multipart/form-data'
@@ -154,6 +154,7 @@
 
                     var formData = new FormData();
                     formData.append("image", $files[0]);
+                    formData.append("album", window.imgurIntegration.imgurAlbumHash);
                     settings.data = formData;
 
                     // Response contains stringified JSON
@@ -181,7 +182,7 @@
                     var imgurTokens = response.imgurTokens;
 
                     if (imgurTokens && typeof imgurTokens == 'object') {
-                        self.imgurAccessToken = imgurTokens.imgurAccessToken || self.imgurAccessToken;
+                        self.imgurAccessToken = 'Bearer ' + imgurTokens.imgurAccessToken || self.imgurAccessToken;
                         self.imgurAlbumHash = imgurTokens.imgurAlbumHash || self.imgurAlbumHash;
                         self.imgurAuthorization = 'Client-ID ' + imgurTokens.imgurAuthorization || self.imgurAuthorization;
 
