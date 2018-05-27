@@ -234,8 +234,8 @@
             }
         }
 
-        imgurIntegration.uploadFilesToImgur(files[0], '#' + nextTagNumber + ' tag by ' + user, inputs[0], function() {
-            imgurIntegration.uploadFilesToImgur(files[1], '#' + (nextTagNumber - 1) + ' proof for ' + user, inputs[1], function() {
+        window.imgurIntegration.uploadFileToImgur(files[0], '#' + nextTagNumber + ' tag by ' + user, inputs[0], function() {
+            window.imgurIntegration.uploadFileToImgur(files[1], '#' + (nextTagNumber - 1) + ' proof for ' + user, inputs[1], function() {
                 window.reload(true);
             });
         });
