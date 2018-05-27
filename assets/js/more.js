@@ -209,15 +209,17 @@
 
     $('form #submitTheDamnFuckingForm').click(function (e) {
         e.preventDefault();
-        var inputs = $(e.currentTarget).closest('form').find('input[type="file"]');
+        var form = $(e.currentTarget).closest('form');
+        var fileInputs = form.find('input[type="file"]');
         var files = [], user = '';
 
         // get the latest tag number
         var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length + 1;
+        user = form.find('input[name="name"]').val();
 
-        for (var i = 0; i < inputs.length; ++i) {
-            var $files = inputs[i].files;
-            var $input = $(inputs[i]);
+        for (var i = 0; i < fileInputs.length; ++i) {
+            var $files = fileInputs[i].files;
+            var $input = $(fileInputs[i]);
 
             if ($files.length) {
 
@@ -234,9 +236,9 @@
             }
         }
 
-        window.imgurIntegration.uploadFileToImgur(files[0], '#' + nextTagNumber + ' tag by ' + user, inputs[0], function() {
-            window.imgurIntegration.uploadFileToImgur(files[1], '#' + (nextTagNumber - 1) + ' proof for ' + user, inputs[1], function() {
-                window.reload(true);
+        window.imgurIntegration.uploadFileToImgur(files[0], '#' + nextTagNumber + ' tag by ' + user, fileInputs[0], function() {
+            window.imgurIntegration.uploadFileToImgur(files[1], '#' + (nextTagNumber - 1) + ' proof for ' + user, fileInputs[1], function() {
+                location.reload(true);
             });
         });
         
