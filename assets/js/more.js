@@ -228,7 +228,6 @@
                 }
 
                 files.push($files[0]);
-                descriptions.push();
             } else {
                 console.log('I need both files!');
                 return;
