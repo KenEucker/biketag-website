@@ -214,7 +214,7 @@
         var files = [], user = '';
 
         // get the latest tag number
-        var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length + 1;
+        var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
         user = form.find('input[name="name"]').val();
 
         for (var i = 0; i < fileInputs.length; ++i) {
