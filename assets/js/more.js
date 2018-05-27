@@ -42,7 +42,9 @@
                 url: 'https://api.imgur.com/3/album/' + albumHash + '/images',
                 success: function (data) {
                     console.log(data);
-                    window.imgurIntegration.imgurAlbumPictures = data.data;
+                    window.imgurIntegration.imgurAlbumPictures = data.data.sort(function(image1, image2){
+                        return image1.datetime < image2.datetime; 
+                    });
 
                     if (callback) {
                         callback(data);
