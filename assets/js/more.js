@@ -141,12 +141,18 @@
         uploadFileToImgur: function (file, description, input, next) {
             // Begin file upload
             console.log("Uploading file to Imgur..");
-            $input.after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+            $(input).after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+
+            var formData = new FormData();
+            formData.append("image", file);
+            formData.append("album", window.imgurIntegration.imgurAlbumHash);
+            formData.append("description", description);
 
             var settings = {
                 async: false,
                 crossDomain: true,
                 processData: false,
+                data: formData,
                 contentType: false,
                 type: 'POST',
                 url: 'https://api.imgur.com/3/image',
@@ -157,16 +163,10 @@
                 mimeType: 'multipart/form-data'
             };
 
-            var formData = new FormData();
-            formData.append("image", $files[0]);
-            formData.append("album", window.imgurIntegration.imgurAlbumHash);
-            formData.append("description", description);
-            settings.data = formData;
-
             // Response contains stringified JSON
             // Image URL available at response.data.link
             $.ajax(settings).done(function (response) {
-                $input.next().remove();
+                $(input).next().remove();
                 next();
             });
         },
