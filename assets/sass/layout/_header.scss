@@ -94,6 +94,27 @@
 				padding: 3rem 2rem;
 				overflow: hidden;
 				
+				a {
+					position: relative; 
+
+					span {
+						position: absolute;
+
+						&:nth-child(1) {
+							font-size: 40px;
+							font-weight: 500;
+							text-shadow: 2px 2px #292828e6;
+						}
+
+						&:nth-child(2) {
+							bottom: 4px;
+							right: 2%;
+							font-size: 24px;
+							text-shadow: 2px 2px #292828e6;
+						}
+					}
+				}
+
 				img {
 					max-width: 75vw;
 				}

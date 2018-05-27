@@ -916,6 +916,19 @@ button {
       transition-delay: 0.25s;
       padding: 3rem 2rem;
       overflow: hidden; }
+      #header .content .inner a {
+        position: relative; }
+        #header .content .inner a span {
+          position: absolute; }
+          #header .content .inner a span:nth-child(1) {
+            font-size: 40px;
+            font-weight: 500;
+            text-shadow: 2px 2px #292828e6; }
+          #header .content .inner a span:nth-child(2) {
+            bottom: 4px;
+            right: 2%;
+            font-size: 24px;
+            text-shadow: 2px 2px #292828e6; }
       #header .content .inner img {
         max-width: 75vw; }
       #header .content .inner > :last-child {

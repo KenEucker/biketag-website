@@ -99,6 +99,25 @@
             });
         },
 
+        biketagImageTemplate: function (image, title) {
+            var thumbnail = image.link.substr(0, image.link.length - 4) + 'l' + image.link.substr(-4);
+            var tagNumber = '';
+            var tagCredit = '';
+
+            if (image.description) {
+                var split = image.description.split(' ');
+                tagNumber = split[0];
+                tagCredit = split[split.length - 1];
+            }
+
+            return '<h2>' + title + '</h2>\
+                    <a href="' + image.link + '" target="_blank">\
+                        <span>' + tagNumber + '</span>\
+                        <span>' + tagCredit + '</span>\
+                        <img src="' + thumbnail + '">\
+                    </a>';
+        },
+
         showLatestTagImages: function () {
             if (!window.imgurIntegration.imgurAlbumPictures) {
                 return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
@@ -110,17 +129,12 @@
             var thirdToLastImage = images.length > 2 ? images[2] : null;
             var lastImageThumbnail = lastImage.link.substr(0, lastImage.link.length - 4) + 'l' + lastImage.link.substr(-4);
 
-            $('.content .inner').append('<h1>Current Tag</h1>');
-            $('.content .inner').append($('<a href="' + lastImage.link + '" target="_blank"><img src="' + lastImageThumbnail + '"></a>'));
+            $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(lastImage, "Tag You're It!") );
             if (secondToLastImage) {
-                var secondToLastImageThumbnail = secondToLastImage.link.substr(0, secondToLastImage.link.length - 4) + 'l' + secondToLastImage.link.substr(-4);
-                $('.content .inner').append('<h2>Proof</h2>');
-                $('.content .inner').append($('<a href="' + secondToLastImage.link + '" target="_blank"><img src="' + secondToLastImageThumbnail + '"></a>'));
+                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(secondToLastImage, "Last tag proof") );
             }
             if (thirdToLastImage) {
-                var thirdToLastImageThumbnail = thirdToLastImage.link.substr(0, thirdToLastImage.link.length - 4) + 'l' + thirdToLastImage.link.substr(-4);
-                $('.content .inner').append('<h2>Previous Tag</h2>');
-                $('.content .inner').append($('<a href="' + thirdToLastImage.link + '" target="_blank"><img src="' + thirdToLastImageThumbnail + '"></a>'));
+                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(thirdToLastImage, "Last tag") );
             }
         },
 
