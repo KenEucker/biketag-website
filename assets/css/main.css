@@ -827,6 +827,42 @@ button {
   width: 100%;
   padding: 4rem 2rem;
   z-index: 3; }
+
+@-webkit-keyframes slideDown {
+  0%, 100% {
+    -webkit-transform: translateY(-50px); }
+  10%, 90% {
+    -webkit-transform: translateY(0px); } }
+
+@-moz-keyframes slideDown {
+  0%, 100% {
+    -moz-transform: translateY(-50px); }
+  10%, 90% {
+    -moz-transform: translateY(0px); } }
+  #wrapper .cssanimations.csstransforms #notification {
+    -webkit-transform: translateY(-50px);
+    -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
+    -moz-transform: translateY(-50px);
+    -moz-animation: slideDown 2.5s 1.0s 1 ease forwards; }
+  #wrapper #notification {
+    position: absolute;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #1cdd4c;
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 5px black;
+    -moz-box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px black; }
+    #wrapper #notification .close {
+      position: absolute;
+      right: 5%;
+      cursor: pointer; }
+    #wrapper #notification .cssanimations.csstransforms .close {
+      display: none; }
   #wrapper:before {
     content: '';
     display: block; }

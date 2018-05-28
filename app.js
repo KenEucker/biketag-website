@@ -4,7 +4,7 @@ const express = require('express'),
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
-    debug = false,
+    debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     port = debug ? 8080 : 80;
 
 var imgurTokens = {

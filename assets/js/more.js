@@ -5,6 +5,7 @@
         imgurAuthorization: 'Client-ID 79ea70333c45883',
         imgurAccessToken: null,
         imgurAlbumPictures: null,
+        imgurAlbumPicturesRefreshFrequency: 30000,
 
         createAlbum: function (ids) {
 
@@ -129,9 +130,10 @@
             var thirdToLastImage = images.length > 2 ? images[2] : null;
             var lastImageThumbnail = lastImage.link.substr(0, lastImage.link.length - 4) + 'l' + lastImage.link.substr(-4);
 
+            $('.content .inner').empty();
             $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(lastImage, "Tag You're It!") );
             if (secondToLastImage) {
-                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(secondToLastImage, "Last tag proof") );
+                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(secondToLastImage, "Proof") );
             }
             if (thirdToLastImage) {
                 $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(thirdToLastImage, "Last tag") );
@@ -196,6 +198,65 @@
 
         init: function () {
             var self = this;
+
+            $('form #submitTheDamnFuckingForm').click(function (e) {
+                e.preventDefault();
+                var form = $(e.currentTarget).closest('form');
+                var fileInputs = form.find('input[type="file"]');
+                var files = [], user = '';
+        
+                // get the latest tag number
+                var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
+                user = form.find('input[name="name"]').val();
+        
+                for (var i = 0; i < fileInputs.length; ++i) {
+                    var $files = fileInputs[i].files;
+                    var $input = $(fileInputs[i]);
+        
+                    if ($files.length) {
+        
+                        // Reject big files
+                        if ($files[0].size > $(this).data("max-size") * 1024) {
+                            console.log("Please select a smaller file");
+                            return false;
+                        }
+        
+                        files.push($files[0]);
+                    } else {
+                        console.log('I need both files!');
+                        return;
+                    }
+                }
+        
+                window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof for ' + user, fileInputs[0], function() {
+                    window.imgurIntegration.uploadFileToImgur(files[1], '#' + nextTagNumber + ' tag by ' + user, fileInputs[1], function() {
+                        window.location.href = window.location.pathname + '?uploadSuccess=true';
+                    });
+                });
+                
+            });
+
+            // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
+            if (window.location.search.indexOf('uploadSuccess=true')) {
+                var wrapper = document.getElementById('wrapper');
+                var notification = document.createElement('div');
+                notification.id = 'notification';
+                notification.innerHTML = 'Your upload was successful! Please wait a few moments for the internet to catch up to you. <a class="close">[close]</a>';
+                wrapper.prepend(notification);
+
+                var close = $('#notification .close');
+                close.on('click', function() {
+                    var notification = document.getElementById("notification");
+                    notification.style.display = 'none';
+                });
+                this.imgurAlbumPicturesRefreshFrequency = 5000;
+            }
+
+            if (this.imgurAlbumPicturesRefreshFrequency) {
+                setInterval(function() {
+                    window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
+                }, this.imgurAlbumPicturesRefreshFrequency);
+            }
             this.getImgurTokens(function (response) {
                 self.showLatestTagImages();
                 console.log('imgur integration initialized.');
@@ -206,41 +267,4 @@
 
     window.imgurIntegration = imgurIntegration;
     imgurIntegration.init();
-
-    $('form #submitTheDamnFuckingForm').click(function (e) {
-        e.preventDefault();
-        var form = $(e.currentTarget).closest('form');
-        var fileInputs = form.find('input[type="file"]');
-        var files = [], user = '';
-
-        // get the latest tag number
-        var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
-        user = form.find('input[name="name"]').val();
-
-        for (var i = 0; i < fileInputs.length; ++i) {
-            var $files = fileInputs[i].files;
-            var $input = $(fileInputs[i]);
-
-            if ($files.length) {
-
-                // Reject big files
-                if ($files[0].size > $(this).data("max-size") * 1024) {
-                    console.log("Please select a smaller file");
-                    return false;
-                }
-
-                files.push($files[0]);
-            } else {
-                console.log('I need both files!');
-                return;
-            }
-        }
-
-        window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof for ' + user, fileInputs[0], function() {
-            window.imgurIntegration.uploadFileToImgur(files[1], '#' + nextTagNumber + ' tag by ' + user, fileInputs[1], function() {
-                location.reload(true);
-            });
-        });
-        
-    });
 })(jQuery);
