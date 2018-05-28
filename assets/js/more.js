@@ -237,7 +237,7 @@
             });
 
             // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
-            if (window.location.search.indexOf('uploadSuccess=true')) {
+            if (window.location.search.indexOf('uploadSuccess=true') > -1) {
                 var wrapper = document.getElementById('wrapper');
                 var notification = document.createElement('div');
                 notification.id = 'notification';
