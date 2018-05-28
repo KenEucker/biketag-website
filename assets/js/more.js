@@ -123,20 +123,29 @@
             if (!window.imgurIntegration.imgurAlbumPictures) {
                 return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
             }
-
             var images = window.imgurIntegration.imgurAlbumPictures;
-            var lastImage = images[0];
-            var secondToLastImage = images.length > 1 ? images[1] : null;
-            var thirdToLastImage = images.length > 2 ? images[2] : null;
-            var lastImageThumbnail = lastImage.link.substr(0, lastImage.link.length - 4) + 'l' + lastImage.link.substr(-4);
-
+            var count = window.imgurIntegration.getUrlParam('count');
             $('.content .inner').empty();
-            $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(lastImage, "Tag You're It!") );
-            if (secondToLastImage) {
-                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(secondToLastImage, "Proof") );
-            }
-            if (thirdToLastImage) {
-                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(thirdToLastImage, "Last tag") );
+
+            if (!count) {
+                var lastImage = images[0];
+                var secondToLastImage = images.length > 1 ? images[1] : null;
+                var thirdToLastImage = images.length > 2 ? images[2] : null;
+                var lastImageThumbnail = lastImage.link.substr(0, lastImage.link.length - 4) + 'l' + lastImage.link.substr(-4);
+
+                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(lastImage, "Tag You're It!") );
+                if (secondToLastImage) {
+                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(secondToLastImage, "Proof") );
+                }
+                if (thirdToLastImage) {
+                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(thirdToLastImage, "Last tag") );
+                }
+            } else {
+                count = Number(count);
+                for (var i = 0; (i < count) && (i < images.length); ++i) {
+                    var image = images[i];
+                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(image, image.description) );
+                }
             }
         },
 
@@ -196,6 +205,16 @@
                 });
         },
 
+        getUrlParam(param) {
+            var searchParams = new URLSearchParams(window.location.search);
+
+            if(!param) {
+                return searchParams;
+            } else {
+                return searchParams.get(param);
+            }
+        },
+
         init: function () {
             var self = this;
 
@@ -237,7 +256,7 @@
             });
 
             // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
-            if (window.location.search.indexOf('uploadSuccess=true') > -1) {
+            if (this.getUrlParam('uploadSuccess') == 'true') {
                 var wrapper = document.getElementById('wrapper');
                 var notification = document.createElement('div');
                 notification.id = 'notification';
