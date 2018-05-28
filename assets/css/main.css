@@ -959,7 +959,10 @@ button {
           #header .content .inner a span:nth-child(1) {
             font-size: 40px;
             font-weight: 500;
-            text-shadow: 2px 2px #292828e6; }
+            text-shadow: 2px 2px #292828e6;
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 0 0.5rem;
+            border-radius: 5px; }
           #header .content .inner a span:nth-child(2) {
             bottom: 4px;
             right: 2%;
