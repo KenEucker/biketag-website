@@ -219,6 +219,8 @@
             $('form #submitTheDamnFuckingForm').click(function (e) {
                 e.preventDefault();
                 var thisButton = $(e.currentTarget);
+                thisButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+
                 var form = $(e.currentTarget).closest('form');
                 var fileInputs = form.find('input[type="file"]');
                 var files = [], user = '';
@@ -226,8 +228,6 @@
                 // get the latest tag number
                 var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
                 user = form.find('input[name="name"]').val();
-
-                thisButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
                 for (var i = 0; i < fileInputs.length; ++i) {
                     var $files = fileInputs[i].files;
