@@ -149,10 +149,9 @@
             }
         },
 
-        uploadFileToImgur: function (file, description, input, next) {
+        uploadFileToImgur: function (file, description, next) {
             // Begin file upload
             console.log("Uploading file to Imgur..");
-            $(input).after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
             var formData = new FormData();
             formData.append("image", file);
@@ -177,7 +176,6 @@
             // Response contains stringified JSON
             // Image URL available at response.data.link
             $.ajax(settings).done(function (response) {
-                $(input).next().remove();
                 next();
             });
         },
@@ -220,6 +218,7 @@
 
             $('form #submitTheDamnFuckingForm').click(function (e) {
                 e.preventDefault();
+                var thisButton = $(e.currentTarget);
                 var form = $(e.currentTarget).closest('form');
                 var fileInputs = form.find('input[type="file"]');
                 var files = [], user = '';
@@ -227,7 +226,9 @@
                 // get the latest tag number
                 var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
                 user = form.find('input[name="name"]').val();
-        
+
+                thisButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+
                 for (var i = 0; i < fileInputs.length; ++i) {
                     var $files = fileInputs[i].files;
                     var $input = $(fileInputs[i]);
@@ -247,8 +248,8 @@
                     }
                 }
         
-                window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof for ' + user, fileInputs[0], function() {
-                    window.imgurIntegration.uploadFileToImgur(files[1], '#' + nextTagNumber + ' tag by ' + user, fileInputs[1], function() {
+                window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof for ' + user, function() {
+                    window.imgurIntegration.uploadFileToImgur(files[1], '#' + nextTagNumber + ' tag by ' + user, function() {
                         window.location.href = window.location.pathname + '?uploadSuccess=true';
                     });
                 });
