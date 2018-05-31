@@ -5,7 +5,8 @@ const express = require('express'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
-    port = debug ? 8080 : 80;
+    config = require('./config.js'),
+    port = debug ? 8080 : config.port || 80;
 
 var imgurTokens = {
     "default": {
@@ -29,9 +30,9 @@ function getSubdomainPrefix (req) {
 }
 
 passport.use(new ImgurStrategy({
-    clientID: '79ea70333c45883',
-    clientSecret: '947d003902b25c7c8b72830898f9f5f07beddfb5',
-    callbackURL: "http://biketag.org/auth/imgur/callback",
+    clientID: config.imgurClientID,
+    clientSecret: config.imgurClientSecret,
+    callbackURL: config.imgurCallbackURL,
     passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
