@@ -249,8 +249,11 @@
                     }
                 }
         
-                window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof fount at (' + proofLocation + ') by ' + user, function() {
-                    window.imgurIntegration.uploadFileToImgur(files[1], '#' + nextTagNumber + ' tag by ' + user, function() {
+                var image1Description = '#' + (nextTagNumber - 1) + ' proof fount at ( ' + proofLocation + ' ) by ' + user;
+                var image2Description = '#' + nextTagNumber + ' tag by ' + user;
+
+                window.imgurIntegration.uploadFileToImgur(files[0], image1Description, function() {
+                    window.imgurIntegration.uploadFileToImgur(files[1], image2Description, function() {
                         window.location.href = window.location.pathname + '?uploadSuccess=true';
                     });
                 });
