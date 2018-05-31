@@ -221,7 +221,7 @@
                 var thisButton = $(e.currentTarget);
                 thisButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
-                var form = $(e.currentTarget).closest('form');
+                var form = $('#theDamnForm');
                 var fileInputs = form.find('input[type="file"]');
                 var files = [], user = '';
         
