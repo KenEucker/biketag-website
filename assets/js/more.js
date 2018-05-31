@@ -216,18 +216,19 @@
         init: function () {
             var self = this;
 
-            $('form #submitTheDamnFuckingForm').click(function (e) {
+            $('form #submit').click(function (e) {
                 e.preventDefault();
                 var thisButton = $(e.currentTarget);
                 thisButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
-                var form = $('#theDamnForm');
+                var form = $('#uploadForm');
                 var fileInputs = form.find('input[type="file"]');
-                var files = [], user = '';
+                var files = [], user = '', proofLocation = '';
         
                 // get the latest tag number
                 var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
                 user = form.find('input[name="name"]').val();
+                proofLocation = form.find('input[name="location"]').val();
 
                 for (var i = 0; i < fileInputs.length; ++i) {
                     var $files = fileInputs[i].files;
@@ -248,7 +249,7 @@
                     }
                 }
         
-                window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof for ' + user, function() {
+                window.imgurIntegration.uploadFileToImgur(files[0], '#' + (nextTagNumber - 1) + ' proof fount at (' + proofLocation + ') by ' + user, function() {
                     window.imgurIntegration.uploadFileToImgur(files[1], '#' + nextTagNumber + ' tag by ' + user, function() {
                         window.location.href = window.location.pathname + '?uploadSuccess=true';
                     });

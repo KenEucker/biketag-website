@@ -54,7 +54,7 @@
 
 						<!-- Intro -->
 							<article id="tagit">
-								<form id="theDamnForm">
+								<form id="uploadForm">
 									<div class="field half first">
 										<label for="currentTag">Image proof you found the mystery location</label>
 										<input type="file" name="currentTag" />
@@ -63,12 +63,16 @@
 										<label for="nextTag">Image of the next tag location</label>
 										<input type="file" name="nextTag" />
 									</div>
-									<div class="field">
+									<div class="field half first">
+										<label for="location">Location it was found:</label>
+										<input type="text" name="location" placeholder="location" />
+									</div>
+									<div class="field half">
 										<label for="name">Who are you?</label>
 										<input type="text" name="name" placeholder="name" />
 									</div>
 									<ul class="actions">
-										<li><button id="submitTheDamnFuckingForm">Tag IT!</button></li>
+										<li><button id="submit">Tag IT!</button></li>
 									</ul>
 								</form>
 								
