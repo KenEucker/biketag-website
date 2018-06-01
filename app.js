@@ -45,14 +45,14 @@ function isValidRequestOrigin(req) {
     return originIsValid;
 }
 
-function templating(path) {
+function templating(templatePath) {
 
-    if (!path) {
-        path = path.join(__dirname, '/templates/biketag/');
+    if (!templatePath) {
+        templatePath = path.join(__dirname, '/templates/biketag/');
     }
 
-    console.log('configuring a static path to template:', path);
-    app.use(express.static(path));
+    console.log('configuring a static path to template:', templatePath);
+    app.use(express.static(templatePath));
     app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 
     app.use("/assets", function(req, res) {
