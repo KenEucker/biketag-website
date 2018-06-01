@@ -49,7 +49,7 @@ function templating() {
     app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 
     app.use("/assets", function(req, res) {
-        // console.log('asset requested', req.url);
+        console.log('asset requested', req.url);
         var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
         res.sendFile(path.join(__dirname, "assets/", req.url));
     });
@@ -57,13 +57,14 @@ function templating() {
 
 function security() {
     app.all('/*', function(req, res, next) {
-        // console.log('security check');
+        console.log('security check');
         // CORS headers
         res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
         // Set custom headers for CORS
-        // res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+        res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
         if (req.method == 'OPTIONS') {
+            console.log('failed security check!', req.url);
             res.status(200).end();
         } else {
             next();

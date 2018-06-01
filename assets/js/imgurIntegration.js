@@ -1,7 +1,7 @@
 (function ($) {
 
     var imgurIntegration = {
-        imgurAlbumHash: '3OMZJ6a',
+        imgurAlbumHash: 'Y9PKtpI',
         imgurAuthorization: 'Client-ID 79ea70333c45883',
         imgurAccessToken: null,
         imgurAlbumPictures: null,
@@ -196,9 +196,9 @@
                     var imgurTokens = response.imgurTokens;
 
                     if (imgurTokens && typeof imgurTokens == 'object') {
-                        self.imgurAccessToken = 'Bearer ' + imgurTokens.imgurAccessToken || self.imgurAccessToken;
                         self.imgurAlbumHash = imgurTokens.imgurAlbumHash || self.imgurAlbumHash;
-                        self.imgurAuthorization = 'Client-ID ' + imgurTokens.imgurAuthorization || self.imgurAuthorization;
+                        self.imgurAccessToken = imgurTokens.imgurAccessToken ? 'Bearer ' + imgurTokens.imgurAccessToken : self.imgurAccessToken;
+                        self.imgurAuthorization = imgurTokens.imgurAuthorization ? 'Client-ID ' + imgurTokens.imgurAuthorization : self.imgurAuthorization;
 
                         return success(response);
                     }
