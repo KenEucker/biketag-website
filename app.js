@@ -84,7 +84,7 @@ function authentication() {
             passReqToCallback: true
             },
             function(req, accessToken, refreshToken, profile, done) {
-                console.log('imgur callback called');
+                console.log('imgur auth callback with profile', profile);
                 if (profile.email_address == config.imgurEmailAddress) {
                     // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
                     // var subdomain = getSubdomainPrefix(req);
@@ -138,7 +138,7 @@ function authentication() {
             passReqToCallback: true
             },
             function(req, accessToken, refreshToken, profile, done) {
-                console.log('reddit callback called');
+                console.log('reddit auth callback with profile', profile);
                 if (profile.email_address == config.redditEmailAddress) {
                     // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
                     // var subdomain = getSubdomainPrefix(req);
