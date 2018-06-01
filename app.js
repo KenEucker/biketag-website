@@ -45,9 +45,14 @@ function isValidRequestOrigin(req) {
     return originIsValid;
 }
 
-function templating() {
+function templating(path) {
 
-    app.use(express.static(path.join(__dirname, '/templates/biketag/')));
+    if (!path) {
+        path = path.join(__dirname, '/templates/biketag/');
+    }
+
+    console.log('configuring a static path to template:', path);
+    app.use(express.static(path));
     app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 
     app.use("/assets", function(req, res) {
@@ -59,7 +64,7 @@ function templating() {
 
 function security() {
     app.all('/*', function(req, res, next) {
-        console.log('security check');
+        console.log('security check', req.url);
         // CORS headers
         res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
