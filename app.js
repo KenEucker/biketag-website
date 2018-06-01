@@ -56,20 +56,20 @@ function templating() {
 }
 
 function security() {
-    // app.all('/*', function(req, res, next) {
-    //     console.log('security check');
-    //     // CORS headers
-    //     res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
-    //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
-    //     // Set custom headers for CORS
-    //     res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
-    //     if (req.method == 'OPTIONS') {
-    //         console.log('failed security check!', req.url);
-    //         res.status(200).end();
-    //     } else {
-    //         next();
-    //     }
-    // });
+    app.all('/*', function(req, res, next) {
+        console.log('security check');
+        // CORS headers
+        res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
+        // Set custom headers for CORS
+        res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+        if (req.method == 'OPTIONS') {
+            console.log('failed security check!', req.url);
+            res.status(200).end();
+        } else {
+            next();
+        }
+    });
 }
 
 function authentication() {
