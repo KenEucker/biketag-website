@@ -84,8 +84,8 @@ function authentication() {
             passReqToCallback: true
             },
             function(req, accessToken, refreshToken, profile, done) {
-                console.log('imgur auth callback with profile', profile);
-                if (profile.email_address == config.imgurEmailAddress) {
+                if (profile.email == config.imgurEmailAddress) {
+                    console.log('imgur auth callback with valid profile', profile);
                     // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
                     // var subdomain = getSubdomainPrefix(req);
         
@@ -102,6 +102,7 @@ function authentication() {
                     return done(null, profile);
                 } else {
                     // Someone else wants to authorize our app? Why?
+                    console.log('Someone else wants to authorize our app? Why?', profile);
                 }
         
                 // console.log('received imgur info', accessToken, refreshToken, profile);
@@ -138,8 +139,8 @@ function authentication() {
             passReqToCallback: true
             },
             function(req, accessToken, refreshToken, profile, done) {
-                console.log('reddit auth callback with profile', profile);
                 if (profile.email_address == config.redditEmailAddress) {
+                    console.log('reddit auth callback with valid profile', profile);
                     // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
                     // var subdomain = getSubdomainPrefix(req);
         
@@ -155,6 +156,7 @@ function authentication() {
 
                     return done(null, profile);
                 } else {
+                    console.log('Someone else wants to authorize our app? Why?', profile);
                     // Someone else wants to authorize our app? Why?
                 }
 
