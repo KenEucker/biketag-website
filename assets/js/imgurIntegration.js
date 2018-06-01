@@ -189,7 +189,9 @@
                     'Content-Type': 'application/json'
                 }
             }).then(function (res) { return res.json() })
-                .catch(function (error) { console.error('Error:', error) })
+                .catch(function (error) { 
+                    console.error('Error:', error) 
+                })
                 .then(function (response) {
                     var imgurTokens = response.imgurTokens;
 
@@ -213,52 +215,60 @@
             }
         },
 
+        onUploadFormSubmit(theButton) {
+            theButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+
+            var form = $('#uploadForm');
+            var fileInputs = form.find('input[type="file"]');
+            var files = [], user = '', proofLocation = '';
+    
+            // get the latest tag number
+            var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
+            user = form.find('input[name="name"]').val();
+            proofLocation = form.find('input[name="location"]').val();
+
+            for (var i = 0; i < fileInputs.length; ++i) {
+                var $files = fileInputs[i].files;
+                var $input = $(fileInputs[i]);
+    
+                if ($files.length) {
+    
+                    // Reject big files
+                    if ($files[0].size > $(this).data("max-size") * 1024) {
+                        console.log("Please select a smaller file");
+                        return false;
+                    }
+    
+                    files.push($files[0]);
+                } else {
+                    console.log('I need both files!');
+                    return;
+                }
+            }
+    
+            var image1Description = '#' + (nextTagNumber - 1) + ' proof fount at ( ' + proofLocation + ' ) by ' + user;
+            var image2Description = '#' + nextTagNumber + ' tag by ' + user;
+
+            window.imgurIntegration.uploadFileToImgur(files[0], image1Description, function() {
+                window.imgurIntegration.uploadFileToImgur(files[1], image2Description, function() {
+                    window.location.href = window.location.pathname + '?uploadSuccess=true';
+                });
+            });
+        },
+
         init: function () {
             var self = this;
-
-            $('form #submit').click(function (e) {
-                e.preventDefault();
-                var thisButton = $(e.currentTarget);
-                thisButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-
-                var form = $('#uploadForm');
-                var fileInputs = form.find('input[type="file"]');
-                var files = [], user = '', proofLocation = '';
-        
-                // get the latest tag number
-                var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
-                user = form.find('input[name="name"]').val();
-                proofLocation = form.find('input[name="location"]').val();
-
-                for (var i = 0; i < fileInputs.length; ++i) {
-                    var $files = fileInputs[i].files;
-                    var $input = $(fileInputs[i]);
-        
-                    if ($files.length) {
-        
-                        // Reject big files
-                        if ($files[0].size > $(this).data("max-size") * 1024) {
-                            console.log("Please select a smaller file");
-                            return false;
-                        }
-        
-                        files.push($files[0]);
-                    } else {
-                        console.log('I need both files!');
-                        return;
-                    }
-                }
-        
-                var image1Description = '#' + (nextTagNumber - 1) + ' proof fount at ( ' + proofLocation + ' ) by ' + user;
-                var image2Description = '#' + nextTagNumber + ' tag by ' + user;
-
-                window.imgurIntegration.uploadFileToImgur(files[0], image1Description, function() {
-                    window.imgurIntegration.uploadFileToImgur(files[1], image2Description, function() {
-                        window.location.href = window.location.pathname + '?uploadSuccess=true';
-                    });
-                });
-                
+            
+            this.getImgurTokens(function (response) {
+                self.showLatestTagImages();
+                console.log('imgur integration initialized.');
             });
+
+            if (this.imgurAlbumPicturesRefreshFrequency) {
+                setInterval(function() {
+                    window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
+                }, this.imgurAlbumPicturesRefreshFrequency);
+            }
 
             // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
             if (this.getUrlParam('uploadSuccess') == 'true') {
@@ -276,14 +286,9 @@
                 this.imgurAlbumPicturesRefreshFrequency = 5000;
             }
 
-            if (this.imgurAlbumPicturesRefreshFrequency) {
-                setInterval(function() {
-                    window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
-                }, this.imgurAlbumPicturesRefreshFrequency);
-            }
-            this.getImgurTokens(function (response) {
-                self.showLatestTagImages();
-                console.log('imgur integration initialized.');
+            $('form #submit').click(function (e) {
+                e.preventDefault();
+                self.onUploadFormSubmit($(e.currentTarget));
             });
 
         }
