@@ -95,7 +95,7 @@ function authentication() {
                     // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
                     // authTokens["imgur"][subdomain].imgurProfile = profile;
             
-                    for (var subdomain in regions) {
+                    for (var subdomain of regions) {
                         console.log('setting imgur authentication information for subdomain:', subdomain);
                         authTokens[subdomain]["imgur"].imgurRefreshToken = refreshToken;
                         authTokens[subdomain]["imgur"].imgurAccessToken = accessToken;
@@ -151,7 +151,7 @@ function authentication() {
                     // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
                     // authTokens["imgur"][subdomain].imgurProfile = profile;
             
-                    for (var subdomain in regions) {
+                    for (var subdomain of regions) {
                         console.log('setting reddit authentication information for subdomain:', subdomain);
                         authTokens[subdomain]["reddit"].redditRefreshToken = refreshToken;
                         authTokens[subdomain]["reddit"].redditAccessToken = accessToken;
