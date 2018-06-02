@@ -16,6 +16,17 @@
 		}
 	};
 
+	hideShowCountChanger = function(show) {
+		display = 'none';
+		if (show) {
+			display = 'block';
+		}
+		var count = $('#countChanger');
+		if (count.length) {
+			count.css('display', display);
+		}
+	}
+
 	skel.breakpoints({
 		xlarge:		'(max-width: 1680px)',
 		large:		'(max-width: 1280px)',
@@ -89,10 +100,9 @@
 			if (getUrlParam('count')) {
 				extradelay = 1000;
 			}
-			
+
 			setTimeout(function(){
-				var count = $('#countChanger');
-				count.css('display', 'block');
+				hideShowCountChanger(true);
 			}, extradelay);
 
 			// Methods.
@@ -321,6 +331,7 @@
 						$('<div class="close">Close</div>')
 							.appendTo($this)
 							.on('click', function() {
+								hideShowCountChanger(true);
 								location.hash = '';
 							});
 
@@ -335,8 +346,10 @@
 				$body.on('click', function(event) {
 
 					// Article visible? Hide.
-						if ($body.hasClass('is-article-visible'))
+						if ($body.hasClass('is-article-visible')) {
+							hideShowCountChanger(true);
 							$main._hide(true);
+						}
 
 				});
 
@@ -360,7 +373,6 @@
 				});
 
 				$window.on('hashchange', function(event) {
-
 					// Empty hash?
 						if (location.hash == ''
 						||	location.hash == '#') {
@@ -380,6 +392,8 @@
 							// Prevent default.
 								event.preventDefault();
 								event.stopPropagation();
+
+							hideShowCountChanger();
 
 							// Show article.
 								$main._show(location.hash.substr(1));
