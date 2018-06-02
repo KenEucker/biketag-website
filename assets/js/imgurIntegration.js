@@ -115,7 +115,7 @@
                     <a href="' + image.link + '" target="_blank">\
                         <span>' + tagNumber + '</span>\
                         <span>' + tagCredit + '</span>\
-                        <img src="' + thumbnail + '">\
+                        <img data-src="' + thumbnail + '">\
                     </a>';
         },
 
@@ -141,12 +141,14 @@
                     $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(thirdToLastImage, "Last tag") );
                 }
             } else {
-                count = Number(count);
+                count = count.toUpperCase() == "ALL" ? images.length : Number(count);
                 for (var i = 0; (i < count) && (i < images.length); ++i) {
                     var image = images[i];
                     $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(image, image.description) );
                 }
             }
+            window.lazyLoadInstance = new LazyLoad();
+            console.log('loading lazy load images', window.lazyLoadInstance);
         },
 
         uploadFileToImgur: function (file, description, next) {

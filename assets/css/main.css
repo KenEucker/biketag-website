@@ -863,6 +863,38 @@ button {
       cursor: pointer; }
     #wrapper #notification .cssanimations.csstransforms .close {
       display: none; }
+  #wrapper #countChanger {
+    display: none; }
+    #wrapper #countChanger nav {
+      position: fixed;
+      left: 1vw;
+      top: 2vh;
+      z-index: 1000; }
+      #wrapper #countChanger nav ul {
+        display: list-item;
+        margin-bottom: 0;
+        list-style: none;
+        padding-left: 0;
+        border: solid 1px #ffffff;
+        border-radius: 4px; }
+        #wrapper #countChanger nav ul li {
+          padding-left: 0; }
+          #wrapper #countChanger nav ul li:first-child {
+            border-left: 0; }
+          #wrapper #countChanger nav ul li a {
+            display: block;
+            min-width: 1.5rem;
+            height: 2rem;
+            line-height: 2rem;
+            padding: 0 0.45rem 0 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            font-size: 0.8rem;
+            border-bottom: 0; }
+            #wrapper #countChanger nav ul li a:hover {
+              background-color: rgba(255, 255, 255, 0.075); }
+            #wrapper #countChanger nav ul li a:active {
+              background-color: rgba(255, 255, 255, 0.175); }
   #wrapper:before {
     content: '';
     display: block; }
@@ -875,6 +907,12 @@ button {
   @media screen and (max-width: 480px) {
     #wrapper {
       padding: 1rem; } }
+  @media only screen and (min-width: 800px) {
+    #wrapper #countChanger nav ul {
+      display: -moz-flex;
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex; } }
 
 /* Header */
 #header {

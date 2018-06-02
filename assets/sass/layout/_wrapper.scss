@@ -15,7 +15,7 @@
 		width: 100%;
 		padding: 4rem 2rem;
 		z-index: 3;
-		
+
 		@-webkit-keyframes slideDown {
 			0%, 100% { -webkit-transform: translateY(-50px); }
 			10%, 90% { -webkit-transform: translateY(0px); }
@@ -57,6 +57,55 @@
 			}
 		}
 
+		#countChanger {
+			display: none;
+
+			nav {
+				position: fixed;
+				left: 1vw;
+				top: 2vh;
+				z-index: 1000;
+
+				ul {
+					display: list-item;
+					margin-bottom: 0;
+					list-style: none;
+					padding-left: 0;
+					border: solid _size(border-width) _palette(border);
+					border-radius: _size(border-radius);
+
+					li {
+						padding-left: 0;
+						// border-left: solid _size(border-width) _palette(border);
+
+						&:first-child {
+							border-left: 0;
+						}
+
+						a {
+							display: block;
+							min-width: 1.5rem;
+							height: 2rem;
+							line-height: 2rem;
+							padding: 0 0.45rem 0 (0.45rem + _font(letter-spacing));
+							text-transform: uppercase;
+							letter-spacing: _font(letter-spacing);
+							font-size: 0.8rem;
+							border-bottom: 0;
+
+							&:hover {
+								background-color: _palette(border-bg);
+							}
+
+							&:active {
+								background-color: _palette(border-bg-alt);
+							}
+						}
+					}
+				}
+			}
+		}
+
 		&:before {
 			content: '';
 			display: block;
@@ -66,11 +115,24 @@
 			padding: 3rem 2rem;
 		}
 
+		@include breakpoint(large) {
+		}
+
 		@include breakpoint(small) {
 			padding: 2rem 1rem;
 		}
 
 		@include breakpoint(xsmall) {
 			padding: 1rem;
+		}
+
+		@media only screen and (min-width: 800px) {
+			#countChanger {
+				nav {
+					ul {
+						@include vendor('display', 'flex');
+					}
+				}
+			}
 		}
 	}

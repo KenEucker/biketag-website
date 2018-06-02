@@ -6,6 +6,16 @@
 
 (function($) {
 
+	getUrlParam = function(param) {
+		var searchParams = new URLSearchParams(window.location.search);
+
+		if(!param) {
+			return searchParams;
+		} else {
+			return searchParams.get(param);
+		}
+	};
+
 	skel.breakpoints({
 		xlarge:		'(max-width: 1680px)',
 		large:		'(max-width: 1280px)',
@@ -73,7 +83,17 @@
 
 		// Main.
 			var	delay = 325,
-				locked = false;
+				locked = false,
+				extradelay = 7000;
+
+			if (getUrlParam('count')) {
+				extradelay = 1000;
+			}
+			
+			setTimeout(function(){
+				var count = $('#countChanger');
+				count.css('display', 'block');
+			}, extradelay);
 
 			// Methods.
 				$main._show = function(id, initial) {
