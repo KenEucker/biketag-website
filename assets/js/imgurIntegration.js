@@ -266,6 +266,10 @@
                 console.log('imgur integration initialized.');
             });
 
+            if(this.getUrlParam('count')) {
+                this.imgurAlbumPicturesRefreshFrequency = false;
+            }
+
             if (this.imgurAlbumPicturesRefreshFrequency) {
                 setInterval(function() {
                     window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
