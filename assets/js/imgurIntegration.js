@@ -5,7 +5,7 @@
         imgurAuthorization: 'Client-ID 79ea70333c45883',
         imgurAccessToken: null,
         imgurAlbumPictures: null,
-        imgurAlbumPicturesRefreshFrequency: 30000,
+        imgurAlbumPicturesRefreshFrequency: 60000,
 
         createAlbum: function (ids) {
 
@@ -35,17 +35,14 @@
 
         },
 
-        getImgurAlbumPictures: function (albumHash, callback) {
+        getImgurAlbumInfo: function (albumHash, callback) {
             if (!albumHash) {
                 albumHash = this.imgurAlbumHash;
             }
             $.ajax({
-                url: 'https://api.imgur.com/3/album/' + albumHash + '/images',
+                url: 'https://api.imgur.com/3/album/' + albumHash + '',
                 success: function (data) {
                     console.log(data);
-                    window.imgurIntegration.imgurAlbumPictures = data.data.sort(function(image1, image2){
-                        return new Date(image2.datetime) - new Date(image1.datetime);
-                    });
 
                     if (callback) {
                         callback(data);
@@ -60,45 +57,93 @@
             });
         },
 
-        addImagesToAlbum: function (ids, albumHash) {
-            if (!ids) {
-                console.log("I can't just add nothing:", ids);
+        refreshImgurAlbumInfo: function(albumInfo) {
+            if (albumInfo && albumInfo.data) {
+                albumInfo = albumInfo.data;
+            } else {
                 return;
-            } else if (!Array.isArray(ids)) {
-                ids = [ids];
             }
 
+            if (albumInfo.images_count != window.imgurIntegration.imgurAlbumPictures.length) {
+                console.log('image count has changed, updating most recent tags');
+                window.imgurIntegration.imgurAlbumPictures = window.imgurIntegration.getImgurAlbumImagesByUploadDate(albumInfo.images);
+                window.imgurIntegration.showLatestTagImages();
+            }
+        },
+
+        getImgurAlbumImagesByUploadDate: function (images, newestFirst) {
+            if (!newestFirst) {
+                return images.sort(function(image1, image2){
+                    return new Date(image2.datetime) - new Date(image1.datetime);
+                });
+            } else {
+                return images.sort(function(image1, image2){
+                    return new Date(image1.datetime) - new Date(image2.datetime);
+                });
+            }
+        },
+
+        getImgurAlbumPictures: function (albumHash, callback) {
             if (!albumHash) {
                 albumHash = this.imgurAlbumHash;
             }
-
-            var url = 'https://api.imgur.com/3/album/' + albumHash + '/add';
-            console.log('we want to add the following ids to the album ' + albumHash + ' using the URL ' + url, ids);
-
-            var formData = new FormData();
-            formData.append("ids", ids);
-            formData.append("deleteHashes", ids);
-
             $.ajax({
-                async: false,
-                crossDomain: true,
-                processData: false,
-                contentType: false,
-                url: url,
-                data: formData,
-                type: 'POST',
-                url: url,
-                headers: {
-                    Authorization: window.imgurIntegration.imgurAuthorization,
-                    Accept: 'application/json'
+                url: 'https://api.imgur.com/3/album/' + albumHash + '/images',
+                success: function (data) {
+                    // console.log(data);
+                    window.imgurIntegration.imgurAlbumPictures = window.imgurIntegration.getImgurAlbumImagesByUploadDate(data.data);
+
+                    if (callback) {
+                        callback(data);
+                    }
                 },
-                mimeType: 'multipart/form-data'
-            }).done(function (response) {
-                debugger;
-                console.log(response);
-                // window.imgurIntegration.addImagesToAlbum();
+                error: function (err) {
+                    console.log('error getting images from imgur', err);
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", window.imgurIntegration.imgurAuthorization);
+                },
             });
         },
+
+        // addImagesToAlbum: function (ids, albumHash) {
+        //     if (!ids) {
+        //         console.log("I can't just add nothing:", ids);
+        //         return;
+        //     } else if (!Array.isArray(ids)) {
+        //         ids = [ids];
+        //     }
+
+        //     if (!albumHash) {
+        //         albumHash = this.imgurAlbumHash;
+        //     }
+
+        //     var url = 'https://api.imgur.com/3/album/' + albumHash + '/add';
+        //     console.log('we want to add the following ids to the album ' + albumHash + ' using the URL ' + url, ids);
+
+        //     var formData = new FormData();
+        //     formData.append("ids", ids);
+        //     formData.append("deleteHashes", ids);
+
+        //     $.ajax({
+        //         async: false,
+        //         crossDomain: true,
+        //         processData: false,
+        //         contentType: false,
+        //         url: url,
+        //         data: formData,
+        //         type: 'POST',
+        //         url: url,
+        //         headers: {
+        //             Authorization: window.imgurIntegration.imgurAuthorization,
+        //             Accept: 'application/json'
+        //         },
+        //         mimeType: 'multipart/form-data'
+        //     }).done(function (response) {
+        //         // console.log(response);
+        //         // window.imgurIntegration.addImagesToAlbum();
+        //     });
+        // },
 
         biketagImageTemplate: function (image, title) {
             var thumbnail = image.link.substr(0, image.link.length - 4) + 'l' + image.link.substr(-4);
@@ -111,7 +156,7 @@
                 tagCredit = split[split.length - 1];
             }
 
-            console.log('setting image link', image.link, image);
+            // console.log('setting image link', image.link, image);
             return '<h2>' + title + '</h2>\
                     <a href="' + image.link + '" target="_blank">\
                         <span>' + tagNumber + '</span>\
@@ -152,12 +197,12 @@
             console.log('loading lazy load images', window.lazyLoadInstance);
         },
 
-        uploadFileToImgur: function (file, description, next) {
+        uploadImageToImgur: function (image, description, next) {
             // Begin file upload
             console.log("Uploading file to Imgur..");
 
             var formData = new FormData();
-            formData.append("image", file);
+            formData.append("image", image);
             formData.append("album", window.imgurIntegration.imgurAlbumHash);
             formData.append("description", description);
 
@@ -269,11 +314,9 @@
 
             if(this.getUrlParam('count')) {
                 this.imgurAlbumPicturesRefreshFrequency = false;
-            }
-
-            if (this.imgurAlbumPicturesRefreshFrequency) {
+            } else if (this.imgurAlbumPicturesRefreshFrequency) {
                 setInterval(function() {
-                    window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
+                    window.imgurIntegration.getImgurAlbumInfo(null, window.imgurIntegration.refreshImgurAlbumInfo);
                 }, this.imgurAlbumPicturesRefreshFrequency);
             }
 
