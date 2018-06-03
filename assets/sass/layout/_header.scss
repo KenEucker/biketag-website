@@ -265,10 +265,21 @@
 					}
 				}
 			}
-
 			.content {
+				padding: 2.5rem 1rem;
+	
 				.inner {
-					padding: 2.5rem 1rem;
+					a {
+						span {
+							&:nth-child(1) {
+								font-size: 24px;
+							}
+	
+							&:nth-child(2) {
+								font-size: 18px;
+							}
+						}
+					}
 				}
 
 				p {

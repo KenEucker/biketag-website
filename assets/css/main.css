@@ -1098,10 +1098,14 @@ button {
       line-height: 4.75rem; }
       #header .logo .icon:before {
         font-size: 1.75rem; }
-    #header .content .inner {
+    #header .content {
       padding: 2.5rem 1rem; }
-    #header .content p {
-      line-height: 1.875; } }
+      #header .content .inner a span:nth-child(1) {
+        font-size: 24px; }
+      #header .content .inner a span:nth-child(2) {
+        font-size: 18px; }
+      #header .content p {
+        line-height: 1.875; } }
   @media screen and (max-width: 480px) {
     #header {
       padding: 1.5rem 0; }

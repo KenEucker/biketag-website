@@ -111,6 +111,7 @@
                 tagCredit = split[split.length - 1];
             }
 
+            console.log('setting image link', image.link, image);
             return '<h2>' + title + '</h2>\
                     <a href="' + image.link + '" target="_blank">\
                         <span>' + tagNumber + '</span>\

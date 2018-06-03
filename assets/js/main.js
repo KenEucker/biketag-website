@@ -18,12 +18,13 @@
 
 	hideShowCountChanger = function(show) {
 		display = 'none';
-		if (show) {
-			display = 'block';
-		}
 		var count = $('#countChanger');
 		if (count.length) {
-			count.css('display', display);
+			if (show) {
+				count.fadeIn();
+			} else {
+				count.fadeOut();
+			}
 		}
 	}
 
