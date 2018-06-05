@@ -106,45 +106,6 @@
             });
         },
 
-        // addImagesToAlbum: function (ids, albumHash) {
-        //     if (!ids) {
-        //         console.log("I can't just add nothing:", ids);
-        //         return;
-        //     } else if (!Array.isArray(ids)) {
-        //         ids = [ids];
-        //     }
-
-        //     if (!albumHash) {
-        //         albumHash = this.imgurAlbumHash;
-        //     }
-
-        //     var url = 'https://api.imgur.com/3/album/' + albumHash + '/add';
-        //     console.log('we want to add the following ids to the album ' + albumHash + ' using the URL ' + url, ids);
-
-        //     var formData = new FormData();
-        //     formData.append("ids", ids);
-        //     formData.append("deleteHashes", ids);
-
-        //     $.ajax({
-        //         async: false,
-        //         crossDomain: true,
-        //         processData: false,
-        //         contentType: false,
-        //         url: url,
-        //         data: formData,
-        //         type: 'POST',
-        //         url: url,
-        //         headers: {
-        //             Authorization: window.imgurIntegration.imgurAuthorization,
-        //             Accept: 'application/json'
-        //         },
-        //         mimeType: 'multipart/form-data'
-        //     }).done(function (response) {
-        //         // console.log(response);
-        //         // window.imgurIntegration.addImagesToAlbum();
-        //     });
-        // },
-
         biketagImageTemplate: function (image, title) {
             var thumbnail = image.link.substr(0, image.link.length - 4) + 'l' + image.link.substr(-4);
             var tagNumber = '';
@@ -297,8 +258,8 @@
             var image1Description = '#' + (nextTagNumber - 1) + ' proof fount at ( ' + proofLocation + ' ) by ' + user;
             var image2Description = '#' + nextTagNumber + ' tag by ' + user;
 
-            window.imgurIntegration.uploadFileToImgur(files[0], image1Description, function() {
-                window.imgurIntegration.uploadFileToImgur(files[1], image2Description, function() {
+            window.imgurIntegration.uploadImageToImgur(files[0], image1Description, function() {
+                window.imgurIntegration.uploadImageToImgur(files[1], image2Description, function() {
                     window.location.href = window.location.pathname + '?uploadSuccess=true';
                 });
             });
