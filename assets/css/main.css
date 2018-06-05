@@ -805,6 +805,24 @@ button {
     background-color: #000000; }
 
 /* Wrapper */
+@-moz-keyframes slideDown {
+  0%, 100% {
+    -moz-transform: translateY(-50px); }
+  10%, 90% {
+    -moz-transform: translateY(0px); } }
+
+@-webkit-keyframes slideDown {
+  0%, 100% {
+    -webkit-transform: translateY(-50px); }
+  10%, 90% {
+    -webkit-transform: translateY(0px); } }
+
+@keyframes slideDown {
+  0%, 100% {
+    transform: translateY(-50px); }
+  10%, 90% {
+    transform: translateY(0px); } }
+
 #wrapper {
   display: -moz-flex;
   display: -webkit-flex;
@@ -827,19 +845,9 @@ button {
   width: 100%;
   padding: 4rem 2rem;
   z-index: 3; }
-
-@-webkit-keyframes slideDown {
-  0%, 100% {
-    -webkit-transform: translateY(-50px); }
-  10%, 90% {
-    -webkit-transform: translateY(0px); } }
-
-@-moz-keyframes slideDown {
-  0%, 100% {
-    -moz-transform: translateY(-50px); }
-  10%, 90% {
-    -moz-transform: translateY(0px); } }
   #wrapper .cssanimations.csstransforms #notification {
+    transform: translateY(-50px);
+    animation: slideDown 2.5s 1.0s 1 ease forwards;
     -webkit-transform: translateY(-50px);
     -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
     -moz-transform: translateY(-50px);
@@ -869,7 +877,7 @@ button {
       position: fixed;
       left: 1vw;
       top: 2vh;
-      z-index: 1000; }
+      z-index: 100; }
       #wrapper #countChanger nav ul {
         display: list-item;
         margin-bottom: 0;
@@ -915,6 +923,24 @@ button {
       display: flex; } }
 
 /* Header */
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg); }
+  to {
+    -moz-transform: rotate(360deg); } }
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
 #header {
   display: -moz-flex;
   display: -webkit-flex;
@@ -971,6 +997,8 @@ button {
     line-height: 5.5rem;
     border: solid 1px #ffffff;
     border-radius: 100%; }
+    #header .logo.spin {
+      animation: spin 2s; }
     #header .logo .icon:before {
       font-size: 2rem; }
   #header .content {

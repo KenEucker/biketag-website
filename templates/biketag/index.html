@@ -35,7 +35,7 @@
 				</div>
 				<!-- Header -->
 					<header id="header">
-						<div class="logo">
+						<div class="logo spin">
 							<span class="icon fa-bicycle"></span>
 						</div>
 						<div class="headingText">
@@ -48,7 +48,7 @@
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#tagit">Tag it!</a></li>
+								<li><a id="tagItButton" href="#tagit">Tag it!</a></li>
 								<li><a href="#howto">How To</a></li>
 								<li><a href="#about">About</a></li>
 								<li><a href="#contact">Contact</a></li>
@@ -64,10 +64,12 @@
 							<article id="tagit">
 								<form id="uploadForm">
 									<div class="field half first">
+										<h3 id="proofHeading">Proof Information</h3>
 										<label for="currentTag">Image proof you found the mystery location</label>
 										<input type="file" name="currentTag" />
 									</div>
 									<div class="field half">
+										<h3 id="nextTagHeading">Mext Tag Info</h3>
 										<label for="nextTag">Image of the next tag location</label>
 										<input type="file" name="nextTag" />
 									</div>
@@ -76,6 +78,10 @@
 										<input type="text" name="location" placeholder="location" />
 									</div>
 									<div class="field half">
+										<label for="hint">Hint for the next tag:</label>
+										<input type="text" name="hint" placeholder="location" />
+									</div>
+									<div class="field">
 										<label for="name">Who are you?</label>
 										<input type="text" name="name" placeholder="name" />
 									</div>

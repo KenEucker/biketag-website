@@ -6,6 +6,19 @@
 
 /* Header */
 
+	@-moz-keyframes spin {
+		from { -moz-transform: rotate(0deg); }
+		to { -moz-transform: rotate(360deg); }
+	}
+	@-webkit-keyframes spin {
+		from { -webkit-transform: rotate(0deg); }
+		to { -webkit-transform: rotate(360deg); }
+	}
+	@keyframes spin {
+		from {transform:rotate(0deg);}
+		to {transform:rotate(360deg);}
+	}
+
 	#header {
 		@include vendor('display', 'flex');
 		@include vendor('flex-direction', 'column');
@@ -69,6 +82,10 @@
 			line-height: 5.5rem;
 			border: solid _size(border-width) _palette(border);
 			border-radius: 100%;
+
+			&.spin {
+				animation: spin 2s;
+			}
 
 			.icon {
 				&:before {

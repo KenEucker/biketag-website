@@ -35,6 +35,27 @@
 
         },
 
+        getCurrentTagInformation() {
+            var tagInformation = {
+                currentTagNumber: 0,
+                hasTag: false,
+                currentTag: null,
+            };
+
+            if (window.imgurIntegration.imgurAlbumPictures.length) {
+                tagInformation.currentTag = window.imgurIntegration.imgurAlbumPictures[0];
+
+                if (tagInformation.currentTag) {
+                    tagInformation.hasTag = true;
+                    tagInformation.currentTagNumber = Number(tagInformation.currentTag.description.split(' ')[0].substr(1));
+                }
+            }
+
+            tagInformation.nextTagNumber = tagInformation.currentTagNumber + 1;
+
+            return tagInformation;
+        },
+
         getImgurAlbumInfo: function (albumHash, callback) {
             if (!albumHash) {
                 albumHash = this.imgurAlbumHash;
@@ -154,6 +175,11 @@
                     $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(image, image.description) );
                 }
             }
+
+            // Set the form with the tag information
+            var currentTagInfo = window.imgurIntegration.getCurrentTagInformation();
+            $('#proofHeading').text('Proof for ' + currentTagInfo.currentTagNumber);
+
             window.lazyLoadInstance = new LazyLoad();
             console.log('loading lazy load images', window.lazyLoadInstance);
         },
@@ -232,9 +258,10 @@
             var files = [], user = '', proofLocation = '';
     
             // get the latest tag number
-            var nextTagNumber = window.imgurIntegration.imgurAlbumPictures.length ? Number(window.imgurIntegration.imgurAlbumPictures[0].description.split(' ')[0].substr(1)) + 1 : 1;
+            var currentTagInfo = window.imgurIntegration.getCurrentTagInformation();
             user = form.find('input[name="name"]').val();
             proofLocation = form.find('input[name="location"]').val();
+            hint = form.find('input[name="hint"]').val();
 
             for (var i = 0; i < fileInputs.length; ++i) {
                 var $files = fileInputs[i].files;
@@ -255,8 +282,10 @@
                 }
             }
     
-            var image1Description = '#' + (nextTagNumber - 1) + ' proof fount at ( ' + proofLocation + ' ) by ' + user;
-            var image2Description = '#' + nextTagNumber + ' tag by ' + user;
+            var locationString = proofLocation && proofLocation.length ? ' fount at ( ' + proofLocation + ' )' : '';
+            var hintString = hint && hint.length ? ' (hint:  ' + hint + ' )' : '';
+            var image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user;
+            var image2Description = '#' + currentTagInfo.nextTagNumber + ' tag' + hintString + ' by ' + user;
 
             window.imgurIntegration.uploadImageToImgur(files[0], image1Description, function() {
                 window.imgurIntegration.uploadImageToImgur(files[1], image2Description, function() {
@@ -296,6 +325,10 @@
                 });
                 this.imgurAlbumPicturesRefreshFrequency = 5000;
             }
+
+            $('#header > .logo').click(function (){
+                document.getElementById('tagItButton').click();
+            });
 
             $('form #submit').click(function (e) {
                 e.preventDefault();

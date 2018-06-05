@@ -106,6 +106,13 @@
 				hideShowCountChanger(true);
 			}, extradelay);
 
+			setInterval(function(){
+				var logo = $('#header > div')[0];
+				logo.style.animation = 'none';
+				logo.offsetHeight; /* trigger reflow */
+				logo.style.animation = null;
+			}, extradelay);
+
 			// Methods.
 				$main._show = function(id, initial) {
 
