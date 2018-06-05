@@ -96,7 +96,8 @@
 		// Main.
 			var	delay = 325,
 				locked = false,
-				extradelay = 7000;
+				extradelay = 7000,
+				spinDelay = 15000;
 
 			if (getUrlParam('count')) {
 				extradelay = 1000;
@@ -111,7 +112,7 @@
 				logo.style.animation = 'none';
 				logo.offsetHeight; /* trigger reflow */
 				logo.style.animation = null;
-			}, extradelay);
+			}, spinDelay);
 
 			// Methods.
 				$main._show = function(id, initial) {
