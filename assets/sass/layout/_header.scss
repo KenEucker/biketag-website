@@ -83,7 +83,8 @@
 			border: solid _size(border-width) _palette(border);
 			border-radius: 100%;
 
-			&.spin {
+			&.spin, &:hover {
+				cursor: pointer;
 				animation: spin 2s;
 			}
 
