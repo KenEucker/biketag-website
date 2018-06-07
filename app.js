@@ -1,10 +1,12 @@
 const express = require('express'),
+    session = require('express-session'),
     path = require('path'),
     app = express(),
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
-    RedditTokenStrategy = require('passport-reddit-token'),
+    RedditTokenStrategy = require('passport-reddit').Strategy,
+    crypto = require('crypto'),
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     config = require('./config.js'),
     regions = Object.keys(config.regions),
@@ -174,8 +176,24 @@ function authentication() {
         ));
 
         // Reddit OAuth2 Integration
-        app.get('/auth/reddit', passport.authenticate('reddit-token'));
-        app.get('/auth/reddit/callback', passport.authenticate('reddit-token', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
+        app.get('/auth/reddit', function(req, res, next){
+            req.session.state = crypto.randomBytes(32).toString('hex');
+            passport.authenticate('reddit', {
+              state: req.session.state,
+            })(req, res, next);
+          });
+        app.get('/auth/reddit/callback', function(req, res, next){
+            // Check for origin via state token
+            if (req.query.state == req.session.state){
+              passport.authenticate('reddit', {
+                successRedirect: '/',
+                failureRedirect: '/fail'
+              })(req, res, next);
+            }
+            else {
+              next( new Error(403) );
+            }
+          });
         app.post('/auth/reddit/getToken', function(req, res) {
             var subdomain = getSubdomainPrefix(req);
             var tokensValue = 'unauthorized access';
@@ -195,7 +213,9 @@ function authentication() {
 }
 
 function init() {
+    app.use(session({ secret: 'biketag', resave: false, saveUninitialized: true, }));
     app.use(passport.initialize());
+    app.use(passport.session());
     app.use(express.json());       // to support JSON-encoded bodies
     app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 }
