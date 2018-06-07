@@ -149,7 +149,7 @@ function authentication() {
             passReqToCallback: true
             },
             function(req, accessToken, refreshToken, profile, done) {
-                if (profile.email_address == config.redditEmailAddress) {
+                if (profile.name == config.redditUserName) {
                     console.log('reddit auth callback with valid profile', profile);
                     // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
                     // var subdomain = getSubdomainPrefix(req);
