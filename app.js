@@ -5,7 +5,7 @@ const express = require('express'),
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
-    RedditTokenStrategy = require('passport-reddit').Strategy,
+    RedditStrategy = require('passport-reddit').Strategy,
     crypto = require('crypto'),
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     config = require('./config.js'),
@@ -83,6 +83,14 @@ function security() {
 
 function authentication() {
 
+    passport.serializeUser(function(user, done) {
+        done(null, user);
+      });
+      
+      passport.deserializeUser(function(user, done) {
+        done(null, user);
+      });
+
     if (config.imgurClientID) {
         console.log('configuring imgur API authentication for appID:', config.imgurClientID);
 
@@ -142,7 +150,7 @@ function authentication() {
     if (config.redditClientID) {
         console.log('configuring reddit API authentication for appID:', config.redditClientID);
         
-        passport.use(new RedditTokenStrategy({
+        passport.use(new RedditStrategy({
             clientID: config.redditClientID,
             clientSecret: config.redditClientSecret,
             callbackURL: config.redditCallbackURL,
