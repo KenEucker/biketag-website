@@ -82,6 +82,13 @@ function security() {
 }
 
 function authentication() {
+    passport.serializeUser(function(user, done) {
+        done(null, user);
+    });
+
+    passport.deserializeUser(function(obj, done) {
+        done(null, obj);
+    });
 
     if (config.imgurClientID) {
         console.log('configuring imgur API authentication for appID:', config.imgurClientID);
@@ -164,14 +171,17 @@ function authentication() {
                         authTokens[subdomain]["reddit"].redditAccessToken = accessToken;
                         authTokens[subdomain]["reddit"].redditProfile = profile;
                     }
-
-                    return done();
+                    process.nextTick(function () {
+                        return done(null, profile);
+                    });
                 } else {
                     console.log('Someone else wants to authorize our app? Why?', profile);
                     // Someone else wants to authorize our app? Why?
                 }
 
-                return done();
+                process.nextTick(function () {
+                    return done();
+                });
             }
         ));
 
