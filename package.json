@@ -20,6 +20,7 @@
     "passport": "^0.4.0",
     "passport-imgur": "0.0.3",
     "passport-reddit": "^0.2.4",
+    "passport-reddit-token": "^2.1.0",
     "path": "^0.12.7",
     "serve-favicon": "^2.4.3"
   },

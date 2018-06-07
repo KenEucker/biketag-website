@@ -4,7 +4,7 @@ const express = require('express'),
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
-    RedditStrategy = require('passport-reddit').Strategy,
+    RedditTokenStrategy = require('passport-reddit-token'),
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     config = require('./config.js'),
     regions = Object.keys(config.regions),
@@ -138,9 +138,9 @@ function authentication() {
     }
 
     if (config.redditClientID) {
-        console.log('configuring redit API authentication for appID:', config.redditClientID);
+        console.log('configuring reddit API authentication for appID:', config.redditClientID);
         
-        passport.use(new RedditStrategy({
+        passport.use(new RedditTokenStrategy({
             clientID: config.redditClientID,
             clientSecret: config.redditClientSecret,
             callbackURL: config.redditCallbackURL,
@@ -174,8 +174,8 @@ function authentication() {
         ));
 
         // Reddit OAuth2 Integration
-        app.get('/auth/reddit', passport.authenticate('reddit'));
-        app.get('/auth/reddit/callback', passport.authenticate('reddit', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
+        app.get('/auth/reddit', passport.authenticate('reddit-token'));
+        app.get('/auth/reddit/callback', passport.authenticate('reddit-token', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
         app.post('/auth/reddit/getToken', function(req, res) {
             var subdomain = getSubdomainPrefix(req);
             var tokensValue = 'unauthorized access';
