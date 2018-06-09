@@ -144,7 +144,7 @@ function authentication() {
         var refreshImgurTokens = function() {
             var theRefreshTokenToUse = authTokens["default"]["imgur"].imgurRefreshToken;
             refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, function(err, accessToken, refreshToken) {
-                console.log('imgur access token has been refreshed', refreshToken);
+                console.log('imgur access token has been refreshed:', refreshToken);
                 setImgurTokens(accessToken, refreshToken, null);
             });
         };
@@ -215,7 +215,7 @@ function authentication() {
         var refreshRedditTokens = function() {
             var theRefreshTokenToUse = authTokens["default"]["reddit"].redditRefreshToken;
             refresh.requestNewAccessToken('reddit', theRefreshTokenToUse, function(err, accessToken, refreshToken) {
-                console.log('reddit access token has been refreshed', refreshToken);
+                console.log('reddit access token has been refreshed:', refreshToken);
                 setRedditTokens(accessToken, refreshToken, null);
             });
         };
