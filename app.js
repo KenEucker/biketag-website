@@ -229,6 +229,7 @@ function authentication() {
             req.session.state = crypto.randomBytes(32).toString('hex');
             passport.authenticate('reddit', {
               state: req.session.state,
+              duration: 'permanent'
             })(req, res, next);
           });
         app.get('/auth/reddit/callback', function(req, res, next){
