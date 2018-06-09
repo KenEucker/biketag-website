@@ -15,7 +15,6 @@
             formData.append("ids", ids);
 
             $.ajax({
-                async: false,
                 crossDomain: true,
                 processData: false,
                 contentType: false,
@@ -196,7 +195,6 @@
             formData.append("description", description);
 
             var settings = {
-                async: false,
                 crossDomain: true,
                 processData: false,
                 data: formData,
