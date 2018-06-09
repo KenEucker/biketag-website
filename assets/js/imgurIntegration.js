@@ -304,14 +304,6 @@
                 console.log('imgur integration initialized.');
             });
 
-            if(this.getUrlParam('count')) {
-                this.imgurAlbumPicturesRefreshFrequency = false;
-            } else if (this.imgurAlbumPicturesRefreshFrequency) {
-                setInterval(function() {
-                    window.imgurIntegration.getImgurAlbumInfo(null, window.imgurIntegration.refreshImgurAlbumInfo);
-                }, this.imgurAlbumPicturesRefreshFrequency);
-            }
-
             // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
             if (this.getUrlParam('uploadSuccess') == 'true') {
                 var wrapper = document.getElementById('wrapper');
@@ -326,6 +318,19 @@
                     notification.style.display = 'none';
                 });
                 this.imgurAlbumPicturesRefreshFrequency = 5000;
+            }
+
+            if(this.getUrlParam('count')) {
+                this.imgurAlbumPicturesRefreshFrequency = false;
+            } else if (this.imgurAlbumPicturesRefreshFrequency) {
+                setInterval(function() {
+                    var logo = $('#header > div')[0];
+                    logo.style.animation = 'none';
+                    logo.offsetHeight; /* trigger reflow */
+                    logo.style.animation = null;
+                    
+                    window.imgurIntegration.getImgurAlbumInfo(null, window.imgurIntegration.refreshImgurAlbumInfo);
+                }, this.imgurAlbumPicturesRefreshFrequency);
             }
 
             $('#header > .logo').click(function (){

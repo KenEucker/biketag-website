@@ -107,12 +107,12 @@
 				hideShowCountChanger(true);
 			}, extradelay);
 
-			setInterval(function(){
-				var logo = $('#header > div')[0];
-				logo.style.animation = 'none';
-				logo.offsetHeight; /* trigger reflow */
-				logo.style.animation = null;
-			}, spinDelay);
+			// setInterval(function(){
+			// 	var logo = $('#header > div')[0];
+			// 	logo.style.animation = 'none';
+			// 	logo.offsetHeight; /* trigger reflow */
+			// 	logo.style.animation = null;
+			// }, spinDelay);
 
 			// Methods.
 				$main._show = function(id, initial) {
