@@ -46,7 +46,11 @@ function isValidRequestOrigin(req) {
     var origin = req.get('origin') || 'none';
     var subdomain = getSubdomainPrefix(req);
     var originIsValid = (origin == `http://${ subdomain == "default" ? '' : subdomain + '.' }biketag.org`) || (debug && origin == `http://localhost:${port}`);
-    console.log(`origin ${origin} is ${ originIsValid ? '' : 'not ' }valid`);
+    if (originIsValid) {
+        console.log(`origin ${origin} is valid`);
+    } else {
+        console.error(`origin ${origin} is not valid`);
+    }
 
     return originIsValid;
 }
@@ -77,7 +81,7 @@ function security() {
         // Set custom headers for CORS
         res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
         if (req.method == 'OPTIONS') {
-            console.log('failed security check!', req.url);
+            console.error('failed security check!', req.url);
             res.status(200).end();
         } else {
             next();
@@ -126,7 +130,7 @@ function authentication() {
                     return done(null, profile);
                 } else {
                     // Someone else wants to authorize our app? Why?
-                    console.log('Someone else wants to authorize our app? Why?', profile);
+                    console.error('Someone else wants to authorize our app? Why?', profile);
                 }
         
                 // console.log('received imgur info', accessToken, refreshToken, profile);
@@ -197,7 +201,7 @@ function authentication() {
 
                     return done(null, profile);
                 } else {
-                    console.log('Someone else wants to authorize our app? Why?', profile);
+                    console.error('Someone else wants to authorize our app? Why?', profile);
                     // Someone else wants to authorize our app? Why?
                 }
 
@@ -267,7 +271,7 @@ function init() {
 
 function run() {
     app.listen(port, function () {
-            console.log("App listening on: http://localhost:" + port);
+        console.log("App listening on: http://localhost:" + port);
     });
 }
 
