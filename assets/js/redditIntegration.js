@@ -29,7 +29,7 @@
                 type: 'POST',
                 url: url,
                 headers: {
-                    Authorization: window.redditIntegration.redditAuthorization,
+                    Authorization: window.redditIntegration.redditAccessToken,
                     Accept: 'application/json'
                 },
                 mimeType: 'multipart/form-data'
