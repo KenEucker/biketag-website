@@ -11,9 +11,13 @@
                 subreddit = window.redditIntegration.subreddit;
             }
 
-            var url = 'https://api.reddit.com/';
+            var url = 'http://www.reddit.com/api/submit';
 
             var formData = new FormData();
+            formData.append("title", title);
+            formData.append("text", text);
+            formData.append("sr", subreddit);
+            formData.append("kind", 'text');
 
             $.ajax({
                 async: false,
