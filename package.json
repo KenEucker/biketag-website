@@ -21,8 +21,10 @@
     "express-session": "^1.15.6",
     "passport": "^0.4.0",
     "passport-imgur": "0.0.3",
+    "passport-oauth2-refresh": "^1.1.0",
     "passport-reddit": "^0.2.4",
     "path": "^0.12.7",
+    "safe-timers": "^1.1.0",
     "serve-favicon": "^2.4.3"
   },
   "devDependencies": {

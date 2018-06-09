@@ -337,9 +337,9 @@
                 self.onUploadFormSubmit($(e.currentTarget));
             });
 
+            return self;
         }
     };
 
-    window.imgurIntegration = imgurIntegration;
-    imgurIntegration.init();
+    window.imgurIntegration = imgurIntegration.init();
 })(jQuery);

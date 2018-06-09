@@ -2,10 +2,12 @@ const express = require('express'),
     session = require('express-session'),
     path = require('path'),
     app = express(),
+    setInterval = require('safe-timers').setInterval,
     favicon = require('serve-favicon'),
     passport = require('passport'),
     ImgurStrategy = require('passport-imgur').Strategy,
     RedditStrategy = require('passport-reddit').Strategy,
+    refresh = require('passport-oauth2-refresh'),
     crypto = require('crypto'),
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     config = require('./config.js'),
@@ -14,25 +16,27 @@ const express = require('express'),
 
 var authTokens = {};
 
-for(var region of regions) {
-    var tokens = config.regions[region];
+function setVars() {
+    for(var region of regions) {
+        var tokens = config.regions[region];
 
-    // Assign the region based imgur authorization information, or use the default
-    tokens["imgur"].imgurClientID =  tokens["imgur"].imgurClientID || config.imgurClientID;
-    tokens["imgur"].imgurClientSecret = tokens["imgur"].imgurClientSecret || config.imgurClientSecret;
-    tokens["imgur"].imgurCallbackURL = tokens["imgur"].imgurCallbackURL || config.imgurCallbackURL;
-    tokens["imgur"].imgurEmailAddress = tokens["imgur"].imgurEmailAddress || config.imgurEmailAddress;
-    
-    // Assign the region based reddit authorization information, or use the default
-    tokens["reddit"].redditClientID = tokens["reddit"].redditClientID || config.redditClientID;
-    tokens["reddit"].redditClientSecret = tokens["reddit"].redditClientSecret || config.redditClientSecret;
-    tokens["reddit"].redditCallbackURL = tokens["reddit"].redditCallbackURL || config.redditCallbackURL;
-    tokens["reddit"].redditEmailAddress = tokens["reddit"].redditEmailAddress || config.redditEmailAddress;
-    
-    authTokens[region] = tokens;
+        // Assign the region based imgur authorization information, or use the default
+        tokens["imgur"].imgurClientID =  tokens["imgur"].imgurClientID || config.imgurClientID;
+        tokens["imgur"].imgurClientSecret = tokens["imgur"].imgurClientSecret || config.imgurClientSecret;
+        tokens["imgur"].imgurCallbackURL = tokens["imgur"].imgurCallbackURL || config.imgurCallbackURL;
+        tokens["imgur"].imgurEmailAddress = tokens["imgur"].imgurEmailAddress || config.imgurEmailAddress;
+        
+        // Assign the region based reddit authorization information, or use the default
+        tokens["reddit"].redditClientID = tokens["reddit"].redditClientID || config.redditClientID;
+        tokens["reddit"].redditClientSecret = tokens["reddit"].redditClientSecret || config.redditClientSecret;
+        tokens["reddit"].redditCallbackURL = tokens["reddit"].redditCallbackURL || config.redditCallbackURL;
+        tokens["reddit"].redditEmailAddress = tokens["reddit"].redditEmailAddress || config.redditEmailAddress;
+        
+        authTokens[region] = tokens;
+    }
+
+    console.log('using authentication vars:', authTokens);
 }
-
-console.log(authTokens);
 
 function getSubdomainPrefix (req) {
     return req.subdomains.length ? req.subdomains[0] : "default";
@@ -93,7 +97,23 @@ function authentication() {
     if (config.imgurClientID) {
         console.log('configuring imgur API authentication for appID:', config.imgurClientID);
 
-        passport.use(new ImgurStrategy({
+        var setImgurTokens = function (accessToken, refreshToken, profile) {
+            // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
+            // var subdomain = getSubdomainPrefix(req);
+
+            // authTokens["imgur"][subdomain].imgurRefreshToken = refreshToken;
+            // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
+            // authTokens["imgur"][subdomain].imgurProfile = profile;
+    
+            for (var subdomain of regions) {
+                console.log('setting imgur authentication information for subdomain:', subdomain);
+                authTokens[subdomain]["imgur"].imgurAccessToken = accessToken;
+                authTokens[subdomain]["imgur"].imgurRefreshToken = authTokens[subdomain]["imgur"].imgurRefreshToken || refreshToken;
+                authTokens[subdomain]["imgur"].imgurProfile = authTokens[subdomain]["imgur"].imgurProfile || profile;
+            }
+        };
+
+        var imgurStrategy = new ImgurStrategy({
             clientID: config.imgurClientID,
             clientSecret: config.imgurClientSecret,
             callbackURL: config.imgurCallbackURL,
@@ -102,20 +122,7 @@ function authentication() {
             function(req, accessToken, refreshToken, profile, done) {
                 if (profile.email == config.imgurEmailAddress) {
                     console.log('imgur auth callback with valid profile', profile);
-                    // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
-                    // var subdomain = getSubdomainPrefix(req);
-        
-                    // authTokens["imgur"][subdomain].imgurRefreshToken = refreshToken;
-                    // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
-                    // authTokens["imgur"][subdomain].imgurProfile = profile;
-            
-                    for (var subdomain of regions) {
-                        console.log('setting imgur authentication information for subdomain:', subdomain);
-                        authTokens[subdomain]["imgur"].imgurRefreshToken = refreshToken;
-                        authTokens[subdomain]["imgur"].imgurAccessToken = accessToken;
-                        authTokens[subdomain]["imgur"].imgurProfile = profile;
-                    }
-
+                    setImgurTokens(accessToken, refreshToken, profile);
                     return done(null, profile);
                 } else {
                     // Someone else wants to authorize our app? Why?
@@ -125,7 +132,20 @@ function authentication() {
                 // console.log('received imgur info', accessToken, refreshToken, profile);
                 return done();
             }
-        ));
+        );
+        passport.use(imgurStrategy);
+        refresh.use(imgurStrategy);
+
+        var imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
+        imgurRefreshFrequency = 1000;
+        var refreshImgurTokens = function() {
+            var theRefreshTokenToUse = authTokens["default"]["imgur"].imgurRefreshToken;
+            refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, function(err, accessToken, refreshToken) {
+                console.log('imgur access token has been refreshed', refreshToken);
+                setImgurTokens(accessToken, refreshToken, null);
+            });
+        };
+        setInterval(refreshImgurTokens, imgurRefreshFrequency);
 
         // Imgur OAuth2 Integration
         app.get('/auth/imgur', passport.authenticate('imgur'));
@@ -148,8 +168,24 @@ function authentication() {
 
     if (config.redditClientID) {
         console.log('configuring reddit API authentication for appID:', config.redditClientID);
-        
-        passport.use(new RedditStrategy({
+
+        var setRedditTokens = function (accessToken, refreshToken, profile) {
+            // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
+            // var subdomain = getSubdomainPrefix(req);
+
+            // authTokens["imgur"][subdomain].imgurRefreshToken = refreshToken;
+            // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
+            // authTokens["imgur"][subdomain].imgurProfile = profile;
+    
+            for (var subdomain of regions) {
+                console.log('setting reddit authentication information for subdomain:', subdomain);
+                authTokens[subdomain]["reddit"].redditAccessToken = accessToken;
+                authTokens[subdomain]["reddit"].redditRefreshToken = authTokens[subdomain]["reddit"].redditRefreshToken || refreshToken;
+                authTokens[subdomain]["reddit"].redditProfile = authTokens[subdomain]["reddit"].redditProfile || profile;
+            }
+        };
+
+        var redditStrategy = new RedditStrategy({
             clientID: config.redditClientID,
             clientSecret: config.redditClientSecret,
             callbackURL: config.redditCallbackURL,
@@ -158,22 +194,9 @@ function authentication() {
             function(req, accessToken, refreshToken, profile, done) {
                 if (profile.name == config.redditUserName) {
                     console.log('reddit auth callback with valid profile', profile);
-                    // FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
-                    // var subdomain = getSubdomainPrefix(req);
-        
-                    // authTokens["imgur"][subdomain].imgurRefreshToken = refreshToken;
-                    // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
-                    // authTokens["imgur"][subdomain].imgurProfile = profile;
-            
-                    for (var subdomain of regions) {
-                        console.log('setting reddit authentication information for subdomain:', subdomain);
-                        authTokens[subdomain]["reddit"].redditRefreshToken = refreshToken;
-                        authTokens[subdomain]["reddit"].redditAccessToken = accessToken;
-                        authTokens[subdomain]["reddit"].redditProfile = profile;
-                    }
-                    process.nextTick(function () {
-                        return done(null, profile);
-                    });
+                    setRedditTokens(accessToken, refreshToken, profile);
+
+                    return done(null, profile);
                 } else {
                     console.log('Someone else wants to authorize our app? Why?', profile);
                     // Someone else wants to authorize our app? Why?
@@ -183,7 +206,20 @@ function authentication() {
                     return done();
                 });
             }
-        ));
+        );
+
+        var redditRefreshFrequency = 45 * (1000 * 60); // 45 minutes
+        var refreshRedditTokens = function() {
+            var theRefreshTokenToUse = authTokens["default"]["reddit"].redditRefreshToken;
+            refresh.requestNewAccessToken('reddit', theRefreshTokenToUse, function(err, accessToken, refreshToken) {
+                console.log('reddit access token has been refreshed', refreshToken);
+                setRedditTokens(accessToken, refreshToken, null);
+            });
+        };
+        setInterval(refreshRedditTokens, redditRefreshFrequency);
+
+        passport.use(redditStrategy);
+        refresh.use(redditStrategy);
 
         // Reddit OAuth2 Integration
         app.get('/auth/reddit', function(req, res, next){
@@ -237,7 +273,9 @@ function run() {
 }
 
 init();
+setVars();
 security();
 templating();
 authentication();
+
 run();
