@@ -21,7 +21,6 @@
                 url: url,
                 data: formData,
                 type: 'POST',
-                url: url,
                 headers: {
                     Authorization: window.imgurIntegration.imgurAuthorization,
                     Accept: 'application/json'
@@ -197,8 +196,8 @@
             var settings = {
                 crossDomain: true,
                 processData: false,
-                data: formData,
                 contentType: false,
+                data: formData,
                 type: 'POST',
                 url: 'https://api.imgur.com/3/image',
                 headers: {

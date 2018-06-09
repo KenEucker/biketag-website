@@ -26,7 +26,6 @@
                 url: url,
                 data: formData,
                 type: 'POST',
-                url: url,
                 headers: {
                     Authorization: window.redditIntegration.redditAccessToken,
                     Accept: 'application/json'
