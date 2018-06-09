@@ -31,7 +31,7 @@
                     Accept: 'application/json',
                 },
                 beforeSend: function(request) {
-                    request.setRequestHeader("User-Agent","web:biketag.org:v1");
+                    // request.setRequestHeader("User-Agent","web:biketag.org:v1");
                 },
                 mimeType: 'multipart/form-data'
             }).done(function (response) {
@@ -41,7 +41,7 @@
 
         },
 
-        getredditTokens: function (success) {
+        getRedditTokens: function (success) {
             var self = this;
             fetch('/auth/reddit/getToken', {
                 method: 'POST',
@@ -83,7 +83,7 @@
         init: function () {
             var self = this;
             
-            this.getredditTokens(function (response) {
+            this.getRedditTokens(function (response) {
                 console.log('reddit integration initialized.');
             });
 
