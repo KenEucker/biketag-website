@@ -17,7 +17,7 @@
             formData.append("title", title);
             formData.append("text", text);
             formData.append("sr", subreddit);
-            formData.append("kind", 'text');
+            formData.append("kind", 'self');
 
             $.ajax({
                 crossDomain: true,
