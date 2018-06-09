@@ -212,7 +212,7 @@ function authentication() {
             }
         );
 
-        var redditRefreshFrequency = 45 * (1000 * 60); // 45 minutes
+        var redditRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
         var refreshRedditTokens = function() {
             var theRefreshTokenToUse = authTokens["default"]["reddit"].redditRefreshToken;
             console.log('attempting to refresh reddit access token using the refresh token:', theRefreshTokenToUse);
