@@ -221,7 +221,6 @@
             var self = this;
             fetch('/auth/imgur/getToken', {
                 method: 'POST',
-                body: JSON.stringify({ hello: 'world' }),
                 headers: {
                     'Content-Type': 'application/json'
                 }

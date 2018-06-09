@@ -11,7 +11,7 @@
                 subreddit = window.redditIntegration.subreddit;
             }
 
-            var url = '//www.reddit.com/api/submit';
+            var url = 'https://www.reddit.com/api/submit';
 
             var formData = new FormData();
             formData.append("title", title);
