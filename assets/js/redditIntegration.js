@@ -11,7 +11,7 @@
                 subreddit = window.redditIntegration.subreddit;
             }
 
-            var url = 'http://www.reddit.com/api/submit';
+            var url = 'https://reddit.com/api/submit';
 
             var formData = new FormData();
             formData.append("title", title);
@@ -28,7 +28,10 @@
                 type: 'POST',
                 headers: {
                     Authorization: window.redditIntegration.redditAccessToken,
-                    Accept: 'application/json'
+                    Accept: 'application/json',
+                },
+                beforeSend: function(request) {
+                    request.setRequestHeader("User-Agent","web:biketag.org:v1");
                 },
                 mimeType: 'multipart/form-data'
             }).done(function (response) {
