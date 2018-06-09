@@ -143,6 +143,7 @@ function authentication() {
         var imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
         var refreshImgurTokens = function() {
             var theRefreshTokenToUse = authTokens["default"]["imgur"].imgurRefreshToken;
+            console.log('attempting to refresh imgur access token using the refresh token:', theRefreshTokenToUse);
             refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, function(err, accessToken, refreshToken) {
                 console.log('imgur access token has been refreshed:', refreshToken);
                 setImgurTokens(accessToken, refreshToken, null);
@@ -214,6 +215,7 @@ function authentication() {
         var redditRefreshFrequency = 45 * (1000 * 60); // 45 minutes
         var refreshRedditTokens = function() {
             var theRefreshTokenToUse = authTokens["default"]["reddit"].redditRefreshToken;
+            console.log('attempting to refresh reddit access token using the refresh token:', theRefreshTokenToUse);
             refresh.requestNewAccessToken('reddit', theRefreshTokenToUse, function(err, accessToken, refreshToken) {
                 console.log('reddit access token has been refreshed:', refreshToken);
                 setRedditTokens(accessToken, refreshToken, null);
