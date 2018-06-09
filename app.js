@@ -137,7 +137,6 @@ function authentication() {
         refresh.use(imgurStrategy);
 
         var imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
-        imgurRefreshFrequency = 1000;
         var refreshImgurTokens = function() {
             var theRefreshTokenToUse = authTokens["default"]["imgur"].imgurRefreshToken;
             refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, function(err, accessToken, refreshToken) {
