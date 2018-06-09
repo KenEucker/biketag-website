@@ -130,7 +130,7 @@ function authentication() {
                     return done(null, profile);
                 } else {
                     // Someone else wants to authorize our app? Why?
-                    console.error('Someone else wants to authorize our app? Why?', profile);
+                    console.error('Someone else wants to authorize our app? Why?', profile.email, config.imgurEmailAddress);
                 }
         
                 // console.log('received imgur info', accessToken, refreshToken, profile);
@@ -201,7 +201,7 @@ function authentication() {
 
                     return done(null, profile);
                 } else {
-                    console.error('Someone else wants to authorize our app? Why?', profile);
+                    console.error('Someone else wants to authorize our app? Why?', profile.name, config.redditUserName);
                     // Someone else wants to authorize our app? Why?
                 }
 
