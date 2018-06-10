@@ -13,33 +13,55 @@
 
             var url = 'https://reddit.com/api/submit';
 
-            var formData = new FormData();
-            formData.append("title", title);
-            formData.append("text", text);
-            formData.append("sr", subreddit);
-            formData.append("kind", 'self');
-
-            var request = {
-                crossDomain: true,
-                processData: false,
-                contentType: false,
-                url: url,
-                data: formData,
-                type: 'POST',
-                headers: {
-                    Authorization: window.redditIntegration.redditAccessToken,
-                    Accept: 'application/json',
-                },
-                beforeSend: function(request) {
-                    // request.setRequestHeader("User-Agent","web:biketag.org:v1");
-                },
-                mimeType: 'application/x-www-form-urlencoded'
+            var data = {
+                title: title,
+                text: text,
+                sr: subreddit,
+                kind: 'self'
             };
+            // var formData = new FormData();
+            // formData.append("title", title);
+            // formData.append("text", text);
+            // formData.append("sr", subreddit);
+            // formData.append("kind", 'self');
 
-            $.ajax(request).done(function (response) {
-                debugger;
-                console.log(response);
-            });
+            // var request = {
+            //     crossDomain: true,
+            //     processData: false,
+            //     contentType: false,
+            //     url: url,
+            //     data: formData,
+            //     type: 'POST',
+            //     headers: {
+            //         Authorization: window.redditIntegration.redditAccessToken,
+            //         Accept: 'application/json',
+            //     },
+            //     beforeSend: function(request) {
+            //         // request.setRequestHeader("User-Agent","web:biketag.org:v1");
+            //     },
+            //     mimeType: 'application/x-www-form-urlencoded'
+            // };
+
+            // $.ajax(request).done(function (response) {
+            //     debugger;
+            //     console.log(response);
+            // });
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': window.redditIntegration.redditAccessToken,
+                    // 'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            }).then(function (res) { return res.json() })
+                .catch(function (error) { 
+                    console.error('Error:', error) 
+                })
+                .then(function (response) {
+                    console.log('response', response);
+                });
 
         },
 
