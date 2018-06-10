@@ -49,12 +49,12 @@
             
             fetch(url, {
                 method: 'POST',
+                body: JSON.stringify(data),
+                credentials: 'same-origin',
                 headers: {
                     'Authorization': window.redditIntegration.redditAccessToken,
-                    // 'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                },
-                data: data
+                }
             }).then(function (res) { return res.json() })
                 .catch(function (error) { 
                     console.error('Error:', error) 
