@@ -19,7 +19,7 @@
             formData.append("sr", subreddit);
             formData.append("kind", 'self');
 
-            $.ajax({
+            var request = {
                 crossDomain: true,
                 processData: false,
                 contentType: false,
@@ -33,8 +33,10 @@
                 beforeSend: function(request) {
                     // request.setRequestHeader("User-Agent","web:biketag.org:v1");
                 },
-                mimeType: 'multipart/form-data'
-            }).done(function (response) {
+                mimeType: 'application/x-www-form-urlencoded'
+            };
+
+            $.ajax(request).done(function (response) {
                 debugger;
                 console.log(response);
             });
