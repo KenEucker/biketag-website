@@ -50,7 +50,7 @@
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(data),
-                credentials: 'same-origin',
+                mode: 'cors',
                 headers: {
                     'Authorization': window.redditIntegration.redditAccessToken,
                     'Content-Type': 'application/json'
