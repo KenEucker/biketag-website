@@ -174,7 +174,7 @@
             }
 
             var images = window.imgurIntegration.imgurAlbumPictures;
-            count = count || window.imgurIntegration.getUrlParam('count');
+            count = Number.isInteger(count) ? count : window.imgurIntegration.getUrlParam('count');
             $('.content .inner').empty();
 
             if (!count) {
@@ -345,7 +345,9 @@
                 } else if(tagnumber) {
                     self.imgurAlbumPicturesRefreshFrequency = false;
                     self.showBikeTagNumber(tagnumber);
-                } 
+                } else {
+                    self.showLatestTagImages();
+                }
                 
                 if (self.imgurAlbumPicturesRefreshFrequency) {
                     setInterval(function() {
