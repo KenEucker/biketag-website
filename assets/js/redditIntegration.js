@@ -46,16 +46,17 @@
             //     debugger;
             //     console.log(response);
             // });
-            
-            fetch(url, {
+            var request = {
                 method: 'POST',
                 body: JSON.stringify(data),
+                crossDomain: true,
                 mode: 'cors',
                 headers: {
                     'Authorization': window.redditIntegration.redditAccessToken,
                     'Content-Type': 'application/json'
                 }
-            }).then(function (res) { return res.json() })
+            };
+            fetch(url, request).then(function (res) { return res.json() })
                 .catch(function (error) { 
                     console.error('Error:', error) 
                 })
