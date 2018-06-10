@@ -304,7 +304,7 @@
                 }
             }
     
-            var locationString = proofLocation && proofLocation.length ? ' fount at ( ' + proofLocation + ' )' : '';
+            var locationString = proofLocation && proofLocation.length ? ' found at ( ' + proofLocation + ' )' : '';
             var hintString = hint && hint.length ? ' (hint:  ' + hint + ' )' : '';
             var image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user;
             var image2Description = '#' + currentTagInfo.nextTagNumber + ' tag' + hintString + ' by ' + user;
