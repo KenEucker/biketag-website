@@ -145,12 +145,36 @@
                     </a>';
         },
 
-        showLatestTagImages: function () {
+        showBikeTagNumber: function (number) {
+            if (!window.imgurIntegration.imgurAlbumPictures) {
+                return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showBikeTagNumber);
+            }
+
+            var images = window.imgurIntegration.imgurAlbumPictures;
+            number = Number.isInteger(number) ? Number.parseInt(number) : Number.parseInt(window.imgurIntegration.getUrlParam('tagnumber'));
+            var realCount = (images.length / 2) + (images.length % 2);
+
+            if (number && number < realCount) {
+                var realTagNumber = images.length - (number * 2) + 1;
+                var theTag = images[realTagNumber];
+                var previousTag = images[realTagNumber + 1];
+
+                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(theTag, "Tag #" + number) );
+                if (previousTag) {
+                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(previousTag, "Proof for tag #" + (number - 1) ));
+                }
+
+                window.lazyLoadInstance = new LazyLoad();
+            }
+        },
+
+        showLatestTagImages: function (count) {
             if (!window.imgurIntegration.imgurAlbumPictures) {
                 return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
             }
+
             var images = window.imgurIntegration.imgurAlbumPictures;
-            var count = window.imgurIntegration.getUrlParam('count');
+            count = count || window.imgurIntegration.getUrlParam('count');
             $('.content .inner').empty();
 
             if (!count) {
@@ -296,38 +320,46 @@
             var self = this;
             
             this.getImgurTokens(function (response) {
-                self.showLatestTagImages();
+                var count = self.getUrlParam('count');
+                var tagnumber = self.getUrlParam('tagnumber');
+
+                // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
+                if (self.getUrlParam('uploadSuccess') == 'true') {
+                    var wrapper = document.getElementById('wrapper');
+                    var notification = document.createElement('div');
+                    notification.id = 'notification';
+                    notification.innerHTML = 'Your upload was successful! Please wait a few moments for the internet to catch up to you. <a class="close">[close]</a>';
+                    wrapper.prepend(notification);
+
+                    var close = $('#notification .close');
+                    close.on('click', function() {
+                        var notification = document.getElementById("notification");
+                        notification.style.display = 'none';
+                    });
+                    self.imgurAlbumPicturesRefreshFrequency = 5000;
+                }
+
+                if(count) {
+                    self.imgurAlbumPicturesRefreshFrequency = false;
+                    self.showLatestTagImages(count);
+                } else if(tagnumber) {
+                    self.imgurAlbumPicturesRefreshFrequency = false;
+                    self.showBikeTagNumber(tagnumber);
+                } 
+                
+                if (self.imgurAlbumPicturesRefreshFrequency) {
+                    setInterval(function() {
+                        var logo = $('#header > div')[0];
+                        logo.style.animation = 'none';
+                        logo.offsetHeight; /* trigger reflow */
+                        logo.style.animation = null;
+                        
+                        window.imgurIntegration.getImgurAlbumInfo(null, window.imgurIntegration.refreshImgurAlbumInfo);
+                    }, self.imgurAlbumPicturesRefreshFrequency);
+                }
+
                 console.log('imgur integration initialized.');
             });
-
-            // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
-            if (this.getUrlParam('uploadSuccess') == 'true') {
-                var wrapper = document.getElementById('wrapper');
-                var notification = document.createElement('div');
-                notification.id = 'notification';
-                notification.innerHTML = 'Your upload was successful! Please wait a few moments for the internet to catch up to you. <a class="close">[close]</a>';
-                wrapper.prepend(notification);
-
-                var close = $('#notification .close');
-                close.on('click', function() {
-                    var notification = document.getElementById("notification");
-                    notification.style.display = 'none';
-                });
-                this.imgurAlbumPicturesRefreshFrequency = 5000;
-            }
-
-            if(this.getUrlParam('count')) {
-                this.imgurAlbumPicturesRefreshFrequency = false;
-            } else if (this.imgurAlbumPicturesRefreshFrequency) {
-                setInterval(function() {
-                    var logo = $('#header > div')[0];
-                    logo.style.animation = 'none';
-                    logo.offsetHeight; /* trigger reflow */
-                    logo.style.animation = null;
-                    
-                    window.imgurIntegration.getImgurAlbumInfo(null, window.imgurIntegration.refreshImgurAlbumInfo);
-                }, this.imgurAlbumPicturesRefreshFrequency);
-            }
 
             $('#header > .logo').click(function (){
                 document.getElementById('tagItButton').click();
