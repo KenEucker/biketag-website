@@ -8,7 +8,7 @@
   "scripts": {
     "compile": "npm run compileJsx && npm run compileSass",
     "compileJsx": "babel templates/views --out-dir assets/views --presets=env,react",
-    "compileSass" : "node-sass templates/biketag/sass -o assets/css",
+    "compileSass" : "node-sass templates/sass -o assets/css",
     "dev": "node app.js --debug",
     "run": "node app.js"
   },

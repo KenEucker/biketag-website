@@ -17,11 +17,24 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1"/>
 		<script src="assets/js/modernizr.custom.80028.js"></script>
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/views.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body>
-
+		<!-- Priority Scripts -->
+		<script>
+			(function(w, d){
+				var b = d.getElementsByTagName('body')[0];
+				var s = d.createElement("script"); s.async = true;
+				var v = !("IntersectionObserver" in w) ? "8.7.1" : "10.5.2";
+				s.src = "https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/" + v + "/lazyload.min.js";
+				w.lazyLoadOptions = {}; // Your options here. See "recipes" for more information about async.
+				b.appendChild(s);
+				
+			}(window, document));
+		</script>
+		
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<div id="countChanger">
@@ -403,20 +416,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		<!-- BG -->
 			<div id="bg"></div>
 
-		<!-- Priority Scripts -->
-			<script>
-				(function(w, d){
-					var b = d.getElementsByTagName('body')[0];
-					var s = d.createElement("script"); s.async = true;
-					var v = !("IntersectionObserver" in w) ? "8.7.1" : "10.5.2";
-					s.src = "https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/" + v + "/lazyload.min.js";
-					w.lazyLoadOptions = {}; // Your options here. See "recipes" for more information about async.
-					b.appendChild(s);
-					
-				}(window, document));
-			</script>
-			<script>
-			</script>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>

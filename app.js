@@ -70,7 +70,7 @@ function viewComponentExists(name) {
 function templating(templatePath) {
 
     if (!templatePath) {
-        templatePath = path.join(__dirname, '/templates/biketag/');
+        templatePath = path.join(__dirname, '/templates/pages/');
     }
 
     console.log('configuring a static path to template:', templatePath);
