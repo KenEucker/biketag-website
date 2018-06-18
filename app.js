@@ -1,6 +1,9 @@
 const express = require('express'),
+    hypernovaServer = require('hypernova/server'),
+    hypernovaClient = require('hypernova-client'),
     session = require('express-session'),
     path = require('path'),
+    fs = require('fs'),
     app = express(),
     setInterval = require('safe-timers').setInterval,
     favicon = require('serve-favicon'),
@@ -12,7 +15,8 @@ const express = require('express'),
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     config = require('./config.js'),
     regions = Object.keys(config.regions),
-    port = debug ? 8080 : config.port || 80;
+    port = debug ? 8080 : config.port || 80,
+    renderPort = 8100;
 
 var authTokens = {};
 
@@ -42,6 +46,10 @@ function getSubdomainPrefix (req) {
     return req.subdomains.length ? req.subdomains[0] : "default";
 }
 
+function getViewComponentPath(name) {
+    return path.resolve('assets', 'views', 'js', `${name}.js`);
+}
+
 function isValidRequestOrigin(req) {
     var origin = req.get('origin') || 'none';
     var subdomain = getSubdomainPrefix(req);
@@ -53,6 +61,10 @@ function isValidRequestOrigin(req) {
     }
 
     return originIsValid;
+}
+
+function viewComponentExists(name) {
+    return fs.existsSync(getViewComponentPath(name));
 }
 
 function templating(templatePath) {
@@ -69,6 +81,40 @@ function templating(templatePath) {
         console.log('asset requested', req.url);
         var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
         res.sendFile(path.join(__dirname, "assets/", req.url));
+    });
+}
+
+function serversideRendering() {
+    hypernovaServer({
+        devMode: true,
+        port: renderPort,
+        endpoint: '/',
+        getComponent: function(name) {
+            if (viewComponentExists(name)) {
+                console.log('serving component', name);
+                return require(getViewComponentPath(name));
+            }
+
+            console.log('component not found', name);
+            return null;
+          },
+    });
+
+    var renderer = new hypernovaClient({
+        url: `http://localhost:${renderPort}/`
+    });
+
+    app.post('/views', (req, res) => {
+        const component = req.body.component;
+        if(viewComponentExists(component)) {
+            var job = {}, data = req.body;
+            delete data.component;
+            job[component] = data;
+
+            // verify component
+            return renderer.render(job).then(html => res.send(html));
+        }
+        res.send("");
     });
 }
 
@@ -268,7 +314,7 @@ function init() {
     app.use(session({ secret: 'biketag', resave: false, saveUninitialized: true, }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(express.json());       // to support JSON-encoded bodies
+    app.use(express.json());                         // to support JSON-encoded bodies
     app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 }
 
@@ -277,11 +323,12 @@ function run() {
         console.log("App listening on: http://localhost:" + port);
     });
 }
-
-init();
-setVars();
-security();
-templating();
-authentication();
-
+/* configuration */
+/*      / */ init();
+/*     /  */ setVars();
+/*    /   */ security();
+/*   /    */ templating();
+/*  /     */ authentication();
+/* ||     */ serversideRendering();
+/* \/    */
 run();
