@@ -4,6 +4,35 @@
         subreddit: 'CyclePDX',
         redditAuthorization: '',
         redditAccessToken: null,
+        redditPostComponent: 'RedditPost',
+
+        buildRedditTextPosting: function (name, nextNumber, nextTag, lastTag, callback) {
+            var data = {
+                name: name,
+                nextNumber: nextNumber,
+                lastNumber: nextNumber - 1,
+                nextTag: nextTag,
+                lastTag: lastTag
+            };
+
+            data.component = window.redditIntegration.redditPostComponent;
+            
+            fetch('/views', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            }).then(function (res) {
+                return res.text();
+            }).then(function (response) {
+                var container = $(response);
+                callback(container.html());
+            }).catch(function (error) { 
+                console.error('Error:', error) 
+            });
+        },
 
         postToSubreddit: function (title, text, subreddit) {
 
