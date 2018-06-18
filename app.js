@@ -47,7 +47,7 @@ function getSubdomainPrefix (req) {
 }
 
 function getViewComponentPath(name) {
-    return path.resolve('assets', 'views', 'js', `${name}.js`);
+    return path.resolve('assets', 'views', `${name}.js`);
 }
 
 function isValidRequestOrigin(req) {
