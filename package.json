@@ -6,7 +6,9 @@
   "contributors": [],
   "bin": {},
   "scripts": {
-    "build": "babel templates/views --out-dir assets/views --presets=env,react",
+    "compile": "npm run compileJsx && npm run compileSass",
+    "compileJsx": "babel templates/views --out-dir assets/views --presets=env,react",
+    "compileSass" : "node-sass templates/biketag/sass -o assets/css",
     "dev": "node app.js --debug",
     "run": "node app.js"
   },
@@ -41,7 +43,8 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "http-server": "^0.9.0"
+    "http-server": "^0.9.0",
+    "node-sass": "^4.9.0"
   },
   "license": "Unlicense"
 }
