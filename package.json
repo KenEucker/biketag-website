@@ -6,7 +6,7 @@
   "contributors": [],
   "bin": {},
   "scripts": {
-    "build": "babel assets/views/src --out-dir assets/views/js --presets=env,react",
+    "build": "babel templates/views --out-dir assets/views --presets=env,react",
     "dev": "node app.js --debug",
     "run": "node app.js"
   },
