@@ -26,7 +26,7 @@
 				count.fadeOut();
 			}
 		}
-	}
+	};
 
 	skel.breakpoints({
 		xlarge:		'(max-width: 1680px)',
@@ -36,6 +36,28 @@
 		xsmall:		'(max-width: 480px)',
 		xxsmall:	'(max-width: 360px)'
 	});
+
+	getArticleContents = function(target, componentName) {
+		var data = {
+			component: componentName
+		};
+
+		fetch('/views', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data),
+		}).then(function (res) {
+			return res.text();
+		}).then(function (response) {
+			var container = $(response);
+			$(target).append(container.html());
+		}).catch(function (error) {
+			console.error('Error:', error)
+		});
+	};
 
 	$(function() {
 
@@ -98,6 +120,11 @@
 				locked = false,
 				extradelay = 7000,
 				spinDelay = 15000;
+
+			getArticleContents("#tagit", "TagIt");
+			getArticleContents("#howto", "HowTo");
+			getArticleContents("#about", "About");
+			getArticleContents("#contact", "Contact");
 
 			if (getUrlParam('count')) {
 				extradelay = 1000;
