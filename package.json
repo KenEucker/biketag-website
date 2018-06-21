@@ -6,8 +6,9 @@
   "contributors": [],
   "bin": {},
   "scripts": {
-    "compile": "npm run compileJsx && npm run compileSass",
-    "compileJsx": "babel templates/views --out-dir assets/views --presets=env,react",
+    "compile": "npm run compileJsxViews && npm run compileJsxPages && npm run compileSass",
+    "compileJsxPages": "babel templates/pages --out-dir assets/pages --presets=env,react",
+    "compileJsxViews": "babel templates/views --out-dir assets/views --presets=env,react",
     "compileSass": "node-sass templates/sass -o assets/css",
     "dev": "node app.js --debug",
     "run": "node app.js"
@@ -22,6 +23,7 @@
   },
   "keywords": [],
   "dependencies": {
+    "@immowelt/hypernova-express": "^1.0.3",
     "crypto": "^1.0.1",
     "express": "^4.14.0",
     "express-session": "^1.15.6",

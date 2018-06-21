@@ -1,5 +1,11 @@
 'use strict';
 
+var _Header = require('./Header.js');
+
+var _Articles = require('./Articles.js');
+
+var _Foot = require('./Foot.js');
+
 var React = require('react');
 var renderReact = require('hypernova-react').renderReact;
 
@@ -52,8 +58,8 @@ function TheComponent(props) {
                     )
                 )
             ),
-            React.createElement(Header, null),
-            React.createElement(Articles, null),
+            React.createElement(_Header.Header, null),
+            React.createElement(_Articles.Articles, null),
             React.createElement(
                 'footer',
                 { id: 'footer' },
@@ -70,7 +76,7 @@ function TheComponent(props) {
             )
         ),
         React.createElement('div', { id: 'bg' }),
-        React.createElement(Foot, null)
+        React.createElement(_Foot.Foot, null)
     );
 }
 

@@ -1,6 +1,7 @@
 const express = require('express'),
     hypernovaServer = require('hypernova/server'),
     hypernovaClient = require('hypernova-client'),
+    hypernovaExpress = require('@immowelt/hypernova-express'),
     session = require('express-session'),
     path = require('path'),
     fs = require('fs'),
@@ -14,29 +15,32 @@ const express = require('express'),
     crypto = require('crypto'),
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     config = require('./config.js'),
-    regions = Object.keys(config.regions),
+    subdomains = Object.keys(config.subdomains),
     port = debug ? 8080 : config.port || 80,
     renderPort = 8100;
 
 var authTokens = {};
+const renderer = new hypernovaClient({
+    url: `http://localhost:${renderPort}/`
+});
 
 function setVars() {
-    for(var region of regions) {
-        var tokens = config.regions[region];
+    for(var subdomain of subdomains) {
+        var tokens = config.subdomains[subdomain];
 
-        // Assign the region based imgur authorization information, or use the default
+        // Assign the subdomain based imgur authorization information, or use the default
         tokens["imgur"].imgurClientID =  tokens["imgur"].imgurClientID || config.imgurClientID;
         tokens["imgur"].imgurClientSecret = tokens["imgur"].imgurClientSecret || config.imgurClientSecret;
         tokens["imgur"].imgurCallbackURL = tokens["imgur"].imgurCallbackURL || config.imgurCallbackURL;
         tokens["imgur"].imgurEmailAddress = tokens["imgur"].imgurEmailAddress || config.imgurEmailAddress;
         
-        // Assign the region based reddit authorization information, or use the default
+        // Assign the subdomain based reddit authorization information, or use the default
         tokens["reddit"].redditClientID = tokens["reddit"].redditClientID || config.redditClientID;
         tokens["reddit"].redditClientSecret = tokens["reddit"].redditClientSecret || config.redditClientSecret;
         tokens["reddit"].redditCallbackURL = tokens["reddit"].redditCallbackURL || config.redditCallbackURL;
         tokens["reddit"].redditEmailAddress = tokens["reddit"].redditEmailAddress || config.redditEmailAddress;
         
-        authTokens[region] = tokens;
+        authTokens[subdomain] = tokens;
     }
 
     console.log('using authentication vars:', authTokens);
@@ -47,7 +51,17 @@ function getSubdomainPrefix (req) {
 }
 
 function getViewComponentPath(name) {
-    return path.resolve('assets', 'views', `${name}.js`);
+    var filePath = path.resolve('assets', 'views', `${name}.js`);
+    if (fs.existsSync(filePath)) {
+        return filePath;
+    } else {
+        filePath = path.resolve('assets', 'pages', `${name}.js`);
+        if (fs.existsSync(filePath)) {
+            return filePath;
+        }
+    }
+
+    return false;
 }
 
 function isValidRequestOrigin(req) {
@@ -63,20 +77,20 @@ function isValidRequestOrigin(req) {
     return originIsValid;
 }
 
-function viewComponentExists(name) {
-    return fs.existsSync(getViewComponentPath(name));
-}
-
 function templating(templatePath) {
 
-    if (!templatePath) {
-        templatePath = path.join(__dirname, '/templates/pages/');
-    }
-
-    console.log('configuring a static path to template:', templatePath);
-    app.use(express.static(templatePath));
     app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 
+    app.get("/", function(req, res) {
+        var job = {};
+        const subdomain = getSubdomainPrefix(req);
+        job["Index"] = {
+            subdomain
+        };
+
+        // verify component
+        return renderer.render(job).then(html => res.send(html));
+    });
     app.use("/assets", function(req, res) {
         console.log('asset requested', req.url);
         var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
@@ -85,14 +99,16 @@ function templating(templatePath) {
 }
 
 function serversideRendering() {
+
     hypernovaServer({
         devMode: true,
         port: renderPort,
         endpoint: '/',
         getComponent: function(name) {
-            if (viewComponentExists(name)) {
-                console.log('serving component', name);
-                return require(getViewComponentPath(name));
+            const viewFilePath = getViewComponentPath(name);
+            if (viewFilePath) {
+                console.log('serving component', name, viewFilePath);
+                return require(viewFilePath);
             }
 
             console.log('component not found', name);
@@ -100,13 +116,23 @@ function serversideRendering() {
           },
     });
 
-    var renderer = new hypernovaClient({
-        url: `http://localhost:${renderPort}/`
-    });
+    app.get('/', hypernovaExpress({
+        createRequestProps: async (req) => {
+            var job = {}, data = req.body;
+            delete data.component;
+            job[component] = data;
+
+            return Promise.resolve(job);
+        },
+        templatePath: path.resolve('assets', 'pages', 'index.html'),
+        templateMarker: '<body></body>',
+        renderer
+    }));
 
     app.post('/views', (req, res) => {
         const component = req.body.component;
-        if(viewComponentExists(component)) {
+        const viewFilePath = getViewComponentPath(component);
+        if (viewFilePath) {
             var job = {}, data = req.body;
             delete data.component;
             job[component] = data;
@@ -114,6 +140,7 @@ function serversideRendering() {
             // verify component
             return renderer.render(job).then(html => res.send(html));
         }
+        console.log('component not found', component);
         res.send("");
     });
 }
@@ -155,7 +182,7 @@ function authentication() {
             // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
             // authTokens["imgur"][subdomain].imgurProfile = profile;
     
-            for (var subdomain of regions) {
+            for (var subdomain of subdomains) {
                 console.log('setting imgur authentication information for subdomain:', subdomain);
                 authTokens[subdomain]["imgur"].imgurAccessToken = accessToken;
                 authTokens[subdomain]["imgur"].imgurRefreshToken = authTokens[subdomain]["imgur"].imgurRefreshToken || refreshToken;
@@ -227,7 +254,7 @@ function authentication() {
             // authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
             // authTokens["imgur"][subdomain].imgurProfile = profile;
     
-            for (var subdomain of regions) {
+            for (var subdomain of subdomains) {
                 console.log('setting reddit authentication information for subdomain:', subdomain);
                 authTokens[subdomain]["reddit"].redditAccessToken = accessToken;
                 authTokens[subdomain]["reddit"].redditRefreshToken = authTokens[subdomain]["reddit"].redditRefreshToken || refreshToken;

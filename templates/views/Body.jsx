@@ -1,6 +1,10 @@
 const React = require('react');
 const renderReact = require('hypernova-react').renderReact;
 
+import {Header} from './Header.js';
+import {Articles} from './Articles.js';
+import {Foot} from './Foot.js';
+
 function TheComponent(props) {
 //   props = Object.assign({
 //   }, props);
