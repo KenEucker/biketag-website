@@ -121,10 +121,10 @@
 				extradelay = 7000,
 				spinDelay = 15000;
 
-			getArticleContents("#tagit", "TagIt");
-			getArticleContents("#howto", "HowTo");
-			getArticleContents("#about", "About");
-			getArticleContents("#contact", "Contact");
+			// getArticleContents("#tagit", "TagIt");
+			// getArticleContents("#howto", "HowTo");
+			// getArticleContents("#about", "About");
+			// getArticleContents("#contact", "Contact");
 
 			if (getUrlParam('count')) {
 				extradelay = 1000;

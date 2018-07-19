@@ -78,8 +78,19 @@ function isValidRequestOrigin(req) {
 }
 
 function templating(templatePath) {
+    if (!templatePath) {
+        templatePath = path.join(__dirname, '/templates/pages/');
+    }
 
-    app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
+    app.use(express.static(templatePath));
+    app.use("/assets", function(req, res) {
+        console.log('asset requested', req.url);
+        var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
+        res.sendFile(path.join(__dirname, "assets/", req.url));
+    });
+}
+
+function serversideRendering() {
 
     app.get("/", function(req, res) {
         var job = {};
@@ -96,9 +107,6 @@ function templating(templatePath) {
         var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
         res.sendFile(path.join(__dirname, "assets/", req.url));
     });
-}
-
-function serversideRendering() {
 
     hypernovaServer({
         devMode: true,
@@ -343,6 +351,8 @@ function init() {
     app.use(passport.session());
     app.use(express.json());                         // to support JSON-encoded bodies
     app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
+
+    app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 }
 
 function run() {
@@ -356,6 +366,6 @@ function run() {
 /*    /   */ security();
 /*   /    */ templating();
 /*  /     */ authentication();
-/* ||     */ serversideRendering();
+/* ||     */ // serversideRendering();
 /* \/    */
 run();
