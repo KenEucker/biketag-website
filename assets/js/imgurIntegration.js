@@ -137,6 +137,7 @@
             if (image.description) {
                 var split = image.description.split(' ');
                 tagNumber = split[0];
+                split = image.description.split('by');
                 tagCredit = split[split.length - 1];
             }
         
