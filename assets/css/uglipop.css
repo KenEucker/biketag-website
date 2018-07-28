@@ -26,9 +26,12 @@ box-shadow: 0px 0px 39px 12px rgba(0,0,0,0.75);
 #uglipop_content_fixed {
 	z-index: 5;
 	position: absolute !important;
-	max-width: 1000px;
 	left: 0 !important;
 	right: 0 !important;
 	top: 0 !important;
 	transform: none !important;
+}
+
+#uglipop_content_fixed img {
+	max-width: 1000px;
 }
