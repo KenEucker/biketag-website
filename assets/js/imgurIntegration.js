@@ -197,7 +197,7 @@
             var verifyProofTagNumber = function(index) { return images[index].description.indexOf('#' + tagNumber + ' proof') != -1 };
             if (verifyProofTagNumber(tagNumberIndex)) {
                 return tagNumberIndex;
-            } else if (tagNumberIndex < images.length && verifyProofTagNumber(tagNumberIndex + 1)) {
+            } else if ((tagNumberIndex + 1 < images.length) && verifyProofTagNumber(tagNumberIndex + 1)) {
                 return tagNumberIndex + 1;
             } else if (tagNumberIndex > 0 && verifyProofTagNumber(tagNumberIndex - 1)) {
                 return tagNumberIndex - 1;
