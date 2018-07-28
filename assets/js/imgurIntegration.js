@@ -73,7 +73,7 @@
                 },
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", this.imgurAuthorization);
-                },
+                }.bind(this),
             });
         },
 
