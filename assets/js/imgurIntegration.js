@@ -159,7 +159,7 @@
         
             var images = window.imgurIntegration.imgurAlbumPictures;
             number = Number.isInteger(number) ? Number.parseInt(number) : Number.parseInt(window.imgurIntegration.getUrlParam('tagnumber'));
-            var realCount = (images.length / 2) + (images.length % 2);
+            var realCount = Math.round((images.length / 2) + ((images.length - 1) % 2));
         
             if (number && number < realCount) {
                 var realTagNumber = images.length - (number * 2) + 1;
