@@ -23,7 +23,7 @@
                 data: formData,
                 type: 'POST',
                 headers: {
-                    Authorization: window.imgurIntegration.imgurAuthorization,
+                    Authorization: this.imgurAuthorization,
                     Accept: 'application/json'
                 },
                 mimeType: 'multipart/form-data'
@@ -41,8 +41,8 @@
                 currentTag: null,
             };
 
-            if (window.imgurIntegration.imgurAlbumPictures.length) {
-                tagInformation.currentTag = window.imgurIntegration.imgurAlbumPictures[0];
+            if (this.imgurAlbumPictures.length) {
+                tagInformation.currentTag = this.imgurAlbumPictures[0];
 
                 if (tagInformation.currentTag) {
                     tagInformation.hasTag = true;
@@ -72,7 +72,7 @@
                     console.log('error getting images from imgur', err);
                 },
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", window.imgurIntegration.imgurAuthorization);
+                    xhr.setRequestHeader("Authorization", this.imgurAuthorization);
                 },
             });
         },
@@ -84,10 +84,10 @@
                 return;
             }
 
-            if (albumInfo.images_count != window.imgurIntegration.imgurAlbumPictures.length) {
+            if (albumInfo.images_count != this.imgurAlbumPictures.length) {
                 console.log('image count has changed, updating most recent tags');
-                window.imgurIntegration.imgurAlbumPictures = window.imgurIntegration.getImgurAlbumImagesByUploadDate(albumInfo.images);
-                window.imgurIntegration.showLatestTagImages();
+                this.imgurAlbumPictures = this.getImgurAlbumImagesByUploadDate(albumInfo.images);
+                this.showLatestTagImages();
             }
         },
 
@@ -111,17 +111,17 @@
                 url: 'https://api.imgur.com/3/album/' + albumHash + '/images',
                 success: function (data) {
                     // console.log(data);
-                    window.imgurIntegration.imgurAlbumPictures = window.imgurIntegration.getImgurAlbumImagesByUploadDate(data.data);
+                    this.imgurAlbumPictures = this.getImgurAlbumImagesByUploadDate(data.data);
 
                     if (callback) {
                         callback(data);
                     }
-                },
+                }.bind(this),
                 error: function (err) {
                     console.log('error getting images from imgur', err);
                 },
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", window.imgurIntegration.imgurAuthorization);
+                    xhr.setRequestHeader("Authorization", this.imgurAuthorization);
                 },
             });
         },
@@ -142,46 +142,112 @@
             }
         
             // console.log('setting image link', image.link, image);
-            return '<div class="m-imgur-post">' + 
-            '<h2>' + title + '</h2>\
-            <a href="' + image.link + '" target="_blank">\
-            <span>' + tagNumber + '</span>\
-            <span>' + tagCredit + '</span>\
-            <img data-src="' + thumbnail + '">\
-            </a>' +
-            '</div>';
+            return '<h2>' + title + '</h2>\
+                    <a href="' + image.link + '" target="_blank">\
+                        <span>' + tagNumber + '</span>\
+                        <span>' + tagCredit + '</span>\
+                        <img data-src="' + thumbnail + '">\
+                    </a>';
+        },
+
+        renderBikeTag: function(tag, heading, targetSelector) {
+            var targetContainer = document.querySelector(targetSelector || '.content .inner');
+
+            if (targetContainer) {
+                var tagContainer = document.createElement('div');
+                tagContainer.className = "m-imgur-post";
+                tagContainer.innerHTML = this.biketagImageTemplate(tag, heading || "Tag");
+                tagContainer.querySelector('a').addEventListener('click', function(e) {
+
+                    if (window.uglipop) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        window.uglipop({source:'html', content:'<img src="' + this.getAttribute('href') + '"></img>'});
+                    }
+                });
+                targetContainer.appendChild(tagContainer);
+            }
+        },
+
+        getTagNumberIndex: function(tagNumber) {
+            var images = this.imgurAlbumPictures;
+            var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
+
+            var verifyTagNumber = function(index) { return index > -1 ? images[index].description.indexOf('#' + tagNumber + ' tag') != -1 : -1 };
+            if (verifyTagNumber(tagNumberIndex)) {
+                return tagNumberIndex;
+            } else if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
+                return tagNumberIndex + 1;
+            } else if (tagNumberIndex > 0 && verifyTagNumber(tagNumberIndex - 1)) {
+                return tagNumberIndex - 1;
+            }
+
+            for(var i = 0; i < images.length; ++i) {
+                if (verifyTagNumber(i)) { tagNumberIndex = i; }
+            }
+
+            return tagNumberIndex;
+        },
+
+        getProofTagNumberIndex: function(tagNumber) {
+            var images = this.imgurAlbumPictures;
+            var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
+
+            var verifyProofTagNumber = function(index) { return images[index].description.indexOf('#' + tagNumber + ' proof') != -1 };
+            if (verifyProofTagNumber(tagNumberIndex)) {
+                return tagNumberIndex;
+            } else if (tagNumberIndex < images.length && verifyProofTagNumber(tagNumberIndex + 1)) {
+                return tagNumberIndex + 1;
+            } else if (tagNumberIndex > 0 && verifyProofTagNumber(tagNumberIndex - 1)) {
+                return tagNumberIndex - 1;
+            }
+
+            for(var i = 0; i < images.length; ++i) {
+                console.log(`looking for ${tagNumber} with ${i}`);
+                if (verifyProofTagNumber(i)) { tagNumberIndex = i; }
+            }
+
+            return tagNumberIndex;
         },
         
-        showBikeTagNumber: function (number) {
-            if (!window.imgurIntegration.imgurAlbumPictures) {
-                return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showBikeTagNumber);
+        showBikeTagNumber: function (tagNumber) {
+            if (!this.imgurAlbumPictures) {
+                return this.getImgurAlbumPictures(null, this.showBikeTagNumber.bind(this));
             }
         
-            var images = window.imgurIntegration.imgurAlbumPictures;
-            number = Number.isInteger(number) ? Number.parseInt(number) : Number.parseInt(window.imgurIntegration.getUrlParam('tagnumber'));
-            var realCount = Math.round((images.length / 2) + ((images.length - 1) % 2));
+            var images = this.imgurAlbumPictures;
+            tagNumber = Number.isInteger(tagNumber) ? Number.parseInt(tagNumber) : Number.parseInt(this.getUrlParam('tagnumber')) || 1;
+            var imageCount = Math.round((images.length / 2) + ((images.length - 1) % 2));
+            
+            if (tagNumber && tagNumber < imageCount) {
+                var theTag = images[this.getTagNumberIndex(tagNumber)];
+                var proofTag = images[this.getProofTagNumberIndex(tagNumber)];
         
-            if (number && number < realCount) {
-                var realTagNumber = images.length - (number * 2) + 1;
-                var theTag = images[realTagNumber];
-                var previousTag = images[realTagNumber + 1];
-        
-                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(theTag, "Tag #" + number) );
-                if (previousTag) {
-                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(previousTag, "Proof for tag #" + (number - 1) ));
+                if (proofTag) {
+                    this.renderBikeTag(proofTag, "Found It Tag");
                 }
+                if (theTag) {
+                    this.renderBikeTag(theTag, "Original Tag");
+                }
+        
+                window.lazyLoadInstance = new LazyLoad();
+            } else if (tagNumber == imageCount) {
+                var newTag = images[this.getTagNumberIndex(tagNumber)];
+        
+                this.renderBikeTag(newTag, "Current Tag");
         
                 window.lazyLoadInstance = new LazyLoad();
             }
         },
         
         showLatestTagImages: function (count) {
-            if (!window.imgurIntegration.imgurAlbumPictures) {
-                return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
+            if (!this.imgurAlbumPictures) {
+                return this.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this));
             }
         
-            var images = window.imgurIntegration.imgurAlbumPictures;
-            count = Number.isInteger(count) ? count : window.imgurIntegration.getUrlParam('count');
+            var images = this.imgurAlbumPictures;
+            count = Number.isInteger(count) ? count : this.getUrlParam('count');
             $('.content .inner').empty();
         
             if (!count) {
@@ -189,23 +255,23 @@
                 var secondToLastImage = images.length > 1 ? images[1] : null;
                 var thirdToLastImage = images.length > 2 ? images[2] : null;
         
-                $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(lastImage, "Tag You're It!") );
+                this.renderBikeTag(lastImage, "Tag You're It!");
                 if (secondToLastImage) {
-                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(secondToLastImage, "Proof") );
+                    this.renderBikeTag(secondToLastImage, "Proof");
                 }
                 if (thirdToLastImage) {
-                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(thirdToLastImage, "Last tag") );
+                    this.renderBikeTag(thirdToLastImage, "Last tag");
                 }
             } else {
                 count = count.toUpperCase() == "ALL" ? images.length : Number(count);
                 for (var i = 0; (i < count) && (i < images.length); ++i) {
                     var image = images[i];
-                    $('.content .inner').append( window.imgurIntegration.biketagImageTemplate(image, image.description) );
+                    this.renderBikeTag(image, image.description);
                 }
             }
 
             // Set the form with the tag information
-            var currentTagInfo = window.imgurIntegration.getCurrentTagInformation();
+            var currentTagInfo = this.getCurrentTagInformation();
             $('#proofHeading').text('Proof for #' + currentTagInfo.currentTagNumber);
             // DON'T DO THIS RIGHT NOW
             // $('#nextTagHeading').text('Next Tag info (#' + currentTagInfo.nextTagNumber + ')');
@@ -234,7 +300,7 @@
                 data.tagCredit = split[split.length - 1];
             }
 
-            data.component = window.imgurIntegration.imgurPostComponent;
+            data.component = this.imgurPostComponent;
             
             fetch('/views', {
                 method: 'POST',
@@ -255,12 +321,12 @@
         },
 
         // showBikeTagNumber: function (number) {
-        //     if (!window.imgurIntegration.imgurAlbumPictures) {
-        //         return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showBikeTagNumber);
+        //     if (!this.imgurAlbumPictures) {
+        //         return this.getImgurAlbumPictures(null, this.showBikeTagNumber);
         //     }
 
-        //     var images = window.imgurIntegration.imgurAlbumPictures;
-        //     number = Number.isInteger(number) ? Number.parseInt(number) : Number.parseInt(window.imgurIntegration.getUrlParam('tagnumber'));
+        //     var images = this.imgurAlbumPictures;
+        //     number = Number.isInteger(number) ? Number.parseInt(number) : Number.parseInt(this.getUrlParam('tagnumber'));
         //     var realCount = (images.length / 2) + (images.length % 2);
 
         //     if (number && number < realCount) {
@@ -268,9 +334,9 @@
         //         var theTag = images[realTagNumber];
         //         var previousTag = images[realTagNumber + 1];
 
-        //         window.imgurIntegration.buildBiketagImage('.content .inner', theTag, "Tag #" + number);
+        //         this.buildBiketagImage('.content .inner', theTag, "Tag #" + number);
         //         if (previousTag) {
-        //             window.imgurIntegration.buildBiketagImage('.content .inner', previousTag, "Proof for tag #" + (number - 1));
+        //             this.buildBiketagImage('.content .inner', previousTag, "Proof for tag #" + (number - 1));
         //         }
 
         //         window.lazyLoadInstance = new LazyLoad();
@@ -278,12 +344,12 @@
         // },
 
         // showLatestTagImages: function (count) {
-        //     if (!window.imgurIntegration.imgurAlbumPictures) {
-        //         return window.imgurIntegration.getImgurAlbumPictures(null, window.imgurIntegration.showLatestTagImages);
+        //     if (!this.imgurAlbumPictures) {
+        //         return this.getImgurAlbumPictures(null, this.showLatestTagImages);
         //     }
 
-        //     var images = window.imgurIntegration.imgurAlbumPictures;
-        //     count = Number.isInteger(count) ? count : window.imgurIntegration.getUrlParam('count');
+        //     var images = this.imgurAlbumPictures;
+        //     count = Number.isInteger(count) ? count : this.getUrlParam('count');
         //     $('.content .inner').empty();
 
         //     if (!count) {
@@ -291,23 +357,23 @@
         //         var secondToLastImage = images.length > 1 ? images[1] : null;
         //         var thirdToLastImage = images.length > 2 ? images[2] : null;
 
-        //         window.imgurIntegration.buildBiketagImage('.content .inner', lastImage, "Tag You're It!");
+        //         this.buildBiketagImage('.content .inner', lastImage, "Tag You're It!");
         //         if (secondToLastImage) {
-        //             window.imgurIntegration.buildBiketagImage('.content .inner', secondToLastImage, "Proof");
+        //             this.buildBiketagImage('.content .inner', secondToLastImage, "Proof");
         //         }
         //         if (thirdToLastImage) {
-        //             window.imgurIntegration.buildBiketagImage('.content .inner', thirdToLastImage, "Last tag");
+        //             this.buildBiketagImage('.content .inner', thirdToLastImage, "Last tag");
         //         }
         //     } else {
         //         count = count.toUpperCase() == "ALL" ? images.length : Number(count);
         //         for (var i = 0; (i < count) && (i < images.length); ++i) {
         //             var image = images[i];
-        //             window.imgurIntegration.buildBiketagImage('.content .inner', image, image.description);
+        //             this.buildBiketagImage('.content .inner', image, image.description);
         //         }
         //     }
 
         //     // Set the form with the tag information
-        //     var currentTagInfo = window.imgurIntegration.getCurrentTagInformation();
+        //     var currentTagInfo = this.getCurrentTagInformation();
         //     $('#proofHeading').text('Proof for #' + currentTagInfo.currentTagNumber);
         //     // DON'T DO THIS RIGHT NOW
         //     // $('#nextTagHeading').text('Next Tag info (#' + currentTagInfo.nextTagNumber + ')');
@@ -322,7 +388,7 @@
 
             var formData = new FormData();
             formData.append("image", image);
-            formData.append("album", window.imgurIntegration.imgurAlbumHash);
+            formData.append("album", this.imgurAlbumHash);
             formData.append("description", description);
 
             var settings = {
@@ -333,7 +399,7 @@
                 type: 'POST',
                 url: 'https://api.imgur.com/3/image',
                 headers: {
-                    Authorization: window.imgurIntegration.imgurAccessToken,
+                    Authorization: this.imgurAccessToken,
                     Accept: 'application/json'
                 },
                 mimeType: 'multipart/form-data'
@@ -388,7 +454,7 @@
             var files = [], user = '', proofLocation = '';
     
             // get the latest tag number
-            var currentTagInfo = window.imgurIntegration.getCurrentTagInformation();
+            var currentTagInfo = this.getCurrentTagInformation();
             user = form.find('input[name="name"]').val();
             proofLocation = form.find('input[name="location"]').val();
             hint = form.find('input[name="hint"]').val();
@@ -417,11 +483,11 @@
             var image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user;
             var image2Description = '#' + currentTagInfo.nextTagNumber + ' tag' + hintString + ' by ' + user;
 
-            window.imgurIntegration.uploadImageToImgur(files[0], image1Description, function() {
-                window.imgurIntegration.uploadImageToImgur(files[1], image2Description, function() {
+            this.uploadImageToImgur(files[0], image1Description, function() {
+                this.uploadImageToImgur(files[1], image2Description, function() {
                     window.location.href = window.location.pathname + '?uploadSuccess=true';
                 });
-            });
+            }.bind(this));
         },
 
         init: function () {
@@ -464,7 +530,7 @@
                         logo.offsetHeight; /* trigger reflow */
                         logo.style.animation = null;
                         
-                        window.imgurIntegration.getImgurAlbumInfo(null, window.imgurIntegration.refreshImgurAlbumInfo);
+                        this.getImgurAlbumInfo(null, this.refreshImgurAlbumInfo);
                     }, self.imgurAlbumPicturesRefreshFrequency);
                 }
 
@@ -477,7 +543,7 @@
 
             $('form #submit').click(function (e) {
                 e.preventDefault();
-                self.onUploadFormSubmit($(e.currentTarget));
+                self.onUploadFormSubmit($(e.currentTarget).bind(self));
             });
 
             return self;
