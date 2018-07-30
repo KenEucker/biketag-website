@@ -10,6 +10,7 @@ function TheComponent(props) {
     <script src="assets/js/main.js" async></script>
     <script src="assets/js/imgurIntegration.js" async></script>
     <script src="assets/js/redditIntegration.js" async></script>
+    <script src="assets/js/biketag.js" async></script>
   </div>;
 }
 

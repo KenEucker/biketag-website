@@ -12,6 +12,9 @@ const express = require('express'),
     ImgurStrategy = require('passport-imgur').Strategy,
     RedditStrategy = require('passport-reddit').Strategy,
     refresh = require('passport-oauth2-refresh'),
+    gulp = require('gulp'),
+    watch = require('gulp-watch'),
+	gulpS3 = require('gulp-s3-upload'),
     crypto = require('crypto'),
     debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : false,
     config = require('./config.js'),
@@ -33,12 +36,19 @@ function setVars() {
         tokens["imgur"].imgurClientSecret = tokens["imgur"].imgurClientSecret || config.imgurClientSecret;
         tokens["imgur"].imgurCallbackURL = tokens["imgur"].imgurCallbackURL || config.imgurCallbackURL;
         tokens["imgur"].imgurEmailAddress = tokens["imgur"].imgurEmailAddress || config.imgurEmailAddress;
-        
+
+        // Assign the subdomain based AWS S3 authorization information, or use the default
+        tokens["s3"].cdnUrl = tokens["s3"].cdnUrl || config.AwsCdnUrl;
+        tokens["s3"].emailAddress = tokens["s3"].emailAddress || config.AwsEmailAddress;
+        tokens["s3"].accessKeyId = tokens["s3"].accessKeyId || config.AwsAccessKeyId;
+        tokens["s3"].secretAccessKey = tokens["s3"].secretAccessKey || config.AwsSecretAccessKey;
+        tokens["s3"].region = tokens["s3"].region || config.AwsRegion;
+
         // Assign the subdomain based reddit authorization information, or use the default
         tokens["reddit"].redditClientID = tokens["reddit"].redditClientID || config.redditClientID;
         tokens["reddit"].redditClientSecret = tokens["reddit"].redditClientSecret || config.redditClientSecret;
         tokens["reddit"].redditCallbackURL = tokens["reddit"].redditCallbackURL || config.redditCallbackURL;
-        tokens["reddit"].redditEmailAddress = tokens["reddit"].redditEmailAddress || config.redditEmailAddress;
+        tokens["reddit"].redditUserName = tokens["reddit"].redditUserName || config.redditUserName;
         
         authTokens[subdomain] = tokens;
     }
@@ -267,6 +277,7 @@ function authentication() {
                 authTokens[subdomain]["reddit"].redditAccessToken = accessToken;
                 authTokens[subdomain]["reddit"].redditRefreshToken = authTokens[subdomain]["reddit"].redditRefreshToken || refreshToken;
                 authTokens[subdomain]["reddit"].redditProfile = authTokens[subdomain]["reddit"].redditProfile || profile;
+                authTokens[subdomain]["reddit"].redditUserName = authTokens[subdomain]["reddit"].redditUserName || profile.name;
             }
         };
 
@@ -345,6 +356,56 @@ function authentication() {
     }
 }
 
+function ImgurIngestor() {
+
+}
+
+function RedditIngestor() {
+
+}
+
+function uploadFileToS3(config, file, basePath = 'biketag', metadataMap = {}) {
+    const s3 = gulpS3(config);
+
+    console.log(`watching folder for new uploads to S3:`, config.bucket);
+    return gulp.src(file.path, { allowEmpty: true })
+        .pipe(s3({
+            Bucket: `${config.bucket}/${basePath}`,
+            ACL: 'public-read',
+            metadataMap,
+        }, {
+                maxRetries: 5
+            }));
+}
+
+function syncUploadsToS3(config) {
+    const s3 = gulpS3(config);
+
+    console.log(`watching folder for new uploads to S3:`, config.bucket);
+    return watch(config.bucket, {
+        ignoreInitial: true,
+        verbose: true,
+        allowEmpty: true,
+    }, function(file) {
+        return gulp.src(file.path, { allowEmpty: true })
+            .pipe(s3({
+                Bucket: `${config.bucket}/biketag`,
+                ACL: 'public-read',
+                metadataMap: {
+                    "uploaded-by": config.bucket,
+                    "title": "title",
+                    "description": "description",
+                },
+            }, {
+                    maxRetries: 5
+                }));
+    });
+}
+
+function syncWithS3() {
+    syncUploadsToS3(authTokens["pdx"]["s3"]);
+}
+
 function init() {
     app.use(session({ secret: 'biketag', resave: false, saveUninitialized: true, }));
     app.use(passport.initialize());
@@ -361,11 +422,12 @@ function run() {
     });
 }
 /* configuration */
-/*      / */ init();
-/*     /  */ setVars();
-/*    /   */ security();
-/*   /    */ templating();
-/*  /     */ authentication();
-/* ||     */ // serversideRendering();
-/* \/    */
+/*       / */ init();
+/*      /  */ setVars();
+/*     /   */ security();
+/*    /    */ syncWithS3();
+/*   /     */ templating();
+/*  /      */ authentication();
+/* ||      */ // serversideRendering();
+/* \/      */
 run();
