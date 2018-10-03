@@ -530,7 +530,7 @@
                         logo.offsetHeight; /* trigger reflow */
                         logo.style.animation = null;
                         
-                        this.getImgurAlbumInfo(null, this.refreshImgurAlbumInfo);
+                        self.getImgurAlbumInfo(null, self.refreshImgurAlbumInfo);
                     }, self.imgurAlbumPicturesRefreshFrequency);
                 }
 
