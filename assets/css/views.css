@@ -1,20 +1,26 @@
 .m-imgur-post a {
   position: relative;
-  border: none; }
-  .m-imgur-post a span {
-    position: absolute; }
-    .m-imgur-post a span:nth-child(1) {
-      font-size: 40px;
-      font-weight: 500;
-      text-shadow: 2px 2px #292828e6;
-      background-color: rgba(0, 0, 0, 0.75);
-      padding: 0 0.5rem;
-      border-radius: 5px; }
-    .m-imgur-post a span:nth-child(2) {
-      bottom: 4px;
-      right: 2%;
-      font-size: 24px;
-      text-shadow: 2px 2px #292828e6; }
-
+  border: none;
+}
+.m-imgur-post a span {
+  position: absolute;
+}
+.m-imgur-post a span:nth-child(1) {
+  font-size: 40px;
+  font-weight: 500;
+  text-shadow: 2px 2px #292828e6;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 0 0.5rem;
+  border-radius: 5px;
+}
+.m-imgur-post a span:nth-child(2) {
+  bottom: 4px;
+  right: 2%;
+  font-size: 24px;
+  text-shadow: 2px 2px #292828e6;
+}
 .m-imgur-post img {
-  max-width: 75vw; }
+  max-width: 75vw;
+}
+
+/*# sourceMappingURL=views.css.map */

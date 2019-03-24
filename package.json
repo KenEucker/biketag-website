@@ -1,60 +1,47 @@
 {
-  "name": "biketag-website",
-  "version": "0.1.0",
-  "description": "A website for biketag.org",
-  "author": "Ken Eucker <keneucker@gmail.com>",
-  "contributors": [],
-  "bin": {},
-  "scripts": {
-    "compile": "npm run compileJsxViews && npm run compileJsxPages && npm run compileSass",
-    "compileJsxPages": "babel templates/pages --out-dir assets/pages --presets=env,react",
-    "compileJsxViews": "babel templates/views --out-dir assets/views --presets=env,react",
-    "compileSass": "node-sass templates/sass -o assets/css",
-    "dev": "node app.js --debug",
-    "run": "node app.js"
-  },
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KenEucker/biketag-website.git"
-  },
-  "bugs": {
-    "url": "https://github.com/KenEucker/biketag-website/issues"
-  },
-  "keywords": [],
-  "dependencies": {
-    "@immowelt/hypernova-express": "^1.0.3",
-    "crypto": "^1.0.1",
-    "express": "^4.14.0",
-    "express-session": "^1.15.6",
-    "gulp": "^3.9.1",
-    "gulp-s3-upload": "^1.7.0",
-    "gulp-watch": "^5.0.1",
-    "hypernova": "^2.2.6",
-    "hypernova-client": "^1.1.0",
-    "hypernova-react": "^2.1.0",
-    "passport": "^0.4.0",
-    "passport-imgur": "0.0.3",
-    "passport-oauth2-refresh": "^1.1.0",
-    "passport-reddit": "^0.2.4",
-    "path": "^0.12.7",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "safe-timers": "^1.1.0",
-    "serve-favicon": "^2.4.3"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.10.0",
-    "http-server": "^0.9.0",
-    "node-sass": "^4.9.0"
-  },
-  "license": "Unlicense"
+	"name": "biketag-website",
+	"version": "0.2.0",
+	"description": "A website for biketag.org",
+	"author": "Ken Eucker <keneucker@gmail.com>",
+	"contributors": [],
+	"bin": {},
+	"scripts": {
+		"compile": "./node_modules/.bin/dart-sass templates/sass:assets/css",
+		"dev": "node app.js --debug",
+		"run": "node app.js"
+	},
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/KenEucker/biketag-website.git"
+	},
+	"bugs": {
+		"url": "https://github.com/KenEucker/biketag-website/issues"
+	},
+	"keywords": [],
+	"dependencies": {
+		"express": "^4.16.4",
+		"express-session": "^1.15.6",
+		"gulp": "^4.0.0",
+		"gulp-s3-upload": "^1.7.3",
+		"gulp-watch": "^5.0.1",
+		"imgur": "^0.3.1",
+		"passport": "^0.4.0",
+		"passport-imgur": "^0.0.3",
+		"passport-oauth2-refresh": "^1.1.0",
+		"passport-reddit": "^0.2.4",
+		"path": "^0.12.7",
+		"safe-timers": "^1.1.0",
+		"serve-favicon": "^2.5.0"
+	},
+	"devDependencies": {
+		"dart-sass": "^1.17.3",
+		"eslint": "^5.15.3",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-plugin-import": "^2.16.0",
+		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-react": "^7.12.4",
+		"http-server": "^0.11.1"
+	},
+	"license": "Unlicense"
 }
