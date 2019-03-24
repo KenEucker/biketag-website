@@ -72,23 +72,82 @@ function isValidRequestOrigin(req) {
 	return originIsValid;
 }
 
+function getImagesByUploadDate(images, newestFirst) {
+	if (!newestFirst) {
+		return images.sort(function (image1, image2) {
+			return new Date(image2.datetime) - new Date(image1.datetime);
+		});
+	} else {
+		return images.sort(function (image1, image2) {
+			return new Date(image1.datetime) - new Date(image2.datetime);
+		});
+	}
+};
+
+function getTagNumberIndex(images, tagNumber, proof = false) {
+	var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
+
+	var verifyTagNumber = function (index) {
+		let compare = `#${tagNumber} tag`;
+		if (proof) {
+			compare = `#${tagNumber} proof`;
+		}
+		return index > -1 ? images[index].description.indexOf(compare) != -1 : -1;
+	};
+	if (verifyTagNumber(tagNumberIndex)) {
+		return tagNumberIndex;
+	} else if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
+		return tagNumberIndex + 1;
+	} else if (tagNumberIndex > 0 && verifyTagNumber(tagNumberIndex - 1)) {
+		return tagNumberIndex - 1;
+	}
+
+	for (var i = 0; i < images.length; ++i) {
+		if (verifyTagNumber(i)) { tagNumberIndex = i; break; }
+	}
+
+	return tagNumberIndex;
+};
+
+function biketagRedditTemplate(images, tagNumber) {
+	const latestTagNumber = Number.parseInt(images[0].description.split(' ')[0].substr(1));
+	tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber;
+	const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1;
+	const nextTagNumber = tagNumber > 1 ? tagNumber : 2;
+	const nextTagIndex = getTagNumberIndex(images, nextTagNumber);
+	const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true);
+
+	const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`;
+	const nextTagURL = images[nextTagIndex].link;
+
+
+	const split = images[prevTagIndex].description.split('by');
+	const credit = split[split.length - 1].trim();
+	const proofText = images[prevTagIndex].description;
+
+	// console.log('setting image link', image.link, image);
+	return `<pre>Credit goes to: ${credit} for finding tag #${prevTagNumber}!\r\n\r\n
+[\#${nextTagNumber} tag by ${credit}](${nextTagURL})\r\n\r\n
+[${proofText}](${proofTagURL})\r\n\r\n
+[Rules](http://biketag.org/#howto)</pre>`;
+}
+
 function templating(templatePath) {
 	if (!templatePath) {
 		templatePath = path.join(__dirname, '/templates/pages/');
 	}
 
 	app.get("/get/reddit", function (req, res) {
-		console.log('reddit template request for tag', req.tagnumber || 'latest');
-		const tagnumber = req.tagnumber || 1;
+		const tagnumber = req.tagnumber || 'latest';
 		const subdomain = getSubdomainPrefix(req);
 		const albumHash = authTokens[subdomain]["imgur"].imgurAlbumHash;
 
-		console.log('getting album info', albumHash);
+		console.log('reddit template request for tag', tagnumber);
 		imgur.setClientId(authTokens[subdomain]["imgur"].imgurClientID);
 		imgur.getAlbumInfo(albumHash)
 			.then(function (json) {
-				console.log()
-				res.json(json.data);
+				const images = getImagesByUploadDate(json.data.images);
+				res.send(biketagRedditTemplate(images, tagnumber));
 			})
 			.catch(function (err) {
 				console.error(err.message);
