@@ -6,18 +6,19 @@
 
 /* Header */
 
-	@-moz-keyframes spin {
-		from { -moz-transform: rotate(0deg); }
-		to { -moz-transform: rotate(360deg); }
-	}
-	@-webkit-keyframes spin {
-		from { -webkit-transform: rotate(0deg); }
-		to { -webkit-transform: rotate(360deg); }
-	}
-	@keyframes spin {
-		from {transform:rotate(0deg);}
-		to {transform:rotate(360deg);}
-	}
+
+@-moz-keyframes spin {
+	from { -moz-transform: rotate(0deg); }
+	to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+	from { -webkit-transform: rotate(0deg); }
+	to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
 
 	#header {
 		@include vendor('display', 'flex');
@@ -192,7 +193,7 @@
 			opacity: 0;
 		}
 
-		body.is-loading & {
+		body.is-preload & {
 			> * {
 				opacity: 0;
 			}
@@ -209,7 +210,7 @@
 			}
 		}
 
-		@include breakpoint(xlarge) {
+		@include breakpoint('<=large') {
 			.headingText {
 
 				> * {
@@ -223,28 +224,7 @@
 				:nth-child(2) {
 					right: -135px;
 				}
-			}
-		}
-
-		@include breakpoint(large) {
-			.headingText {
-
-				> * {
-					top: -122px;
-				}
-
-				:nth-child(1) {
-					left: -150px;
-				}
-
-				:nth-child(2) {
-					right: -135px;
-				}
-			}
-		}
-
-		@include breakpoint(medium) {
-			.content {
+			}			.content {
 				p {
 					br {
 						display: none;
@@ -253,7 +233,7 @@
 			}
 		}
 
-		@include breakpoint(small) {
+		@include breakpoint('<=small') {
 			> * {
 				margin-top: 2rem;
 
@@ -276,8 +256,8 @@
 				:nth-child(2) {
 					right: -105px;
 				}
-			}
-
+			}			
+			
 			.logo {
 				width: 4.75rem;
 				height: 4.75rem;
@@ -289,10 +269,11 @@
 					}
 				}
 			}
-			.content {
-				padding: 2.5rem 1rem;
 
+			.content {
 				.inner {
+					padding: 2.5rem 1rem;
+
 					a {
 						span {
 							&:nth-child(1) {
@@ -304,7 +285,7 @@
 							}
 						}
 					}
-				}
+								}
 
 				p {
 					line-height: 1.875;
@@ -312,7 +293,7 @@
 			}
 		}
 
-		@include breakpoint(xsmall) {
+		@include breakpoint('<=xsmall') {
 			padding: 1.5rem 0;
 
 			.content {

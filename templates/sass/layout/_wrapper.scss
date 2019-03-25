@@ -5,19 +5,6 @@
 ///
 
 /* Wrapper */
-	
-	@-moz-keyframes slideDown {
-		0%, 100% { -moz-transform: translateY(-50px); }
-		10%, 90% { -moz-transform: translateY(0px); }
-	}
-	@-webkit-keyframes slideDown {
-		0%, 100% { -webkit-transform: translateY(-50px); }
-		10%, 90% { -webkit-transform: translateY(0px); }
-	}
-	@keyframes slideDown {
-		0%, 100% { transform: translateY(-50px); }
-		10%, 90% { transform: translateY(0px); }
-	}
 
 	#wrapper {
 		@include vendor('display', 'flex');
@@ -29,6 +16,7 @@
 		width: 100%;
 		padding: 4rem 2rem;
 		z-index: 3;
+
 
 		.cssanimations.csstransforms #notification {
 			transform: translateY(-50px);
@@ -112,24 +100,20 @@
 				}
 			}
 		}
-
 		&:before {
 			content: '';
 			display: block;
 		}
 
-		@include breakpoint(xlarge) {
+		@include breakpoint('<=xlarge') {
 			padding: 3rem 2rem;
 		}
 
-		@include breakpoint(large) {
-		}
-
-		@include breakpoint(small) {
+		@include breakpoint('<=small') {
 			padding: 2rem 1rem;
 		}
 
-		@include breakpoint(xsmall) {
+		@include breakpoint('<=xsmall') {
 			padding: 1rem;
 		}
 
@@ -141,5 +125,4 @@
 					}
 				}
 			}
-		}
-	}
+		}	}

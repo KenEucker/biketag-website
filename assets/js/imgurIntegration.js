@@ -85,7 +85,7 @@
 				return;
 			}
 
-			if (albumInfo.images_count != this.imgurAlbumPictures.length) {
+			if (albumInfo.images_count != window.imgurIntegration.imgurAlbumPictures.length) {
 				console.log('image count has changed, updating most recent tags');
 				this.imgurAlbumPictures = this.getImgurAlbumImagesByUploadDate(albumInfo.images);
 				this.showLatestTagImages();
