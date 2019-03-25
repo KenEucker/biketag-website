@@ -1,0 +1,24 @@
+#loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.75;
+	z-index: 10;
+
+	.spin {
+		animation: spin 2s infinite linear;
+		transform-origin: center;
+	}
+	
+	.logo{
+		position: relative;
+		width: 100%;
+		margin-top: 25vh;
+
+		.icon.fa-bicycle {
+			padding-left: 18%;
+			font-size: 50vw;
+		}
+	}
+}

@@ -976,6 +976,28 @@ body.is-loading #bg:before {
   background-color: #000000;
 }
 
+#loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.75;
+  z-index: 10;
+}
+#loader .spin {
+  animation: spin 2s infinite linear;
+  transform-origin: center;
+}
+#loader .logo {
+  position: relative;
+  width: 100%;
+  margin-top: 25vh;
+}
+#loader .logo .icon.fa-bicycle {
+  padding-left: 18%;
+  font-size: 50vw;
+}
+
 /* Wrapper */
 @-moz-keyframes slideDown {
   0%, 100% {
