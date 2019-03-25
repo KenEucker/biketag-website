@@ -138,7 +138,7 @@ function templating(templatePath) {
 	}
 
 	app.get("/get/reddit", function (req, res) {
-		const tagnumber = req.tagnumber || 'latest';
+		const tagnumber = req.query.tagnumber || 'latest';
 		const subdomain = getSubdomainPrefix(req);
 		const albumHash = authTokens[subdomain]["imgur"].imgurAlbumHash;
 
