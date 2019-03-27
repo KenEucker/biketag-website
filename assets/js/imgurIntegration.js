@@ -285,6 +285,7 @@
 
 			setTimeout(function () {
 				// Hide the overlay and show the content
+				$('#loader .logo').animate({ top: "-200px" });
 				$('#loader').fadeOut();
 				$('#main').fadeIn();
 			}, 1000);
