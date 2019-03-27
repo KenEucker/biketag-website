@@ -128,7 +128,7 @@
 
 		setTimeout(function () {
 			// If the main content is showing
-			if ($('#main').style.display == 'none') {
+			if ($('#header')[0].style.display != 'none') {
 				hideShowCountChanger(true);
 			}
 		}, extradelay);
