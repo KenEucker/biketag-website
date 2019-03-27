@@ -283,9 +283,11 @@
 			console.log('loading lazy load images');
 			window.lazyLoadInstance = new LazyLoad();
 
-			// Hide the overlay and show the content
-			$('#main').fadeIn();
-			$('#loader').fadeOut();
+			setTimeout(function () {
+				// Hide the overlay and show the content
+				$('#loader').fadeOut();
+				$('#main').fadeIn();
+			}, 1000);
 		},
 
 		// buildBiketagImage: function (target, image, title) {

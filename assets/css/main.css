@@ -1032,7 +1032,6 @@ body.is-preload #bg:before {
   height: 100%;
   width: 100%;
   background-color: black;
-  opacity: 0.75;
   z-index: 10;
 }
 #loader .spin {
@@ -1042,11 +1041,15 @@ body.is-preload #bg:before {
 #loader .logo {
   position: relative;
   width: 100%;
-  margin-top: 25vh;
 }
 #loader .logo .icon.fa-bicycle {
   padding-left: 18%;
   font-size: 50vw;
+}
+@media screen and (max-width: 980px) {
+  #loader .logo {
+    top: 25vh;
+  }
 }
 
 /* Wrapper */
