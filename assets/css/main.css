@@ -1624,6 +1624,18 @@ body.is-preload #footer {
   opacity: 0;
 }
 
+.m-imgur-post h2 {
+  border-style: solid;
+  border-radius: 5px;
+  border-color: white;
+  border-width: 1px;
+  border-bottom-width: 0px;
+  margin: 0;
+  width: 82%;
+  margin-left: 9%;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 .m-imgur-post a {
   position: relative;
   border: none;
@@ -1647,6 +1659,9 @@ body.is-preload #footer {
   text-shadow: 2px 2px #292828e6;
 }
 .m-imgur-post img {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom: 1px white solid;
   max-width: 75vw;
 }
 

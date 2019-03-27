@@ -1,4 +1,16 @@
 .m-imgur-post {
+	h2 {
+		border-style: solid;
+		border-radius: 5px;
+		border-color: white;
+		border-width: 1px;
+		border-bottom-width: 0px;
+		margin: 0;
+		width: 82%;
+		margin-left: 9%;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+	}
     a {
         position: relative; 
         border: none;
@@ -26,6 +38,9 @@
     }
 
     img {
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		border-bottom: 1px white solid;
         max-width: 75vw;
     }
 }

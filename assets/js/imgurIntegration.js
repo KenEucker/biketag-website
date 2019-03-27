@@ -257,12 +257,12 @@
 					var secondToLastImage = images.length > 1 ? images[1] : null;
 					var thirdToLastImage = images.length > 2 ? images[2] : null;
 
-					this.renderBikeTag(lastImage, "Tag You're It!");
+					this.renderBikeTag(lastImage, "Current mystery location to find");
 					if (secondToLastImage) {
-						this.renderBikeTag(secondToLastImage, "Proof");
+						this.renderBikeTag(secondToLastImage, "Proof image");
 					}
 					if (thirdToLastImage) {
-						this.renderBikeTag(thirdToLastImage, "Last tag");
+						this.renderBikeTag(thirdToLastImage, "Previous tag mystery location");
 					}
 				} else {
 					count = count.toUpperCase() == "ALL" ? images.length : Number(count);

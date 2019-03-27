@@ -127,7 +127,10 @@
 		}
 
 		setTimeout(function () {
-			hideShowCountChanger(true);
+			// If the main content is showing
+			if ($('#main').style.display == 'none') {
+				hideShowCountChanger(true);
+			}
 		}, extradelay);
 
 		// setInterval(function(){
@@ -456,6 +459,10 @@
 				});
 
 		}
+
+		// $('#nav a').on('click', function () {
+		// 	hideShowCountChanger(false);
+		// });
 
 		// Initialize.
 
