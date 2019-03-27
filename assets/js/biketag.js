@@ -221,8 +221,7 @@
 			// Set the form with the tag information
 			var currentTagInfo = this.getCurrentTagInformation();
 			$('#proofHeading').text('Proof for #' + currentTagInfo.currentTagNumber);
-			// DON'T DO THIS RIGHT NOW
-			// $('#nextTagHeading').text('Next Tag info (#' + currentTagInfo.nextTagNumber + ')');
+			$('#nextTagHeading').text('Next Tag info (#' + currentTagInfo.nextTagNumber + ')');
 
 			window.lazyLoadInstance = new LazyLoad();
 			console.log('loading lazy load images', window.lazyLoadInstance);

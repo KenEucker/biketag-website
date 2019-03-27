@@ -17,6 +17,39 @@
 		max-width: 100%;
 		z-index: 3;
 
+		#tagit {
+			#uploadForm {
+				> div {
+					padding-bottom: 15px;
+				}
+
+				#proofHeading {
+					color: yellow;
+				}
+				#nextTagHeading {
+					color: green;
+				}
+				input {
+					max-width: 100%;
+					font-weight: bold;
+					font-variant: petite-caps;
+					font-size: 1.5em;
+
+					&[name="currentTag"] {
+						color: yellow;
+					}
+					&[name="nextTag"] {
+						color: green;
+					}
+				}
+
+				.actions {
+					padding-top: 25px;
+					float: right;
+				}
+			}
+		}
+
 		article {
 			@include vendor('transform', 'translateY(0.25rem)');
 			@include vendor('transition', (

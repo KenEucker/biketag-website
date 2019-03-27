@@ -60,13 +60,15 @@ function getSubdomainPrefix(req) {
 }
 
 function isValidRequestOrigin(req) {
-	var origin = req.get('origin') || 'none';
-	var subdomain = getSubdomainPrefix(req);
-	var originIsValid = (origin == `http://${subdomain == "default" ? '' : subdomain + '.'}biketag.org`) || (debug && origin == `http://localhost:${port}`);
+	const origin = req.get('origin') || 'none';
+	const subdomain = getSubdomainPrefix(req);
+	const localhostPortIsTheSameForDebugging = origin == `http://localhost:${port}`;
+	const originIsCorrectSubdomain = origin == `http://${subdomain == "default" ? '' : subdomain + '.'}biketag.org`;
+	const originIsValid = originIsCorrectSubdomain || localhostPortIsTheSameForDebugging;
 	if (originIsValid) {
 		console.log(`origin ${origin} is valid`);
 	} else {
-		console.error(`origin ${origin} is not valid`);
+		console.error(`origin ${origin} is not valid`, { localhostPortIsTheSameForDebugging, originIsCorrectSubdomain, originIsValid, subdomain, origin });
 	}
 
 	return originIsValid;
@@ -85,9 +87,9 @@ function getImagesByUploadDate(images, newestFirst) {
 };
 
 function getTagNumberIndex(images, tagNumber, proof = false) {
-	var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
+	const tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
 
-	var verifyTagNumber = function (index) {
+	const verifyTagNumber = function (index) {
 		let compare = `#${tagNumber} tag`;
 		if (proof) {
 			compare = `#${tagNumber} proof`;
@@ -102,7 +104,7 @@ function getTagNumberIndex(images, tagNumber, proof = false) {
 		return tagNumberIndex - 1;
 	}
 
-	for (var i = 0; i < images.length; ++i) {
+	for (let i = 0; i < images.length; ++i) {
 		if (verifyTagNumber(i)) { tagNumberIndex = i; break; }
 	}
 
@@ -160,6 +162,8 @@ function templating(templatePath) {
 		var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
 		res.sendFile(path.join(__dirname, "assets/", req.url));
 	});
+
+	console.log('static templating set up for path', templatePath);
 }
 
 function security() {
@@ -177,6 +181,8 @@ function security() {
 			next();
 		}
 	});
+
+	console.log('request security enabled')
 }
 
 function authentication() {
@@ -191,7 +197,7 @@ function authentication() {
 	if (config.imgurClientID) {
 		console.log('configuring imgur API authentication for appID:', config.imgurClientID);
 
-		var setImgurTokens = function (accessToken, refreshToken, profile) {
+		const setImgurTokens = function (accessToken, refreshToken, profile) {
 			// FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
 			// var subdomain = getSubdomainPrefix(req);
 
@@ -207,7 +213,7 @@ function authentication() {
 			}
 		};
 
-		var imgurStrategy = new ImgurStrategy({
+		const imgurStrategy = new ImgurStrategy({
 			clientID: config.imgurClientID,
 			clientSecret: config.imgurClientSecret,
 			callbackURL: config.imgurCallbackURL,
@@ -230,9 +236,9 @@ function authentication() {
 		passport.use(imgurStrategy);
 		refresh.use(imgurStrategy);
 
-		var imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
-		var refreshImgurTokens = function () {
-			var theRefreshTokenToUse = authTokens["default"]["imgur"].imgurRefreshToken;
+		const imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
+		const refreshImgurTokens = function () {
+			const theRefreshTokenToUse = authTokens["default"]["imgur"].imgurRefreshToken;
 			console.log('attempting to refresh imgur access token using the refresh token:', theRefreshTokenToUse);
 			refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, function (err, accessToken, refreshToken) {
 				console.log('imgur access token has been refreshed:', refreshToken);
@@ -245,8 +251,8 @@ function authentication() {
 		app.get('/auth/imgur', passport.authenticate('imgur'));
 		app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
 		app.post('/auth/imgur/getToken', function (req, res) {
-			var subdomain = getSubdomainPrefix(req);
-			var tokensValue = 'unauthorized access';
+			const subdomain = getSubdomainPrefix(req);
+			let tokensValue = 'unauthorized access';
 
 			if (isValidRequestOrigin(req)) {
 				tokensValue = {
@@ -256,7 +262,7 @@ function authentication() {
 				};
 			}
 			// This will only return the imgur access token if the request is coming from the site itself
-			res.json({ imgurTokens: tokensValue });
+			res.json({ imgurTokens: null });
 		});
 	}
 
@@ -406,6 +412,8 @@ function syncWithS3() {
 }
 
 function init() {
+	console.log('BikeTag Webiste initialization');
+
 	app.use(session({ secret: 'biketag', resave: false, saveUninitialized: true, }));
 	app.use(passport.initialize());
 	app.use(passport.session());
