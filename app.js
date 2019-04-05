@@ -12,7 +12,7 @@ const express = require('express'),
 	gulp = require('gulp'),
 	watch = require('gulp-watch'),
 	gulpS3 = require('gulp-s3-upload'),
-	config = require('./config.js'),
+	config = require('./config.json'),
 	debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : config.debug || false,
 	subdomains = Object.keys(config.subdomains),
 	port = debug ? 8080 : config.port || 80;
@@ -224,11 +224,11 @@ function authentication() {
 		};
 
 		const imgurStrategy = new ImgurStrategy({
-				clientID: config.imgurClientID,
-				clientSecret: config.imgurClientSecret,
-				callbackURL: config.imgurCallbackURL,
-				passReqToCallback: true
-			},
+			clientID: config.imgurClientID,
+			clientSecret: config.imgurClientSecret,
+			callbackURL: config.imgurCallbackURL,
+			passReqToCallback: true
+		},
 			function (req, accessToken, refreshToken, profile, done) {
 				if (profile.email == config.imgurEmailAddress) {
 					console.log('imgur auth callback with valid profile', profile);
@@ -303,11 +303,11 @@ function authentication() {
 		};
 
 		var redditStrategy = new RedditStrategy({
-				clientID: config.redditClientID,
-				clientSecret: config.redditClientSecret,
-				callbackURL: config.redditCallbackURL,
-				passReqToCallback: true
-			},
+			clientID: config.redditClientID,
+			clientSecret: config.redditClientSecret,
+			callbackURL: config.redditCallbackURL,
+			passReqToCallback: true
+		},
 			function (req, accessToken, refreshToken, profile, done) {
 				if (profile.name == config.redditUserName) {
 					console.log('reddit auth callback with valid profile', profile);
@@ -391,15 +391,15 @@ function uploadFileToS3(config, file, basePath = 'biketag', metadataMap = {}) {
 
 	console.log(`watching folder for new uploads to S3:`, config.bucket);
 	return gulp.src(file.path, {
-			allowEmpty: true
-		})
+		allowEmpty: true
+	})
 		.pipe(s3({
 			Bucket: `${config.bucket}/${basePath}`,
 			ACL: 'public-read',
 			metadataMap,
 		}, {
-			maxRetries: 5
-		}));
+				maxRetries: 5
+			}));
 }
 
 function syncUploadsToS3(config) {
@@ -412,8 +412,8 @@ function syncUploadsToS3(config) {
 		allowEmpty: true,
 	}, function (file) {
 		return gulp.src(file.path, {
-				allowEmpty: true
-			})
+			allowEmpty: true
+		})
 			.pipe(s3({
 				Bucket: `${config.bucket}/biketag`,
 				ACL: 'public-read',
@@ -423,8 +423,8 @@ function syncUploadsToS3(config) {
 					"description": "description",
 				},
 			}, {
-				maxRetries: 5
-			}));
+					maxRetries: 5
+				}));
 	});
 }
 
