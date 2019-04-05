@@ -330,14 +330,14 @@
 		init: function () {
 			var self = this;
 
-			$('#header > .logo').click(function () {
-				document.getElementById('tagItButton').click();
-			});
+			// $('#header > .logo').click(function () {
+			// 	document.getElementById('tagItButton').click();
+			// });
 
-			$('form #submit').click(function (e) {
-				e.preventDefault();
-				self.onUploadFormSubmit($(e.currentTarget).bind(self));
-			});
+			// $('form #submit').click(function (e) {
+			// 	e.preventDefault();
+			// 	self.onUploadFormSubmit($(e.currentTarget).bind(self));
+			// });
 
 			return self;
 		}
