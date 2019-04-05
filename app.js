@@ -68,7 +68,13 @@ function isValidRequestOrigin(req) {
 	if (originIsValid) {
 		console.log(`origin ${origin} is valid`);
 	} else {
-		console.error(`origin ${origin} is not valid`, { localhostPortIsTheSameForDebugging, originIsCorrectSubdomain, originIsValid, subdomain, origin });
+		console.error(`origin ${origin} is not valid`, {
+			localhostPortIsTheSameForDebugging,
+			originIsCorrectSubdomain,
+			originIsValid,
+			subdomain,
+			origin
+		});
 	}
 
 	return originIsValid;
@@ -94,8 +100,9 @@ function getTagNumberIndex(images, tagNumber, proof = false) {
 		if (proof) {
 			compare = `#${tagNumber} proof`;
 		}
-		return index > -1 ? images[index].description.indexOf(compare) != -1 : -1;
+		return index > -1 ? images[index].description.indexOf(compare) !== -1 : false;
 	};
+
 	if (verifyTagNumber(tagNumberIndex)) {
 		return tagNumberIndex;
 	} else if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
@@ -105,10 +112,13 @@ function getTagNumberIndex(images, tagNumber, proof = false) {
 	}
 
 	for (let i = 0; i < images.length; ++i) {
-		if (verifyTagNumber(i)) { tagNumberIndex = i; break; }
+		if (verifyTagNumber(i)) {
+			return i;
+			break;
+		}
 	}
 
-	return tagNumberIndex;
+	return -1;
 };
 
 function biketagRedditTemplate(images, tagNumber) {
@@ -214,11 +224,11 @@ function authentication() {
 		};
 
 		const imgurStrategy = new ImgurStrategy({
-			clientID: config.imgurClientID,
-			clientSecret: config.imgurClientSecret,
-			callbackURL: config.imgurCallbackURL,
-			passReqToCallback: true
-		},
+				clientID: config.imgurClientID,
+				clientSecret: config.imgurClientSecret,
+				callbackURL: config.imgurCallbackURL,
+				passReqToCallback: true
+			},
 			function (req, accessToken, refreshToken, profile, done) {
 				if (profile.email == config.imgurEmailAddress) {
 					console.log('imgur auth callback with valid profile', profile);
@@ -249,7 +259,11 @@ function authentication() {
 
 		// Imgur OAuth2 Integration
 		app.get('/auth/imgur', passport.authenticate('imgur'));
-		app.get('/auth/imgur/callback', passport.authenticate('imgur', { session: false, failureRedirect: '/fail', successRedirect: '/' }));
+		app.get('/auth/imgur/callback', passport.authenticate('imgur', {
+			session: false,
+			failureRedirect: '/fail',
+			successRedirect: '/'
+		}));
 		app.post('/auth/imgur/getToken', function (req, res) {
 			const subdomain = getSubdomainPrefix(req);
 			let tokensValue = 'unauthorized access';
@@ -262,7 +276,9 @@ function authentication() {
 				};
 			}
 			// This will only return the imgur access token if the request is coming from the site itself
-			res.json({ imgurTokens: null });
+			res.json({
+				imgurTokens: null
+			});
 		});
 	}
 
@@ -287,11 +303,11 @@ function authentication() {
 		};
 
 		var redditStrategy = new RedditStrategy({
-			clientID: config.redditClientID,
-			clientSecret: config.redditClientSecret,
-			callbackURL: config.redditCallbackURL,
-			passReqToCallback: true
-		},
+				clientID: config.redditClientID,
+				clientSecret: config.redditClientSecret,
+				callbackURL: config.redditCallbackURL,
+				passReqToCallback: true
+			},
 			function (req, accessToken, refreshToken, profile, done) {
 				if (profile.name == config.redditUserName) {
 					console.log('reddit auth callback with valid profile', profile);
@@ -338,8 +354,7 @@ function authentication() {
 					successRedirect: '/',
 					failureRedirect: '/fail'
 				})(req, res, next);
-			}
-			else {
+			} else {
 				next(new Error(403));
 			}
 		});
@@ -356,7 +371,9 @@ function authentication() {
 			}
 
 			// This will only return the reddit access token if the request is coming from the site itself
-			res.json({ redditTokens: tokensValue });
+			res.json({
+				redditTokens: tokensValue
+			});
 		});
 	}
 }
@@ -373,14 +390,16 @@ function uploadFileToS3(config, file, basePath = 'biketag', metadataMap = {}) {
 	const s3 = gulpS3(config);
 
 	console.log(`watching folder for new uploads to S3:`, config.bucket);
-	return gulp.src(file.path, { allowEmpty: true })
+	return gulp.src(file.path, {
+			allowEmpty: true
+		})
 		.pipe(s3({
 			Bucket: `${config.bucket}/${basePath}`,
 			ACL: 'public-read',
 			metadataMap,
 		}, {
-				maxRetries: 5
-			}));
+			maxRetries: 5
+		}));
 }
 
 function syncUploadsToS3(config) {
@@ -392,7 +411,9 @@ function syncUploadsToS3(config) {
 		verbose: true,
 		allowEmpty: true,
 	}, function (file) {
-		return gulp.src(file.path, { allowEmpty: true })
+		return gulp.src(file.path, {
+				allowEmpty: true
+			})
 			.pipe(s3({
 				Bucket: `${config.bucket}/biketag`,
 				ACL: 'public-read',
@@ -402,8 +423,8 @@ function syncUploadsToS3(config) {
 					"description": "description",
 				},
 			}, {
-					maxRetries: 5
-				}));
+				maxRetries: 5
+			}));
 	});
 }
 
@@ -414,11 +435,17 @@ function syncWithS3() {
 function init() {
 	console.log('BikeTag Webiste initialization');
 
-	app.use(session({ secret: 'biketag', resave: false, saveUninitialized: true, }));
+	app.use(session({
+		secret: 'biketag',
+		resave: false,
+		saveUninitialized: true,
+	}));
 	app.use(passport.initialize());
 	app.use(passport.session());
-	app.use(express.json());                         // to support JSON-encoded bodies
-	app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
+	app.use(express.json()); // to support JSON-encoded bodies
+	app.use(express.urlencoded({
+		extended: true
+	})); // to support URL-encoded bodies
 
 	app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 }
@@ -429,11 +456,16 @@ function run() {
 	});
 }
 /* configuration */
-/*       / */ init();
-/*      /  */ setVars();
-/*     /   */ security();
+/*       / */
+init();
+/*      /  */
+setVars();
+/*     /   */
+security();
 // /*    /    */ syncWithS3();
-/*   /     */ templating();
-/*  /      */ authentication();
+/*   /     */
+templating();
+/*  /      */
+authentication();
 /* \/      */
 run();
