@@ -556,7 +556,7 @@
 
 			$('form #submit').click(function (e) {
 				e.preventDefault();
-				self.onUploadFormSubmit($(e.currentTarget).bind(self));
+				self.onUploadFormSubmit(e.currentTarget);
 			});
 
 			return self;
