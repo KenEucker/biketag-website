@@ -1,4 +1,6 @@
 # biketag-website
+[![Build Status](https://travis-ci.org/KenEucker/biketag-website.svg?branch=master)](https://travis-ci.org/KenEucker/biketag-website)
+
 A website for biketag.org
 
 ## why?
