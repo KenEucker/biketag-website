@@ -29,18 +29,17 @@ Run `npm install` to install the node module dependencies.
 The app loads a config.json file found in the root folder. Here's an example of a minimum config to get the local site to display images for the Portland subdomain as the default:
 ```
 {
-	"subdomains": {
-		"default": {
-			"imgur": {
-				"imgurAlbumHash": "Y9PKtpI"
-			},
-			"reddit": {
-				"redditSubreddit": "CyclePDX"
-			}
-		}
-	},
-  
-	"port": 3000
+  "subdomains": {
+    "default": {
+      "imgur": {
+        "imgurAlbumHash": "Y9PKtpI"
+      },
+      "reddit": {
+        "redditSubreddit": "CyclePDX"
+        }
+      }
+    },
+  "port": 3000
 }
 
 ```
