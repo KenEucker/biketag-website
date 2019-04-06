@@ -16,14 +16,14 @@ const express = require('express'),
 	config = require('./config.json'),
 	http = require('http'),
 	reload = require('reload'),
-	debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : config.debug || false,
 	subdomains = Object.keys(config.subdomains),
 	port = debug ? 8080 : config.port || 80;
 
 var authTokens = {};
 
 // Never let debug mode run in production
-debug = process.env.NODE_ENV !== 'production' ? debug : false;
+let debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : config.debug || false,
+	debug = process.env.NODE_ENV !== 'production' ? debug : false;
 
 function setVars() {
 	const getValueFromConfig = function (name, tokens) {
