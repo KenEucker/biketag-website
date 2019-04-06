@@ -10,14 +10,20 @@ const express = require('express'),
 	refresh = require('passport-oauth2-refresh'),
 	imgur = require('imgur'),
 	gulp = require('gulp'),
-	watch = require('gulp-watch'),
+	watch = require('watch'),
+	gulpWatch = require('gulp-watch'),
 	gulpS3 = require('gulp-s3-upload'),
 	config = require('./config.json'),
+	http = require('http'),
+	reload = require('reload'),
 	debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : config.debug || false,
 	subdomains = Object.keys(config.subdomains),
 	port = debug ? 8080 : config.port || 80;
 
 var authTokens = {};
+
+// Never let debug mode run in production
+debug = process.env.NODE_ENV !== 'production' ? debug : false;
 
 function setVars() {
 	const getValueFromConfig = function (name, tokens) {
@@ -420,7 +426,7 @@ function syncUploadsToS3(config) {
 	const s3 = gulpS3(config);
 
 	console.log(`watching folder for new uploads to S3:`, config.bucket);
-	return watch(config.bucket, {
+	return gulpWatch(config.bucket, {
 		ignoreInitial: true,
 		verbose: true,
 		allowEmpty: true,
@@ -464,10 +470,24 @@ function init() {
 	app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 }
 
-function run() {
-	app.listen(port, function () {
-		console.log("App listening on: http://localhost:" + port);
-	});
+function run(started = () => { console.log("App listening on: http://localhost:" + port) }) {
+	if (debug) {
+
+		app.set('port', port);
+
+		const server = http.createServer(app);
+		const reloadServer = reload(app);
+
+		watch.watchTree(__dirname + "/assets/", function (f, curr, prev) {
+			console.log('Asset change detected, reloading connection');
+			reloadServer.reload();
+		});
+
+		server.listen(app.get('port'), started);
+	}
+	else {
+		app.listen(port, started);
+	}
 }
 /* configuration */
 /*       / */

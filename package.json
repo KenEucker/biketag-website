@@ -1,6 +1,6 @@
 {
 	"name": "biketag-website",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "A website for biketag.org",
 	"author": "Ken Eucker <keneucker@gmail.com>",
 	"contributors": [],
@@ -35,13 +35,17 @@
 		"serve-favicon": "^2.5.0"
 	},
 	"devDependencies": {
+		"chokidar": "^2.1.5",
 		"dart-sass": "^1.17.3",
 		"eslint": "^5.15.3",
 		"eslint-config-airbnb": "^17.1.0",
 		"eslint-plugin-import": "^2.16.0",
 		"eslint-plugin-jsx-a11y": "^6.2.1",
 		"eslint-plugin-react": "^7.12.4",
-		"http-server": "^0.11.1"
+		"http": "0.0.0",
+		"http-server": "^0.11.1",
+		"reload": "^2.4.0",
+		"watch": "^1.0.2"
 	},
 	"license": "Unlicense"
 }
