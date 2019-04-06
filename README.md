@@ -20,3 +20,35 @@ If you'd like to contribute to this project you can [file an issue](https://gith
 
 [travis-url]: https://travis-ci.org/KenEucker/biketag-website
 [travis-image]: https://travis-ci.org/KenEucker/biketag-website.svg?branch=master
+
+# Development
+## Install dependencies
+Run `npm install` to install the node module dependencies. 
+
+## Required Configuration
+The app loads a config.json file found in the root folder. Here's an example of a minimum config to get the local site to display images for the Portland subdomain as the default:
+```
+{
+	"subdomains": {
+		"default": {
+			"imgur": {
+				"imgurAlbumHash": "Y9PKtpI"
+			},
+			"reddit": {
+				"redditSubreddit": "CyclePDX"
+			}
+		}
+	},
+  
+	"port": 3000
+}
+
+```
+
+## Start local server
+Run `npm run run` to run the webserver and then navigate to http://localhost:3000 or whichever port you have set in the config.json. You can also run `npm run dev` to run in debugging mode for local development, though it is not required.
+
+## Change the website code
+The homepage is in the /templates/pages/ folder using index.html. The styles are in the /templates/sass/ folder using main.scss. The sass is compiled by running the command `npm run sass` and all of the output files are saved in the folder /assets/css/. The rest of the website content is in the /assets/ folder, including javascript and fonts and images. 
+
+Note: When running in dev mode, changes to the files in the /assets/ folder are reflected immediately upon the next request, without needing to run any commands.
