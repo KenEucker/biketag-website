@@ -1,5 +1,5 @@
 # biketag-website
-[![Build Status][travis-image]](travis-url)
+[![Build Status][travis-image]](https://travis-ci.org/KenEucker/biketag-website)
 
 A website for biketag.org
 
@@ -16,10 +16,7 @@ To allow anyone and everyone to play biketag! This site will ingest the Reddit p
 # Contribute
 If you'd like to contribute to this project you can [file an issue](https://github.com/keneucker/biketag-website/issues), fork the code and [create a pull request](https://github.com/keneucker/biketag-website/pulls), or [donate money towards server costs](https://paypal.me/KenEucker) which currently run between $5-10/month.
 
-[![Donate with PayPal](https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)](https://paypal.me/KenEucker)
-
-[travis-url]: https://travis-ci.org/KenEucker/biketag-website
-[travis-image]: https://travis-ci.org/KenEucker/biketag-website.svg?branch=master
+[![Donate with PayPal][paypal-image]](https://paypal.me/KenEucker)
 
 # Development
 ## Install dependencies
@@ -51,3 +48,6 @@ Run `npm run run` to run the webserver and then navigate to http://localhost:300
 The homepage is in the /templates/pages/ folder using index.html. The styles are in the /templates/sass/ folder using main.scss. The sass is compiled by running the command `npm run sass` and all of the output files are saved in the folder /assets/css/. The rest of the website content is in the /assets/ folder, including javascript and fonts and images. 
 
 Note: When running in dev mode, changes to the files in the /assets/ folder are reflected immediately upon the next request, without needing to run any commands.
+
+[paypal-image]:https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png
+[travis-image]:https://travis-ci.org/KenEucker/biketag-website.svg?branch=master
