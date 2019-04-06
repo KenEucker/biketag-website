@@ -280,6 +280,13 @@ function authentication() {
 				imgurTokens: null
 			});
 		});
+	} else {
+		app.get('/auth/imgur/*', function (req, res) {
+			res.send("I don't have imgur data set in my configuration");
+		});
+		app.post('/auth/*', function (req, res) {
+			res.json({});
+		})
 	}
 
 	if (config.redditClientID) {
@@ -375,6 +382,13 @@ function authentication() {
 				redditTokens: tokensValue
 			});
 		});
+	} else {
+		app.get('/auth/reddit/*', function (req, res) {
+			res.send("I don't have reddit data set in my configuration");
+		});
+		app.post('/auth/*', function (req, res) {
+			res.json({});
+		})
 	}
 }
 
