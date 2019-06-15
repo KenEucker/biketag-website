@@ -11,7 +11,10 @@
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119956764-1"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
 		gtag('js', new Date());
 
 		gtag('config', 'UA-119956764-1');
@@ -35,11 +38,11 @@
 </head>
 
 <body class="is-preload">
-	<div id="loader">
+	<!-- <div id="loader">
 		<div class="logo spin">
 			<span class="icon fa-bicycle"></span>
 		</div>
-	</div>
+	</div> -->
 	<!-- Wrapper -->
 	<div id="wrapper">
 		<div id="countChanger">
@@ -451,7 +454,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script>
 		(function (w, d) {
 			var b = d.getElementsByTagName('body')[0];
-			var s = d.createElement("script"); s.async = true;
+			var s = d.createElement("script");
+			s.async = true;
 			var v = !("IntersectionObserver" in w) ? "8.7.1" : "10.5.2";
 			s.src = "https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/" + v + "/lazyload.min.js";
 			w.lazyLoadOptions = {}; // Your options here. See "recipes" for more information about async.
