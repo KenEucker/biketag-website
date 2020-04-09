@@ -26,26 +26,27 @@
 		"gulp-s3-upload": "^1.7.3",
 		"gulp-watch": "^5.0.1",
 		"imgur": "^0.3.1",
+		"nodemailer": "^6.4.6",
 		"passport": "^0.4.0",
 		"passport-imgur": "^0.0.3",
 		"passport-oauth2-refresh": "^1.1.0",
 		"passport-reddit": "^0.2.4",
 		"path": "^0.12.7",
 		"safe-timers": "^1.1.0",
-		"serve-favicon": "^2.5.0"
+		"serve-favicon": "^2.5.0",
+		"reload": "^2.4.0",
+		"watch": "^1.0.2"
 	},
 	"devDependencies": {
 		"chokidar": "^2.1.5",
-		"dart-sass": "^1.17.3",
+		"dart-sass": "^1.25.0",
 		"eslint": "^5.15.3",
 		"eslint-config-airbnb": "^17.1.0",
 		"eslint-plugin-import": "^2.16.0",
 		"eslint-plugin-jsx-a11y": "^6.2.1",
 		"eslint-plugin-react": "^7.12.4",
 		"http": "0.0.0",
-		"http-server": "^0.11.1",
-		"reload": "^2.4.0",
-		"watch": "^1.0.2"
+		"http-server": "^0.12.1"
 	},
 	"license": "Unlicense"
 }

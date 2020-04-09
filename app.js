@@ -1,24 +1,33 @@
-const express = require('express'),
-	session = require('express-session'),
-	path = require('path'),
-	app = express(),
-	setInterval = require('safe-timers').setInterval,
-	favicon = require('serve-favicon'),
-	passport = require('passport'),
-	ImgurStrategy = require('passport-imgur').Strategy,
-	RedditStrategy = require('passport-reddit').Strategy,
-	refresh = require('passport-oauth2-refresh'),
-	imgur = require('imgur'),
-	gulp = require('gulp'),
-	watch = require('watch'),
-	gulpWatch = require('gulp-watch'),
-	gulpS3 = require('gulp-s3-upload'),
-	config = require('./config.json'),
-	http = require('http'),
-	reload = require('reload'),
-	subdomains = Object.keys(config.subdomains);
+const express = require('express')
+const session = require('express-session')
+const path = require('path')
 
-var authTokens = {};
+const app = express()
+const {
+	setInterval,
+} = require('safe-timers')
+const favicon = require('serve-favicon')
+const passport = require('passport')
+const {
+	Strategy: ImgurStrategy,
+} = require('passport-imgur')
+const {
+	Strategy: RedditStrategy,
+} = require('passport-reddit')
+
+const refresh = require('passport-oauth2-refresh')
+const imgur = require('imgur')
+const gulp = require('gulp')
+const watch = require('watch')
+const gulpWatch = require('gulp-watch')
+const gulpS3 = require('gulp-s3-upload')
+const http = require('http')
+const reload = require('reload')
+const config = require('./config.json')
+
+const subdomains = Object.keys(config.subdomains)
+
+const authTokens = {};
 
 // Never let debug mode run in production
 let debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : config.debug || false;
@@ -32,29 +41,29 @@ function setVars() {
 		return tokens[name] || config[name];
 	}
 
-	for (var subdomain of subdomains) {
-		var tokens = config.subdomains[subdomain];
+	for (const subdomain of subdomains) {
+		const tokens = config.subdomains[subdomain];
 
 		// Assign the subdomain based imgur authorization information, or use the default
-		tokens["imgur"] = tokens["imgur"] || [];
-		tokens["imgur"].imgurClientID = getValueFromConfig("imgurClientID", tokens["imgur"]);
-		tokens["imgur"].imgurClientSecret = getValueFromConfig("imgurClientSecret", tokens["imgur"]);
-		tokens["imgur"].imgurCallbackURL = getValueFromConfig("imgurCallbackURL", tokens["imgur"]);
-		tokens["imgur"].imgurEmailAddress = getValueFromConfig("imgurEmailAddress", tokens["imgur"]);
+		tokens.imgur = tokens.imgur || [];
+		tokens.imgur.imgurClientID = getValueFromConfig('imgurClientID', tokens.imgur);
+		tokens.imgur.imgurClientSecret = getValueFromConfig('imgurClientSecret', tokens.imgur);
+		tokens.imgur.imgurCallbackURL = getValueFromConfig('imgurCallbackURL', tokens.imgur);
+		tokens.imgur.imgurEmailAddress = getValueFromConfig('imgurEmailAddress', tokens.imgur);
 
 		// Assign the subdomain based AWS S3 authorization information, or use the default
-		tokens["s3"] = tokens["s3"] || [];
-		tokens["s3"].cdnUrl = getValueFromConfig("AwsCdnUrl", tokens["s3"]);
-		tokens["s3"].emailAddress = getValueFromConfig("emailAddress", tokens["s3"]);
-		tokens["s3"].accessKeyId = getValueFromConfig("accessKeyId", tokens["s3"]);
-		tokens["s3"].secretAccessKey = getValueFromConfig("secretAccessKey", tokens["s3"]);
-		tokens["s3"].region = getValueFromConfig("region", tokens["s3"]);
+		tokens.s3 = tokens.s3 || [];
+		tokens.s3.cdnUrl = getValueFromConfig('AwsCdnUrl', tokens.s3);
+		tokens.s3.emailAddress = getValueFromConfig('emailAddress', tokens.s3);
+		tokens.s3.accessKeyId = getValueFromConfig('accessKeyId', tokens.s3);
+		tokens.s3.secretAccessKey = getValueFromConfig('secretAccessKey', tokens.s3);
+		tokens.s3.region = getValueFromConfig('region', tokens.s3);
 
-		tokens["reddit"] = tokens["reddit"] || [];
-		tokens["reddit"].redditClientID = getValueFromConfig("redditClientID", tokens["reddit"]);
-		tokens["reddit"].redditClientSecret = getValueFromConfig("redditClientSecret", tokens["reddit"]);
-		tokens["reddit"].redditCallbackURL = getValueFromConfig("redditCallbackURL", tokens["reddit"]);
-		tokens["reddit"].redditUserName = getValueFromConfig("redditUserName", tokens["reddit"]);
+		tokens.reddit = tokens.reddit || [];
+		tokens.reddit.redditClientID = getValueFromConfig('redditClientID', tokens.reddit);
+		tokens.reddit.redditClientSecret = getValueFromConfig('redditClientSecret', tokens.reddit);
+		tokens.reddit.redditCallbackURL = getValueFromConfig('redditCallbackURL', tokens.reddit);
+		tokens.reddit.redditUserName = getValueFromConfig('redditUserName', tokens.reddit);
 
 		authTokens[subdomain] = tokens;
 	}
@@ -63,14 +72,14 @@ function setVars() {
 }
 
 function getSubdomainPrefix(req) {
-	return req.subdomains.length ? req.subdomains[0] : "default";
+	return req.subdomains.length ? req.subdomains[0] : 'default';
 }
 
 function isValidRequestOrigin(req) {
 	const origin = req.get('origin') || 'none';
 	const subdomain = getSubdomainPrefix(req);
 	const localhostPortIsTheSameForDebugging = origin == `http://localhost:${port}`;
-	const originIsCorrectSubdomain = origin == `http://${subdomain == "default" ? '' : subdomain + '.'}biketag.org`;
+	const originIsCorrectSubdomain = origin == `http://${subdomain == 'default' ? '' : `${subdomain}.`}biketag.org`;
 	const originIsValid = originIsCorrectSubdomain || localhostPortIsTheSameForDebugging;
 	if (originIsValid) {
 		console.log(`origin ${origin} is valid`);
@@ -80,7 +89,7 @@ function isValidRequestOrigin(req) {
 			originIsCorrectSubdomain,
 			originIsValid,
 			subdomain,
-			origin
+			origin,
 		});
 	}
 
@@ -89,15 +98,10 @@ function isValidRequestOrigin(req) {
 
 function getImagesByUploadDate(images, newestFirst) {
 	if (!newestFirst) {
-		return images.sort(function (image1, image2) {
-			return new Date(image2.datetime) - new Date(image1.datetime);
-		});
-	} else {
-		return images.sort(function (image1, image2) {
-			return new Date(image1.datetime) - new Date(image2.datetime);
-		});
+		return images.sort((image1, image2) => new Date(image2.datetime) - new Date(image1.datetime));
 	}
-};
+	return images.sort((image1, image2) => new Date(image1.datetime) - new Date(image2.datetime));
+}
 
 function getTagNumberIndex(images, tagNumber, proof = false) {
 	const tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
@@ -112,9 +116,11 @@ function getTagNumberIndex(images, tagNumber, proof = false) {
 
 	if (verifyTagNumber(tagNumberIndex)) {
 		return tagNumberIndex;
-	} else if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
+	}
+	if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
 		return tagNumberIndex + 1;
-	} else if (tagNumberIndex > 0 && verifyTagNumber(tagNumberIndex - 1)) {
+	}
+	if (tagNumberIndex > 0 && verifyTagNumber(tagNumberIndex - 1)) {
 		return tagNumberIndex - 1;
 	}
 
@@ -126,7 +132,7 @@ function getTagNumberIndex(images, tagNumber, proof = false) {
 	}
 
 	return -1;
-};
+}
 
 function biketagRedditTemplate(images, tagNumber) {
 	const latestTagNumber = Number.parseInt(images[0].description.split(' ')[0].substr(1));
@@ -156,38 +162,38 @@ function templating(templatePath) {
 		templatePath = path.join(__dirname, '/templates/pages/');
 	}
 
-	app.get("/get/reddit", function (req, res) {
+	app.get('/get/reddit', (req, res) => {
 		const tagnumber = req.query.tagnumber || 'latest';
 		const subdomain = getSubdomainPrefix(req);
-		const albumHash = authTokens[subdomain]["imgur"].imgurAlbumHash;
+		const albumHash = authTokens[subdomain].imgur.imgurAlbumHash;
 
 		console.log('reddit template request for tag', tagnumber);
-		imgur.setClientId(authTokens[subdomain]["imgur"].imgurClientID);
+		imgur.setClientId(authTokens[subdomain].imgur.imgurClientID);
 		imgur.getAlbumInfo(albumHash)
-			.then(function (json) {
+			.then((json) => {
 				const images = getImagesByUploadDate(json.data.images);
 				res.send(biketagRedditTemplate(images, tagnumber));
 			})
-			.catch(function (err) {
+			.catch((err) => {
 				console.error(err.message);
 				res.send(err.message);
 			});
 	});
 	app.use(express.static(templatePath));
-	app.use("/assets", function (req, res) {
+	app.use('/assets', (req, res) => {
 		console.log('asset requested', req.url);
-		var file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
-		res.sendFile(path.join(__dirname, "assets/", req.url));
+		const file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
+		res.sendFile(path.join(__dirname, 'assets/', req.url));
 	});
 
 	console.log('static templating set up for path', templatePath);
 }
 
 function security() {
-	app.all('/*', function (req, res, next) {
+	app.all('/*', (req, res, next) => {
 		console.log('security check', req.url);
 		// CORS headers
-		res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+		res.header('Access-Control-Allow-Origin', '*'); // restrict it to the required domain
 		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
 		// Set custom headers for CORS
 		res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
@@ -203,11 +209,11 @@ function security() {
 }
 
 function authentication() {
-	passport.serializeUser(function (user, done) {
+	passport.serializeUser((user, done) => {
 		done(null, user);
 	});
 
-	passport.deserializeUser(function (obj, done) {
+	passport.deserializeUser((obj, done) => {
 		done(null, obj);
 	});
 
@@ -222,42 +228,41 @@ function authentication() {
 			// authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
 			// authTokens["imgur"][subdomain].imgurProfile = profile;
 
-			for (var subdomain of subdomains) {
+			for (const subdomain of subdomains) {
 				console.log('setting imgur authentication information for subdomain:', subdomain);
-				authTokens[subdomain]["imgur"].imgurAccessToken = accessToken;
-				authTokens[subdomain]["imgur"].imgurRefreshToken = authTokens[subdomain]["imgur"].imgurRefreshToken || refreshToken;
-				authTokens[subdomain]["imgur"].imgurProfile = authTokens[subdomain]["imgur"].imgurProfile || profile;
+				authTokens[subdomain].imgur.imgurAccessToken = accessToken;
+				authTokens[subdomain].imgur.imgurRefreshToken = authTokens[subdomain].imgur.imgurRefreshToken || refreshToken;
+				authTokens[subdomain].imgur.imgurProfile = authTokens[subdomain].imgur.imgurProfile || profile;
 			}
 		};
 
 		const imgurStrategy = new ImgurStrategy({
-			clientID: config.imgurClientID,
-			clientSecret: config.imgurClientSecret,
-			callbackURL: config.imgurCallbackURL,
-			passReqToCallback: true
-		},
-			function (req, accessToken, refreshToken, profile, done) {
+				clientID: config.imgurClientID,
+				clientSecret: config.imgurClientSecret,
+				callbackURL: config.imgurCallbackURL,
+				passReqToCallback: true,
+			},
+			((req, accessToken, refreshToken, profile, done) => {
 				if (profile.email == config.imgurEmailAddress) {
 					console.log('imgur auth callback with valid profile', profile);
 					setImgurTokens(accessToken, refreshToken, profile);
 					return done(null, profile);
-				} else {
-					// Someone else wants to authorize our app? Why?
-					console.error('Someone else wants to authorize our app? Why?', profile.email, config.imgurEmailAddress);
 				}
+				// Someone else wants to authorize our app? Why?
+				console.error('Someone else wants to authorize our app? Why?', profile.email, config.imgurEmailAddress);
+
 
 				// console.log('received imgur info', accessToken, refreshToken, profile);
 				return done();
-			}
-		);
+			}));
 		passport.use(imgurStrategy);
 		refresh.use(imgurStrategy);
 
 		const imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
 		const refreshImgurTokens = function () {
-			const theRefreshTokenToUse = authTokens["default"]["imgur"].imgurRefreshToken;
+			const theRefreshTokenToUse = authTokens.default.imgur.imgurRefreshToken;
 			console.log('attempting to refresh imgur access token using the refresh token:', theRefreshTokenToUse);
-			refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, function (err, accessToken, refreshToken) {
+			refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, (err, accessToken, refreshToken) => {
 				console.log('imgur access token has been refreshed:', refreshToken);
 				setImgurTokens(accessToken, refreshToken, null);
 			});
@@ -269,29 +274,29 @@ function authentication() {
 		app.get('/auth/imgur/callback', passport.authenticate('imgur', {
 			session: false,
 			failureRedirect: '/fail',
-			successRedirect: '/'
+			successRedirect: '/',
 		}));
-		app.post('/auth/imgur/getToken', function (req, res) {
+		app.post('/auth/imgur/getToken', (req, res) => {
 			const subdomain = getSubdomainPrefix(req);
 			let tokensValue = 'unauthorized access';
 
 			if (isValidRequestOrigin(req)) {
 				tokensValue = {
-					imgurRefreshToken: authTokens[subdomain]["imgur"].imgurRefreshToken,
-					imgurAccessToken: authTokens[subdomain]["imgur"].imgurAccessToken,
-					imgurProfile: authTokens[subdomain]["imgur"].imgurProfile
+					imgurRefreshToken: authTokens[subdomain].imgur.imgurRefreshToken,
+					imgurAccessToken: authTokens[subdomain].imgur.imgurAccessToken,
+					imgurProfile: authTokens[subdomain].imgur.imgurProfile,
 				};
 			}
 			// This will only return the imgur access token if the request is coming from the site itself
 			res.json({
-				imgurTokens: null
+				imgurTokens: null,
 			});
 		});
 	} else {
-		app.get('/auth/imgur/*', function (req, res) {
+		app.get('/auth/imgur/*', (req, res) => {
 			res.send("I don't have imgur data set in my configuration");
 		});
-		app.post('/auth/*', function (req, res) {
+		app.post('/auth/*', (req, res) => {
 			res.json({});
 		})
 	}
@@ -299,7 +304,7 @@ function authentication() {
 	if (config.redditClientID) {
 		console.log('configuring reddit API authentication for appID:', config.redditClientID);
 
-		var setRedditTokens = function (accessToken, refreshToken, profile) {
+		const setRedditTokens = function (accessToken, refreshToken, profile) {
 			// FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
 			// var subdomain = getSubdomainPrefix(req);
 
@@ -307,43 +312,40 @@ function authentication() {
 			// authTokens["imgur"][subdomain].imgurAccessToken = accessToken;
 			// authTokens["imgur"][subdomain].imgurProfile = profile;
 
-			for (var subdomain of subdomains) {
+			for (const subdomain of subdomains) {
 				console.log('setting reddit authentication information for subdomain:', subdomain);
-				authTokens[subdomain]["reddit"].redditAccessToken = accessToken;
-				authTokens[subdomain]["reddit"].redditRefreshToken = authTokens[subdomain]["reddit"].redditRefreshToken || refreshToken;
-				authTokens[subdomain]["reddit"].redditProfile = authTokens[subdomain]["reddit"].redditProfile || profile;
-				authTokens[subdomain]["reddit"].redditUserName = authTokens[subdomain]["reddit"].redditUserName || profile.name;
+				authTokens[subdomain].reddit.redditAccessToken = accessToken;
+				authTokens[subdomain].reddit.redditRefreshToken = authTokens[subdomain].reddit.redditRefreshToken || refreshToken;
+				authTokens[subdomain].reddit.redditProfile = authTokens[subdomain].reddit.redditProfile || profile;
+				authTokens[subdomain].reddit.redditUserName = authTokens[subdomain].reddit.redditUserName || profile.name;
 			}
 		};
 
-		var redditStrategy = new RedditStrategy({
-			clientID: config.redditClientID,
-			clientSecret: config.redditClientSecret,
-			callbackURL: config.redditCallbackURL,
-			passReqToCallback: true
-		},
-			function (req, accessToken, refreshToken, profile, done) {
+		const redditStrategy = new RedditStrategy({
+				clientID: config.redditClientID,
+				clientSecret: config.redditClientSecret,
+				callbackURL: config.redditCallbackURL,
+				passReqToCallback: true,
+			},
+			((req, accessToken, refreshToken, profile, done) => {
 				if (profile.name == config.redditUserName) {
 					console.log('reddit auth callback with valid profile', profile);
 					setRedditTokens(accessToken, refreshToken, profile);
 
 					return done(null, profile);
-				} else {
-					console.error('Someone else wants to authorize our app? Why?', profile.name, config.redditUserName);
-					// Someone else wants to authorize our app? Why?
 				}
+				console.error('Someone else wants to authorize our app? Why?', profile.name, config.redditUserName);
+				// Someone else wants to authorize our app? Why?
 
-				process.nextTick(function () {
-					return done();
-				});
-			}
-		);
 
-		var redditRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
-		var refreshRedditTokens = function () {
-			var theRefreshTokenToUse = authTokens["default"]["reddit"].redditRefreshToken;
+				process.nextTick(() => done());
+			}));
+
+		const redditRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
+		const refreshRedditTokens = function () {
+			const theRefreshTokenToUse = authTokens.default.reddit.redditRefreshToken;
 			console.log('attempting to refresh reddit access token using the refresh token:', theRefreshTokenToUse);
-			refresh.requestNewAccessToken('reddit', theRefreshTokenToUse, function (err, accessToken, refreshToken) {
+			refresh.requestNewAccessToken('reddit', theRefreshTokenToUse, (err, accessToken, refreshToken) => {
 				console.log('reddit access token has been refreshed:', refreshToken);
 				setRedditTokens(accessToken, refreshToken, null);
 			});
@@ -354,46 +356,46 @@ function authentication() {
 		refresh.use(redditStrategy);
 
 		// Reddit OAuth2 Integration
-		app.get('/auth/reddit', function (req, res, next) {
+		app.get('/auth/reddit', (req, res, next) => {
 			req.session.state = crypto.randomBytes(32).toString('hex');
 			passport.authenticate('reddit', {
 				state: req.session.state,
-				duration: 'permanent'
+				duration: 'permanent',
 			})(req, res, next);
 		});
-		app.get('/auth/reddit/callback', function (req, res, next) {
+		app.get('/auth/reddit/callback', (req, res, next) => {
 			// Check for origin via state token
 			if (req.query.state == req.session.state) {
 				passport.authenticate('reddit', {
 					successRedirect: '/',
-					failureRedirect: '/fail'
+					failureRedirect: '/fail',
 				})(req, res, next);
 			} else {
 				next(new Error(403));
 			}
 		});
-		app.post('/auth/reddit/getToken', function (req, res) {
-			var subdomain = getSubdomainPrefix(req);
-			var tokensValue = 'unauthorized access';
+		app.post('/auth/reddit/getToken', (req, res) => {
+			const subdomain = getSubdomainPrefix(req);
+			let tokensValue = 'unauthorized access';
 
 			if (isValidRequestOrigin(req)) {
 				tokensValue = {
-					redditRefreshToken: authTokens[subdomain]["reddit"].redditRefreshToken,
-					redditAccessToken: authTokens[subdomain]["reddit"].redditAccessToken,
-					redditProfile: authTokens[subdomain]["reddit"].redditProfile
+					redditRefreshToken: authTokens[subdomain].reddit.redditRefreshToken,
+					redditAccessToken: authTokens[subdomain].reddit.redditAccessToken,
+					redditProfile: authTokens[subdomain].reddit.redditProfile,
 				};
 			}
 
 			// This will only return the reddit access token if the request is coming from the site itself
 			res.json({
-				redditTokens: tokensValue
+				redditTokens: tokensValue,
 			});
 		});
 	} else {
-		app.get('/auth/reddit/*', function (req, res) {
+		app.get('/auth/reddit/*', (req, res) => {
 			res.send("I don't have reddit data set in my configuration");
 		});
-		app.post('/auth/*', function (req, res) {
+		app.post('/auth/*', (req, res) => {
 			res.json({});
 		})
 	}
@@ -410,47 +412,45 @@ function RedditIngestor() {
 function uploadFileToS3(config, file, basePath = 'biketag', metadataMap = {}) {
 	const s3 = gulpS3(config);
 
-	console.log(`watching folder for new uploads to S3:`, config.bucket);
+	console.log('watching folder for new uploads to S3:', config.bucket);
 	return gulp.src(file.path, {
-		allowEmpty: true
-	})
+			allowEmpty: true,
+		})
 		.pipe(s3({
 			Bucket: `${config.bucket}/${basePath}`,
 			ACL: 'public-read',
 			metadataMap,
 		}, {
-				maxRetries: 5
-			}));
+			maxRetries: 5,
+		}));
 }
 
 function syncUploadsToS3(config) {
 	const s3 = gulpS3(config);
 
-	console.log(`watching folder for new uploads to S3:`, config.bucket);
+	console.log('watching folder for new uploads to S3:', config.bucket);
 	return gulpWatch(config.bucket, {
-		ignoreInitial: true,
-		verbose: true,
-		allowEmpty: true,
-	}, function (file) {
-		return gulp.src(file.path, {
-			allowEmpty: true
+			ignoreInitial: true,
+			verbose: true,
+			allowEmpty: true,
+		}, file => gulp.src(file.path, {
+			allowEmpty: true,
 		})
-			.pipe(s3({
-				Bucket: `${config.bucket}/biketag`,
-				ACL: 'public-read',
-				metadataMap: {
-					"uploaded-by": config.bucket,
-					"title": "title",
-					"description": "description",
-				},
-			}, {
-					maxRetries: 5
-				}));
-	});
+		.pipe(s3({
+			Bucket: `${config.bucket}/biketag`,
+			ACL: 'public-read',
+			metadataMap: {
+				'uploaded-by': config.bucket,
+				title: 'title',
+				description: 'description',
+			},
+		}, {
+			maxRetries: 5,
+		})));
 }
 
 function syncWithS3() {
-	syncUploadsToS3(authTokens["pdx"]["s3"]);
+	syncUploadsToS3(authTokens.pdx.s3);
 }
 
 function init() {
@@ -465,28 +465,28 @@ function init() {
 	app.use(passport.session());
 	app.use(express.json()); // to support JSON-encoded bodies
 	app.use(express.urlencoded({
-		extended: true
+		extended: true,
 	})); // to support URL-encoded bodies
 
 	app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
 }
 
-function run(started = () => { console.log("App listening on: http://localhost:" + port) }) {
+function run(started = () => {
+	console.log(`App listening on: http://localhost:${port}`)
+}) {
 	if (debug) {
-
 		app.set('port', port);
 
 		const server = http.createServer(app);
 		const reloadServer = reload(app);
 
-		watch.watchTree(__dirname + "/assets/", function (f, curr, prev) {
+		watch.watchTree(`${__dirname}/assets/`, (f, curr, prev) => {
 			console.log('Asset change detected, reloading connection');
 			reloadServer.reload();
 		});
 
 		server.listen(app.get('port'), started);
-	}
-	else {
+	} else {
 		app.listen(port, started);
 	}
 }
