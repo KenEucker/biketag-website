@@ -111,7 +111,10 @@
 						e.preventDefault();
 						e.stopPropagation();
 
-						window.uglipop({ source: 'html', content: '<img src="' + this.getAttribute('href') + '"></img>' });
+						window.uglipop({
+							source: 'html',
+							content: '<img src="' + this.getAttribute('href') + '"></img>'
+						});
 					}
 				});
 				targetContainer.appendChild(tagContainer);
@@ -122,7 +125,9 @@
 			var images = this.imgurAlbumPictures;
 			var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
 
-			var verifyTagNumber = function (index) { return index > -1 ? images[index].description.indexOf('#' + tagNumber + ' tag') != -1 : -1 };
+			var verifyTagNumber = function (index) {
+				return index > -1 ? images[index].description.indexOf('#' + tagNumber + ' tag') != -1 : -1
+			};
 			if (verifyTagNumber(tagNumberIndex)) {
 				return tagNumberIndex;
 			} else if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
@@ -132,7 +137,9 @@
 			}
 
 			for (var i = 0; i < images.length; ++i) {
-				if (verifyTagNumber(i)) { tagNumberIndex = i; }
+				if (verifyTagNumber(i)) {
+					tagNumberIndex = i;
+				}
 			}
 
 			return tagNumberIndex;
@@ -142,7 +149,9 @@
 			var images = this.imgurAlbumPictures;
 			var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
 
-			var verifyProofTagNumber = function (index) { return images[index].description.indexOf('#' + tagNumber + ' proof') != -1 };
+			var verifyProofTagNumber = function (index) {
+				return images[index].description.indexOf('#' + tagNumber + ' proof') != -1
+			};
 			if (verifyProofTagNumber(tagNumberIndex)) {
 				return tagNumberIndex;
 			} else if ((tagNumberIndex + 1 < images.length) && verifyProofTagNumber(tagNumberIndex + 1)) {
@@ -153,7 +162,9 @@
 
 			for (var i = 0; i < images.length; ++i) {
 				console.log(`looking for ${tagNumber} with ${i}`);
-				if (verifyProofTagNumber(i)) { tagNumberIndex = i; }
+				if (verifyProofTagNumber(i)) {
+					tagNumberIndex = i;
+				}
 			}
 
 			return tagNumberIndex;
@@ -212,7 +223,8 @@
 				}
 			} else {
 				count = count.toUpperCase() == "ALL" ? images.length : Number(count);
-				for (var i = 0; (i < count) && (i < images.length); ++i) {
+				for (var i = 0;
+					(i < count) && (i < images.length); ++i) {
 					var image = images[i];
 					this.renderBikeTag(image, image.description);
 				}
@@ -288,7 +300,9 @@
 
 			var form = $('#uploadForm');
 			var fileInputs = form.find('input[type="file"]');
-			var files = [], user = '', proofLocation = '';
+			var files = [],
+				user = '',
+				proofLocation = '';
 
 			// get the latest tag number
 			var currentTagInfo = this.getCurrentTagInformation();

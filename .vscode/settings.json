@@ -6,13 +6,13 @@
 	"gitlens.advanced.messages": {
 		"suppressShowKeyBindingsNotice": true
 	},
-	"editor.tabSize": 4,
+	// "editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.formatOnSave": true,
 	"editor.detectIndentation": false,
 	"files.trimFinalNewlines": false,
 	"prettier.printWidth": 60,
-	"eslint.enable": true,
 	"files.insertFinalNewline": true,
 	"window.zoomLevel": 0,
+	"eslint.enable": false,
 }

@@ -8,6 +8,12 @@
 		imgurAlbumPictures: null,
 		imgurAlbumPicturesRefreshFrequency: 60000,
 		imgurPostComponent: 'ImgurPost',
+		adminEmailAddresses: [
+			"keneucker@gmail.com",
+			"pdxbiketag@gmail.com",
+			"biketagorg@gmail.com",
+			"evanwhite.is@gmail.com"
+		],
 
 		createAlbum: function (ids) {
 
@@ -475,6 +481,22 @@
 			}
 		},
 
+		sendNotificationEmail(emailAddress, subject, body) {
+			Email.send({
+				// Host: "smtp.gmail.com",
+				// Username: "biketagorg",
+				// Password: "BikeTagOrg720!",
+				SecureToken: "1dc9bf22-d96c-46a6-86d7-1a3521d62781",
+				To: emailAddress,
+				From: "biketagorg@gmail.com",
+				Subject: subject,
+				Body: body,
+				Port: 587,
+			}).then(
+				message => console.log(message)
+			);
+		},
+
 		onUploadFormSubmit(theButton) {
 			theButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
@@ -516,8 +538,16 @@
 
 			this.uploadImageToImgur(files[0], image1Description, function () {
 				this.uploadImageToImgur(files[1], image2Description, function () {
+
+					this.adminEmailAddresses.forEach(function (emailAddress) {
+						const subject = "New Bike Tag Post (#" + currentTagInfo.nextTagNumber + ")"
+						const body = "Hello BikeTag Admin, A new post has been created!\r\nYou are getting this email because you are listed as an admin on the site (" + window.location + "). Reply to this email to request to be removed from this admin list."
+						this.sendNotificationEmail(emailAddress, subject, body)
+					}.bind(this))
+
 					window.location.href = window.location.pathname + '?uploadSuccess=true';
-				});
+
+				}.bind(this));
 			}.bind(this));
 		},
 
