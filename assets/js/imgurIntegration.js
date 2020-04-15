@@ -541,7 +541,7 @@
 
 					this.adminEmailAddresses.forEach(function (emailAddress) {
 						const subject = "New Bike Tag Post (#" + currentTagInfo.nextTagNumber + ")"
-						const body = "Hello BikeTag Admin, A new post has been created!\r\nYou are getting this email because you are listed as an admin on the site (" + window.location + "). Reply to this email to request to be removed from this admin list."
+						const body = "Hello BikeTag Admin, A new post has been created!\r\nTo post this tag to Reddit manually, go to http://" + window.location.host + "/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + window.location.host + "). Reply to this email to request to be removed from this admin list."
 						this.sendNotificationEmail(emailAddress, subject, body)
 					}.bind(this))
 
