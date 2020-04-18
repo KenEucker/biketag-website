@@ -271,7 +271,14 @@
 
 			if ((images && images.length > 1)) {
 				$('.content .inner').empty();
-				if (!count) {
+				if (!!count) {
+					count = count.toUpperCase() == "ALL" ? images.length : Number(count);
+					for (var i = 0;
+						(i < (count * 2)) && (i < images.length); ++i) {
+						var image = images[i];
+						this.renderBikeTag(image, image.description);
+					}
+				} else {
 					var lastImage = images[0];
 					var secondToLastImage = images.length > 1 ? images[1] : null;
 					var thirdToLastImage = images.length > 2 ? images[2] : null;
@@ -282,13 +289,6 @@
 					}
 					if (thirdToLastImage) {
 						this.renderBikeTag(thirdToLastImage, "Previous tag mystery location");
-					}
-				} else {
-					count = count.toUpperCase() == "ALL" ? images.length : Number(count);
-					for (var i = 0;
-						(i < count) && (i < images.length); ++i) {
-						var image = images[i];
-						this.renderBikeTag(image, image.description);
 					}
 				}
 
@@ -448,13 +448,13 @@
 		getImgurTokens: function (done) {
 			var self = this;
 			fetch('/auth/imgur/getToken', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				}).then(function (res) {
-					return res.json()
-				})
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(function (res) {
+				return res.json()
+			})
 				.catch(function (error) {
 					console.error('Error:', error)
 				})
@@ -546,7 +546,7 @@
 						emailPromises.push(this.sendNotificationEmail(emailAddress, subject, body))
 					}.bind(this))
 
-					Promise.all(emailPromises).then(function() {
+					Promise.all(emailPromises).then(function () {
 						window.location.href = window.location.pathname + '?uploadSuccess=true';
 					})
 
