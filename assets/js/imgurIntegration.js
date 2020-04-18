@@ -482,7 +482,7 @@
 		},
 
 		sendNotificationEmail(emailAddress, subject, body) {
-			Email.send({
+			return Email.send({
 				// Host: "smtp.gmail.com",
 				// Username: "biketagorg",
 				// Password: "BikeTagOrg720!",
@@ -538,14 +538,17 @@
 
 			this.uploadImageToImgur(files[0], image1Description, function () {
 				this.uploadImageToImgur(files[1], image2Description, function () {
+					var emailPromises = []
 
 					this.adminEmailAddresses.forEach(function (emailAddress) {
 						const subject = "New Bike Tag Post (#" + currentTagInfo.nextTagNumber + ")"
 						const body = "Hello BikeTag Admin, A new post has been created!\r\nTo post this tag to Reddit manually, go to " + window.location.host + "/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + window.location.host + "). Reply to this email to request to be removed from this admin list."
-						this.sendNotificationEmail(emailAddress, subject, body)
+						emailPromises.push(this.sendNotificationEmail(emailAddress, subject, body))
 					}.bind(this))
 
-					window.location.href = window.location.pathname + '?uploadSuccess=true';
+					Promise.all(emailPromises).then(function() {
+						window.location.href = window.location.pathname + '?uploadSuccess=true';
+					})
 
 				}.bind(this));
 			}.bind(this));
