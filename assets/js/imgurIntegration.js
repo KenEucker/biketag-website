@@ -11,8 +11,7 @@
 		adminEmailAddresses: [
 			"keneucker@gmail.com",
 			"pdxbiketag@gmail.com",
-			"biketagorg@gmail.com",
-			"evanwhite.is@gmail.com"
+			"biketagorg@gmail.com"
 		],
 
 		createAlbum: function (ids) {
