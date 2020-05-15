@@ -447,13 +447,13 @@
 		getImgurTokens: function (done) {
 			var self = this;
 			fetch('/auth/imgur/getToken', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then(function (res) {
-				return res.json()
-			})
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}).then(function (res) {
+					return res.json()
+				})
 				.catch(function (error) {
 					console.error('Error:', error)
 				})
@@ -603,7 +603,8 @@
 			});
 
 			$('#header > .logo').click(function () {
-				document.getElementById('tagItButton').click();
+				window.location = window.location.origin
+				// document.getElementById('tagItButton').click();
 			});
 
 			$('form #submit').click(function (e) {
