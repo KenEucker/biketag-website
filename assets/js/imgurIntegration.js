@@ -497,7 +497,7 @@
 		},
 
 		onUploadFormSubmit(theButton) {
-			theButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+			theButton.parentElement.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="24px"></i>`
 
 			var form = $('#uploadForm');
 			var fileInputs = form.find('input[type="file"]');

@@ -296,7 +296,7 @@
 		},
 
 		onUploadFormSubmit(theButton) {
-			theButton.replaceWith('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+			theButton.html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
 			var form = $('#uploadForm');
 			var fileInputs = form.find('input[type="file"]');
