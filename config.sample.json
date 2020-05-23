@@ -15,8 +15,31 @@
 			"reddit": {
 				"redditSubreddit": "CyclePDX"
 			}
+		},
+		"den": {
+			"imgur": {
+				"imgurAlbumHash": "Y9PKtpI"
+			},
+			"reddit": {
+				"redditSubreddit": "CyclePDX"
+			}
 		}
 	},
+	"subdomainAliases": {
+		"portland": [
+			"pdx",
+			"oregon"
+		],
+		"denver": [
+			"den",
+			"colorado"
+		]
+	},
+	"adminEmailAddresses": [
+		"keneucker@gmail.com",
+		"pdxbiketag@gmail.com",
+		"biketagorg@gmail.com"
+	],
 	"imgurClientID": "",
 	"imgurClientSecret": "",
 	"imgurCallbackURL": "",

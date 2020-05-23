@@ -22,6 +22,7 @@
 	"dependencies": {
 		"express": "^4.16.4",
 		"express-session": "^1.15.6",
+		"fs": "0.0.1-security",
 		"gulp": "^4.0.0",
 		"gulp-s3-upload": "^1.7.3",
 		"gulp-watch": "^5.0.1",
@@ -32,9 +33,9 @@
 		"passport-oauth2-refresh": "^1.1.0",
 		"passport-reddit": "^0.2.4",
 		"path": "^0.12.7",
+		"reload": "^2.4.0",
 		"safe-timers": "^1.1.0",
 		"serve-favicon": "^2.5.0",
-		"reload": "^2.4.0",
 		"watch": "^1.0.2"
 	},
 	"devDependencies": {

@@ -3,6 +3,6 @@
 	"rules": {
 		"indent": 0,
 		"no-tabs": 0,
-		"semi": 0
+		"semi": 2
 	}
 }

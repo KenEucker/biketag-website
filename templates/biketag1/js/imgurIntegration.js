@@ -2,8 +2,8 @@
 
 	var imgurIntegration = {
 		imgurAlbumHash: 'Y9PKtpI',
-		imgurAuthorization: 'Client-ID 79ea70333c45883',
-		fallbackCdnUrl: 'https://pdxbiketag.s3-us-west-2.amazonaws.com/biketag/',
+		// imgurAuthorization: 'Client-ID 79ea70333c45883',
+		// fallbackCdnUrl: 'https://pdxbiketag.s3-us-west-2.amazonaws.com/biketag/',
 		imgurAccessToken: null,
 		imgurAlbumPictures: null,
 		imgurAlbumPicturesRefreshFrequency: 60000,
@@ -61,27 +61,28 @@
 			return tagInformation;
 		},
 
-		getImgurAlbumInfo: function (albumHash, callback) {
-			if (!albumHash) {
-				albumHash = this.imgurAlbumHash;
-			}
-			$.ajax({
-				url: 'https://api.imgur.com/3/album/' + albumHash + '',
-				success: function (data) {
-					console.log(data);
+		// getImgurAlbumInfo: function (albumHash, callback) {
+		// 	if (!albumHash) {
+		// 		albumHash = this.imgurAlbumHash;
+		// 	}
 
-					if (callback) {
-						callback(data);
-					}
-				},
-				error: function (err) {
-					console.log('error getting images from imgur', err);
-				},
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader("Authorization", this.imgurAuthorization);
-				}.bind(this),
-			});
-		},
+		// 	$.ajax({
+		// 		url: 'https://api.imgur.com/3/album/' + albumHash + '',
+		// 		success: function (data) {
+		// 			console.log(data);
+
+		// 			if (callback) {
+		// 				callback(data);
+		// 			}
+		// 		},
+		// 		error: function (err) {
+		// 			console.log('error getting images from imgur', err);
+		// 		},
+		// 		beforeSend: function (xhr) {
+		// 			xhr.setRequestHeader("Authorization", this.imgurAuthorization);
+		// 		}.bind(this),
+		// 	});
+		// },
 
 		refreshImgurAlbumInfo: function (albumInfo) {
 			if (albumInfo && albumInfo.data) {
@@ -113,6 +114,11 @@
 			if (!albumHash) {
 				albumHash = this.imgurAlbumHash;
 			}
+
+			if (!albumHash) {
+				return console.log('imgur album hash not set')
+			}
+
 			$.ajax({
 				url: 'https://api.imgur.com/3/album/' + albumHash + '/images',
 				success: function (data) {
@@ -458,12 +464,14 @@
 					console.error('Error:', error)
 				})
 				.then(function (response) {
-					const imgurTokens = response.imgurTokens;
+					if (!!response) {
+						const imgurTokens = response.imgurTokens;
 
-					if (imgurTokens && typeof imgurTokens == 'object') {
-						self.imgurAlbumHash = imgurTokens.imgurAlbumHash || self.imgurAlbumHash;
-						self.imgurAccessToken = imgurTokens.imgurAccessToken ? 'Bearer ' + imgurTokens.imgurAccessToken : self.imgurAccessToken;
-						self.imgurAuthorization = imgurTokens.imgurAuthorization ? 'Client-ID ' + imgurTokens.imgurAuthorization : self.imgurAuthorization;
+						if (imgurTokens && typeof imgurTokens == 'object') {
+							self.imgurAlbumHash = imgurTokens.imgurAlbumHash || self.imgurAlbumHash;
+							self.imgurAccessToken = imgurTokens.imgurAccessToken ? 'Bearer ' + imgurTokens.imgurAccessToken : self.imgurAccessToken;
+							self.imgurAuthorization = imgurTokens.imgurAuthorization ? 'Client-ID ' + imgurTokens.imgurAuthorization : self.imgurAuthorization;
+						}
 					}
 
 					done(response);

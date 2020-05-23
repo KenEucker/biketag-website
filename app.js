@@ -1,6 +1,7 @@
 const express = require('express')
 const session = require('express-session')
 const path = require('path')
+const fs = require('fs')
 
 const app = express()
 const {
@@ -23,7 +24,7 @@ const gulpWatch = require('gulp-watch')
 const gulpS3 = require('gulp-s3-upload')
 const http = require('http')
 const reload = require('reload')
-const config = require('./config.json')
+let config = require('./config.json')
 
 const subdomains = Object.keys(config.subdomains)
 
@@ -32,6 +33,10 @@ const authTokens = {};
 // Never let debug mode run in production
 let debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : config.debug || false;
 debug = process.env.NODE_ENV !== 'production' ? debug : false;
+
+if (debug) {
+	config = Object.assign({}, config, require('./config.debug'))
+}
 
 const port = debug ? 8080 : config.port || 80;
 
@@ -72,7 +77,30 @@ function setVars() {
 }
 
 function getSubdomainPrefix(req) {
-	return req.subdomains.length ? req.subdomains[0] : 'default';
+	const defaultSubdomain = req.subdomains.length ? req.subdomains[0] : 'default'
+	const localhostSubdomainEnd = req.headers.host.indexOf('.')
+	const localhostOverride = localhostSubdomainEnd !== -1 ? req.headers.host.substr(0, localhostSubdomainEnd) : null
+	const alias = !!localhostOverride ? localhostOverride : defaultSubdomain
+
+	return getSubdomainFromAlias(alias)
+}
+
+function getSubdomainFromAlias(alias) {
+	let baseSubdomain
+
+	Object.keys(config.subdomains).forEach((baseName) => {
+		const aliases = config.subdomains[baseName].aliases
+		if (alias === baseName || aliases.indexOf(alias) !== -1) {
+			baseSubdomain = baseName
+			return
+		}
+	})
+
+	return baseSubdomain
+}
+
+function getTemplateNameFromSubdomain(subdomain) {
+	return config.subdomains[subdomain].template
 }
 
 function isValidRequestOrigin(req) {
@@ -157,10 +185,29 @@ function biketagRedditTemplate(images, tagNumber) {
 [Rules](http://biketag.org/#howto)</pre>`;
 }
 
-function templating(templatePath) {
-	if (!templatePath) {
-		templatePath = path.join(__dirname, '/templates/pages/');
-	}
+function templating(templatePath = path.join(__dirname, '/templates/')) {
+
+	app.get('/', (req, res) => {
+		const subdomain = getSubdomainPrefix(req)
+
+		if (!subdomain) {
+			const host = req.headers.host
+			const hostSubdomainEnd = host.indexOf('.') + 1
+			const redirectToHost = `${req.protocol}://${host.substring(hostSubdomainEnd)}`
+
+			console.log({
+				hostNotFound: host,
+				redirectToHost
+			})
+
+			return res.redirect(redirectToHost)
+		}
+
+		const template = getTemplateNameFromSubdomain(subdomain)
+		const landingPage = path.join(templatePath, template, 'index.html')
+
+		res.sendFile(landingPage);
+	})
 
 	app.get('/get/reddit', (req, res) => {
 		const tagnumber = req.query.tagnumber || 'latest';
@@ -175,23 +222,38 @@ function templating(templatePath) {
 				res.send(biketagRedditTemplate(images, tagnumber));
 			})
 			.catch((err) => {
-				console.error(err.message);
-				res.send(err.message);
-			});
-	});
-	app.use(express.static(templatePath));
+				console.error(err.message)
+				res.send(err.message)
+			})
+	})
+	Object.keys(config.subdomains).forEach((subdomain) => {
+		const subdomainTemplate = config.subdomains[subdomain].template
+		const subdomainTemplatePath = path.join(templatePath, subdomainTemplate)
+
+		if (fs.existsSync(subdomainTemplatePath)) {
+			console.log(`configuring static path for subdomain: ${subdomain}`, subdomainTemplatePath)
+
+			app.use(express.static(subdomainTemplatePath))
+		}
+	})
+
+	const baseOverride = path.join(templatePath, 'base')
+	console.log(`configuring static path for the base override files`, baseOverride)
+	app.use(express.static(baseOverride))
+
 	app.use('/assets', (req, res) => {
-		console.log('asset requested', req.url);
+		if (false) console.log('asset requested', req.url);
 		const file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
 		res.sendFile(path.join(__dirname, 'assets/', req.url));
 	});
 
-	console.log('static templating set up for path', templatePath);
+	console.log('finished templating set up for path', templatePath);
 }
 
 function security() {
 	app.all('/*', (req, res, next) => {
-		console.log('security check', req.url);
+		if (config.debug) console.log('security check', req.url)
+
 		// CORS headers
 		res.header('Access-Control-Allow-Origin', '*'); // restrict it to the required domain
 		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');

@@ -1,0 +1,21 @@
+<body>
+	<h1>You're home!</h1>
+	<p>Check out these games of biketag!</p>
+	<div></div>
+
+	<script>
+		(function () {
+			const div = document.getElementsByTagName('div')[0]
+			const subs = ['pdx', 'portland', 'denver', 'den']
+
+			subs.forEach((sub) => {
+				const link = document.createElement('a')
+				link.href = `${window.location.protocol}//${sub}.${window.location.host}`
+				link.innerHTML = sub
+
+				div.appendChild(link)
+				div.appendChild(document.createElement('br'))
+			})
+		})()
+	</script>
+</body>
