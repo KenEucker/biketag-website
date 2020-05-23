@@ -1,6 +1,10 @@
 {
 	"subdomains": {
 		"default": {
+			"template": "home",
+			"aliases": [
+				"home"
+			],
 			"imgur": {
 				"imgurAlbumHash": "Y9PKtpI"
 			},
@@ -8,7 +12,12 @@
 				"redditSubreddit": "CyclePDX"
 			}
 		},
-		"pdx": {
+		"portland": {
+			"template": "biketag1",
+			"aliases": [
+				"pdx",
+				"oregon"
+			],
 			"imgur": {
 				"imgurAlbumHash": "Y9PKtpI"
 			},
@@ -16,7 +25,12 @@
 				"redditSubreddit": "CyclePDX"
 			}
 		},
-		"den": {
+		"denver": {
+			"template": "biketag1",
+			"aliases": [
+				"den",
+				"colorado"
+			],
 			"imgur": {
 				"imgurAlbumHash": "Y9PKtpI"
 			},
@@ -24,16 +38,6 @@
 				"redditSubreddit": "CyclePDX"
 			}
 		}
-	},
-	"subdomainAliases": {
-		"portland": [
-			"pdx",
-			"oregon"
-		],
-		"denver": [
-			"den",
-			"colorado"
-		]
 	},
 	"adminEmailAddresses": [
 		"keneucker@gmail.com",

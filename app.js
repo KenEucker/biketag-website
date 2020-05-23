@@ -76,13 +76,13 @@ function setVars() {
 	console.log('using authentication vars:', authTokens);
 }
 
-function getSubdomainPrefix(req) {
+function getSubdomainPrefix(req, returnAlias = false) {
 	const defaultSubdomain = req.subdomains.length ? req.subdomains[0] : 'default'
 	const localhostSubdomainEnd = req.headers.host.indexOf('.')
 	const localhostOverride = localhostSubdomainEnd !== -1 ? req.headers.host.substr(0, localhostSubdomainEnd) : null
 	const alias = !!localhostOverride ? localhostOverride : defaultSubdomain
 
-	return getSubdomainFromAlias(alias)
+	return returnAlias ? alias : getSubdomainFromAlias(alias)
 }
 
 function getSubdomainFromAlias(alias) {
@@ -105,16 +105,21 @@ function getTemplateNameFromSubdomain(subdomain) {
 
 function isValidRequestOrigin(req) {
 	const origin = req.get('origin') || 'none';
-	const subdomain = getSubdomainPrefix(req);
-	const localhostPortIsTheSameForDebugging = origin == `http://localhost:${port}`;
-	const originIsCorrectSubdomain = origin == `http://${subdomain == 'default' ? '' : `${subdomain}.`}biketag.org`;
+	const subdomain = getSubdomainPrefix(req, true)
+	const subdomainPrefix = `${subdomain == 'default' ? '' : `${subdomain}.`}`
+	const path = ''
+	const reconstructedUrl = `${req.protocol}://${subdomainPrefix}localhost${path}:${port}`
+	const localhostPortIsTheSameForDebugging = origin === reconstructedUrl
+	const originIsCorrectSubdomain = origin == `http://${subdomainPrefix}biketag.org`
 	const originIsValid = originIsCorrectSubdomain || localhostPortIsTheSameForDebugging;
+
 	if (originIsValid) {
 		console.log(`origin ${origin} is valid`);
 	} else {
 		console.error(`origin ${origin} is not valid`, {
 			localhostPortIsTheSameForDebugging,
 			originIsCorrectSubdomain,
+			reconstructedUrl,
 			originIsValid,
 			subdomain,
 			origin,
@@ -339,20 +344,20 @@ function authentication() {
 			successRedirect: '/',
 		}));
 		app.post('/auth/imgur/getToken', (req, res) => {
-			const subdomain = getSubdomainPrefix(req);
-			let tokensValue = 'unauthorized access';
+			const subdomain = getSubdomainPrefix(req)
+			const response = {
+				imgurAlbumHash: config.subdomains[subdomain].imgur.imgurAlbumHash,
+				imgurAuthorization: config.subdomains[subdomain].imgur.imgurAuthorization
+			}
 
 			if (isValidRequestOrigin(req)) {
-				tokensValue = {
-					imgurRefreshToken: authTokens[subdomain].imgur.imgurRefreshToken,
-					imgurAccessToken: authTokens[subdomain].imgur.imgurAccessToken,
-					imgurProfile: authTokens[subdomain].imgur.imgurProfile,
-				};
+				response.imgurRefreshToken = authTokens[subdomain].imgur.imgurRefreshToken
+				response.imgurAccessToken = authTokens[subdomain].imgur.imgurAccessToken
+				response.imgurProfile = authTokens[subdomain].imgur.imgurProfile
 			}
+
 			// This will only return the imgur access token if the request is coming from the site itself
-			res.json({
-				imgurTokens: null,
-			});
+			res.json(response);
 		});
 	} else {
 		app.get('/auth/imgur/*', (req, res) => {
