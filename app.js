@@ -82,9 +82,6 @@ function getSubdomainPrefix(req, returnAlias = false) {
 	const localhostOverride = localhostSubdomainEnd !== -1 ? req.headers.host.substr(0, localhostSubdomainEnd) : null
 	const alias = !!localhostOverride ? localhostOverride : defaultSubdomain
 
-	console.log({
-		alias
-	})
 	return returnAlias ? alias : getSubdomainFromAlias(alias)
 }
 

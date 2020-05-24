@@ -19,6 +19,10 @@
 			color: darkslateblue;
 		}
 
+		a {
+			color: darkslateblue !important;
+		}
+
 		a:visited {
 			color: unset;
 		}
@@ -56,7 +60,7 @@
 
 
 	<img src="none.png" data-src="/assets/img/biketag-logo-1-medium.png"></img>
-	<span id="mute" class="fas fa-volume-mute"></span>
+	<span id="mute" class="fas fa-volume-down"></span>
 	<p>Check out the biketag games in these cities!</p>
 	<div></div>
 
@@ -81,12 +85,21 @@
 			const mute = document.getElementById('mute')
 			mute.addEventListener('click', function () {
 				const jingle = document.getElementsByTagName('audio')[0]
-				jingle.pause()
+				if (this.className.indexOf('down') !== -1) {
+					this.className = "fas fa-volume-mute"
+					jingle.play()
+				} else {
+					this.className = "fas fa-volume-down"
+					jingle.pause()
+				}
 			})
 
 			const jingle = document.getElementsByTagName('audio')[0]
 			jingle.volume = 0.5
-			jingle.play()
+
+			jingle.play().then(function () {
+				mute.className = "fas fa-volume-mute"
+			})
 
 		})()
 	</script>
