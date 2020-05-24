@@ -18,7 +18,8 @@
 		"server-restart": "sudo pm2 restart app",
 		"server-run": "sudo pm2 start app.js",
 		"server-stop": "sudo pm2 stop app",
-		"server-rerun": "sudo pm2 delete app && sudo pm2 start app.js"
+		"server-rerun": "sudo pm2 delete app && sudo pm2 start app.js",
+		"server-deploy": "npm run server-update && npm run server-restart && npm run server-logs"
 	},
 	"main": "index.js",
 	"repository": {
