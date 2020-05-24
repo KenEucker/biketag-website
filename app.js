@@ -114,7 +114,7 @@ function setVars() {
 
 	// merge(config, data)
 	// Object.assign(config, data, {})
-	console.log(config)
+	// console.log(config)
 }
 
 /// TODO: refactor this request to only use the data from the data folder, with whatever else is required, instead of chunking out the data from the config
@@ -177,7 +177,6 @@ function getPublicConfigurationValues(subdomain, host) {
 		return out
 
 	}, {})
-	console.log(config, publicConfig)
 
 	return publicConfig
 }
