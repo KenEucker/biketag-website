@@ -352,10 +352,10 @@ function authentication() {
 			// authTokens["imgur"][subdomain].imgurProfile = profile;
 
 			for (const subdomain of subdomains) {
-				console.log('setting imgur authentication information for subdomain:', subdomain);
 				authTokens[subdomain].imgur.imgurAccessToken = accessToken;
 				authTokens[subdomain].imgur.imgurRefreshToken = authTokens[subdomain].imgur.imgurRefreshToken || refreshToken;
 				authTokens[subdomain].imgur.imgurProfile = authTokens[subdomain].imgur.imgurProfile || profile;
+				console.log(`imgur authentication information for subdomain: subdomain`, authTokens[subdomain].imgur);
 			}
 		};
 
