@@ -87,6 +87,9 @@ function getSubdomainPrefix(req, returnAlias = false) {
 
 function getSubdomainFromAlias(alias) {
 	let baseSubdomain
+	console.log({
+		alias
+	})
 
 	Object.keys(config.subdomains).forEach((baseName) => {
 		const aliases = config.subdomains[baseName].aliases
@@ -201,6 +204,7 @@ function templating(templatePath = path.join(__dirname, '/templates/')) {
 			const redirectToHost = `${req.protocol}://${host.substring(hostSubdomainEnd)}`
 
 			console.log({
+				subdomain,
 				hostNotFound: host,
 				redirectToHost
 			})
