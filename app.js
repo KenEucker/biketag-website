@@ -81,15 +81,15 @@ function getPublicConfigurationValues(subdomain) {
 	// Only return what can be injected onto the page
 	const thisSubdomain = !!subdomain ? config.subdomains[subdomain] : null
 	const easter = !!thisSubdomain ? thisSubdomain.easter : null
-	const adminEmailAddresses = config.adminEmailAddresses
+	const adminEmailAddresses = thisSubdomain.adminEmailAddresses
 	const images = thisSubdomain.images
-	const supportedRegionals = config.supportedRegionals
+	const supportedRegions = config.supportedRegions
 
 	const out = {
 		SUBDOMAIN: subdomain.toUpperCase(),
 		thisSubdomain: subdomain,
 		subdomains,
-		supportedRegionals,
+		supportedRegions,
 		adminEmailAddresses,
 		easter,
 		images,
@@ -126,17 +126,17 @@ function getTemplateNameFromSubdomain(subdomain) {
 }
 
 function isValidRequestOrigin(req) {
-	const origin = req.get('origin') || 'none';
+	const origin = req.get('origin') || 'none'
 	const subdomain = getSubdomainPrefix(req, true)
 	const subdomainPrefix = `${subdomain == 'default' ? '' : `${subdomain}.`}`
 	const path = ''
-	const reconstructedUrl = `${req.protocol}://${subdomainPrefix}localhost${path}:${port}`
-	const localhostPortIsTheSameForDebugging = origin === reconstructedUrl
+	const reconstructedUrl = `${req.protocol}://${subdomainPrefix}localhost${path}`
+	const localhostPortIsTheSameForDebugging = (origin === reconstructedUrl || origin === `${reconstructedUrl}:${port}`)
 	const originIsCorrectSubdomain = origin == `http://${subdomainPrefix}biketag.org`
-	const originIsValid = originIsCorrectSubdomain || localhostPortIsTheSameForDebugging;
+	const originIsValid = originIsCorrectSubdomain || localhostPortIsTheSameForDebugging
 
 	if (originIsValid) {
-		console.log(`origin ${origin} is valid`);
+		console.log(`origin ${origin} is valid`)
 	} else {
 		console.error(`origin ${origin} is not valid`, {
 			localhostPortIsTheSameForDebugging,
@@ -145,10 +145,10 @@ function isValidRequestOrigin(req) {
 			originIsValid,
 			subdomain,
 			origin,
-		});
+		})
 	}
 
-	return originIsValid;
+	return originIsValid
 }
 
 function getImagesByUploadDate(images, newestFirst) {
@@ -212,14 +212,15 @@ function biketagRedditTemplate(images, tagNumber) {
 [Rules](http://biketag.org/#howto)</pre>`;
 }
 
-function templateRendering(app) {
+function filterSubdomainRequest(endpoint, response) {
+	app.get(endpoint, (req, res, next) => {
+		const subdomain = getSubdomainPrefix(req)
+		const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
 
-	/// Check for an ejs file in the request, if no file exists then continue on to the next
-	app.get("/", (req, res, next) => {
-		res.render("index")
-		next
+		console.log('request from ip:', ip)
+
+		return response(subdomain, req, res, next)
 	})
-
 }
 
 function templating(templatePath = path.join(__dirname, '/templates/'), supportRendering = true) {
@@ -237,8 +238,7 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 		}))
 	}
 
-	app.get('/', (req, res) => {
-		const subdomain = getSubdomainPrefix(req)
+	filterSubdomainRequest('/', (subdomain, req, res) => {
 
 		if (!subdomain) {
 			const host = req.headers.host
@@ -259,7 +259,7 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 
 		if (supportRendering && fs.existsSync(`${landingPageTemplate}.ejs`)) {
 
-			console.log('attempting to run renderer')
+			console.log('attempting to run renderer', landingPageTemplate)
 
 			return res.render(landingPageTemplate, getPublicConfigurationValues(subdomain))
 		}
@@ -269,9 +269,8 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 		return res.sendFile(landingPageFile);
 	})
 
-	app.get('/get/reddit', (req, res) => {
+	filterSubdomainRequest('/get/reddit', (subdomain, req, res) => {
 		const tagnumber = req.query.tagnumber || 'latest';
-		const subdomain = getSubdomainPrefix(req);
 		const albumHash = authTokens[subdomain].imgur.imgurAlbumHash;
 
 		console.log('reddit template request for tag', tagnumber);
@@ -302,7 +301,7 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 	app.use(express.static(baseOverride))
 
 	app.use('/assets', (req, res) => {
-		if (false) console.log('asset requested', req.url);
+		if (config.debug) console.log('asset requested', req.url);
 		const file = req.url = (req.url.indexOf('?') != -1) ? req.url.substring(0, req.url.indexOf('?')) : req.url;
 		res.sendFile(path.join(__dirname, 'assets/', req.url));
 	});
@@ -312,7 +311,9 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 
 function security() {
 	app.all('/*', (req, res, next) => {
-		if (config.debug) console.log('security check', req.url)
+		const url = req.url
+
+		if (config.debug) console.log('security check', url)
 
 		// CORS headers
 		res.header('Access-Control-Allow-Origin', '*'); // restrict it to the required domain
@@ -320,7 +321,7 @@ function security() {
 		// Set custom headers for CORS
 		res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
 		if (req.method == 'OPTIONS') {
-			console.error('failed security check!', req.url);
+			console.error('failed security check!', url);
 			res.status(200).end();
 		} else {
 			next();
@@ -576,10 +577,10 @@ function syncWithS3() {
 }
 
 function init() {
-	console.log('BikeTag Webiste initialization')
+	console.log('BikeTag MultiTenant WebApp InitSeq')
 
 	app.use(session({
-		secret: 'biketag',
+		secret: '~biketag~',
 		resave: false,
 		saveUninitialized: true,
 	}));

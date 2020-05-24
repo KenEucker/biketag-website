@@ -11,7 +11,17 @@
 			},
 			"reddit": {
 				"redditSubreddit": "biketag"
-			}
+			},
+			"easter": {
+				"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			},
+			"images": {
+				"header": "../../assets/img/biketag-logo-1.png",
+				"logo": ""
+			},
+			"adminEmailAddresses": [
+				"biketagorg@gmail.com"
+			]
 		},
 		"tag": {
 			"template": "tag",
@@ -25,8 +35,17 @@
 			},
 			"reddit": {
 				"redditSubreddit": "CyclePDX"
-			}
-
+			},
+			"easter": {
+				"jingle": "assets/media/biketag-jingle-1.mp3"
+			},
+			"images": {
+				"header": "../../assets/img/biketag-logo-1.png",
+				"logo": ""
+			},
+			"adminEmailAddresses": [
+				"biketagorg@gmail.com"
+			]
 		},
 		"portland": {
 			"template": "biketag1",
@@ -40,7 +59,19 @@
 			},
 			"reddit": {
 				"redditSubreddit": "CyclePDX"
-			}
+			},
+			"easter": {
+				"jingle": "assets/media/biketag-pdx-jingle-1.mp3"
+			},
+			"images": {
+				"header": "../../assets/img/biketag-logo-1.png",
+				"logo": ""
+			},
+			"adminEmailAddresses": [
+				"keneucker@gmail.com",
+				"pdxbiketag@gmail.com",
+				"biketagorg@gmail.com"
+			]
 		},
 		"denver": {
 			"template": "biketag1",
@@ -54,13 +85,20 @@
 			},
 			"reddit": {
 				"redditSubreddit": "CycleDenver"
-			}
+			},
+			"easter": {
+				"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			},
+			"images": {
+				"header": "../../assets/img/biketag-logo-1.png",
+				"logo": ""
+			},
+			"adminEmailAddresses": [
+				"keneucker@gmail.com",
+				"biketagorg@gmail.com"
+			]
 		}
 	},
-
-	"adminEmailAddresses": [
-		"biketagorg@gmail.com"
-	],
 
 	"imgurClientID": "",
 	"imgurClientSecret": "",
@@ -76,7 +114,8 @@
 	"s3SecretAccessKey": "",
 	"s3Region": "",
 	"GoogleCoudBucket": "",
-	"port": 3000,
+
+	"port": 80,
 	"bucket": "biketagorg",
 	"debug": false
 }

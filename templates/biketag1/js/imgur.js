@@ -6,12 +6,7 @@
 		imgurAlbumPictures: null,
 		imgurAlbumPicturesRefreshFrequency: 60000,
 		imgurPostComponent: 'ImgurPost',
-
-		adminEmailAddresses: [
-			"keneucker@gmail.com",
-			"pdxbiketag@gmail.com",
-			"biketagorg@gmail.com"
-		],
+		adminEmailAddresses: window.biketag.config.adminEmailAddresses || [],
 
 		getCurrentTagInformation() {
 			var tagInformation = {

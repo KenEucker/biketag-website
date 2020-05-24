@@ -20,6 +20,13 @@
 		gtag('config', 'UA-119956764-1');
 	</script>
 
+	<script>
+		window.biketag = window.biketag || {}
+		window.biketag.config = {
+			adminEmailAddresses: ("<%= adminEmailAddresses %>").split(','),
+		}
+	</script>
+
 	<title><%= SUBDOMAIN %>BIKE TAG</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />

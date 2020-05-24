@@ -8,7 +8,17 @@
 	"scripts": {
 		"compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
 		"dev": "node app.js --debug",
-		"run": "node app.js"
+		"run": "node app.js",
+		"server-erase-config": "rm ~/config.json ~/biketag-website/config.json",
+		"server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
+		"server-update": "git pull",
+		"server-reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm install",
+		"server-logs": "sudo pm2 logs app",
+		"server-start": "sudo pm2 start app",
+		"server-resart": "sudo pm2 restart app",
+		"server-run": "sudo pm2 start app.js",
+		"server-stop": "sudo pm2 stop app",
+		"server-rerun": "sudo pm2 delete app && sudo pm2 start app.js"
 	},
 	"main": "index.js",
 	"repository": {

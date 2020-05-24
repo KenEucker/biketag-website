@@ -92,7 +92,7 @@
 			logo.src = logo.dataset.src
 
 			const div = document.getElementsByTagName('div')[0]
-			const subs = ("<%= supportedRegionals %>").split(',') //['portland', 'denver']
+			const subs = ("<%= supportedRegions %>").split(',') //['portland', 'denver']
 
 			subs.forEach(function (sub) {
 				const link = document.createElement('a')
