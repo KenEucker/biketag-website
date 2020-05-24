@@ -1,27 +1,25 @@
 <html>
 
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119956764-1"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<%= page.gaUA %>"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-
 		function gtag() {
 			dataLayer.push(arguments);
 		}
 		gtag('js', new Date());
-
-		gtag('config', 'UA-119956764-1');
+		gtag('config', '<%= page.gaUA %>');
 	</script>
 
-	<title>BIKE TAG</title>
+	<title><%= SUBDOMAIN %>BIKE TAG</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="http://biketag.org" />
-	<meta property="og:title" content="BikeTag!" />
-	<meta property="og:description"
-		content="BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything." />
+	<meta property="og:type" content="<%= page.metaType %>" />
+	<meta property="og:url" content="<%= page.metaUrl %>" />
+	<meta property="og:title" content="<%= page.metaTitle %>" />
+	<meta property="og:description" content="<%= page.metaDescription %>" />
 
 	<link rel="stylesheet" href="css/fa-all.min.css" type='text/css'>
 	<style>
@@ -76,12 +74,12 @@
 
 <body>
 	<audio id="biketag-jingle">
-		<source src="<%= easter.jingle %>" type="audio/mpeg">
+		<source src="<%= page.easter.jingle %>" type="audio/mpeg">
 		Your browser does not support the audio element.
 	</audio>
 
 
-	<img src="none.png" data-src="<%= images.header %>"></img>
+	<img src="none.png" data-src="<%= page.images.header %>"></img>
 	<span id="mute" class="fas fa-volume-down"></span>
 	<p>Check out the biketag games in these cities!</p>
 	<div></div>

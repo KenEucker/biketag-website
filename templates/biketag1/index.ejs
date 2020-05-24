@@ -7,8 +7,15 @@
 <html>
 
 <head>
+	<script>
+		window.biketag = window.biketag || {}
+		window.biketag.config = {
+			adminEmailAddresses: ("<%= page.adminEmailAddresses %>").split(','),
+		}
+	</script>
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119956764-1"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<%= page.gaUA %>"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 
@@ -16,26 +23,17 @@
 			dataLayer.push(arguments);
 		}
 		gtag('js', new Date());
-
-		gtag('config', 'UA-119956764-1');
+		gtag('config', '<%= page.gaUA %>');
 	</script>
 
-	<script>
-		window.biketag = window.biketag || {}
-		window.biketag.config = {
-			adminEmailAddresses: ("<%= adminEmailAddresses %>").split(','),
-		}
-	</script>
-
-	<title><%= SUBDOMAIN %>BIKE TAG</title>
+	<title><%= SUBDOMAIN %> BIKE TAG</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="http://biketag.org" />
-	<meta property="og:title" content="BikeTag!" />
-	<meta property="og:description"
-		content="BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything." />
+	<meta property="og:type" content="<%= page.metaType %>" />
+	<meta property="og:url" content="<%= page.metaUrl %>" />
+	<meta property="og:title" content="<%= page.metaTitle %>" />
+	<meta property="og:description" content="<%= page.metaDescription %>" />
 
 	<link rel="stylesheet" href="css/main.css" />
 	<link rel="stylesheet" href="css/uglipop.css" />
@@ -125,26 +123,14 @@
 			<article id="howto">
 				<h2 class="major">How To</h2>
 				<!-- <span class="image main"><img src="images/pic02.jpg" alt="" /></span> -->
-				<h3>HOW TO PLAY</h3>
-				<p>You must discover the “mystery location” and take a picture of your bike there. Then you must bike to
-					a new "mystery location" of your choosing and take a picture of your bike there. Submit both
-					pictures to the <strong>TAG IT!</strong> section. NOTE: you may not "reserve" being "IT" by
-					immediately posting a photo of your bike in the old "mystery location" before finding and posting a
-					picture of the new "mystery location."</p>
-				<h3>THE RULES</h3>
-				<p>Mystery locations must be freely accessible to the public and by bicycle. Mystery locations should be
-					unique/interesting/identifiable. Tags that include only nondescript features (blank walls) are not
-					acceptable and will be removed. Mystery locations may not be mobile objects (food trucks, for
-					example). Discovered mystery locations and new mystery locations must be tagged with the same
-					bicycle, on the same ride. Pictures of discovered mystery locations and new mystery locations must
-					be posted at the same time.</p>
-				<p>
+				
+				<%- content.howto %>
 
-					<span id="easter" style="font-style: italic;">Get these instructions via audio</span>
-					<audio id="biketag-jingle">
-						<source src="<%= easter.jingle %>" type="audio/mpeg">
-						Your browser does not support the audio element.
-					</audio>
+				<span id="easter" style="font-style: italic;">Get these instructions via audio</span>
+				<audio id="biketag-jingle">
+					<source src="<%= page.easter.jingle %>" type="audio/mpeg">
+					Your browser does not support the audio element.
+				</audio>
 				</p>
 			</article>
 
@@ -152,32 +138,22 @@
 			<article id="about">
 				<h2 class="major">Bike Tag Game</h2>
 				<!-- <span class="image main"><img src="images/pic03.jpg" alt="" /></span> -->
-				<p>
-					<a href="http://biketag.org">Global BikeTag Dashboard</a><br>
-				</p>
-				<p>BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in
-					the game in an easy and simple way, without needing to login to anything. The game was originally
-					found on /r/BikingATX, that was then adopted by /r/bikeLA, that was then adopted by /r/chibike. For
-					reddit credit: /u/america_yall of /r/BikingATX who started the first run of the game.</p>
+				
+				<%- content.about %>
+				
 				<p>
 					<% supportedRegions.forEach((region) => { %>
-						<a href="http://<%= region %>.biketag.org">BikeTag in <%= subdomains[region].region %></a><br>
+					<a href="http://<%= region %>.biketag.org">BikeTag in <%= subdomains[region].region %></a><br>
 					<% }) %>
 				</p>
-				<p>
-					The code that runs this website is open source and tracked on
-					<a href="https://github.com/KenEucker/biketag-website">github</a>.
-					This code is free to use or modify and is maintained by volunteers.
-					Server costs currently range between $5-$10/month.
-					<a href="https://paypal.me/KenEucker">You can donate to the project by paypal.</a></p>
+				
+				<%- content.devnotice %>
+
 			</article>
 
 			<!-- Contact -->
 			<article id="contact">
 				<h2 class="major">Contact</h2>
-				<p>
-					To get ahold of us at BikeTag send an <a mailto="hello@biketag.org">email</a> to hello@biketag.org
-				</p>
 				<!-- <form method="post" action="#">
 									<div class="field half first">
 										<label for="name">Name</label>
@@ -456,8 +432,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 		<!-- Footer -->
 		<footer id="footer">
-			<p class="copyright">BikeTag is an open source website <a
-					href="https://github.com/KenEucker/biketag-website">developed on github </a></p>
+			<%- content.footer %>
 		</footer>
 
 	</div>
@@ -480,6 +455,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	</script>
 	<script>
 	</script>
+
 	<!-- Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/uglipop.min.js"></script>
@@ -492,8 +468,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="js/smtp.js"></script>
 	<!-- <script src="assets/js/biketag.js"></script> -->
 
+	<% if (debug) { %>
 	<!-- For local development hotloading -->
 	<script src="/reload/reload.js"></script>
+	<% } %>
 
 	<!-- For local development of the template -->
 

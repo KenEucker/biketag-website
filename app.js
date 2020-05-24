@@ -75,6 +75,25 @@ function setVars() {
 	}
 
 	console.log('using authentication vars:', authTokens);
+
+	/// Populate the content files into the object to be sent with the public configuration
+	const contentFolder = path.join(__dirname, 'content')
+	const contentFiles = fs.readdirSync(contentFolder)
+	const content = {}
+	
+	contentFiles.forEach((contentFile) => {
+		const contentFileSplit = contentFile.split('.')
+		const contentFileName = contentFileSplit[0]
+		const contentFileExtension = contentFileSplit[1]
+
+		if (contentFileExtension === 'html') {
+			const html = fs.readFileSync(path.join(contentFolder, contentFile), { encoding:'utf8' })
+			console.log({html})
+			content[contentFileName] = html
+		}
+	})
+
+	config.content = content
 }
 
 	// Only return what can be injected onto the page
@@ -84,6 +103,8 @@ function getPublicConfigurationValues(subdomain, host) {
 		SUBDOMAIN: subdomain.toUpperCase(),
 		thisSubdomain: subdomain,
 		supportedRegions: config.supportedRegions,
+		debug: config.debug,
+		content: config.content,
 	}
 	
 	publicConfig.subdomains = Object.values(config.subdomains).reduce((out, subdomainInformation, index) => {
@@ -95,19 +116,38 @@ function getPublicConfigurationValues(subdomain, host) {
 		const easter = subdomainInformation.easter
 		const region = subdomainInformation.region
 
+		const metaUrl = subdomainInformation.metaUrl || config.metaUrl
+		const metaType = subdomainInformation.metaType || config.metaType
+		const metaTitle = subdomainInformation.metaTitle || config.metaTitle
+		const metaDescription = subdomainInformation.metaDescription || config.metaDescription
+		const gaUA = subdomainInformation.gaUA || config.gaUA
+		
 		out[subdomainName] = {
 			adminEmailAddresses,
 			easter,
 			images,
 			location,
 			region,
+			metaUrl,
+			metaType,
+			metaTitle,
+			metaDescription,
+			gaUA,
 		}
 
 		if (subdomain === subdomainName) {
-			publicConfig.adminEmailAddresses = adminEmailAddresses
-			publicConfig.easter = easter
-			publicConfig.images = images
-			publicConfig.location = location
+			publicConfig.page = {}
+
+			publicConfig.page.adminEmailAddresses = adminEmailAddresses
+			publicConfig.page.easter = easter
+			publicConfig.page.images = images
+			publicConfig.page.location = location
+		
+			publicConfig.page.metaUrl = metaUrl
+			publicConfig.page.metaType = metaType
+			publicConfig.page.metaTitle = metaTitle
+			publicConfig.page.metaDescription = metaDescription
+			publicConfig.page.gaUA = gaUA
 		}
 
 		return out
