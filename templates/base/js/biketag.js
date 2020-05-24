@@ -101,7 +101,7 @@ class BikeTag {
 				imgur.uploadImageToImgur(files[1], image2Description, function () {
 					var emailPromises = []
 
-					biketag.adminEmailAddresses.forEach(function (emailAddress) {
+					biketag.config.adminEmailAddresses.forEach(function (emailAddress) {
 						const subject = "New Bike Tag Post (#" + currentTagInfo.nextTagNumber + ")"
 						const body = "Hello BikeTag Admin, A new post has been created!\r\nTo post this tag to Reddit manually, go to " + window.location.host + "/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + window.location.host + "). Reply to this email to request to be removed from this admin list."
 						emailPromises.push(this.sendNotificationEmail(emailAddress, subject, body))
