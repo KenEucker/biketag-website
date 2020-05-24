@@ -277,8 +277,8 @@
 				return;
 
 			// Add state?
-			if (typeof addState != 'undefined'
-				&& addState === true)
+			if (typeof addState != 'undefined' &&
+				addState === true)
 				history.pushState(null, null, '#');
 
 			// Handle lock.
@@ -409,8 +409,8 @@
 
 		$window.on('hashchange', function (event) {
 			// Empty hash?
-			if (location.hash == ''
-				|| location.hash == '#') {
+			if (location.hash == '' ||
+				location.hash == '#') {
 
 				// Prevent default.
 				event.preventDefault();
@@ -470,9 +470,15 @@
 		$main.hide();
 		$main_articles.hide();
 
+		$('#easter').click(function (easter) {
+			const jingle = document.getElementsByTagName('audio')[0]
+			jingle.volume = 0.5
+			jingle.play().catch(function (e) {})
+		})
+
 		// Initial article.
-		if (location.hash != ''
-			&& location.hash != '#')
+		if (location.hash != '' &&
+			location.hash != '#')
 			$window.on('load', function () {
 				$main._show(location.hash.substr(1), true);
 			});
