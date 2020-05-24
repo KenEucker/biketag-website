@@ -15,7 +15,7 @@
 		"server-reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm install",
 		"server-logs": "sudo pm2 logs app",
 		"server-start": "sudo pm2 start app",
-		"server-resart": "sudo pm2 restart app",
+		"server-restart": "sudo pm2 restart app",
 		"server-run": "sudo pm2 start app.js",
 		"server-stop": "sudo pm2 stop app",
 		"server-rerun": "sudo pm2 delete app && sudo pm2 start app.js"
