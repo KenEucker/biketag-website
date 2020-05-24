@@ -3,13 +3,14 @@ class BikeTag {
 		// Auto-Pickup?
 		this.target = null
 		this.targetSelector = 'form #submit'
+		this.formID = "biketagUploadForm"
 	}
 
 	appendBiketagForm(target) {
 		target = target || this.target
 
 		var form = document.createElement('form')
-		form.id = "biketagUploadForm"
+		form.id = this.formID
 	
 		var first = document.createElement('div')
 		var second = document.createElement('div')
@@ -55,11 +56,12 @@ class BikeTag {
 		target.appendChild(form)
 	}
 
-	onUploadFormSubmit(theButton) {
+	onUploadFormSubmit(formEl) {
+		var theButton = formEl.querySelector('ul')
 		theButton.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="24px"></i>`
 
 		try {
-			var form = $('#biketagUploadForm')
+			var form = $(`#${this.formID}`)
 			var fileInputs = form.find('input[type="file"]')
 			var files = []
 			var user = ''
@@ -113,7 +115,7 @@ class BikeTag {
 			}.bind(this))
 		} catch(e) {
 			console.error(e)
-			theButton.innerHTML = `<h3>Error</h3><p>Your tag could not be posted. :(</p><p>If this issue persists, please reach out to <a href="hello@biketag.org">hello@biketag.org</a> for help.</p>`
+			formEl.innerHTML = `<h3>Error</h3><p>Your tag could not be posted. :(</p><p>If this issue persists, please reach out to <a href="hello@biketag.org">hello@biketag.org</a> for help.</p>`
 		}
 	}
 
