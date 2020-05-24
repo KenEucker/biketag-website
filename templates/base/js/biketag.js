@@ -55,8 +55,25 @@ class BikeTag {
 	
 		target.appendChild(form)
 	}
+	
+	sendNotificationEmail(emailAddress, subject, body) {
+		return Email.send({
+			// Host: "smtp.gmail.com",
+			// Username: "biketagorg",
+			// Password: "BikeTagOrg720!",
+			SecureToken: "1dc9bf22-d96c-46a6-86d7-1a3521d62781",
+			To: emailAddress,
+			From: "biketagorg@gmail.com",
+			Subject: subject,
+			Body: body,
+			Port: 587,
+		}).then(
+			message => console.log(message)
+		);
+	}
 
 	onUploadFormSubmit(formEl) {
+		var self = this
 		var theButton = formEl.querySelector('ul')
 		theButton.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="24px"></i>`
 
@@ -104,15 +121,15 @@ class BikeTag {
 					biketag.config.adminEmailAddresses.forEach(function (emailAddress) {
 						const subject = "New Bike Tag Post (#" + currentTagInfo.nextTagNumber + ")"
 						const body = "Hello BikeTag Admin, A new post has been created!\r\nTo post this tag to Reddit manually, go to " + window.location.host + "/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + window.location.host + "). Reply to this email to request to be removed from this admin list."
-						emailPromises.push(this.sendNotificationEmail(emailAddress, subject, body))
-					}.bind(this))
+						emailPromises.push(self.sendNotificationEmail(emailAddress, subject, body))
+					})
 
 					Promise.all(emailPromises).then(function () {
 						window.location.href = window.location.pathname + '?uploadSuccess=true'
 					})
 
-				}.bind(this))
-			}.bind(this))
+				})
+			})
 		} catch(e) {
 			console.error(e)
 			formEl.innerHTML = `<h3>Error</h3><p>Your tag could not be posted. :(</p><p>If this issue persists, please reach out to <a href="hello@biketag.org">hello@biketag.org</a> for help.</p>`
@@ -131,7 +148,7 @@ class BikeTag {
 		
 		form.addEventListener('submit', function (e) {
 			e.preventDefault()
-			self.onUploadFormSubmit(e.currentTarget)
+			self.onUploadFormSubmit(e.currentTarget).bind(self)
 		})
 
 	}

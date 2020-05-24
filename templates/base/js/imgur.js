@@ -358,22 +358,6 @@
 			}
 		},
 
-		sendNotificationEmail(emailAddress, subject, body) {
-			return Email.send({
-				// Host: "smtp.gmail.com",
-				// Username: "biketagorg",
-				// Password: "BikeTagOrg720!",
-				SecureToken: "1dc9bf22-d96c-46a6-86d7-1a3521d62781",
-				To: emailAddress,
-				From: "biketagorg@gmail.com",
-				Subject: subject,
-				Body: body,
-				Port: 587,
-			}).then(
-				message => console.log(message)
-			);
-		},
-
 		init() {
 			var self = this;
 
