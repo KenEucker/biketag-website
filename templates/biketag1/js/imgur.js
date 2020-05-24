@@ -334,14 +334,10 @@
 				// 	console.error('Error:', error)
 				// })
 				.then(function (response) {
-					if (!!response) {
-						const imgurTokens = response.imgurTokens;
-
-						if (imgurTokens && typeof imgurTokens == 'object') {
-							self.imgurAlbumHash = imgurTokens.imgurAlbumHash || self.imgurAlbumHash
-							self.imgurAccessToken = imgurTokens.imgurAccessToken ? 'Bearer ' + imgurTokens.imgurAccessToken : self.imgurAccessToken
-							self.imgurAuthorization = imgurTokens.imgurAuthorization ? 'Client-ID ' + imgurTokens.imgurAuthorization : self.imgurAuthorization
-						}
+					if (!!response && typeof response == 'object') {
+						self.imgurAlbumHash = response.imgurAlbumHash || self.imgurAlbumHash
+						self.imgurAccessToken = response.imgurAccessToken ? 'Bearer ' + response.imgurAccessToken : self.imgurAccessToken
+						self.imgurAuthorization = response.imgurAuthorization ? 'Client-ID ' + response.imgurAuthorization : self.imgurAuthorization
 					}
 
 					done(response);
