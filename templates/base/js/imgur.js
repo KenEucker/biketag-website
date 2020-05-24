@@ -374,63 +374,6 @@
 			);
 		},
 
-		onUploadFormSubmit(theButton) {
-			theButton.parentElement.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="24px"></i>`
-
-			var form = $('#biketagUploadForm');
-			var fileInputs = form.find('input[type="file"]');
-			var files = [],
-				user = '',
-				proofLocation = '';
-
-			// get the latest tag number
-			var currentTagInfo = this.getCurrentTagInformation();
-			user = form.find('input[name="name"]').val();
-			proofLocation = form.find('input[name="location"]').val();
-			hint = form.find('input[name="hint"]').val();
-
-			for (var i = 0; i < fileInputs.length; ++i) {
-				var $files = fileInputs[i].files;
-				var $input = $(fileInputs[i]);
-
-				if ($files.length) {
-
-					// Reject big files
-					if ($files[0].size > $(this).data("max-size") * 1024) {
-						console.log("Please select a smaller file");
-						return false;
-					}
-
-					files.push($files[0]);
-				} else {
-					console.log('I need both files!');
-					return;
-				}
-			}
-
-			var locationString = proofLocation && proofLocation.length ? ' found at ( ' + proofLocation + ' )' : '';
-			var hintString = hint && hint.length ? ' (hint:  ' + hint + ' )' : '';
-			var image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user;
-			var image2Description = '#' + currentTagInfo.nextTagNumber + ' tag' + hintString + ' by ' + user;
-
-			this.uploadImageToImgur(files[0], image1Description, function () {
-				this.uploadImageToImgur(files[1], image2Description, function () {
-					var emailPromises = []
-
-					this.adminEmailAddresses.forEach(function (emailAddress) {
-						const subject = "New Bike Tag Post (#" + currentTagInfo.nextTagNumber + ")"
-						const body = "Hello BikeTag Admin, A new post has been created!\r\nTo post this tag to Reddit manually, go to " + window.location.host + "/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + window.location.host + "). Reply to this email to request to be removed from this admin list."
-						emailPromises.push(this.sendNotificationEmail(emailAddress, subject, body))
-					}.bind(this))
-
-					Promise.all(emailPromises).then(function () {
-						window.location.href = window.location.pathname + '?uploadSuccess=true';
-					})
-
-				}.bind(this));
-			}.bind(this));
-		},
-
 		init() {
 			var self = this;
 

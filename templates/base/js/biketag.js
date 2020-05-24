@@ -127,7 +127,7 @@ class BikeTag {
 
 		var form = document.querySelector(this.targetSelector)
 		
-		form.addEventListener('click', function (e) {
+		form.addEventListener('submit', function (e) {
 			e.preventDefault()
 			self.onUploadFormSubmit(e.currentTarget)
 		})
