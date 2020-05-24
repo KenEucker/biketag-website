@@ -150,24 +150,23 @@
 
 			<!-- About -->
 			<article id="about">
-				<h2 class="major">About</h2>
+				<h2 class="major">Bike Tag Game</h2>
 				<!-- <span class="image main"><img src="images/pic03.jpg" alt="" /></span> -->
-				<h3>BIKE TAG GAME</h3>
 				<p>
-					<a href="http://portland.biketag.org">BikeTag in Portland, Oregon</a><br>
-					<a href="http://denver.biketag.org">BikeTag in Denver, Colorado</a><br>
-					<a href="http://atx.biketag.org">BikeTag in Austin, Texas</a><br>
-					<a href="http://chi.biketag.org">BikeTag in Chicago, Illinois</a><br>
-					<a href="http://atl.biketag.org">BikeTag in Atlanta, Georgia</a><br>
-					<a href="http://la.biketag.org">BikeTag in Los Angeles, California</a><br>
-					<a href="http://sea.biketag.org">BikeTag in Seattle, Washington</a><br>
+					<a href="http://biketag.org">Global BikeTag Dashboard</a><br>
 				</p>
 				<p>BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in
 					the game in an easy and simple way, without needing to login to anything. The game was originally
 					found on /r/BikingATX, that was then adopted by /r/bikeLA, that was then adopted by /r/chibike. For
 					reddit credit: /u/america_yall of /r/BikingATX who started the first run of the game.</p>
-				<p>The code that runs this website is open source and tracked on <a
-						href="https://github.com/KenEucker/biketag-website">github</a>.
+				<p>
+					<% supportedRegions.forEach((region) => { %>
+						<a href="http://<%= region %>.biketag.org">BikeTag in <%= subdomains[region].region %></a><br>
+					<% }) %>
+				</p>
+				<p>
+					The code that runs this website is open source and tracked on
+					<a href="https://github.com/KenEucker/biketag-website">github</a>.
 					This code is free to use or modify and is maintained by volunteers.
 					Server costs currently range between $5-$10/month.
 					<a href="https://paypal.me/KenEucker">You can donate to the project by paypal.</a></p>

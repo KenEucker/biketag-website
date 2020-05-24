@@ -77,25 +77,44 @@ function setVars() {
 	console.log('using authentication vars:', authTokens);
 }
 
-function getPublicConfigurationValues(subdomain) {
 	// Only return what can be injected onto the page
-	const thisSubdomain = !!subdomain ? config.subdomains[subdomain] : null
-	const easter = !!thisSubdomain ? thisSubdomain.easter : null
-	const adminEmailAddresses = thisSubdomain.adminEmailAddresses
-	const images = thisSubdomain.images
-	const supportedRegions = config.supportedRegions
-
-	const out = {
+function getPublicConfigurationValues(subdomain, host) {
+	const publicConfig = {
+		host,
 		SUBDOMAIN: subdomain.toUpperCase(),
 		thisSubdomain: subdomain,
-		subdomains,
-		supportedRegions,
-		adminEmailAddresses,
-		easter,
-		images,
+		supportedRegions: config.supportedRegions,
 	}
+	
+	publicConfig.subdomains = Object.values(config.subdomains).reduce((out, subdomainInformation, index) => {
+		const subdomainName = subdomains[index]
 
-	return out
+		const location = subdomainInformation.location
+		const images = subdomainInformation.images
+		const adminEmailAddresses = subdomainInformation.adminEmailAddresses
+		const easter = subdomainInformation.easter
+		const region = subdomainInformation.region
+
+		out[subdomainName] = {
+			adminEmailAddresses,
+			easter,
+			images,
+			location,
+			region,
+		}
+
+		if (subdomain === subdomainName) {
+			publicConfig.adminEmailAddresses = adminEmailAddresses
+			publicConfig.easter = easter
+			publicConfig.images = images
+			publicConfig.location = location
+		}
+
+		return out
+
+	}, {})
+
+	return publicConfig
 }
 
 function getSubdomainPrefix(req, returnAlias = false) {
@@ -239,9 +258,9 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 	}
 
 	filterSubdomainRequest('/', (subdomain, req, res) => {
+		const host = req.headers.host
 
 		if (!subdomain) {
-			const host = req.headers.host
 			const hostSubdomainEnd = host.indexOf('.') + 1
 			const redirectToHost = `${req.protocol}://${host.substring(hostSubdomainEnd)}`
 
@@ -261,7 +280,7 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 
 			console.log('attempting to run renderer', landingPageTemplate)
 
-			return res.render(landingPageTemplate, getPublicConfigurationValues(subdomain))
+			return res.render(landingPageTemplate, getPublicConfigurationValues(subdomain, host))
 		}
 
 		const landingPageFile = path.join(templatePath, template, 'index.html')
