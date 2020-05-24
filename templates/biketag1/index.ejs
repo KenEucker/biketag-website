@@ -89,7 +89,7 @@
 
 			<!-- Intro -->
 			<article id="tagit">
-				<form id="uploadForm">
+				<!-- <form id="uploadForm">
 					<div class="field half first">
 						<h3 id="proofHeading">Proof Information</h3>
 						<label for="currentTag">Image proof you found the mystery location</label>
@@ -115,7 +115,7 @@
 					<ul class="actions">
 						<li><button id="submit">Tag IT!</button></li>
 					</ul>
-				</form>
+				</form> -->
 
 			</article>
 
@@ -442,6 +442,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<div id="bg"></div>
 
 	<!-- Priority Scripts -->
+	<script src="js/biketag.js"></script>
+	<script>
+		window.BikeTag.init('#tagit')
+	</script>
+
 	<script>
 		(function (w, d) {
 			var b = d.getElementsByTagName('body')[0];

@@ -373,7 +373,7 @@
 		onUploadFormSubmit(theButton) {
 			theButton.parentElement.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="24px"></i>`
 
-			var form = $('#uploadForm');
+			var form = $('#biketagUploadForm');
 			var fileInputs = form.find('input[type="file"]');
 			var files = [],
 				user = '',
@@ -482,11 +482,6 @@
 			$('#header > .logo').click(function () {
 				window.location = window.location.origin
 				// document.getElementById('tagItButton').click();
-			});
-
-			$('form #submit').click(function (e) {
-				e.preventDefault();
-				self.onUploadFormSubmit(e.currentTarget);
 			});
 
 			return self;

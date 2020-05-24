@@ -1488,28 +1488,28 @@ body.is-preload #header .content .inner {
   max-width: 100%;
   z-index: 3;
 }
-#main #tagit #uploadForm > div {
+#main #tagit #biketagUploadForm > div {
   padding-bottom: 15px;
 }
-#main #tagit #uploadForm #proofHeading {
+#main #tagit #biketagUploadForm #proofHeading {
   color: yellow;
 }
-#main #tagit #uploadForm #nextTagHeading {
+#main #tagit #biketagUploadForm #nextTagHeading {
   color: green;
 }
-#main #tagit #uploadForm input {
+#main #tagit #biketagUploadForm input {
   max-width: 100%;
   font-weight: bold;
   font-variant: petite-caps;
   font-size: 1.5em;
 }
-#main #tagit #uploadForm input[name=currentTag] {
+#main #tagit #biketagUploadForm input[name=currentTag] {
   color: yellow;
 }
-#main #tagit #uploadForm input[name=nextTag] {
+#main #tagit #biketagUploadForm input[name=nextTag] {
   color: green;
 }
-#main #tagit #uploadForm .actions {
+#main #tagit #biketagUploadForm .actions {
   padding-top: 25px;
   float: right;
 }
