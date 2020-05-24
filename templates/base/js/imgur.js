@@ -154,6 +154,7 @@
 							content: '<img src="' + this.getAttribute('href') + '"></img>'
 						});
 					}
+					
 				});
 				targetContainer.appendChild(tagContainer);
 			}
@@ -261,12 +262,14 @@
 					var thirdToLastImage = images.length > 2 ? images[2] : null;
 
 					this.renderBikeTag(lastImage, "Current mystery location to find");
-					if (secondToLastImage) {
-						this.renderBikeTag(secondToLastImage, "Proof image");
-					}
-					if (thirdToLastImage) {
-						this.renderBikeTag(thirdToLastImage, "Previous tag mystery location");
-					}
+
+					// Removed the multiple tags on the main page
+					// if (secondToLastImage) {
+					// 	this.renderBikeTag(secondToLastImage, "Proof image");
+					// }
+					// if (thirdToLastImage) {
+					// 	this.renderBikeTag(thirdToLastImage, "Previous tag mystery location");
+					// }
 				}
 
 				// Set the form with the tag information
@@ -274,6 +277,7 @@
 				$('#proofHeading').text('Proof for #' + currentTagInfo.currentTagNumber);
 				$('#nextTagHeading').text('Next Tag (#' + currentTagInfo.nextTagNumber + ')');
 			}
+
 			// DON'T DO THIS RIGHT NOW
 			// $('#nextTagHeading').text('Next Tag info (#' + currentTagInfo.nextTagNumber + ')');
 
