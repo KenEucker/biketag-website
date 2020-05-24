@@ -3,7 +3,8 @@
 		"default": {
 			"template": "home",
 			"aliases": [
-				"home"
+				"home",
+				"biketag"
 			],
 			"imgur": {
 				"imgurAlbumHash": "JABitEa",
@@ -30,7 +31,7 @@
 				"post"
 			],
 			"imgur": {
-				"imgurAlbumHash": "JABitEa",
+				"imgurAlbumHash": "DNCiJTC",
 				"imgurAuthorization": "Client-ID 79ea70333c45883"
 			},
 			"reddit": {
@@ -48,6 +49,9 @@
 			]
 		},
 		"portland": {
+			"metaTitle": "PortlandBikeTag!",
+			"region": "Portland, Oregon",
+			"tagline": "The BikeTag game in Portland, Oregon",
 			"template": "biketag1",
 			"aliases": [
 				"pdx",
@@ -74,6 +78,9 @@
 			]
 		},
 		"denver": {
+			"metaTitle": "DenverBikeTag!",
+			"region": "Denver, Colorado",
+			"tagline": "",
 			"template": "biketag1",
 			"aliases": [
 				"den",
@@ -99,6 +106,17 @@
 			]
 		}
 	},
+
+	"supportedRegions": [
+		"portland",
+		"denver"
+	],
+
+	"metaUrl": "http://biketag.org",
+	"metaType": "article",
+	"metaTitle": "BikeTag!",
+	"metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
+	"gaUA": "UA-119956764-1",
 
 	"imgurClientID": "",
 	"imgurClientSecret": "",
