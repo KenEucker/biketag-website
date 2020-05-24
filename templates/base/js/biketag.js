@@ -69,9 +69,9 @@ class BikeTag {
 
 			// get the latest tag number
 			var currentTagInfo = imgur.getCurrentTagInformation()
-			user = form.find('input[name="name"]').val()
-			proofLocation = form.find('input[name="location"]').val()
-			hint = form.find('input[name="hint"]').val()
+			var user = form.find('input[name="name"]').val()
+			var proofLocation = form.find('input[name="location"]').val()
+			var hint = form.find('input[name="hint"]').val()
 
 			for (var i = 0; i < fileInputs.length; ++i) {
 				var $files = fileInputs[i].files
