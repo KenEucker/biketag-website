@@ -20,7 +20,7 @@
 		gtag('config', 'UA-119956764-1');
 	</script>
 
-	<title>PDX BIKE TAG</title>
+	<title><%= SUBDOMAIN %>BIKE TAG</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1" />
@@ -135,7 +135,7 @@
 
 					<span id="easter" style="font-style: italic;">Get these instructions via audio</span>
 					<audio id="biketag-jingle">
-						<source src="assets/media/biketag-pdx-jingle-1.mp3" type="audio/mpeg">
+						<source src="<%= easter.jingle %>" type="audio/mpeg">
 						Your browser does not support the audio element.
 					</audio>
 				</p>

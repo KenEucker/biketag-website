@@ -76,12 +76,12 @@
 
 <body>
 	<audio id="biketag-jingle">
-		<source src="assets/media/biketag-jingle-1.mp3" type="audio/mpeg">
+		<source src="<%= easter.jingle %>" type="audio/mpeg">
 		Your browser does not support the audio element.
 	</audio>
 
 
-	<img src="none.png" data-src="/assets/img/biketag-logo-1-medium.png"></img>
+	<img src="none.png" data-src="<%= images.header %>"></img>
 	<span id="mute" class="fas fa-volume-down"></span>
 	<p>Check out the biketag games in these cities!</p>
 	<div></div>
@@ -92,7 +92,7 @@
 			logo.src = logo.dataset.src
 
 			const div = document.getElementsByTagName('div')[0]
-			const subs = ['portland', 'denver']
+			const subs = ("<%= supportedRegionals %>").split(',') //['portland', 'denver']
 
 			subs.forEach(function (sub) {
 				const link = document.createElement('a')

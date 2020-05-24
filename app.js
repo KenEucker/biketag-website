@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const path = require('path')
 const fs = require('fs')
+const bodyParser = require('body-parser')
 
 const app = express()
 const {
@@ -76,6 +77,27 @@ function setVars() {
 	console.log('using authentication vars:', authTokens);
 }
 
+function getPublicConfigurationValues(subdomain) {
+	// Only return what can be injected onto the page
+	const thisSubdomain = !!subdomain ? config.subdomains[subdomain] : null
+	const easter = !!thisSubdomain ? thisSubdomain.easter : null
+	const adminEmailAddresses = config.adminEmailAddresses
+	const images = thisSubdomain.images
+	const supportedRegionals = config.supportedRegionals
+
+	const out = {
+		SUBDOMAIN: subdomain.toUpperCase(),
+		thisSubdomain: subdomain,
+		subdomains,
+		supportedRegionals,
+		adminEmailAddresses,
+		easter,
+		images,
+	}
+
+	return out
+}
+
 function getSubdomainPrefix(req, returnAlias = false) {
 	const defaultSubdomain = req.subdomains.length ? req.subdomains[0] : 'default'
 	const localhostSubdomainEnd = req.headers.host.indexOf('.')
@@ -89,7 +111,7 @@ function getSubdomainFromAlias(alias) {
 	let baseSubdomain
 
 	Object.keys(config.subdomains).forEach((baseName) => {
-		const aliases = config.subdomains[baseName].aliases
+		const aliases = config.subdomains[baseName].aliases || []
 		if (alias === baseName || aliases.indexOf(alias) !== -1) {
 			baseSubdomain = baseName
 			return
@@ -190,7 +212,30 @@ function biketagRedditTemplate(images, tagNumber) {
 [Rules](http://biketag.org/#howto)</pre>`;
 }
 
-function templating(templatePath = path.join(__dirname, '/templates/')) {
+function templateRendering(app) {
+
+	/// Check for an ejs file in the request, if no file exists then continue on to the next
+	app.get("/", (req, res, next) => {
+		res.render("index")
+		next
+	})
+
+}
+
+function templating(templatePath = path.join(__dirname, '/templates/'), supportRendering = true) {
+
+	if (supportRendering) {
+		//Set view engine to ejs
+		app.set("view engine", "ejs")
+
+		//Tell Express where we keep our index.ejs
+		app.set("views", path.join(__dirname, "views"))
+
+		//Use body-parser
+		app.use(bodyParser.urlencoded({
+			extended: false
+		}))
+	}
 
 	app.get('/', (req, res) => {
 		const subdomain = getSubdomainPrefix(req)
@@ -210,9 +255,18 @@ function templating(templatePath = path.join(__dirname, '/templates/')) {
 		}
 
 		const template = getTemplateNameFromSubdomain(subdomain)
-		const landingPage = path.join(templatePath, template, 'index.html')
+		const landingPageTemplate = path.join(templatePath, template, 'index')
 
-		res.sendFile(landingPage);
+		if (supportRendering && fs.existsSync(`${landingPageTemplate}.ejs`)) {
+
+			console.log('attempting to run renderer')
+
+			return res.render(landingPageTemplate, getPublicConfigurationValues(subdomain))
+		}
+
+		const landingPageFile = path.join(templatePath, template, 'index.html')
+		console.log('serving html file', landingPageFile)
+		return res.sendFile(landingPageFile);
 	})
 
 	app.get('/get/reddit', (req, res) => {
@@ -522,7 +576,7 @@ function syncWithS3() {
 }
 
 function init() {
-	console.log('BikeTag Webiste initialization');
+	console.log('BikeTag Webiste initialization')
 
 	app.use(session({
 		secret: 'biketag',
@@ -534,9 +588,9 @@ function init() {
 	app.use(express.json()); // to support JSON-encoded bodies
 	app.use(express.urlencoded({
 		extended: true,
-	})); // to support URL-encoded bodies
+	})) // to support URL-encoded bodies
 
-	app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')));
+	app.use(favicon(path.join(__dirname, 'assets/', 'favicon.ico')))
 }
 
 function run(started = () => {
@@ -545,30 +599,30 @@ function run(started = () => {
 	if (debug) {
 		app.set('port', port);
 
-		const server = http.createServer(app);
-		const reloadServer = reload(app);
+		const server = http.createServer(app)
+		const reloadServer = reload(app)
 
 		watch.watchTree(`${__dirname}/templates/`, (f, curr, prev) => {
 			console.log('Asset change detected, reloading connection');
-			reloadServer.reload();
+			reloadServer.reload()
 		});
 
-		server.listen(app.get('port'), started);
+		server.listen(app.get('port'), started)
 	} else {
-		app.listen(port, started);
+		app.listen(port, started)
 	}
 }
 /* configuration */
 /*       / */
-init();
+init()
 /*      /  */
-setVars();
+setVars()
 /*     /   */
-security();
+security()
 // /*    /    */ syncWithS3();
 /*   /     */
-templating();
+templating()
 /*  /      */
-authentication();
+authentication()
 /* \/      */
-run();
+run()
