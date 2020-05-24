@@ -1,0 +1,85 @@
+{
+	"default": {
+		"imgur": {
+			"imgurAlbumHash": "JABitEa"
+		},
+		"reddit": {
+			"redditSubreddit": "biketag"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"biketagorg@gmail.com"
+		]
+	},
+	"tag": {
+		"metaTitle": "Post A BikeTag!",
+		"tagline": "Create a tag which can be used anywhere",
+		"imgur": {
+			"imgurAlbumHash": "DNCiJTC"
+		},
+		"reddit": {
+			"redditSubreddit": "CyclePDX"
+		},
+		"easter": {
+			"jingle": "assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"biketagorg@gmail.com"
+		]
+	},
+	"portland": {
+		"metaTitle": "PortlandBikeTag!",
+		"region": "Portland, Oregon",
+		"tagline": "The BikeTag game in Portland, Oregon",
+		"imgur": {
+			"imgurAlbumHash": "Y9PKtpI"
+		},
+		"reddit": {
+			"redditSubreddit": "CyclePDX"
+		},
+		"easter": {
+			"jingle": "assets/media/biketag-pdx-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com",
+			"pdxbiketag@gmail.com",
+			"biketagorg@gmail.com"
+		]
+	},
+	"denver": {
+		"metaTitle": "DenverBikeTag!",
+		"region": "Denver, Colorado",
+		"tagline": "",
+		"imgur": {
+			"imgurAlbumHash": "xTnG1Io"
+		},
+		"reddit": {
+			"redditSubreddit": "CycleDenver"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com",
+			"biketagorg@gmail.com"
+		]
+	}
+}

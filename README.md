@@ -23,31 +23,35 @@ If you'd like to contribute to this project you can [file an issue](https://gith
 Run `npm install` to install the node module dependencies. 
 
 ## Required Configuration
-The app loads a config.json file found in the root folder. Here's an example of a minimum config to get the local site to display images for the Portland subdomain as the default:
-```
-{
-  "subdomains": {
-    "default": {
-      "imgur": {
-        "imgurAlbumHash": "Y9PKtpI"
-      },
-      "reddit": {
-        "redditSubreddit": "CyclePDX"
-        }
-      }
-    },
-  "port": 3000
-}
-
-```
+The app loads a config.json file found in the root folder. There's sample of the minimum configuration to get the local site to display images for the Portland subdomain, as well as the default landing page. [sample.config.json](config.sample.json)
 
 ## Start local server
-Run `npm run run` to run the webserver and then navigate to http://localhost:3000 or whichever port you have set in the config.json. You can also run `npm run dev` to run in debugging mode for local development, though it is not required.
+Run `npm run run` to run the webserver and then navigate to http://localhost:80 or whichever port you have set in the config.json. You can also run `npm run dev` to run in debugging mode for local development, which provides greater logging and hot-reloading.
 
 ## Change the website code
-The homepage is in the /templates/pages/ folder using index.html. The styles are in the /templates/sass/ folder using main.scss. The sass is compiled by running the command `npm run sass` and all of the output files are saved in the folder /assets/css/. The rest of the website content is in the /assets/ folder, including javascript and fonts and images. 
+This project supports Embedded Javascript templating, [ejs](https://ejs.co/), for the templates served by each subdomain. A template may have either an `index.html` or `index.ejs` file in it's root that the express application will serve for a given subdomain. Using data from the config.json file as well as the data found in /data/config/, in conjunction with the raw html in the /data/content/ folder, data can be injected into the ejs templates.
 
-Note: When running in dev mode, changes to the files in the /assets/ folder are reflected immediately upon the next request, without needing to run any commands.
+To use within javascript:
+```
+<script>
+	const subs = ("<%= supportedRegions %>").split(',') //['portland', 'denver']
+</script>
+```
+
+To use within html:
+```
+<audio id="biketag-jingle">
+	<source src="<%= page.easter.jingle %>" type="audio/mpeg">
+</audio>
+```
+
+The homepage landing page is in the /templates/home/ folder using the template file index.ejs. Each template should use it's own root folder for theme resources. There is an assets folder in the root of the project for items that span multiple templates. Within the assets folder there is a js folder that contains javascript available to all consumption. There is also a content folder within the assets folder that contains raw html content which is available for editing by site administrators using git.
+
+Note: When running in dev mode, changes to the files in the /templates/ folder are reflected immediately, with the page autoreloading.
+
+# Credits
+
+Thank you to HorribleLogos.com for whatever it is that you provided.
 
 [paypal-image]:https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png
 [travis-image]:https://travis-ci.org/KenEucker/biketag-website.svg?branch=master

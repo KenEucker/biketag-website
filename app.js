@@ -3,6 +3,7 @@ const session = require('express-session')
 const path = require('path')
 const fs = require('fs')
 const bodyParser = require('body-parser')
+const merge = require('deepmerge')
 
 const app = express()
 const {
@@ -36,7 +37,7 @@ let debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : 
 debug = process.env.NODE_ENV !== 'production' ? debug : false;
 
 if (debug) {
-	config = Object.assign({}, config, require('./config.debug'))
+	config = merge(config, require('./config.debug'))
 }
 
 const port = debug ? 8080 : config.port || 80;
@@ -76,8 +77,25 @@ function setVars() {
 
 	console.log('using authentication vars:', authTokens);
 
+
+	/// Populate the data files into the object to be sent with the public configuration
+	const dataFolder = path.join(__dirname, 'data', 'config')
+	const dataFiles = fs.readdirSync(dataFolder)
+	const data = {}
+
+	dataFiles.forEach((dataFile) => {
+		const dataFileSplit = dataFile.split('.')
+		const dataFileName = dataFileSplit[0]
+		const dataFileExtension = dataFileSplit[1]
+
+		if (dataFileExtension === 'json') {
+			const fileData = require(path.join(dataFolder, dataFile))
+			config[dataFileName] = merge(config[dataFileName], fileData)
+		}
+	})
+
 	/// Populate the content files into the object to be sent with the public configuration
-	const contentFolder = path.join(__dirname, 'content')
+	const contentFolder = path.join(__dirname, 'data', 'content')
 	const contentFiles = fs.readdirSync(contentFolder)
 	const content = {}
 	
@@ -93,9 +111,13 @@ function setVars() {
 	})
 
 	config.content = content
+
+	// merge(config, data)
+	// Object.assign(config, data, {})
+	console.log(config)
 }
 
-	// Only return what can be injected onto the page
+/// TODO: refactor this request to only use the data from the data folder, with whatever else is required, instead of chunking out the data from the config
 function getPublicConfigurationValues(subdomain, host) {
 	const publicConfig = {
 		host,
@@ -105,6 +127,7 @@ function getPublicConfigurationValues(subdomain, host) {
 		debug: config.debug,
 		content: config.content,
 	}
+
 	
 	publicConfig.subdomains = Object.values(config.subdomains).reduce((out, subdomainInformation, index) => {
 		const subdomainName = subdomains[index]
@@ -114,6 +137,7 @@ function getPublicConfigurationValues(subdomain, host) {
 		const adminEmailAddresses = subdomainInformation.adminEmailAddresses
 		const easter = subdomainInformation.easter
 		const region = subdomainInformation.region
+		const content = config.content
 
 		const metaUrl = subdomainInformation.metaUrl || config.metaUrl
 		const metaType = subdomainInformation.metaType || config.metaType
@@ -126,6 +150,7 @@ function getPublicConfigurationValues(subdomain, host) {
 			easter,
 			images,
 			location,
+			content,
 			region,
 			metaUrl,
 			metaType,
@@ -152,6 +177,7 @@ function getPublicConfigurationValues(subdomain, host) {
 		return out
 
 	}, {})
+	console.log(config, publicConfig)
 
 	return publicConfig
 }

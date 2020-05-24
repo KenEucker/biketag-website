@@ -7,18 +7,7 @@
 				"biketag"
 			],
 			"imgur": {
-				"imgurAlbumHash": "JABitEa",
 				"imgurAuthorization": "Client-ID 79ea70333c45883"
-			},
-			"reddit": {
-				"redditSubreddit": "biketag"
-			},
-			"easter": {
-				"jingle": "../../assets/media/biketag-jingle-1.mp3"
-			},
-			"images": {
-				"header": "../../assets/img/biketag-logo-1.png",
-				"logo": ""
 			},
 			"adminEmailAddresses": [
 				"biketagorg@gmail.com"
@@ -31,77 +20,35 @@
 				"post"
 			],
 			"imgur": {
-				"imgurAlbumHash": "DNCiJTC",
 				"imgurAuthorization": "Client-ID 79ea70333c45883"
-			},
-			"reddit": {
-				"redditSubreddit": "CyclePDX"
-			},
-			"easter": {
-				"jingle": "assets/media/biketag-jingle-1.mp3"
-			},
-			"images": {
-				"header": "../../assets/img/biketag-logo-1.png",
-				"logo": ""
 			},
 			"adminEmailAddresses": [
 				"biketagorg@gmail.com"
 			]
 		},
 		"portland": {
-			"metaTitle": "PortlandBikeTag!",
-			"region": "Portland, Oregon",
-			"tagline": "The BikeTag game in Portland, Oregon",
 			"template": "biketag1",
 			"aliases": [
 				"pdx",
 				"oregon"
 			],
 			"imgur": {
-				"imgurAlbumHash": "Y9PKtpI",
 				"imgurAuthorization": "Client-ID 79ea70333c45883"
 			},
-			"reddit": {
-				"redditSubreddit": "CyclePDX"
-			},
-			"easter": {
-				"jingle": "assets/media/biketag-pdx-jingle-1.mp3"
-			},
-			"images": {
-				"header": "../../assets/img/biketag-logo-1.png",
-				"logo": ""
-			},
 			"adminEmailAddresses": [
-				"keneucker@gmail.com",
-				"pdxbiketag@gmail.com",
 				"biketagorg@gmail.com"
 			]
 		},
 		"denver": {
-			"metaTitle": "DenverBikeTag!",
-			"region": "Denver, Colorado",
-			"tagline": "",
 			"template": "biketag1",
 			"aliases": [
 				"den",
 				"colorado"
 			],
 			"imgur": {
-				"imgurAlbumHash": "xTnG1Io",
 				"imgurAuthorization": "Client-ID 79ea70333c45883"
 			},
-			"reddit": {
-				"redditSubreddit": "CycleDenver"
-			},
-			"easter": {
-				"jingle": "../../assets/media/biketag-jingle-1.mp3"
-			},
-			"images": {
-				"header": "../../assets/img/biketag-logo-1.png",
-				"logo": ""
-			},
 			"adminEmailAddresses": [
-				"keneucker@gmail.com",
 				"biketagorg@gmail.com"
 			]
 		}
@@ -111,12 +58,6 @@
 		"portland",
 		"denver"
 	],
-
-	"metaUrl": "http://biketag.org",
-	"metaType": "article",
-	"metaTitle": "BikeTag!",
-	"metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
-	"gaUA": "UA-119956764-1",
 
 	"imgurClientID": "",
 	"imgurClientSecret": "",
