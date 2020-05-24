@@ -88,7 +88,6 @@ function setVars() {
 
 		if (contentFileExtension === 'html') {
 			const html = fs.readFileSync(path.join(contentFolder, contentFile), { encoding:'utf8' })
-			console.log({html})
 			content[contentFileName] = html
 		}
 	})
