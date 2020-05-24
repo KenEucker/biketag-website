@@ -1,4 +1,4 @@
 (function ($) {
 	console.log('Uhhh no')
-	window.imgurIntegration = imgurIntegration.init();
+	window.imgur = imgur.init();
 })(jQuery);

@@ -6,7 +6,7 @@
 	"contributors": [],
 	"bin": {},
 	"scripts": {
-		"compile": "./node_modules/.bin/dart-sass templates/sass:assets/css",
+		"compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
 		"dev": "node app.js --debug",
 		"run": "node app.js"
 	},

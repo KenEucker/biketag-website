@@ -547,7 +547,7 @@ function run(started = () => {
 		const server = http.createServer(app);
 		const reloadServer = reload(app);
 
-		watch.watchTree(`${__dirname}/assets/`, (f, curr, prev) => {
+		watch.watchTree(`${__dirname}/templates/`, (f, curr, prev) => {
 			console.log('Asset change detected, reloading connection');
 			reloadServer.reload();
 		});

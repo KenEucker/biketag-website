@@ -1,21 +1,98 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/fa-all.min.css" type='text/css'>
+	<style>
+		@font-face {
+			font-family: horrible;
+			src: url('assets/fonts/Theorevil.woff2');
+		}
+
+		body {
+			font-family: horrible;
+			font-size: 3rem;
+			text-align: center;
+			background-color: rgb(27, 31, 34, 0.4);
+		}
+
+		div {
+			color: darkslateblue;
+		}
+
+		a:visited {
+			color: unset;
+		}
+
+		a span {
+			display: none !important;
+		}
+
+		a:hover span {
+			display: inline !important;
+			margin-right: 15px;
+			margin-left: 15px;
+		}
+
+		a {
+			text-decoration: none;
+
+		}
+
+		img {
+			max-width: 50%;
+		}
+
+		#mute {
+			opacity: 0.8;
+		}
+	</style>
+</head>
+
 <body>
-	<h1>You're home!</h1>
-	<p>Check out these games of biketag!</p>
+	<audio id="biketag-jingle">
+		<source src="assets/media/biketag-jingle-1.mp3" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+
+	<img src="none.png" data-src="/assets/img/biketag-logo-1-medium.png"></img>
+	<span id="mute" class="fas fa-volume-mute"></span>
+	<p>Check out the biketag games in these cities!</p>
 	<div></div>
 
 	<script>
 		(function () {
-			const div = document.getElementsByTagName('div')[0]
-			const subs = ['pdx', 'portland', 'denver', 'den']
+			const logo = document.getElementsByTagName('img')[0]
+			logo.src = logo.dataset.src
 
-			subs.forEach((sub) => {
+			const div = document.getElementsByTagName('div')[0]
+			const subs = ['portland', 'denver']
+
+			subs.forEach(function (sub) {
 				const link = document.createElement('a')
 				link.href = `${window.location.protocol}//${sub}.${window.location.host}`
-				link.innerHTML = sub
+				link.innerHTML =
+					`<span class="fas fa-bicycle"></span>${sub}<span class="fas fa-bicycle"></span>`
 
 				div.appendChild(link)
 				div.appendChild(document.createElement('br'))
 			})
+
+			const mute = document.getElementById('mute')
+			mute.addEventListener('click', function () {
+				const jingle = document.getElementsByTagName('audio')[0]
+				jingle.pause()
+			})
+
+			const jingle = document.getElementsByTagName('audio')[0]
+			jingle.volume = 0.5
+			jingle.play()
+
 		})()
 	</script>
+
+	<!-- For local development hotloading -->
+	<script src="/reload/reload.js"></script>
 </body>
+
+</html>

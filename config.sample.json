@@ -6,11 +6,27 @@
 				"home"
 			],
 			"imgur": {
-				"imgurAlbumHash": "Y9PKtpI"
+				"imgurAlbumHash": "JABitEa",
+				"imgurAuthorization": "Client-ID 79ea70333c45883"
+			},
+			"reddit": {
+				"redditSubreddit": "biketag"
+			}
+		},
+		"tag": {
+			"template": "tag",
+			"aliases": [
+				"new",
+				"post"
+			],
+			"imgur": {
+				"imgurAlbumHash": "JABitEa",
+				"imgurAuthorization": "Client-ID 79ea70333c45883"
 			},
 			"reddit": {
 				"redditSubreddit": "CyclePDX"
 			}
+
 		},
 		"portland": {
 			"template": "biketag1",
@@ -19,7 +35,8 @@
 				"oregon"
 			],
 			"imgur": {
-				"imgurAlbumHash": "Y9PKtpI"
+				"imgurAlbumHash": "Y9PKtpI",
+				"imgurAuthorization": "Client-ID 79ea70333c45883"
 			},
 			"reddit": {
 				"redditSubreddit": "CyclePDX"
@@ -32,18 +49,19 @@
 				"colorado"
 			],
 			"imgur": {
-				"imgurAlbumHash": "Y9PKtpI"
+				"imgurAlbumHash": "xTnG1Io",
+				"imgurAuthorization": "Client-ID 79ea70333c45883"
 			},
 			"reddit": {
-				"redditSubreddit": "CyclePDX"
+				"redditSubreddit": "CycleDenver"
 			}
 		}
 	},
+
 	"adminEmailAddresses": [
-		"keneucker@gmail.com",
-		"pdxbiketag@gmail.com",
 		"biketagorg@gmail.com"
 	],
+
 	"imgurClientID": "",
 	"imgurClientSecret": "",
 	"imgurCallbackURL": "",
