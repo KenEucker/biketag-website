@@ -72,12 +72,6 @@
 </head>
 
 <body>
-	<audio id="biketag-jingle">
-		<source src="<%= page.easter.jingle %>" type="audio/mpeg">
-		Your browser does not support the audio element.
-	</audio>
-
-
 	<img src="none.png" data-src="<%= page.images.header %>"></img>
 	<span id="mute" class="fas fa-volume-down"></span>
 	<p>Check out the biketag games in these cities!</p>
@@ -100,7 +94,18 @@
 				div.appendChild(link)
 				div.appendChild(document.createElement('br'))
 			})
+		})()
+	</script>
 
+	<link rel="stylesheet" href="css/fa-all.min.css" type='text/css'>
+
+	<audio id="biketag-jingle">
+		<source id="audioSource" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+	<script>
+		(function () {
 			const mute = document.getElementById('mute')
 			mute.addEventListener('click', function () {
 				const jingle = document.getElementsByTagName('audio')[0]
@@ -114,6 +119,8 @@
 			})
 
 			const jingle = document.getElementsByTagName('audio')[0]
+			const jingleSource = document.getElementById('audioSource')
+			jingleSource.src = "<%= page.easter.jingle %>"
 			jingle.volume = 0.5
 
 			jingle.play().then(function () {
@@ -123,10 +130,10 @@
 		})()
 	</script>
 
-	<link rel="stylesheet" href="css/fa-all.min.css" type='text/css'>
-
-	<!-- For local development hotloading -->
-	<script src="/reload/reload.js"></script>
+	<% if(debug) { %>
+		<!-- For local development hotloading -->
+		<script src="/reload/reload.js"></script>
+	<% } %>
 </body>
 
 </html>

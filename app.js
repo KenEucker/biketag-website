@@ -272,27 +272,65 @@ function getTagNumberIndex(images, tagNumber, proof = false) {
 	return -1;
 }
 
-function biketagRedditTemplate(images, tagNumber) {
-	const latestTagNumber = Number.parseInt(images[0].description.split(' ')[0].substr(1));
-	tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber;
-	const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1;
-	const nextTagNumber = tagNumber > 1 ? tagNumber : 2;
-	const nextTagIndex = getTagNumberIndex(images, nextTagNumber);
-	const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true);
+function renderTemplate(template, data, res) {
+	const pageTemplate = path.join(config.templatePath, template, 'index')
+	if (config.supportRendering && fs.existsSync(`${pageTemplate}.ejs`)) {
 
-	const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`;
-	const nextTagURL = images[nextTagIndex].link;
+		// console.log('rendering template', pageTemplate)
+		return res.render(pageTemplate, data)
+	}
+
+	const pageFile = `${pageTemplate}.html`
+	if (fs.existsSync(pageFile)) {
+		
+		console.log('serving html file', pageFile)
+		return res.sendFile(pageFile)
+		/// TODO: Send data somehow?
+	}
+
+	console.log('could not render template', template)
+}
+
+function getTagInformation(subdomain, tagNumber, albumHash, callback) {
+
+	imgur.setClientId(authTokens[subdomain].imgur.imgurClientID)
+	return imgur.getAlbumInfo(albumHash)
+		.then((json) => {
+			const images = getImagesByUploadDate(json.data.images)
+			const latestTagNumber = Number.parseInt(images[0].description.split(' ')[0].substr(1));
+			tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber;
+			
+			const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1;
+			const nextTagNumber = tagNumber > 1 ? tagNumber : 2;
+			const nextTagIndex = getTagNumberIndex(images, nextTagNumber);
+			const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true);
+
+			const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`;
+			const nextTagURL = images[nextTagIndex].link;
 
 
-	const split = images[prevTagIndex].description.split('by');
-	const credit = split[split.length - 1].trim();
-	const proofText = images[prevTagIndex].description;
+			const split = images[prevTagIndex].description.split('by');
+			const credit = split[split.length - 1].trim();
+			const proofText = images[prevTagIndex].description;
 
-	// console.log('setting image link', image.link, image);
-	return `<pre>Credit goes to: ${credit} for finding tag #${prevTagNumber}!\r\n\r\n
-[\#${nextTagNumber} tag by ${credit}](${nextTagURL})\r\n\r\n
-[${proofText}](${proofTagURL})\r\n\r\n
-[Rules](http://biketag.org/#howto)</pre>`;
+			const tagData = {
+				latestTagNumber,
+				prevTagNumber,
+				nextTagNumber,
+				nextTagIndex,
+				prevTagIndex,
+				proofTagURL,
+				nextTagURL,
+				credit,
+				proofText,
+			}
+
+			return callback(tagData)
+		})
+	.catch((err) => {
+		console.error(err.message)
+		res.send(err.message)
+	})
 }
 
 function filterSubdomainRequest(endpoint, response) {
@@ -307,13 +345,15 @@ function filterSubdomainRequest(endpoint, response) {
 }
 
 function templating(templatePath = path.join(__dirname, '/templates/'), supportRendering = true) {
+	config.templatePath = templatePath
+	config.supportRendering = supportRendering
 
-	if (supportRendering) {
+	if (config.supportRendering) {
 		//Set view engine to ejs
 		app.set("view engine", "ejs")
 
 		//Tell Express where we keep our index.ejs
-		app.set("views", path.join(__dirname, "views"))
+		// app.set("views", path.join(__dirname, "templates"))
 
 		//Use body-parser
 		app.use(bodyParser.urlencoded({
@@ -321,7 +361,7 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 		}))
 	}
 
-	filterSubdomainRequest('/', (subdomain, req, res) => {
+	filterSubdomainRequest('/:tagnumber?', (subdomain, req, res) => {
 		const host = req.headers.host
 
 		if (!subdomain) {
@@ -338,36 +378,11 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 		}
 
 		const template = getTemplateNameFromSubdomain(subdomain)
-		const landingPageTemplate = path.join(templatePath, template, 'index')
+		const data =  getPublicConfigurationValues(subdomain, host)
 
-		if (supportRendering && fs.existsSync(`${landingPageTemplate}.ejs`)) {
-
-			console.log('attempting to run renderer', landingPageTemplate)
-
-			return res.render(landingPageTemplate, getPublicConfigurationValues(subdomain, host))
-		}
-
-		const landingPageFile = path.join(templatePath, template, 'index.html')
-		console.log('serving html file', landingPageFile)
-		return res.sendFile(landingPageFile);
+		return renderTemplate(template, data, res)
 	})
 
-	filterSubdomainRequest('/get/reddit', (subdomain, req, res) => {
-		const tagnumber = req.query.tagnumber || 'latest';
-		const albumHash = config.subdomains[subdomain].imgur.imgurAlbumHash;
-
-		console.log('reddit template request for tag', tagnumber);
-		imgur.setClientId(authTokens[subdomain].imgur.imgurClientID);
-		imgur.getAlbumInfo(albumHash)
-			.then((json) => {
-				const images = getImagesByUploadDate(json.data.images);
-				res.send(biketagRedditTemplate(images, tagnumber));
-			})
-			.catch((err) => {
-				console.error(err.message)
-				res.send(err.message)
-			})
-	})
 	Object.keys(config.subdomains).forEach((subdomain) => {
 		const subdomainTemplate = config.subdomains[subdomain].template
 		const subdomainTemplatePath = path.join(templatePath, subdomainTemplate)
@@ -412,6 +427,22 @@ function security() {
 	});
 
 	console.log('request security enabled')
+}
+
+function endpoints() {
+	filterSubdomainRequest('/get/reddit/:tagnumber?', (subdomain, req, res) => {
+		const tagnumber = req.params.tagnumber || 'latest'
+		const albumHash = config.subdomains[subdomain].imgur.imgurAlbumHash
+		const host = req.headers.host
+		const redditTemplatePath = path.join(config.templatePath, 'reddit', 'post')
+
+		console.log(`reddit endpoint request for tag #${tagnumber}`)
+
+		return getTagInformation(subdomain, tagnumber, albumHash, (data) => {
+			data.host = host
+			return res.render(redditTemplatePath, data)
+		})
+	})
 }
 
 function authentication() {
@@ -703,6 +734,8 @@ init()
 setVars()
 /*     /   */
 security()
+/*   /     */
+endpoints()
 // /*    /    */ syncWithS3();
 /*   /     */
 templating()

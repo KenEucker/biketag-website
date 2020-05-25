@@ -7,13 +7,6 @@
 <html>
 
 <head>
-	<script>
-		window.biketag = window.biketag || {}
-		window.biketag.config = {
-			adminEmailAddresses: ("<%= page.adminEmailAddresses %>").split(','),
-		}
-	</script>
-
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=<%= page.gaUA %>"></script>
 	<script>
@@ -444,7 +437,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<!-- Priority Scripts -->
 	<script src="js/biketag.js"></script>
 	<script>
-		window.BikeTag.init('#tagit')
+		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
+		window.biketag.config = {
+			adminEmailAddresses: ("<%= page.adminEmailAddresses %>").split(','),
+		}
+		window.biketag.init('#tagit')
 	</script>
 
 	<script>
@@ -472,14 +469,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="js/imgur.js"></script>
 	<script src="js/reddit.js"></script>
 	<script src="js/smtp.js"></script>
-	<!-- <script src="assets/js/biketag.js"></script> -->
 
 	<% if (debug) { %>
 	<!-- For local development hotloading -->
 	<script src="/reload/reload.js"></script>
 	<% } %>
-
-	<!-- For local development of the template -->
 
 </body>
 

@@ -6,6 +6,37 @@ class BikeTag {
 		this.formID = "biketagUploadForm"
 	}
 
+	getUrlParam(param) {
+		var searchParams = new URLSearchParams(window.location.search);
+
+		if (!param) {
+			return searchParams;
+		} else {
+			return searchParams.get(param);
+		}
+	}
+
+	getLastOfUrlPath() {
+		return window.location.href.split('/')[3]
+	}
+
+	getTagNumberFromURL(tagNumber) {
+		if (!!tagNumber && Number.isInteger(tagNumber)) {
+			return tagNumber
+		}
+
+		if (!Number.isInteger(tagNumber)) {
+			var tagNumberFromQuery = Number.parseInt(this.getUrlParam('tagnumber'))
+			var tagNumberFromPath = Number.parseInt(this.getLastOfUrlPath())
+
+			return tagNumberFromPath || tagNumberFromQuery
+		} else {
+			tagNumber = Number.parseInt(tagNumber)
+		}
+
+		return tagNumber
+	}
+
 	appendBiketagForm(target) {
 		target = target || this.target
 
@@ -136,6 +167,211 @@ class BikeTag {
 		}
 	}
 
+	getTagNumberIndex(tagNumber) {
+		var images = imgur.imgurAlbumPictures;
+		var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
+
+		var verifyTagNumber = function (index) {
+			return index > -1 ? images[index].description.indexOf('#' + tagNumber + ' tag') != -1 : -1
+		};
+		if (verifyTagNumber(tagNumberIndex)) {
+			return tagNumberIndex;
+		} else if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
+			return tagNumberIndex + 1;
+		} else if (tagNumberIndex > 0 && verifyTagNumber(tagNumberIndex - 1)) {
+			return tagNumberIndex - 1;
+		}
+
+		for (var i = 0; i < images.length; ++i) {
+			if (verifyTagNumber(i)) {
+				tagNumberIndex = i;
+			}
+		}
+
+		return tagNumberIndex;
+	}
+
+	getProofTagNumberIndex(tagNumber) {
+		var images = imgur.imgurAlbumPictures;
+		var tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
+
+		var verifyProofTagNumber = function (index) {
+			return images[index].description.indexOf('#' + tagNumber + ' proof') != -1
+		};
+		if (verifyProofTagNumber(tagNumberIndex)) {
+			return tagNumberIndex;
+		} else if ((tagNumberIndex + 1 < images.length) && verifyProofTagNumber(tagNumberIndex + 1)) {
+			return tagNumberIndex + 1;
+		} else if (tagNumberIndex > 0 && verifyProofTagNumber(tagNumberIndex - 1)) {
+			return tagNumberIndex - 1;
+		}
+
+		for (var i = 0; i < images.length; ++i) {
+			console.log(`looking for ${tagNumber} with ${i}`);
+			if (verifyProofTagNumber(i)) {
+				tagNumberIndex = i;
+			}
+		}
+
+		return tagNumberIndex;
+	}
+
+	renderBikeTag(tag, heading, targetSelector) {
+		var targetContainer = document.querySelector(targetSelector || '.content .inner');
+
+		if (targetContainer) {
+			var tagContainer = document.createElement('div');
+			tagContainer.className = "m-imgur-post";
+			tagContainer.innerHTML = this.biketagImageTemplate(tag, heading || "Tag");
+			tagContainer.querySelector('a').addEventListener('click', function (e) {
+
+				if (window.uglipop) {
+					e.preventDefault();
+					e.stopPropagation();
+
+					window.uglipop({
+						source: 'html',
+						content: '<img src="' + this.getAttribute('href') + '"></img>'
+					});
+				}
+				
+			});
+			targetContainer.appendChild(tagContainer);
+		}
+	}
+
+	biketagImageTemplate(image, title) {
+		var imageLinkStringSplit = image.link.split('.')
+		var imageLinkStringEnd = '.' + imageLinkStringSplit[imageLinkStringSplit.length - 1]
+		var thumbnail = image.link.replace(imageLinkStringEnd, 'l' + imageLinkStringEnd)
+		var tagNumber = '';
+
+		if (image.gifv) {
+			thumbnail = image.link;
+		}
+
+		if (image.description) {
+			var split = image.description.split(' ')
+			var tagNumber = split[0]
+			var split = image.description.split('by')
+			var tagCredit = split[split.length - 1]
+		}
+
+		// console.log('setting image link', image.link, image);
+		return '<h2>' + title + '</h2>\
+				<a href="' + image.link + '" target="_blank">\
+					<span>' + tagNumber + '</span>\
+					<span>' + tagCredit + '</span>\
+					<img data-src="' + thumbnail + '">\
+				</a>';
+	}
+
+	getCurrentTagInformation() {
+		var tagInformation = {
+			currentTagNumber: 0,
+			hasTag: false,
+			currentTag: null,
+		};
+
+		if (imgur.imgurAlbumPictures.length) {
+			tagInformation.currentTag = imgur.imgurAlbumPictures[0];
+
+			if (tagInformation.currentTag) {
+				tagInformation.hasTag = true;
+				tagInformation.currentTagNumber = Number(tagInformation.currentTag.description.split(' ')[0].substr(1));
+			}
+		}
+
+		tagInformation.nextTagNumber = tagInformation.currentTagNumber + 1;
+
+		return tagInformation;
+	}
+
+	showLatestTagImages(count) {
+		if (!imgur.imgurAlbumPictures) {
+			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this));
+		}
+
+		var images = imgur.imgurAlbumPictures;
+		count = Number.isInteger(count) ? count : this.getUrlParam('count');
+
+		if ((images && images.length > 1)) {
+			$('.content .inner').empty();
+			if (!!count) {
+				count = count.toUpperCase() == "ALL" ? images.length : Number(count);
+				for (var i = 0;
+					(i < (count * 2)) && (i < images.length); ++i) {
+					var image = images[i];
+					this.renderBikeTag(image, image.description);
+				}
+			} else {
+				var lastImage = images[0];
+				var secondToLastImage = images.length > 1 ? images[1] : null;
+				var thirdToLastImage = images.length > 2 ? images[2] : null;
+
+				this.renderBikeTag(lastImage, "Current mystery location to find");
+
+				// Removed the multiple tags on the main page
+				// if (secondToLastImage) {
+				// 	this.renderBikeTag(secondToLastImage, "Proof image");
+				// }
+				// if (thirdToLastImage) {
+				// 	this.renderBikeTag(thirdToLastImage, "Previous tag mystery location");
+				// }
+			}
+
+			// Set the form with the tag information
+			var currentTagInfo = this.getCurrentTagInformation();
+			$('#proofHeading').text('Proof for #' + currentTagInfo.currentTagNumber);
+			$('#nextTagHeading').text('Next Tag (#' + currentTagInfo.nextTagNumber + ')');
+		}
+
+		// DON'T DO THIS RIGHT NOW
+		// $('#nextTagHeading').text('Next Tag info (#' + currentTagInfo.nextTagNumber + ')');
+
+		console.log('loading lazy load images');
+		window.lazyLoadInstance = new LazyLoad();
+
+		setTimeout(function () {
+			// Hide the overlay and show the content
+			$('#loader .logo').animate({
+				top: "-200px"
+			});
+			$('#loader').fadeOut();
+			$('#main').fadeIn();
+		}, 1000);
+	}
+
+	showBikeTagNumber(tagNumber) {
+		if (!imgur.imgurAlbumPictures) {
+			return imgur.getImgurAlbumPictures(null, this.showBikeTagNumber.bind(this));
+		}
+
+		tagNumber = this.getTagNumberFromURL(tagNumber)
+		var images = imgur.imgurAlbumPictures
+		var imageCount = Math.round((images.length / 2) + ((images.length - 1) % 2))
+
+		if (tagNumber && tagNumber < imageCount) {
+			var theTag = images[this.getTagNumberIndex(tagNumber)];
+			var proofTag = images[this.getProofTagNumberIndex(tagNumber)];
+
+			if (proofTag) {
+				this.renderBikeTag(proofTag, "Found It Tag");
+			}
+			if (theTag) {
+				this.renderBikeTag(theTag, "Original Tag");
+			}
+
+			window.lazyLoadInstance = new LazyLoad();
+		} else if (tagNumber == imageCount) {
+			var newTag = images[this.getTagNumberIndex(tagNumber)];
+
+			this.renderBikeTag(newTag, "Current Tag");
+
+			window.lazyLoadInstance = new LazyLoad();
+		}
+	}
+
 	init(targetSelector) {
 
 		var self = this
@@ -154,5 +390,5 @@ class BikeTag {
 	}
 }
 
-window.BikeTag = new BikeTag()
-window.BikeTag.BikeTag = BikeTag
+window.biketag = new BikeTag()
+window.biketag.BikeTag = BikeTag
