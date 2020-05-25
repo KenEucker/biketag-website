@@ -384,13 +384,18 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 	})
 
 	Object.keys(config.subdomains).forEach((subdomain) => {
-		const subdomainTemplate = config.subdomains[subdomain].template
-		const subdomainTemplatePath = path.join(templatePath, subdomainTemplate)
+		if (!!config.subdomains[subdomain]) {
+			const subdomainTemplate = config.subdomains[subdomain].template
+			console.log({templatePath, subdomainTemplate})
+			const subdomainTemplatePath = path.join(templatePath, subdomainTemplate)
 
-		if (fs.existsSync(subdomainTemplatePath)) {
-			console.log(`configuring static path for subdomain: ${subdomain}`, subdomainTemplatePath)
+			if (fs.existsSync(subdomainTemplatePath)) {
+				console.log(`configuring static path for subdomain: ${subdomain}`, subdomainTemplatePath)
 
-			app.use(express.static(subdomainTemplatePath))
+				app.use(express.static(subdomainTemplatePath))
+			}
+		} else {
+			console.log('cannot configure subdomain', subdomain)
 		}
 	})
 

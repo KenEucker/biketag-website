@@ -116,7 +116,7 @@ class BikeTag {
 			var proofLocation = ''
 
 			// get the latest tag number
-			var currentTagInfo = imgur.getCurrentTagInformation()
+			var currentTagInfo = this.getCurrentTagInformation()
 			var user = form.find('input[name="name"]').val()
 			var proofLocation = form.find('input[name="location"]').val()
 			var hint = form.find('input[name="hint"]').val()
@@ -238,6 +238,21 @@ class BikeTag {
 			});
 			targetContainer.appendChild(tagContainer);
 		}
+	}
+
+	getBikeTagNumberFromImage(image) {
+		let tagNumber
+
+		if (image.description) {
+			var split = image.description.split(' ')
+			tagNumber = Number.parseInt(split[0].substring(1))
+
+			if(image.description.indexOf('proof') !== -1) {
+				tagNumber = 0 - tagNumber
+			}
+		}
+
+		return tagNumber
 	}
 
 	biketagImageTemplate(image, title) {

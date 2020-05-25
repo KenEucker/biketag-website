@@ -44,20 +44,34 @@
 
 			if (albumInfo.images_count != window.imgur.imgurAlbumPictures.length) {
 				console.log('image count has changed, updating most recent tags');
-				this.imgurAlbumPictures = this.getImgurAlbumImagesByUploadDate(albumInfo.images);
+				this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
 				this.showLatestTagImages();
 			}
+		},
+
+		getImgurAlbumImagesByTagNumber(images) {
+			return images.sort(function (image1, image2) {
+				var tagNumber1 = biketag.getBikeTagNumberFromImage(image1)
+				var tagNumber2 = biketag.getBikeTagNumberFromImage(image2)
+
+				var tagNumber1IsProof = tagNumber1 < 0
+				var tagNumber2IsProof = tagNumber2 < 0
+				var difference = Math.abs(tagNumber2) - Math.abs(tagNumber1)
+				var sortResult = difference !== 0 ? difference : (tagNumber1IsProof ? -1 : 1)
+
+				return sortResult
+			});
 		},
 
 		getImgurAlbumImagesByUploadDate(images, newestFirst) {
 			if (!newestFirst) {
 				return images.sort(function (image1, image2) {
-					return new Date(image2.datetime) - new Date(image1.datetime);
-				});
+					return new Date(image2.datetime) - new Date(image1.datetime)
+				})
 			} else {
 				return images.sort(function (image1, image2) {
-					return new Date(image1.datetime) - new Date(image2.datetime);
-				});
+					return new Date(image1.datetime) - new Date(image2.datetime)
+				})
 			}
 		},
 
@@ -74,7 +88,7 @@
 				url: 'https://api.imgur.com/3/album/' + albumHash + '/images',
 				success: function (data) {
 					// console.log(data);
-					this.imgurAlbumPictures = this.getImgurAlbumImagesByUploadDate(data.data);
+					this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(data.data);
 
 					if (callback) {
 						callback(data);

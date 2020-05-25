@@ -14,7 +14,6 @@
 			"logo": ""
 		},
 		"adminEmailAddresses": [
-			"biketagorg@gmail.com"
 		]
 	},
 	"tag": {
@@ -34,7 +33,6 @@
 			"logo": ""
 		},
 		"adminEmailAddresses": [
-			"biketagorg@gmail.com"
 		]
 	},
 	"portland": {
@@ -56,8 +54,7 @@
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com",
-			"pdxbiketag@gmail.com",
-			"biketagorg@gmail.com"
+			"pdxbiketag@gmail.com"
 		]
 	},
 	"denver": {
@@ -78,8 +75,49 @@
 			"logo": ""
 		},
 		"adminEmailAddresses": [
-			"keneucker@gmail.com",
-			"biketagorg@gmail.com"
+			"keneucker@gmail.com"
+		]
+	},
+	"indianapolis": {
+		"metaTitle": "IndyBikeTag!",
+		"region": "Indianapolis, Indiana",
+		"tagline": "",
+		"imgur": {
+			"imgurAlbumHash": "dr45yWS"
+		},
+		"reddit": {
+			"redditSubreddit": "BikeIN"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
+		]
+	},
+	"seattle": {
+		"metaTitle": "SeattleBikeTag!",
+		"region": "Seattle, Washington",
+		"tagline": "",
+		"imgur": {
+			"imgurAlbumHash": "xTnG1Io"
+		},
+		"reddit": {
+			"redditSubreddit": "CycleDenver"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
 		]
 	}
 }
