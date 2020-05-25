@@ -354,7 +354,7 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 
 	filterSubdomainRequest('/get/reddit', (subdomain, req, res) => {
 		const tagnumber = req.query.tagnumber || 'latest';
-		const albumHash = authTokens[subdomain].imgur.imgurAlbumHash;
+		const albumHash = config.subdomains[subdomain].imgur.imgurAlbumHash;
 
 		console.log('reddit template request for tag', tagnumber);
 		imgur.setClientId(authTokens[subdomain].imgur.imgurClientID);
