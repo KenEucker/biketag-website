@@ -60,7 +60,7 @@
 	"denver": {
 		"metaTitle": "DenverBikeTag!",
 		"region": "Denver, Colorado",
-		"tagline": "The BikeTag game in Portland, Oregon",
+		"tagline": "The BikeTag game in Denver, Colorado",
 		"imgur": {
 			"imgurAlbumHash": "xTnG1Io"
 		},
@@ -81,7 +81,7 @@
 	"indianapolis": {
 		"metaTitle": "IndyBikeTag!",
 		"region": "Indianapolis, Indiana",
-		"tagline": "The BikeTag game in Portland, Oregon",
+		"tagline": "The BikeTag game in Indianapolis, Indiana",
 		"imgur": {
 			"imgurAlbumHash": "dr45yWS"
 		},
@@ -102,7 +102,7 @@
 	"seattle": {
 		"metaTitle": "SeattleBikeTag!",
 		"region": "Seattle, Washington",
-		"tagline": "The BikeTag game in Portland, Oregon",
+		"tagline": "The BikeTag game in Seattle, Washington",
 		"imgur": {
 			"imgurAlbumHash": "xTnG1Io"
 		},
