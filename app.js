@@ -137,9 +137,8 @@ function getPublicConfigurationValues(subdomain, host) {
 			images: subdomainInformation.images,
 			adminEmailAddresses: subdomainInformation.adminEmailAddresses,
 			easter: subdomainInformation.easter,
+			tagline: subdomainInformation.tagline,
 			region: subdomainInformation.region,
-			content: config.content,
-
 			metaUrl: subdomainInformation.metaUrl || config.metaUrl,
 			metaType: subdomainInformation.metaType || config.metaType,
 			metaTitle: subdomainInformation.metaTitle || config.metaTitle,
@@ -157,6 +156,9 @@ function getPublicConfigurationValues(subdomain, host) {
 		return out
 
 	}, {})
+
+	publicConfig.content = config.content
+
 
 	return publicConfig
 }

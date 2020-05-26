@@ -50,7 +50,7 @@
 		},
 		"images": {
 			"header": "../../assets/img/biketag-logo-1.png",
-			"logo": ""
+			"logo": "pdx-bike-tag"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com",
@@ -60,7 +60,7 @@
 	"denver": {
 		"metaTitle": "DenverBikeTag!",
 		"region": "Denver, Colorado",
-		"tagline": "",
+		"tagline": "The BikeTag game in Portland, Oregon",
 		"imgur": {
 			"imgurAlbumHash": "xTnG1Io"
 		},
@@ -81,7 +81,7 @@
 	"indianapolis": {
 		"metaTitle": "IndyBikeTag!",
 		"region": "Indianapolis, Indiana",
-		"tagline": "",
+		"tagline": "The BikeTag game in Portland, Oregon",
 		"imgur": {
 			"imgurAlbumHash": "dr45yWS"
 		},
@@ -102,7 +102,7 @@
 	"seattle": {
 		"metaTitle": "SeattleBikeTag!",
 		"region": "Seattle, Washington",
-		"tagline": "",
+		"tagline": "The BikeTag game in Portland, Oregon",
 		"imgur": {
 			"imgurAlbumHash": "xTnG1Io"
 		},

@@ -30,7 +30,7 @@
 
 	<link rel="stylesheet" href="css/main.css" />
 	<link rel="stylesheet" href="css/uglipop.css" />
-	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
 	<noscript>
 		<link rel="stylesheet" href="css/noscript.css" /></noscript>
 </head>
@@ -199,8 +199,7 @@
 	<script src="js/smtp.js"></script>
 
 	<% if (debug) { %>
-	<!-- For local development hotloading -->
-	<script src="/reload/reload.js"></script>
+		<%- content.localdev %>
 	<% } %>
 
 </body>
