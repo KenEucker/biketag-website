@@ -132,46 +132,26 @@ function getPublicConfigurationValues(subdomain, host) {
 	publicConfig.subdomains = Object.values(config.subdomains).reduce((out, subdomainInformation, index) => {
 		const subdomainName = subdomains[index]
 
-		const location = subdomainInformation.location
-		const images = subdomainInformation.images
-		const adminEmailAddresses = subdomainInformation.adminEmailAddresses
-		const easter = subdomainInformation.easter
-		const region = subdomainInformation.region
-		const content = config.content
+		const pageData = {
+			location: subdomainInformation.location,
+			images: subdomainInformation.images,
+			adminEmailAddresses: subdomainInformation.adminEmailAddresses,
+			easter: subdomainInformation.easter,
+			region: subdomainInformation.region,
+			content: config.content,
 
-		const metaUrl = subdomainInformation.metaUrl || config.metaUrl
-		const metaType = subdomainInformation.metaType || config.metaType
-		const metaTitle = subdomainInformation.metaTitle || config.metaTitle
-		const metaDescription = subdomainInformation.metaDescription || config.metaDescription
-		const gaUA = subdomainInformation.gaUA || config.gaUA
-		
-		out[subdomainName] = {
-			adminEmailAddresses,
-			easter,
-			images,
-			location,
-			content,
-			region,
-			metaUrl,
-			metaType,
-			metaTitle,
-			metaDescription,
-			gaUA,
+			metaUrl: subdomainInformation.metaUrl || config.metaUrl,
+			metaType: subdomainInformation.metaType || config.metaType,
+			metaTitle: subdomainInformation.metaTitle || config.metaTitle,
+			metaDescription: subdomainInformation.metaDescription || config.metaDescription,
+			gaUA: subdomainInformation.gaUA || config.gaUA,
+			readonly: subdomainInformation.readonly,
 		}
+		
+		out[subdomainName] = pageData
 
 		if (subdomain === subdomainName) {
-			publicConfig.page = {}
-
-			publicConfig.page.adminEmailAddresses = adminEmailAddresses
-			publicConfig.page.easter = easter
-			publicConfig.page.images = images
-			publicConfig.page.location = location
-		
-			publicConfig.page.metaUrl = metaUrl
-			publicConfig.page.metaType = metaType
-			publicConfig.page.metaTitle = metaTitle
-			publicConfig.page.metaDescription = metaDescription
-			publicConfig.page.gaUA = gaUA
+			publicConfig.page = pageData
 		}
 
 		return out
@@ -232,6 +212,34 @@ function isValidRequestOrigin(req) {
 	}
 
 	return originIsValid
+}
+
+function getBikeTagNumberFromImage(image) {
+	let tagNumber
+
+	if (image.description) {
+		var split = image.description.split(' ')
+		tagNumber = Number.parseInt(split[0].substring(1))
+
+		if(image.description.indexOf('proof') !== -1) {
+			tagNumber = 0 - tagNumber
+		}
+	}
+
+	return tagNumber
+}
+
+function getImagesByTagNumber(images) {
+	return images.sort(function (image1, image2) {
+		var tagNumber1 = getBikeTagNumberFromImage(image1)
+		var tagNumber2 = getBikeTagNumberFromImage(image2)
+
+		var tagNumber1IsProof = tagNumber1 < 0
+		var difference = Math.abs(tagNumber2) - Math.abs(tagNumber1)
+		var sortResult = difference !== 0 ? difference : (tagNumber1IsProof ? -1 : 1)
+
+		return sortResult
+	})
 }
 
 function getImagesByUploadDate(images, newestFirst) {
@@ -296,22 +304,27 @@ function getTagInformation(subdomain, tagNumber, albumHash, callback) {
 	imgur.setClientId(authTokens[subdomain].imgur.imgurClientID)
 	return imgur.getAlbumInfo(albumHash)
 		.then((json) => {
-			const images = getImagesByUploadDate(json.data.images)
-			const latestTagNumber = Number.parseInt(images[0].description.split(' ')[0].substr(1));
-			tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber;
+			const images = getImagesByTagNumber(json.data.images)
+			const latestTagNumber = getBikeTagNumberFromImage(images[0])
+			tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber
 			
-			const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1;
-			const nextTagNumber = tagNumber > 1 ? tagNumber : 2;
-			const nextTagIndex = getTagNumberIndex(images, nextTagNumber);
-			const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true);
+			const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1
+			const nextTagNumber = tagNumber > 1 ? tagNumber : 2
+			const nextTagIndex = getTagNumberIndex(images, nextTagNumber)
+			const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true)
 
-			const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`;
-			const nextTagURL = images[nextTagIndex].link;
+			console.log({prevTagNumber,
+				nextTagNumber,
+				nextTagIndex,
+				prevTagIndex})
+
+			const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`
+			const nextTagURL = images[nextTagIndex].link
 
 
-			const split = images[prevTagIndex].description.split('by');
-			const credit = split[split.length - 1].trim();
-			const proofText = images[prevTagIndex].description;
+			const split = images[prevTagIndex].description.split('by')
+			const credit = split[split.length - 1].trim()
+			const proofText = images[prevTagIndex].description
 
 			const tagData = {
 				latestTagNumber,

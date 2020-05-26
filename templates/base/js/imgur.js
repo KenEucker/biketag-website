@@ -60,7 +60,7 @@
 				var sortResult = difference !== 0 ? difference : (tagNumber1IsProof ? -1 : 1)
 
 				return sortResult
-			});
+			})
 		},
 
 		getImgurAlbumImagesByUploadDate(images, newestFirst) {
