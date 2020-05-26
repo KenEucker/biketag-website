@@ -67,22 +67,78 @@
 				</div>
 				<div class="w-nav-overlay" data-wf-ignore=""></div>
 			</nav>
-			<div id="main"></div>
+			<div id="main-container">
+				<div id="main" class="section"></div>
+				<!-- <div id="leaderboard" class="section" style="display: none;"></div>
+				<div id="play" class="section" style="display: none;"></div> -->
+				<div id="about" class="section" style="display: none;">
+					<h1>About The BikeTag Game</h1>
+					<%- content.about %>
+				</div>
+			</div>
 			<div class="w-nav" data-animation="default" data-collapse="medium" data-duration="400">
 				<div class="w-nav-overlay" data-wf-ignore=""></div>
 			</div>
-			<!-- <nav class="pagination-nav w-nav" data-animation="default" data-collapse="none" data-duration="400"> -->
-				<!-- <nav class="nav-menu w-nav-menu" role="navigation">
-					<a class="nav-link page w-nav-link" href="http://prooftemplate.webflow.io/">PG. 1</a>
-					<div class="w-nav-button">
-						<div class="w-icon-nav-menu"></div>
-					</div>
-					<div class="w-nav-overlay" data-wf-ignore=""></div>
-			</nav> -->
 		</div>
 	</div>
 	<script>
 		(function () {
+			var navMenu = document.querySelector('.nav-menu')
+			var navMenuLinks = navMenu.querySelectorAll('.nav-link')
+
+			var hideShowSectionInContainer = function(section) {
+				var container = document.getElementById('main-container')
+				var divs = container.querySelectorAll('.section')
+				let nonFound = true
+
+				if (!divs.length) {
+					return
+				}
+
+				divs.forEach(function(div) {
+					if (div.id === section) {
+						div.style.display = 'block'
+						nonFound = false
+					} else {
+						div.style.display = 'none'
+					}
+				})
+
+				if (nonFound) {
+					return hideShowSectionInContainer('main')
+				}
+
+				navMenuLinks.forEach(function(link) {
+					var linkPath = link.href.split('/')[3]
+					var current = section !== 'main' ? link.href.indexOf(section) !== -1 : !linkPath.length
+
+					if (current) {
+						link.classList.add('w--current')
+					} else {
+						link.classList.remove('w--current')
+					}
+				})
+
+				var menu = document.querySelector('.menu-wrapper.w--open')
+				if (!!menu) {
+					menu.click()
+				}
+
+				var newUrl = `/${section !== 'main' ? section : ''}`
+				window.history.pushState({}, newUrl, newUrl);
+			}
+			
+			navMenuLinks.forEach(function(navLink) {
+				navLink.addEventListener('click', function(e) {
+					e.preventDefault()
+					var section = e.target.href.split('/')[3]
+
+					hideShowSectionInContainer(section)
+
+					return true
+				})
+			})
+
 			var logo = document.getElementById('logo-img')
 			if (!!logo) {
 				logo.src = logo.dataset.src
@@ -95,6 +151,11 @@
 			var mainDiv = document.getElementById('main')
 			var subs = JSON.parse(`<%- JSON.stringify(supportedRegions) %>`)
 			var regions = JSON.parse(`<%- JSON.stringify(subdomains) %>`)
+			var path = window.location.href.split('/')[3]
+
+			if (path.length) {
+				hideShowSectionInContainer(path)
+			}
 
 			subs.forEach(function (sub) {
 				var region = regions[sub]
@@ -123,7 +184,6 @@
 		})()
 	</script>
 	<script src="js/jquery.min.js" type="text/javascript"></script>
-	<script src="js/proof.js" type="text/javascript"></script>
 	<script src="js/webflow.js" type="text/javascript"></script>
   	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 

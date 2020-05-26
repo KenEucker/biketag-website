@@ -123,12 +123,27 @@ p {
 	max-height: 100px;
 }
 
+#about h1 {
+	color: #FF652F;
+}
+
+#about {
+	padding: 4em;
+	text-align: center;
+	color: #14A76C;
+}
+
+#about a {
+	color: #14A76C;
+}
+
 .big-tagline {
 	margin-bottom: 68px;
 	font-family: horrible;
 	font-size: 45px;
 	line-height: 54px;
 	font-weight: 300;
+	color: #FF652F;
 }
 
 .byline {
