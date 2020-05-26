@@ -401,13 +401,20 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 	Object.keys(config.subdomains).forEach((subdomain) => {
 		if (!!config.subdomains[subdomain]) {
 			const subdomainTemplate = config.subdomains[subdomain].template
-			console.log({templatePath, subdomainTemplate})
-			const subdomainTemplatePath = path.join(templatePath, subdomainTemplate)
+			
+			if (!!subdomainTemplate) {
+				console.log({templatePath, subdomainTemplate})
+				const subdomainTemplatePath = path.join(templatePath, subdomainTemplate)
 
-			if (fs.existsSync(subdomainTemplatePath)) {
-				console.log(`configuring static path for subdomain: ${subdomain}`, subdomainTemplatePath)
+				if (fs.existsSync(subdomainTemplatePath)) {
+					console.log(`configuring static path for subdomain: ${subdomain}`, subdomainTemplatePath)
 
-				app.use(express.static(subdomainTemplatePath))
+					app.use(express.static(subdomainTemplatePath))
+				} else {
+					console.log('subdomain template not found', {subdomain, subdomainTemplatePath})
+				}
+			} else {
+				console.log('subdomain template not set', { subdomain })
 			}
 		} else {
 			console.log('cannot configure subdomain', subdomain)
@@ -534,11 +541,13 @@ function authentication() {
 			successRedirect: '/',
 		}));
 		app.post('/auth/imgur/getToken', (req, res) => {
+			console.log("hi")
 			const subdomain = getSubdomainPrefix(req)
 			const response = {
 				imgurAlbumHash: config.subdomains[subdomain].imgur.imgurAlbumHash,
 				imgurAuthorization: config.subdomains[subdomain].imgur.imgurAuthorization
 			}
+			console.log({response})
 
 			if (isValidRequestOrigin(req)) {
 				response.imgurRefreshToken = authTokens[subdomain].imgur.imgurRefreshToken
@@ -547,7 +556,7 @@ function authentication() {
 			}
 
 			// This will only return the imgur access token if the request is coming from the site itself
-			res.json(response);
+			res.json(response)
 		});
 	} else {
 		app.get('/auth/imgur/*', (req, res) => {

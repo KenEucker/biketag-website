@@ -137,6 +137,13 @@ p {
 	color: #14A76C;
 }
 
+#mute {
+	opacity: 0.7;
+	color: black;
+	font-size: 24px;
+	text-align: center;
+}
+
 .big-tagline {
 	margin-bottom: 68px;
 	font-family: horrible;
