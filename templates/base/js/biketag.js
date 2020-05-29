@@ -310,7 +310,7 @@ class BikeTag {
 		var images = imgur.imgurAlbumPictures;
 		count = Number.isInteger(count) ? count : this.getUrlParam('count');
 
-		if ((images && images.length > 1)) {
+		if (!!images && images.length) {
 			$('.content .inner').empty();
 			if (!!count) {
 				count = count.toUpperCase() == "ALL" ? images.length : Number(count);

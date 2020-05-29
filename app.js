@@ -540,7 +540,6 @@ function authentication() {
 			successRedirect: '/',
 		}));
 		app.post('/auth/imgur/getToken', (req, res) => {
-			console.log("hi")
 			const subdomain = getSubdomainPrefix(req)
 			const response = {
 				imgurAlbumHash: config.subdomains[subdomain].imgur.imgurAlbumHash,
