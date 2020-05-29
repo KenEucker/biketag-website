@@ -164,11 +164,20 @@ function getPublicConfigurationValues(subdomain, host) {
 
 function getSubdomainPrefix(req, returnAlias = false) {
 	const defaultSubdomain = req.subdomains.length ? req.subdomains[0] : 'default'
-	const localhostSubdomainEnd = req.headers.host.indexOf('.')
-	const localhostOverride = localhostSubdomainEnd !== -1 ? req.headers.host.substr(0, localhostSubdomainEnd) : null
-	const alias = !!localhostOverride ? localhostOverride : defaultSubdomain
+	if (!req.headers.host) {
+		const localhostSubdomainEnd = req.headers.host.indexOf('.')
+		const localhostOverride = localhostSubdomainEnd !== -1 ? req.headers.host.substr(0, localhostSubdomainEnd) : null
+		const alias = !!localhostOverride ? localhostOverride : defaultSubdomain
 
-	return returnAlias ? alias : getSubdomainFromAlias(alias)
+		return returnAlias ? alias : getSubdomainFromAlias(alias)
+	} else {
+		console.log('error in determining subdomain', {
+			host: req.host,
+			subdomains: req.subdomains
+		})
+	}
+
+	return defaultSubdomain
 }
 
 function getSubdomainFromAlias(alias) {
