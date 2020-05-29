@@ -39,12 +39,13 @@
 		<header class="header main-column">
 			<img id="logo-img" style="display: none;" src="assets/img/none.png" data-src="<%= page.images.header %>"></img>
 			<h1 class="logo" id="logo-text">
-				BIKETAG
+				BIKETAG 
 			</h1>
+			<span id="mute" class="fas fa-volume-down"></span>
 			<div class="big-tagline w-hidden-small w-hidden-tiny">Bike.<br>Discover.<br>Share.</div>
 			<div class="info-wrapper">
 				<div class="tagline">A Free and Open Source Software Project</div>
-				<div class="byline">developed on <a style="text-decoration: none; color: unset;" href="https://github.com/keneucker/biketag-website">Github</a></div>
+				<div class="byline"><a style="text-decoration: none; color: unset;" href="https://github.com/keneucker/biketag-website"></a>developed on Github</a></div>
 			</div>
 			<div class="footer-wrapper w-clearfix">
 				<a class="footer-nav-link w-inline-block" href="/"><img src="assets/img/radbike-icon.svg"></a>
@@ -183,8 +184,40 @@
 			})
 		})()
 	</script>
+	<audio id="biketag-jingle">
+		<source id="audioSource" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+	<script>
+		(function () {
+			const mute = document.getElementById('mute')
+			mute.addEventListener('click', function () {
+				const jingle = document.getElementsByTagName('audio')[0]
+				if (this.className.indexOf('down') !== -1) {
+					this.className = "fas fa-volume-mute"
+					jingle.play()
+				} else {
+					this.className = "fas fa-volume-down"
+					jingle.pause()
+				}
+			})
+
+			const jingle = document.getElementsByTagName('audio')[0]
+			const jingleSource = document.getElementById('audioSource')
+			jingleSource.src = "<%= page.easter.jingle %>"
+			jingle.volume = 0.5
+
+			jingle.play().then(function () {
+				mute.className = "fas fa-volume-mute"
+			})
+
+		})()
+	</script>
+
 	<script src="js/jquery.min.js" type="text/javascript"></script>
 	<script src="js/webflow.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="css/fa-all.min.css" type='text/css'>
   	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 
 	<% if (debug) { %>
