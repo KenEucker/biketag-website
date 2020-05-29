@@ -164,7 +164,7 @@ function getPublicConfigurationValues(subdomain, host) {
 
 function getSubdomainPrefix(req, returnAlias = false) {
 	const defaultSubdomain = req.subdomains.length ? req.subdomains[0] : 'default'
-	const localhostSubdomainEnd = !req.headers.host ? req.headers.host.indexOf('.') : -1
+	const localhostSubdomainEnd = !!req.headers.host ? req.headers.host.indexOf('.') : -1
 	const localhostOverride = localhostSubdomainEnd !== -1 ? req.headers.host.substr(0, localhostSubdomainEnd) : null
 	const alias = !!localhostOverride ? localhostOverride : defaultSubdomain
 
