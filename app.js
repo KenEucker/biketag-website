@@ -128,7 +128,6 @@ function getPublicConfigurationValues(subdomain, host) {
 		content: config.content,
 	}
 
-	
 	publicConfig.subdomains = Object.values(config.subdomains).reduce((out, subdomainInformation, index) => {
 		const subdomainName = subdomains[index]
 
