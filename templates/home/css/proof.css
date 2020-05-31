@@ -325,7 +325,7 @@ p {
 	position: relative;
 	z-index: 3;
 	display: block;
-	padding: 40px;
+	padding: 30px;
 	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12);
 	-webkit-transition: background-color 300ms ease, color 300ms ease;
 	transition: background-color 300ms ease, color 300ms ease;
@@ -918,6 +918,10 @@ p {
 		display: inline-block;
 		margin-bottom: 13px;
 		float: none;
+	}
+
+	.image-wrapper {
+		padding-right: 0;
 	}
 
 	.main-column.header {
