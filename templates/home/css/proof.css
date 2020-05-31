@@ -185,6 +185,7 @@ p {
 	-webkit-transition: opacity 250ms ease, background-color 250ms ease;
 	transition: opacity 250ms ease, background-color 250ms ease;
 	text-decoration: none;
+	background-color: rgba(1,1,1,0.5);
 }
 
 .footer-nav-link img {
@@ -326,6 +327,7 @@ p {
 	z-index: 3;
 	display: block;
 	padding: 30px;
+	padding-left: 10px;
 	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12);
 	-webkit-transition: background-color 300ms ease, color 300ms ease;
 	transition: background-color 300ms ease, color 300ms ease;
