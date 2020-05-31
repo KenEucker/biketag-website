@@ -28,7 +28,7 @@ module.exports = {
       repo : 'git@github.com:keneucker/biketag-website.git',
       path : '~/biketag-website',
       env  : {
-        NODE_ENV: 'dev'
+        NODE_ENV: 'production'
       },
     },
     dev : {
