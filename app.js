@@ -251,34 +251,38 @@ function getImagesByUploadDate(images, newestFirst) {
 }
 
 function getTagNumberIndex(images, tagNumber, proof = false) {
-	const tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
-
+	let tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
+	
+	if (tagNumberIndex < 1) {
+		return -tagNumberIndex
+	}
+	
 	const verifyTagNumber = function (index) {
-		let compare = `#${tagNumber} tag`;
+		let compare = `#${tagNumber} tag`
 		if (proof) {
-			compare = `#${tagNumber} proof`;
+			compare = `#${tagNumber} proof`
 		}
-		return index > -1 ? images[index].description.indexOf(compare) !== -1 : false;
-	};
+		
+		return index > -1 && !!images[index] ? images[index].description.indexOf(compare) !== -1 : false
+	}
 
 	if (verifyTagNumber(tagNumberIndex)) {
-		return tagNumberIndex;
+		return tagNumberIndex
 	}
 	if (tagNumberIndex < (images.length + 1) && verifyTagNumber(tagNumberIndex + 1)) {
-		return tagNumberIndex + 1;
+		return tagNumberIndex + 1
 	}
 	if (tagNumberIndex > 0 && verifyTagNumber(tagNumberIndex - 1)) {
-		return tagNumberIndex - 1;
+		return tagNumberIndex - 1
 	}
 
 	for (let i = 0; i < images.length; ++i) {
 		if (verifyTagNumber(i)) {
-			return i;
-			break;
+			return i
 		}
 	}
 
-	return -1;
+	return -1
 }
 
 function renderTemplate(template, data, res) {
@@ -303,48 +307,53 @@ function renderTemplate(template, data, res) {
 function getTagInformation(subdomain, tagNumber, albumHash, callback) {
 
 	imgur.setClientId(authTokens[subdomain].imgur.imgurClientID)
-	return imgur.getAlbumInfo(albumHash)
-		.then((json) => {
-			const images = getImagesByTagNumber(json.data.images)
-			const latestTagNumber = getBikeTagNumberFromImage(images[0])
-			tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber
-			
-			const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1
-			const nextTagNumber = tagNumber > 1 ? tagNumber : 2
-			const nextTagIndex = getTagNumberIndex(images, nextTagNumber)
-			const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true)
+	const getTagRequest = imgur.getAlbumInfo(albumHash).then((json) => {
+		const images = getImagesByTagNumber(json.data.images)
+		const latestTagNumber = getBikeTagNumberFromImage(images[0])
+		tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber
+		// console.log('hello', { tagNumber, images, latestTagNumber })
+		
+		const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1
+		const nextTagNumber = tagNumber > 1 ? tagNumber : 2
+		const nextTagIndex = getTagNumberIndex(images, nextTagNumber)
+		const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true)
 
-			console.log({prevTagNumber,
-				nextTagNumber,
-				nextTagIndex,
-				prevTagIndex})
+		// console.log({prevTagNumber,
+		// 	nextTagNumber,
+		// 	nextTagIndex,
+		// 	prevTagIndex})
 
-			const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`
-			const nextTagURL = images[nextTagIndex].link
+		const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`
+		const nextTagURL = images[nextTagIndex].link
+		const prevTagImage = images[prevTagIndex]
 
+		const split = prevTagImage.description.split('by')
+		const credit = split[split.length - 1].trim()
+		const proofText = prevTagImage.description
 
-			const split = images[prevTagIndex].description.split('by')
-			const credit = split[split.length - 1].trim()
-			const proofText = images[prevTagIndex].description
+		const tagData = {
+			latestTagNumber,
+			prevTagNumber,
+			nextTagNumber,
+			nextTagIndex,
+			prevTagIndex,
+			proofTagURL,
+			nextTagURL,
+			credit,
+			proofText,
+		}
 
-			const tagData = {
-				latestTagNumber,
-				prevTagNumber,
-				nextTagNumber,
-				nextTagIndex,
-				prevTagIndex,
-				proofTagURL,
-				nextTagURL,
-				credit,
-				proofText,
-			}
-
-			return callback(tagData)
-		})
-	.catch((err) => {
-		console.error(err.message)
-		res.send(err.message)
+		return callback(tagData)
 	})
+
+	if (!debug) {
+		getTagRequest.catch((err) => {
+			console.error({ getTagError: err.message })
+			res.send(err.message)
+		})
+	}
+
+	return getTagRequest
 }
 
 function filterSubdomainRequest(endpoint, response) {
