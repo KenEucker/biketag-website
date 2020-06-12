@@ -34,13 +34,15 @@ This project supports Embedded Javascript templating, [ejs](https://ejs.co/), fo
 To use within javascript:
 ```
 <script>
-	const subs = ("<%= supportedRegions %>").split(',') //['portland', 'denver']
+	// get the supportedRegions object via JSON serialization
+	var subs = JSON.parse(`<%- JSON.stringify(supportedRegions) %>`)
 </script>
 ```
 
 To use within html:
 ```
 <audio id="biketag-jingle">
+	<!-- insert the page.easter.jingle variable into the src attribute of this audio element -->
 	<source src="<%= page.easter.jingle %>" type="audio/mpeg">
 </audio>
 ```

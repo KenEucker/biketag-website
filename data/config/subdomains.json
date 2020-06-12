@@ -107,10 +107,31 @@
 			"imgurAlbumHash": "3CIf8hy"
 		},
 		"reddit": {
-			"redditSubreddit": "CycleDenver"
+			"redditSubreddit": "seattlebike"
 		},
 		"easter": {
 			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
+		]
+	},
+	"omaha": {
+		"metaTitle": "OmahaBikeTag!",
+		"region": "Omaha, Nebraska",
+		"tagline": "The BikeTag game in Omaha, Nebraska",
+		"imgur": {
+			"imgurAlbumHash": "8Da1Xfa"
+		},
+		"reddit": {
+			"redditSubreddit": "OmahaMetroCycling"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-denver-jingle-1.mp3"
 		},
 		"images": {
 			"header": "../../assets/img/biketag-logo-1.png",
