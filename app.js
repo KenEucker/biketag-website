@@ -631,6 +631,7 @@ function authentication() {
 		// Reddit OAuth2 Integration
 		app.get('/auth/reddit', (req, res, next) => {
 			req.session.state = crypto.randomBytes(32).toString('hex');
+			console.log('authenticating')
 			passport.authenticate('reddit', {
 				state: req.session.state,
 				duration: 'permanent',
@@ -639,37 +640,45 @@ function authentication() {
 		app.get('/auth/reddit/callback', (req, res, next) => {
 			// Check for origin via state token
 			if (req.query.state == req.session.state) {
+				console.log("passporting")
 				passport.authenticate('reddit', {
 					successRedirect: '/',
 					failureRedirect: '/fail',
 				})(req, res, next);
 			} else {
-				next(new Error(403));
+				console.log("Error 403")
+				next(new Error(403))
 			}
-		});
+		})
 		app.post('/auth/reddit/getToken', (req, res) => {
-			const subdomain = getSubdomainPrefix(req);
-			let tokensValue = 'unauthorized access';
+			const subdomain = getSubdomainPrefix(req)
+			let tokensValue = 'unauthorized access'
+			console.log("getting token")
 
 			if (isValidRequestOrigin(req)) {
+				console.log("request is valid")
 				tokensValue = {
 					redditRefreshToken: authTokens[subdomain].reddit.redditRefreshToken,
 					redditAccessToken: authTokens[subdomain].reddit.redditAccessToken,
 					redditProfile: authTokens[subdomain].reddit.redditProfile,
-				};
+				}
 			}
 
 			// This will only return the reddit access token if the request is coming from the site itself
 			res.json({
 				redditTokens: tokensValue,
-			});
-		});
+			})
+		})
 	} else {
 		app.get('/auth/reddit/*', (req, res) => {
-			res.send("I don't have reddit data set in my configuration");
+			const responseMessage = "I don't have reddit data set in my configuration"
+			console.log(responseMessage)
+			res.send(responseMessage)
 		});
 		app.post('/auth/*', (req, res) => {
-			res.json({});
+			const responseMessage = "empty"
+			console.log(responseMessage)
+			res.json({})
 		})
 	}
 }
