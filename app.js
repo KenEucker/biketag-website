@@ -10,6 +10,7 @@ const {
 	setInterval,
 } = require('safe-timers')
 const favicon = require('serve-favicon')
+const crypto = require('crypto')
 const passport = require('passport')
 const {
 	Strategy: ImgurStrategy,
