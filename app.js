@@ -641,23 +641,23 @@ function authentication() {
 		app.get('/auth/reddit/callback', (req, res, next) => {
 			// Check for origin via state token
 			if (req.query.state == req.session.state) {
-				console.log("passporting")
+				// console.log("passporting")
 				passport.authenticate('reddit', {
 					successRedirect: '/',
 					failureRedirect: '/fail',
 				})(req, res, next);
 			} else {
-				console.log("Error 403")
+				// console.log("Error 403")
 				next(new Error(403))
 			}
 		})
 		app.post('/auth/reddit/getToken', (req, res) => {
 			const subdomain = getSubdomainPrefix(req)
 			let tokensValue = 'unauthorized access'
-			console.log("getting token")
+			// console.log("getting token")
 
 			if (isValidRequestOrigin(req)) {
-				console.log("request is valid")
+				// console.log("request is valid")
 				tokensValue = {
 					redditRefreshToken: authTokens[subdomain].reddit.redditRefreshToken,
 					redditAccessToken: authTokens[subdomain].reddit.redditAccessToken,
@@ -673,22 +673,28 @@ function authentication() {
 	} else {
 		app.get('/auth/reddit/*', (req, res) => {
 			const responseMessage = "I don't have reddit data set in my configuration"
-			console.log(responseMessage)
+			// console.log(responseMessage)
 			res.send(responseMessage)
 		});
 		app.post('/auth/*', (req, res) => {
-			const responseMessage = "empty"
-			console.log(responseMessage)
 			res.json({})
 		})
 	}
 }
 
-function ImgurIngestor() {
+function ImgurConnector() {
 
 }
 
-function RedditIngestor() {
+function ingestNewRedditPostForBikeTag() {
+
+}
+
+function createNewBikeTagPostOnReddit() {
+	
+}
+
+function RedditConnector() {
 
 }
 
@@ -708,10 +714,11 @@ function uploadFileToS3(config, file, basePath = 'biketag', metadataMap = {}) {
 		}));
 }
 
-function syncUploadsToS3(config) {
-	const s3 = gulpS3(config);
+function AWSS3Connector(config) {
+	config = !!config ? config : authTokens.pdx.s3
+	const s3 = gulpS3(config)
 
-	console.log('watching folder for new uploads to S3:', config.bucket);
+	console.log('watching folder for new uploads to S3:', config.bucket)
 	return gulpWatch(config.bucket, {
 			ignoreInitial: true,
 			verbose: true,
@@ -729,11 +736,7 @@ function syncUploadsToS3(config) {
 			},
 		}, {
 			maxRetries: 5,
-		})));
-}
-
-function syncWithS3() {
-	syncUploadsToS3(authTokens.pdx.s3);
+		})))
 }
 
 function init() {
@@ -782,7 +785,9 @@ setVars()
 security()
 /*   /     */
 endpoints()
-// /*    /    */ syncWithS3();
+// /*    /    */ AWSS3Connector()
+// /*    /    */ RedditConnector()
+// /*    /    */ ImgurConnector()
 /*   /     */
 templating()
 /*  /      */
