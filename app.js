@@ -21,13 +21,18 @@ const {
 
 const refresh = require('passport-oauth2-refresh')
 const imgur = require('imgur')
+const Reddit = require('reddit')
 const gulp = require('gulp')
 const watch = require('watch')
 const gulpWatch = require('gulp-watch')
 const gulpS3 = require('gulp-s3-upload')
 const http = require('http')
 const reload = require('reload')
+
+const { version } = require('./package.json')
 let config = require('./config.json')
+
+let reddit
 
 const subdomains = Object.keys(config.subdomains)
 
@@ -38,7 +43,7 @@ let debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : 
 debug = process.env.NODE_ENV !== 'production' ? debug : false;
 
 if (debug) {
-	config = merge(config, require('./config.debug'))
+	config = merge(config, require('./config.debug'), { version })
 }
 
 const port = debug ? 8080 : config.port || 80;
@@ -254,10 +259,6 @@ function getImagesByUploadDate(images, newestFirst) {
 function getTagNumberIndex(images, tagNumber, proof = false) {
 	let tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
 	
-	if (tagNumberIndex < 1) {
-		return -tagNumberIndex
-	}
-	
 	const verifyTagNumber = function (index) {
 		let compare = `#${tagNumber} tag`
 		if (proof) {
@@ -308,21 +309,22 @@ function renderTemplate(template, data, res) {
 function getTagInformation(subdomain, tagNumber, albumHash, callback) {
 
 	imgur.setClientId(authTokens[subdomain].imgur.imgurClientID)
+
 	const getTagRequest = imgur.getAlbumInfo(albumHash).then((json) => {
 		const images = getImagesByTagNumber(json.data.images)
 		const latestTagNumber = getBikeTagNumberFromImage(images[0])
 		tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber
-		// console.log('hello', { tagNumber, images, latestTagNumber })
+		// console.log('hello', { tagNumber, images: { images: [0] }, latestTagNumber })
 		
 		const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1
 		const nextTagNumber = tagNumber > 1 ? tagNumber : 2
 		const nextTagIndex = getTagNumberIndex(images, nextTagNumber)
 		const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true)
 
-		// console.log({prevTagNumber,
-		// 	nextTagNumber,
-		// 	nextTagIndex,
-		// 	prevTagIndex})
+		console.log({prevTagNumber,
+			nextTagNumber,
+			nextTagIndex,
+			prevTagIndex})
 
 		const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`
 		const nextTagURL = images[nextTagIndex].link
@@ -474,6 +476,7 @@ function endpoints() {
 
 		console.log(`reddit endpoint request for tag #${tagnumber}`)
 
+		console.log({ tagnumber })
 		return getTagInformation(subdomain, tagnumber, albumHash, (data) => {
 			data.host = host
 			return res.render(redditTemplatePath, data)
@@ -690,12 +693,38 @@ function ingestNewRedditPostForBikeTag() {
 
 }
 
-function createNewBikeTagPostOnReddit() {
-	
+function createNewBikeTagPostOnReddit(config, callback) {
+	return reddit.post('/api/submit', {
+		// sr: config.redditSubreddit,
+		sr: 'biketag',
+		kind: 'link',
+		// resubmit: true,
+		title: `[X-Post r/${config.redditSubreddit}] TEST`,
+		url: 'https://www.reddit.com/r/CyclePDX/comments/h7q3kk/bike_tag_228/'
+	  }).then(callback)
 }
 
-function RedditConnector() {
+function RedditConnector(config) {
+	const opts = {
+		username: config.redditUserName,
+		password: config.redditPassword,
+		appId: config.redditClientID,
+		appSecret: config.redditClientSecret,
+		userAgent: config.redditUserAgent.replace('VERSION', version)
+	}
+	console.log('reddit opts', opts)
+	reddit = new Reddit(opts)
 
+	app.post('/post/reddit', async (req, res) => {
+		try {
+			return createNewBikeTagPostOnReddit((response) => {
+				res.json({response})
+			})
+		} catch (error) {
+			console.log('reddit post api error', { error })
+			res.json( { error } )
+		}
+	})
 }
 
 function uploadFileToS3(config, file, basePath = 'biketag', metadataMap = {}) {
@@ -786,7 +815,8 @@ security()
 /*   /     */
 endpoints()
 // /*    /    */ AWSS3Connector()
-// /*    /    */ RedditConnector()
+/*    /    */
+RedditConnector(config)
 // /*    /    */ ImgurConnector()
 /*   /     */
 templating()

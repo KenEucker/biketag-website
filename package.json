@@ -1,6 +1,6 @@
 {
 	"name": "biketag-website",
-	"version": "0.2.3",
+	"version": "0.3.0",
 	"description": "A website for biketag.org",
 	"author": "Ken Eucker <keneucker@gmail.com>",
 	"contributors": [],
@@ -51,6 +51,7 @@
 		"passport-oauth2-refresh": "^1.1.0",
 		"passport-reddit": "^0.2.4",
 		"path": "^0.12.7",
+		"reddit": "^1.0.3",
 		"reload": "^2.4.0",
 		"safe-timers": "^1.1.0",
 		"serve-favicon": "^2.5.0",
