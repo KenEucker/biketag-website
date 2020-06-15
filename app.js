@@ -321,10 +321,10 @@ function getTagInformation(subdomain, tagNumber, albumHash, callback) {
 		const nextTagIndex = getTagNumberIndex(images, nextTagNumber)
 		const prevTagIndex = getTagNumberIndex(images, prevTagNumber, true)
 
-		console.log({prevTagNumber,
-			nextTagNumber,
-			nextTagIndex,
-			prevTagIndex})
+		// console.log({prevTagNumber,
+		// 	nextTagNumber,
+		// 	nextTagIndex,
+		// 	prevTagIndex})
 
 		const proofTagURL = `https://imgur.com/${images[prevTagIndex].id}`
 		const nextTagURL = images[nextTagIndex].link
