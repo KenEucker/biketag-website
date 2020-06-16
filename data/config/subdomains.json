@@ -140,5 +140,26 @@
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
 		]
+	},
+	"stlouis": {
+		"metaTitle": "StLouisBikeTag!",
+		"region": "St Louis, Missouri",
+		"tagline": "The BikeTag game in St Louis, Missouri",
+		"imgur": {
+			"imgurAlbumHash": "Zc3wzvE"
+		},
+		"reddit": {
+			"redditSubreddit": "StLouisBiking"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
+		]
 	}
 }
