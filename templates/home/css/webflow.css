@@ -652,7 +652,7 @@ textarea.w-select {
     display: inherit !important;
   }
   .w-hidden-small {
-    display: none !important;
+    /* display: none !important; */
   }
   .w-row,
   .w-container .w-row {
