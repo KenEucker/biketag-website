@@ -1,6 +1,10 @@
 @charset "UTF-8";
 @import 'font-awesome.min.css';
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
+@font-face {
+  font-family: trashHand;
+  src: url("../../assets/fonts/TrashHand.woff2");
+}
 /*
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
@@ -125,7 +129,7 @@ html {
 
 body, input, select, textarea {
   color: #ffffff;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: TrashHand;
   font-weight: 300;
   font-size: 1rem;
   line-height: 1.65;
@@ -186,7 +190,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1.4;
   letter-spacing: 0.5rem;
 }
@@ -1325,7 +1329,7 @@ body.is-preload #bg:before {
   padding: 0 1.25rem 0 1.45rem;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  font-size: 0.8rem;
+  font-size: 1.5rem;
   border-bottom: 0;
 }
 #header nav ul li a:hover {
@@ -1655,7 +1659,7 @@ body.is-preload #footer {
 .m-imgur-post a span:nth-child(2) {
   bottom: 4px;
   right: 2%;
-  font-size: 24px;
+  font-size: 32px;
   text-shadow: 2px 2px #292828e6;
 }
 .m-imgur-post img {
