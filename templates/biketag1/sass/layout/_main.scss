@@ -177,6 +177,14 @@
 				}
 			}
 		}
+
+		#tagit {
+			#biketagUploadForm {
+				.upload-box {
+					min-width: 60%;
+				}
+			}
+		}
 	}
 
 	@include breakpoint('<=xsmall') {

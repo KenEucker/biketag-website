@@ -1640,6 +1640,9 @@ body.is-preload #header .content .inner {
     height: 2.25rem;
     background-size: 14px 14px;
   }
+  #main #tagit #biketagUploadForm .upload-box {
+    min-width: 60%;
+  }
 }
 @media screen and (max-width: 480px) {
   #main article {
@@ -1756,7 +1759,6 @@ body.is-preload #footer {
 }
 #tagit #biketagUploadForm .m-imgur-post .description {
   max-width: 14.2em;
-  width: unset;
   font-size: 1.2em;
   margin: auto;
   margin-top: -0.5em;
