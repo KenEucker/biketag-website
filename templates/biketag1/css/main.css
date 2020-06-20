@@ -1601,6 +1601,9 @@ body.is-preload #header .content .inner {
   transform: translateY(0);
   opacity: 1;
 }
+#main article h2.major {
+  font-size: 3rem;
+}
 #main article .close {
   display: block;
   position: absolute;
@@ -1751,7 +1754,7 @@ body.is-preload #footer {
   position: relative;
   max-width: 85%;
 }
-#tagit #biketagUploadForm .m-imgur-post span {
+#tagit #biketagUploadForm .m-imgur-post #heading span {
   display: none;
 }
 #tagit #biketagUploadForm .m-imgur-post .close {
@@ -1760,7 +1763,6 @@ body.is-preload #footer {
   height: 3rem;
   transform: scale(0.75);
   right: 10%;
-  display: block;
 }
 #tagit #biketagUploadForm .m-imgur-post img {
   max-width: 17em;

@@ -575,7 +575,6 @@ class BikeTag {
 		}.bind(this))
 
 		var uploadBoxes = form.querySelectorAll('.upload-box')
-		console.log({uploadBoxes})
 		uploadBoxes.forEach(function(uploadBox) {
 			uploadBox.addEventListener('click', function(event) {
 				var parentElement = event.target.parentElement.parentElement
