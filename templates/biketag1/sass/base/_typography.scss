@@ -6,7 +6,7 @@
 
 /* Type */
 .normal-text {
-	font-family: Cambria, Georgia, serif;
+	font-family: _font(normal);
 	display: inline;
 }
 
@@ -61,7 +61,7 @@ em, i {
 p {
 	margin: 0 0 _size(element-margin) 0;
 	font-size: 1.25rem;
-	font-family: Cambria, Georgia, serif;
+	font-family: _font(normal);
 }
 
 h1, h2, h3, h4, h5, h6 {

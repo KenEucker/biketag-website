@@ -56,6 +56,24 @@ class BikeTag {
 
 		var submit = document.createElement('ul')
 
+		var uploadBox = `<div class="upload-box">
+			<i class="fa fa-icon fa-bicycle"></i>
+			<i class="fa fa-icon fa-image"></i>
+			<span></span>
+		</div>`
+
+		var proofPreview = `<div class="m-imgur-post hidden">
+			<span class="close"></span>
+			<img src="../../../assets/img/none.png">
+			<h2 class="description"><span id="proofNumber"></span> found at (<span id="proofPreview"></span>) by <span id="namePreview"></span></h2>
+		</div>`
+
+		var nextPreview = `<div class="m-imgur-post hidden">
+			<span class="close"></span>
+			<img src="../../../assets/img/none.png">
+			<h2 class="description"><span id="tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
+		</div>`
+
 		first.className = "field half first"
 		second.className = "field half first"
 		third.className = "field half"
@@ -64,25 +82,19 @@ class BikeTag {
 		submit.className = "actions"
 
 		first.innerHTML = `<h3 id="proofHeading">Did you find the Mystery Location played in round</h3>
-		<label for="currentTag">Play a BikeTag that matches the Biketag in round</label>
-		<input type="file" name="currentTag" required />
-		<div class="m-imgur-post hidden">
-			<span class="close"></span>
-			<img src="../../../assets/img/none.png">
-			<h2 class="description"><span id="proofNumber"></span> found at (<span id="proofPreview"></span>) by <span id="namePreview"></span></h2>
-		</div>`
+		<label for="currentTag">Your bike + Mystery Location</label>
+		<input type="file" name="currentTag" class="hidden" required />
+		${uploadBox}
+		${proofPreview}`
 
 		second.innerHTML = `<label for="location">Describe where the Mystery Location was found</label>
 		<input type="text" name="location" placeholder="e.g. Cathedral Park, NE 42nd and Shaver, etc." />`
 
 		third.innerHTML = `<h3 id="nextTagHeading">Play a new BikeTag Mystery Location to begin round</h3>
-		<label for="nextTag">Play the new BikeTag here</label>
-		<input type="file" name="nextTag" required />
-		<div class="m-imgur-post hidden">
-			<span class="close"></span>
-			<img src="../../../assets/img/none.png">
-			<h2 class="description"><span id="tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
-		</div>`
+		<label for="nextTag">Your bike + new BikeTag</label>
+		<input type="file" name="nextTag" class="hidden" required />
+		${uploadBox}
+		${nextPreview}`
 
 		fourth.innerHTML = `<label for="hint">Provide a hint for the new Mystery Location</label>
 		<input type="text" name="hint" placeholder="e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred" />`
@@ -324,13 +336,19 @@ class BikeTag {
 		var target = event.target 
 		var file = target.files[0]
 		var fileReader = new FileReader()
+		var uploadContainer = target.parentElement.querySelector('.upload-box')
 		var previewContainer = target.parentElement.querySelector('.m-imgur-post')
 
 		var changeToThumbnailImage = function(src, revoke = false) {
 			var img = previewContainer.querySelector('img')
+			var uploadFilenameSpan = uploadContainer.querySelector('span')
+
 			previewContainer.classList.remove('hidden')
-			target.classList.add('hidden')
+			uploadContainer.classList.add('hidden')
+
+			uploadFilenameSpan.innerText = file.name
 			img.src = src
+
 			if (revoke) {
 				URL.revokeObjectURL(url)
 			}
@@ -498,8 +516,20 @@ class BikeTag {
 			fileInput.addEventListener('change', this.showImageThumbnail.bind(this))
 		}.bind(this))
 
+		var uploadBoxes = form.querySelectorAll('.upload-box')
+		console.log({uploadBoxes})
+		uploadBoxes.forEach(function(uploadBox) {
+			uploadBox.addEventListener('click', function(event) {
+				var parentElement = event.target.parentElement.parentElement
+				var uploadFileInput = parentElement.querySelector('input[type="file"]')
+				uploadFileInput.click()
+			})
+		})
+
+		var inputChangedEvent = 'keyup'
+
 		var locationInput = form.querySelector('input[name="location"]')
-		locationInput.addEventListener('change', function(event) {
+		locationInput.addEventListener(inputChangedEvent, function(event) {
 			var target = event.target
 			var text = target.value
 			var preview = form.querySelector('#proofPreview')
@@ -508,7 +538,7 @@ class BikeTag {
 		})
 
 		var hintInput = form.querySelector('input[name="hint"]')
-		hintInput.addEventListener('change', function(event) {
+		hintInput.addEventListener(inputChangedEvent, function(event) {
 			var target = event.target
 			var text = target.value
 			var preview = form.querySelector('#hintPreview')
@@ -517,7 +547,7 @@ class BikeTag {
 		})
 
 		var nameInput = form.querySelector('input[name="name"]')
-		nameInput.addEventListener('change', function(event) {
+		nameInput.addEventListener(inputChangedEvent, function(event) {
 			var target = event.target
 			var text = target.value
 			var previews = form.querySelectorAll('#namePreview')
@@ -531,9 +561,9 @@ class BikeTag {
 		deleteImageButtons.forEach(function(button) {
 			button.addEventListener('click', function(event) {
 				var previewContainer = event.target.parentElement
-				var inputContainer = previewContainer.parentElement
-				var fileInput = inputContainer.querySelector('input')
-				fileInput.classList.remove('hidden')
+				var inputContainer = previewContainer.parentElement.querySelector('.upload-box')
+
+				inputContainer.classList.remove('hidden')
 				previewContainer.classList.add('hidden')
 			})
 		})

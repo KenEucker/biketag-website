@@ -109,7 +109,7 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 
 /* Type */
 .normal-text {
-  font-family: Cambria, Georgia, serif;
+  font-family: "Lato", "Georgia", sans-serif;
   display: inline;
 }
 
@@ -165,7 +165,7 @@ em, i {
 p {
   margin: 0 0 2rem 0;
   font-size: 1.25rem;
-  font-family: Cambria, Georgia, serif;
+  font-family: "Lato", "Georgia", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -357,7 +357,7 @@ label {
   letter-spacing: 0.2rem;
   line-height: 1.5;
   margin: 0 0 1rem 0;
-  font-family: Cambria, Georgia, serif;
+  font-family: "Lato", "Georgia", sans-serif;
 }
 
 input[type=text],
@@ -1515,36 +1515,49 @@ body.is-preload #header .content .inner {
 #main #tagit #biketagUploadForm #nextTagHeading {
   color: #14A76C;
 }
-#main #tagit #biketagUploadForm .m-imgur-post {
-  margin: auto;
-  position: relative;
-  max-width: 75%;
-}
-#main #tagit #biketagUploadForm .m-imgur-post .close {
-  top: -15px;
-  width: 3rem;
-  height: 3rem;
-  transform: scale(0.75);
-  right: 10%;
-}
-#main #tagit #biketagUploadForm .m-imgur-post img {
-  max-width: 17em;
+#main #tagit #biketagUploadForm .upload-box {
+  border: 1px floralwhite dotted;
   border-radius: 10px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-#main #tagit #biketagUploadForm .m-imgur-post .description {
-  max-width: 14.2em;
-  width: unset;
-  font-size: 1.2em;
   margin: auto;
-  margin-top: -0.5em;
+  margin-bottom: 2em;
+  min-width: 15vw;
+  min-height: 12vh;
+  padding: 0.5em;
+  cursor: pointer;
+  width: 50%;
+  position: relative;
+}
+#main #tagit #biketagUploadForm .upload-box::before {
+  content: "";
+}
+#main #tagit #biketagUploadForm .upload-box i {
+  font-size: 3.5rem;
+  border-radius: 10px;
+  padding: 16px;
+}
+#main #tagit #biketagUploadForm .upload-box::after {
+  content: "upload your image";
+  font-size: 0.9em;
+  display: block;
+}
+#main #tagit #biketagUploadForm .upload-box span {
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  display: block;
+  max-width: 90%;
+  font-family: Lota;
+  word-break: break-word;
+  font-size: 0.7em;
 }
 #main #tagit #biketagUploadForm input {
   max-width: 100%;
-  font-weight: bold;
   font-variant: petite-caps;
   font-size: 1.5em;
+  font-family: TrashHand;
+}
+#main #tagit #biketagUploadForm input[type=file] {
+  font-family: "Lato", "Georgia", sans-serif;
 }
 #main #tagit #biketagUploadForm input[name=currentTag] {
   color: _palett(yellow);
@@ -1720,6 +1733,33 @@ body.is-preload #footer {
   .m-imgur-post .description {
     margin-top: -0.4em;
   }
+}
+
+#tagit #biketagUploadForm .m-imgur-post {
+  margin: auto;
+  position: relative;
+  max-width: 75%;
+}
+#tagit #biketagUploadForm .m-imgur-post .close {
+  top: -15px;
+  width: 3rem;
+  height: 3rem;
+  transform: scale(0.75);
+  right: 10%;
+}
+#tagit #biketagUploadForm .m-imgur-post img {
+  max-width: 17em;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top: 1px floralwhite solid;
+}
+#tagit #biketagUploadForm .m-imgur-post .description {
+  max-width: 14.2em;
+  width: unset;
+  font-size: 1.2em;
+  margin: auto;
+  margin-top: -0.5em;
 }
 
 /*# sourceMappingURL=main.css.map */

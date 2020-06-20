@@ -6,164 +6,182 @@
 
 /* Main */
 
-	#main {
-		@include vendor('flex-grow', '1');
-		@include vendor('flex-shrink', '1');
-		@include vendor('display', 'flex');
-		@include vendor('align-items', 'center');
-		@include vendor('justify-content', 'center');
-		@include vendor('flex-direction', 'column');
-		position: relative;
-		max-width: 100%;
-		z-index: 3;
+#main {
+	@include vendor('flex-grow', '1');
+	@include vendor('flex-shrink', '1');
+	@include vendor('display', 'flex');
+	@include vendor('align-items', 'center');
+	@include vendor('justify-content', 'center');
+	@include vendor('flex-direction', 'column');
+	position: relative;
+	max-width: 100%;
+	z-index: 3;
 
-		.hidden {
-			visibility: hidden;
-			display: none;
-		}
+	.hidden {
+		visibility: hidden;
+		display: none;
+	}
 
-		#tagit {
-			#biketagUploadForm {
-				> div {
-					padding-bottom: 15px;
-				}
-				
-				#proofHeading {
-					color: _palette(orange);
-				}
-				#nextTagHeading {
-					color: _palette(green);
-				}
-
-				.m-imgur-post {
-					margin: auto;
-					position: relative;
-					max-width: 75%;
-
-					.close {
-						top: -15px;
-						width: 3rem;
-						height: 3rem;
-						transform: scale(0.75);
-						right: 10%;
-					}
-
-					img {
-						max-width: 17em;
-						border-radius: 10px;
-						border-bottom-left-radius: 0;
-						border-bottom-right-radius: 0;
-					}
-					.description {
-						max-width: 14.2em;
-						width: unset;
-						font-size: 1.2em;
-						margin: auto;
-						margin-top: -0.5em;
-					}
-				}
-
-				input {
-					max-width: 100%;
-					font-weight: bold;
-					font-variant: petite-caps;
-					font-size: 1.5em;
-
-					&[name="currentTag"] {
-						color: _palett(yellow);
-					}
-					&[name="nextTag"] {
-						color: _palett(green);
-					}
-				}
-
-				.actions {
-					padding-top: 25px;
-					float: right;
-				}
-			}
-		}
-
-		article {
-			@include vendor('transform', 'translateY(0.25rem)');
-			@include vendor('transition', (
-				'opacity #{_duration(article)} ease-in-out',
-				'transform #{_duration(article)} ease-in-out'
-			));
-			@include padding(2.5rem, 2.5rem, (2rem, 0, 1rem, 0));
-			position: relative;
-			width: 40rem;
-			max-width: 100%;
-			background-color: transparentize(_palette(bg), 0.15);
-			border-radius: _size(border-radius) * 2;
-			opacity: 0;
-
-			&.active {
-				@include vendor('transform', 'translateY(0)');
-				opacity: 1;
+	#tagit {
+		#biketagUploadForm {
+			>div {
+				padding-bottom: 15px;
 			}
 
-			.close {
-				display: block;
-				position: absolute;
-				top: 0;
-				right: 0;
-				width: 4rem;
-				height: 4rem;
+			#proofHeading {
+				color: _palette(orange);
+			}
+
+			#nextTagHeading {
+				color: _palette(green);
+			}
+
+			.upload-box {
+				border: 1px floralwhite dotted;
+				border-radius: 10px;
+				margin: auto;
+				margin-bottom: 2em;
+				min-width: 15vw;
+				min-height: 12vh;
+				padding: 0.5em;
 				cursor: pointer;
-				text-indent: 4rem;
-				overflow: hidden;
-				white-space: nowrap;
+				width: 50%;
+				position: relative;
 
-				&:before {
-					@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
-					content: '';
+				&::before {
+					content: "";
+				}
+
+				i {
+					font-size: 3.5rem;
+					border-radius: 10px;
+					padding: 16px;
+				}
+
+				&::after {
+					content: "upload your image";
+					font-size: 0.9em;
 					display: block;
+				}
+
+				span {
 					position: absolute;
-					top: 0.75rem;
-					left: 0.75rem;
-					width: 2.5rem;
-					height: 2.5rem;
-					border-radius: 100%;
-					background-position: center;
-					background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="2" y1="2" x2="18" y2="18" /><line x1="18" y1="2" x2="2" y2="18" /></svg>');
-					background-size: 20px 20px;
-					background-repeat: no-repeat;
+					bottom: -2px;
+					width: 100%;
+					display: block;
+					max-width: 90%;
+					font-family: Lota;
+					word-break: break-word;
+					font-size: 0.7em;
 				}
 
-				&:hover {
-					&:before {
-						background-color: _palette(border-bg);
-					}
+			}
+
+			input {
+				max-width: 100%;
+				font-variant: petite-caps;
+				font-size: 1.5em;
+				font-family: _font(family);
+
+				&[type="file"] {
+					font-family: _font(normal);
 				}
 
-				&:active {
-					&:before {
-						background-color: _palette(border-bg-alt);
-					}
+				&[name="currentTag"] {
+					color: _palett(yellow);
+				}
+
+				&[name="nextTag"] {
+					color: _palett(green);
 				}
 			}
-		}
 
-		@include breakpoint('<=small') {
-			article {
-				@include padding(2rem, 2rem, (1.5rem, 0, 0.5rem, 0));
-
-				.close {
-					&:before {
-						top: 0.875rem;
-						left: 0.875rem;
-						width: 2.25rem;
-						height: 2.25rem;
-						background-size: 14px 14px;
-					}
-				}
-			}
-		}
-
-		@include breakpoint('<=xsmall') {
-			article {
-				@include padding(2rem, 1.5rem, (1rem, 0, 0.5rem, 0));
+			.actions {
+				padding-top: 25px;
+				float: right;
 			}
 		}
 	}
+
+	article {
+		@include vendor('transform', 'translateY(0.25rem)');
+		@include vendor('transition', ('opacity #{_duration(article)} ease-in-out',
+				'transform #{_duration(article)} ease-in-out'
+			));
+		@include padding(2.5rem, 2.5rem, (2rem, 0, 1rem, 0));
+		position: relative;
+		width: 40rem;
+		max-width: 100%;
+		background-color: transparentize(_palette(bg), 0.15);
+		border-radius: _size(border-radius) * 2;
+		opacity: 0;
+
+		&.active {
+			@include vendor('transform', 'translateY(0)');
+			opacity: 1;
+		}
+
+		.close {
+			display: block;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 4rem;
+			height: 4rem;
+			cursor: pointer;
+			text-indent: 4rem;
+			overflow: hidden;
+			white-space: nowrap;
+
+			&:before {
+				@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
+				content: '';
+				display: block;
+				position: absolute;
+				top: 0.75rem;
+				left: 0.75rem;
+				width: 2.5rem;
+				height: 2.5rem;
+				border-radius: 100%;
+				background-position: center;
+				background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="2" y1="2" x2="18" y2="18" /><line x1="18" y1="2" x2="2" y2="18" /></svg>');
+				background-size: 20px 20px;
+				background-repeat: no-repeat;
+			}
+
+			&:hover {
+				&:before {
+					background-color: _palette(border-bg);
+				}
+			}
+
+			&:active {
+				&:before {
+					background-color: _palette(border-bg-alt);
+				}
+			}
+		}
+	}
+
+	@include breakpoint('<=small') {
+		article {
+			@include padding(2rem, 2rem, (1.5rem, 0, 0.5rem, 0));
+
+			.close {
+				&:before {
+					top: 0.875rem;
+					left: 0.875rem;
+					width: 2.25rem;
+					height: 2.25rem;
+					background-size: 14px 14px;
+				}
+			}
+		}
+	}
+
+	@include breakpoint('<=xsmall') {
+		article {
+			@include padding(2rem, 1.5rem, (1rem, 0, 0.5rem, 0));
+		}
+	}
+}

@@ -28,6 +28,7 @@
 	$font: (
 		family:						TrashHand,
 		family-fixed:				('Courier New', monospace),
+		normal:						('Lato', 'Georgia', sans-serif),
 		weight:						300,
 		weight-bold:				600,
 		letter-spacing:				0.2rem,
@@ -45,9 +46,10 @@
 		border:						#ffffff,
 		border-bg:					rgba(255,255,255,0.075),
 		border-bg-alt:				rgba(255,255,255,0.175),
-		green:#14A76C,
-		grey: #747474,
-		yellow: #FFE400,
-		black: #272727,
-		orange: #FF652F
+		postcard-white:				floralwhite,
+		green:						#14A76C,
+		grey:						#747474,
+		yellow:						#FFE400,
+		black:						#272727,
+		orange:						#FF652F
 	)
