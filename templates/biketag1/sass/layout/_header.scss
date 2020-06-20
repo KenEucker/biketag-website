@@ -42,7 +42,7 @@
 			margin-top: 3.5rem;
 
 			&:before {
-				content: '';
+				// content: '';
 				display: block;
 				position: absolute;
 				top: calc(-3.5rem - 1px);
@@ -65,15 +65,14 @@
 		.headingText {
 			> * {
 				position: absolute;
-				top: -165px;
 			}
 
 			:nth-child(1) {
-				left: -195px;
+				left: -6em;
 			}
 
 			:nth-child(2) {
-				right: -175px;
+				right: -5.5em;
 			}
 		}
 
@@ -167,7 +166,7 @@
 
 			&.use-middle {
 				&:after {
-					content: '';
+					// content: '';
 					display: block;
 					position: absolute;
 					top: 0;
@@ -180,7 +179,7 @@
 				ul {
 					li {
 						&.is-middle {
-							border-left: 0;
+							// border-left: 0;
 						}
 					}
 				}
@@ -212,23 +211,35 @@
 
 		@include breakpoint('<=large') {
 			.headingText {
-
 				> * {
 					top: -122px;
 				}
 
 				:nth-child(1) {
-					left: -150px;
+					left: -6em;
 				}
 
 				:nth-child(2) {
-					right: -135px;
+					right: -5.5em;
 				}
-			}			.content {
+			}
+			
+			.content {
 				p {
 					br {
 						display: none;
 					}
+				}
+			}
+		}
+		@include breakpoint('>=medium') {
+			.headingText {
+				> * {
+					top: -3.4em;
+				}
+
+				:nth-child(1) {
+					left: -6em;
 				}
 			}
 		}
@@ -246,15 +257,15 @@
 			.headingText {
 
 				h1 {
-					top: -80px;
+					top: -3em;
 				}
 
 				:nth-child(1) {
-					left: -120px;
+					left: -7em;
 				}
 
 				:nth-child(2) {
-					right: -105px;
+					right: -7em;
 				}
 			}			
 			

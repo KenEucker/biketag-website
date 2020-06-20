@@ -108,6 +108,11 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 }
 
 /* Type */
+.normal-text {
+  font-family: Cambria, Georgia, serif;
+  display: inline;
+}
+
 html {
   font-size: 16pt;
 }
@@ -159,6 +164,8 @@ em, i {
 
 p {
   margin: 0 0 2rem 0;
+  font-size: 1.25rem;
+  font-family: Cambria, Georgia, serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -196,7 +203,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 h4 {
@@ -284,6 +291,7 @@ hr {
 /* Form */
 form {
   margin: 0 0 2rem 0;
+  text-align: center;
 }
 form > :last-child {
   margin-bottom: 0;
@@ -344,12 +352,12 @@ form > .fields > .field.quarter {
 label {
   color: #ffffff;
   display: block;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   font-weight: 300;
   letter-spacing: 0.2rem;
   line-height: 1.5;
   margin: 0 0 1rem 0;
-  text-transform: uppercase;
+  font-family: Cambria, Georgia, serif;
 }
 
 input[type=text],
@@ -1236,7 +1244,6 @@ body.is-preload #bg:before {
   margin-top: 3.5rem;
 }
 #header > *:before {
-  content: "";
   display: block;
   position: absolute;
   top: calc(-3.5rem - 1px);
@@ -1253,13 +1260,12 @@ body.is-preload #bg:before {
 }
 #header .headingText > * {
   position: absolute;
-  top: -165px;
 }
 #header .headingText :nth-child(1) {
-  left: -195px;
+  left: -6em;
 }
 #header .headingText :nth-child(2) {
-  right: -175px;
+  right: -5.5em;
 }
 #header .logo {
   width: 5.5rem;
@@ -1339,7 +1345,6 @@ body.is-preload #bg:before {
   background-color: rgba(255, 255, 255, 0.175);
 }
 #header nav.use-middle:after {
-  content: "";
   display: block;
   position: absolute;
   top: 0;
@@ -1347,9 +1352,6 @@ body.is-preload #bg:before {
   width: 1px;
   height: 100%;
   background: #ffffff;
-}
-#header nav.use-middle ul li.is-middle {
-  border-left: 0;
 }
 body.is-article-visible #header {
   -moz-transform: scale(0.95);
@@ -1382,13 +1384,21 @@ body.is-preload #header .content .inner {
     top: -122px;
   }
   #header .headingText :nth-child(1) {
-    left: -150px;
+    left: -6em;
   }
   #header .headingText :nth-child(2) {
-    right: -135px;
+    right: -5.5em;
   }
   #header .content p br {
     display: none;
+  }
+}
+@media screen and (min-width: 737px) {
+  #header .headingText > * {
+    top: -3.4em;
+  }
+  #header .headingText :nth-child(1) {
+    left: -6em;
   }
 }
 @media screen and (max-width: 736px) {
@@ -1400,13 +1410,13 @@ body.is-preload #header .content .inner {
     height: calc(2rem + 1px);
   }
   #header .headingText h1 {
-    top: -80px;
+    top: -3em;
   }
   #header .headingText :nth-child(1) {
-    left: -120px;
+    left: -7em;
   }
   #header .headingText :nth-child(2) {
-    right: -105px;
+    right: -7em;
   }
   #header .logo {
     width: 4.75rem;
@@ -1496,10 +1506,10 @@ body.is-preload #header .content .inner {
   padding-bottom: 15px;
 }
 #main #tagit #biketagUploadForm #proofHeading {
-  color: yellow;
+  color: #FF652F;
 }
 #main #tagit #biketagUploadForm #nextTagHeading {
-  color: green;
+  color: #14A76C;
 }
 #main #tagit #biketagUploadForm input {
   max-width: 100%;
@@ -1508,10 +1518,10 @@ body.is-preload #header .content .inner {
   font-size: 1.5em;
 }
 #main #tagit #biketagUploadForm input[name=currentTag] {
-  color: yellow;
+  color: _palett(yellow);
 }
 #main #tagit #biketagUploadForm input[name=nextTag] {
-  color: green;
+  color: _palett(green);
 }
 #main #tagit #biketagUploadForm .actions {
   padding-top: 25px;
@@ -1531,7 +1541,7 @@ body.is-preload #header .content .inner {
   width: 40rem;
   max-width: 100%;
   background-color: rgba(27, 31, 34, 0.85);
-  border-radius: 4px;
+  border-radius: 8px;
   opacity: 0;
 }
 #main article.active {
@@ -1628,17 +1638,23 @@ body.is-preload #footer {
   opacity: 0;
 }
 
-.m-imgur-post h2 {
+.m-imgur-post {
+  margin-bottom: 2em;
+}
+.m-imgur-post .description {
   border-style: solid;
   border-radius: 5px;
-  border-color: white;
+  border-color: floralwhite;
   border-width: 1px;
-  border-bottom-width: 0px;
+  border-top-width: 0px;
   margin: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
   width: 640px;
   max-width: 75vw;
+  margin-top: -0.6em;
+  background-color: floralwhite;
+  color: black;
 }
 .m-imgur-post a {
   position: relative;
@@ -1654,7 +1670,7 @@ body.is-preload #footer {
   text-shadow: 2px 2px #292828e6;
   background-color: rgba(0, 0, 0, 0.75);
   padding: 0 0.5rem;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .m-imgur-post a span:nth-child(2) {
   bottom: 4px;
@@ -1663,11 +1679,18 @@ body.is-preload #footer {
   text-shadow: 2px 2px #292828e6;
 }
 .m-imgur-post img {
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom: 1px white solid;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border: 1px floralwhite solid;
   width: 640px;
   max-width: 75vw;
+  border-bottom: 0;
+  border-top: 0;
+}
+@media screen and (min-width: 737px) {
+  .m-imgur-post .description {
+    margin-top: -0.4em;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

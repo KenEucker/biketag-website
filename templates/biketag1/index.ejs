@@ -19,7 +19,7 @@
 		gtag('config', '<%= page.gaUA %>');
 	</script>
 
-	<title><%= SUBDOMAIN %> BIKE TAG</title>
+	<title><%= SUBDOMAIN %> BIKETAG</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1" />
@@ -33,9 +33,10 @@
 	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
 	<noscript>
 		<link rel="stylesheet" href="css/noscript.css" /></noscript>
+	<link rel="stylesheet" href="../assets/css/<%= thisSubdomain %>.css" />
 </head>
 
-<body class="is-preload">
+<body class="is-preload <%= thisSubdomain %>">
 	<!-- <div id="loader">
 		<div class="logo spin">
 			<span class="icon fa-bicycle"></span>
@@ -58,9 +59,16 @@
 				<span class="icon fa-bicycle"></span>
 			</div>
 			<div class="headingText">
-				<h1>BIKE</h1>
-				<h1>TAG</h1>
+				<h1><%= thisSubdomain %></h1>
+				<h1>biketag</h1>
 			</div>
+			<!-- <nav>
+				<ul>
+					<li><a href="#howto">How To Play BikeTag!</a></li>
+					<li><a id="tagItButton" href="#tagit">Play The Next Round</a></li>
+					<li><a href="#about">Archive of Past Rounds</a></li>
+				</ul>
+			</nav> -->
 			<div class="content">
 				<div class="inner">
 
@@ -72,6 +80,9 @@
 					<li><a href="#howto">How To</a></li>
 					<li><a href="#about">About</a></li>
 					<li><a href="#contact">Contact</a></li>
+					<!-- <li><a href="#about">About</a></li>
+					<li><a href="#discuss">Discussion for Tag #</a></li>
+					<li><a href="#donate">Donate</a></li> -->
 					<!--<li><a href="#elements">Elements</a></li>-->
 				</ul>
 			</nav>

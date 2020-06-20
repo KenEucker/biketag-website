@@ -8,6 +8,7 @@
 
 	form {
 		margin: 0 0 _size(element-margin) 0;
+		text-align: center;
 
 		> :last-child {
 			margin-bottom: 0;
@@ -71,12 +72,13 @@
 	label {
 		color: _palette(fg-bold);
 		display: block;
-		font-size: 0.8rem;
+		font-size: 1.2rem;
 		font-weight: _font(weight);
 		letter-spacing: _font(letter-spacing);
 		line-height: 1.5;
 		margin: 0 0 (_size(element-margin) * 0.5) 0;
-		text-transform: uppercase;
+		// text-transform: uppercase;
+		font-family: Cambria, Georgia, serif;
 	}
 
 	input[type="text"],

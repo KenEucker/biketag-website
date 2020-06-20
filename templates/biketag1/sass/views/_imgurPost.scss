@@ -1,16 +1,20 @@
 .m-imgur-post {
-
-	h2 {
+	margin-bottom: 2em;
+	
+	.description {
 		border-style: solid;
 		border-radius: 5px;
-		border-color: white;
+		border-color: floralwhite;
 		border-width: 1px;
-		border-bottom-width: 0px;
+		border-top-width: 0px;
 		margin: 0;
-		border-bottom-right-radius: 0;
-		border-bottom-left-radius: 0;
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
         width: 640px;
-    	max-width: 75vw;
+		max-width: 75vw;
+		margin-top: -0.6em;
+		background-color: floralwhite;
+    	color: black;
 	}
 
 	a {
@@ -27,7 +31,7 @@
                 text-shadow: 2px 2px #292828e6;
                 background-color: rgba(0,0,0,0.75);
                 padding: 0 0.5rem;
-                border-radius: 5px;
+                border-radius: 10px;
             }
 
             &:nth-child(2) {
@@ -40,10 +44,18 @@
     }
 
     img {
-		border-bottom-right-radius: 5px;
-		border-bottom-left-radius: 5px;
-		border-bottom: 1px white solid;
+		border-top-right-radius: 10px;
+		border-top-left-radius: 10px;
+		border: 1px floralwhite solid;
         width: 640px;
-   		max-width: 75vw;
+		max-width: 75vw;
+		border-bottom: 0;
+		border-top: 0;
+	}
+
+	@include breakpoint('>=medium') {
+		.description {
+			margin-top: -0.4em;
+		}
 	}
 }

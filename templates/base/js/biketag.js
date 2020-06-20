@@ -1,3 +1,5 @@
+var poundSymbol = '<div class="normal-text">#</div>'
+
 class BikeTag {
 	constructor() {
 		// Auto-Pickup?
@@ -44,6 +46,9 @@ class BikeTag {
 		form.id = this.formID
 	
 		var first = document.createElement('div')
+		var hr1 = document.createElement('hr')
+		var hr2 = document.createElement('hr')
+		var hr3 = document.createElement('hr')
 		var second = document.createElement('div')
 		var third = document.createElement('div')
 		var fourth = document.createElement('div')
@@ -58,29 +63,32 @@ class BikeTag {
 		jameson.className = "field"
 		submit.className = "actions"
 	
-		first.innerHTML = `<h3 id="proofHeading">Proof Information</h3>
-		<label for="currentTag">Image proof you found the mystery location</label>
+		first.innerHTML = `<h3 id="proofHeading">Did you find the Mystery Location played in round</h3>
+		<label for="currentTag">Play a BikeTag that matches the Biketag in round</label>
 		<input type="file" name="currentTag" />`
 	
-		second.innerHTML = `<label for="location">Location of the last tag:</label>
-		<input type="text" name="location" placeholder="location" />`
+		second.innerHTML = `<label for="location">Describe where the Mystery Location was found</label>
+		<input type="text" name="location" placeholder="e.g. Cathedral Park, NE 42nd and Shaver, etc." />`
 	
-		third.innerHTML = `<h3 id="nextTagHeading">Next Tag Info</h3>
-		<label for="nextTag">Image of the next tag location</label>
+		third.innerHTML = `<h3 id="nextTagHeading">Play a new BikeTag Mystery Location to begin round</h3>
+		<label for="nextTag">Play the new BikeTag here</label>
 		<input type="file" name="nextTag" />`
 	
-		fourth.innerHTML = `<label for="hint">Hint for the next tag location:</label>
-		<input type="text" name="hint" placeholder="hint" />`
+		fourth.innerHTML = `<label for="hint">Provide a hint for the new Mystery Location</label>
+		<input type="text" name="hint" placeholder="e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred" />`
 	
-		jameson.innerHTML = `<label for="name">What do you go by?</label>
-		<input type="text" name="name" placeholder="name" />`
+		jameson.innerHTML = `<label for="name">Provide a Name</label>
+		<input type="text" name="name" placeholder="e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name" />`
 	
-		submit.innerHTML = `<li><button id="submit">Tag IT!</button></li>`
+		submit.innerHTML = `<li><button id="submit">Play BikeTag!</button></li>`
 	
+		// form.appendChild(hr1)
 		form.appendChild(first)
 		form.appendChild(second)
+		form.appendChild(hr2)
 		form.appendChild(third)
 		form.appendChild(fourth)
+		form.appendChild(hr3)
 		form.appendChild(jameson)
 		form.appendChild(submit)
 	
@@ -267,17 +275,17 @@ class BikeTag {
 
 		if (image.description) {
 			var split = image.description.split(' ')
-			var tagNumber = split[0]
+			var tagNumber = split[0].replace('#', poundSymbol)
 			var split = image.description.split('by')
 			var tagCredit = split[split.length - 1]
 		}
 
 		// console.log('setting image link', image.link, image);
-		return '<h2>' + title + '</h2>\
-				<a href="' + image.link + '" target="_blank">\
+		return '<a href="' + image.link + '" target="_blank">\
 					<span>' + tagNumber + '</span>\
 					<span>' + tagCredit + '</span>\
 					<img data-src="' + thumbnail + '">\
+					<h2 class="description">' + title + '</h2>\
 				</a>';
 	}
 
@@ -337,8 +345,8 @@ class BikeTag {
 
 			// Set the form with the tag information
 			var currentTagInfo = this.getCurrentTagInformation();
-			$('#proofHeading').text('Proof for #' + currentTagInfo.currentTagNumber);
-			$('#nextTagHeading').text('Next Tag (#' + currentTagInfo.nextTagNumber + ')');
+			$('#proofHeading').html($('#proofHeading').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?');
+			$('#nextTagHeading').html($('#nextTagHeading').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber + ' here');
 		}
 
 		// DON'T DO THIS RIGHT NOW

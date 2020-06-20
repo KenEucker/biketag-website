@@ -24,10 +24,10 @@
 				}
 
 				#proofHeading {
-					color: yellow;
+					color: _palette(orange);
 				}
 				#nextTagHeading {
-					color: green;
+					color: _palette(green);
 				}
 				input {
 					max-width: 100%;
@@ -36,10 +36,10 @@
 					font-size: 1.5em;
 
 					&[name="currentTag"] {
-						color: yellow;
+						color: _palett(yellow);
 					}
 					&[name="nextTag"] {
-						color: green;
+						color: _palett(green);
 					}
 				}
 
@@ -61,7 +61,7 @@
 			width: 40rem;
 			max-width: 100%;
 			background-color: transparentize(_palette(bg), 0.15);
-			border-radius: _size(border-radius);
+			border-radius: _size(border-radius) * 2;
 			opacity: 0;
 
 			&.active {
