@@ -28,12 +28,16 @@
 				padding-bottom: 15px;
 			}
 
-			#proofHeading {
-				color: _palette(orange);
+			.previousTag {
+				h3, .upload-box {
+					color: _palette(orange);
+				}
 			}
 
-			#nextTagHeading {
-				color: _palette(green);
+			.nextTag {
+				h3, .upload-box {
+					color: _palette(green);
+				}
 			}
 
 			.upload-box {

@@ -1509,10 +1509,10 @@ body.is-preload #header .content .inner {
 #main #tagit #biketagUploadForm > div {
   padding-bottom: 15px;
 }
-#main #tagit #biketagUploadForm #proofHeading {
+#main #tagit #biketagUploadForm .previousTag h3, #main #tagit #biketagUploadForm .previousTag .upload-box {
   color: #FF652F;
 }
-#main #tagit #biketagUploadForm #nextTagHeading {
+#main #tagit #biketagUploadForm .nextTag h3, #main #tagit #biketagUploadForm .nextTag .upload-box {
   color: #14A76C;
 }
 #main #tagit #biketagUploadForm .upload-box {

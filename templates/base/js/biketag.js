@@ -74,14 +74,14 @@ class BikeTag {
 			<h2 class="description"><span id="tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
 		</div>`
 
-		first.className = "field half first"
+		first.className = "field half first previousTag"
 		second.className = "field half first"
-		third.className = "field half"
+		third.className = "field half nextTag"
 		fourth.className = "field half"
 		jameson.className = "field"
 		submit.className = "actions"
 
-		first.innerHTML = `<h3 id="proofHeading">Did you find the Mystery Location played in round</h3>
+		first.innerHTML = `<h3>Did you find the Mystery Location played in round</h3>
 		<label for="currentTag">Your bike + Mystery Location</label>
 		<input type="file" name="currentTag" class="hidden" required />
 		${uploadBox}
@@ -90,7 +90,7 @@ class BikeTag {
 		second.innerHTML = `<label for="location">Describe where the Mystery Location was found</label>
 		<input type="text" name="location" placeholder="e.g. Cathedral Park, NE 42nd and Shaver, etc." />`
 
-		third.innerHTML = `<h3 id="nextTagHeading">Play a new BikeTag Mystery Location to begin round</h3>
+		third.innerHTML = `<h3>Play a new BikeTag Mystery Location to begin round</h3>
 		<label for="nextTag">Your bike + new BikeTag</label>
 		<input type="file" name="nextTag" class="hidden" required />
 		${uploadBox}
