@@ -17,18 +17,50 @@
 		max-width: 100%;
 		z-index: 3;
 
+		.hidden {
+			visibility: hidden;
+			display: none;
+		}
+
 		#tagit {
 			#biketagUploadForm {
 				> div {
 					padding-bottom: 15px;
 				}
-
+				
 				#proofHeading {
 					color: _palette(orange);
 				}
 				#nextTagHeading {
 					color: _palette(green);
 				}
+
+				.m-imgur-post {
+					margin: auto;
+					position: relative;
+
+					.close {
+						top: -15px;
+						width: 3rem;
+						height: 3rem;
+						transform: scale(0.75);
+					}
+
+					img {
+						max-width: 17em;
+						border-radius: 10px;
+						border-bottom-left-radius: 0;
+						border-bottom-right-radius: 0;
+					}
+					.description {
+						max-width: 14.2em;
+						width: unset;
+						font-size: 1.2em;
+						margin: auto;
+						margin-top: -0.5em;
+					}
+				}
+
 				input {
 					max-width: 100%;
 					font-weight: bold;

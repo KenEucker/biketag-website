@@ -1502,6 +1502,10 @@ body.is-preload #header .content .inner {
   max-width: 100%;
   z-index: 3;
 }
+#main .hidden {
+  visibility: hidden;
+  display: none;
+}
 #main #tagit #biketagUploadForm > div {
   padding-bottom: 15px;
 }
@@ -1510,6 +1514,29 @@ body.is-preload #header .content .inner {
 }
 #main #tagit #biketagUploadForm #nextTagHeading {
   color: #14A76C;
+}
+#main #tagit #biketagUploadForm .m-imgur-post {
+  margin: auto;
+  position: relative;
+}
+#main #tagit #biketagUploadForm .m-imgur-post .close {
+  top: -15px;
+  width: 3rem;
+  height: 3rem;
+  transform: scale(0.75);
+}
+#main #tagit #biketagUploadForm .m-imgur-post img {
+  max-width: 17em;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+#main #tagit #biketagUploadForm .m-imgur-post .description {
+  max-width: 14.2em;
+  width: unset;
+  font-size: 1.2em;
+  margin: auto;
+  margin-top: -0.5em;
 }
 #main #tagit #biketagUploadForm input {
   max-width: 100%;

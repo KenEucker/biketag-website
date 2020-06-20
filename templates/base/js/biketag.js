@@ -44,7 +44,7 @@ class BikeTag {
 
 		var form = document.createElement('form')
 		form.id = this.formID
-	
+
 		var first = document.createElement('div')
 		var hr1 = document.createElement('hr')
 		var hr2 = document.createElement('hr')
@@ -53,35 +53,45 @@ class BikeTag {
 		var third = document.createElement('div')
 		var fourth = document.createElement('div')
 		var jameson = document.createElement('div')
-	
+
 		var submit = document.createElement('ul')
-	
+
 		first.className = "field half first"
 		second.className = "field half first"
 		third.className = "field half"
 		fourth.className = "field half"
 		jameson.className = "field"
 		submit.className = "actions"
-	
+
 		first.innerHTML = `<h3 id="proofHeading">Did you find the Mystery Location played in round</h3>
 		<label for="currentTag">Play a BikeTag that matches the Biketag in round</label>
-		<input type="file" name="currentTag" />`
-	
+		<input type="file" name="currentTag" required />
+		<div class="m-imgur-post hidden">
+			<span class="close"></span>
+			<img src="../../../assets/img/none.png">
+			<h2 class="description"><span id="proofNumber"></span> found at (<span id="proofPreview"></span>) by <span id="namePreview"></span></h2>
+		</div>`
+
 		second.innerHTML = `<label for="location">Describe where the Mystery Location was found</label>
 		<input type="text" name="location" placeholder="e.g. Cathedral Park, NE 42nd and Shaver, etc." />`
-	
+
 		third.innerHTML = `<h3 id="nextTagHeading">Play a new BikeTag Mystery Location to begin round</h3>
 		<label for="nextTag">Play the new BikeTag here</label>
-		<input type="file" name="nextTag" />`
-	
+		<input type="file" name="nextTag" required />
+		<div class="m-imgur-post hidden">
+			<span class="close"></span>
+			<img src="../../../assets/img/none.png">
+			<h2 class="description"><span id="tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
+		</div>`
+
 		fourth.innerHTML = `<label for="hint">Provide a hint for the new Mystery Location</label>
 		<input type="text" name="hint" placeholder="e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred" />`
-	
+
 		jameson.innerHTML = `<label for="name">Provide a Name</label>
 		<input type="text" name="name" placeholder="e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name" />`
-	
+
 		submit.innerHTML = `<li><button id="submit">Play BikeTag!</button></li>`
-	
+
 		// form.appendChild(hr1)
 		form.appendChild(first)
 		form.appendChild(second)
@@ -91,10 +101,10 @@ class BikeTag {
 		form.appendChild(hr3)
 		form.appendChild(jameson)
 		form.appendChild(submit)
-	
+
 		target.appendChild(form)
 	}
-	
+
 	sendNotificationEmail(emailAddress, subject, body) {
 		return Email.send({
 			// Host: "smtp.gmail.com",
@@ -169,7 +179,7 @@ class BikeTag {
 
 				})
 			})
-		} catch(e) {
+		} catch (e) {
 			console.error(e)
 			formEl.innerHTML = `<h3>Error</h3><p>Your tag could not be posted. :(</p><p>If this issue persists, please reach out to <a href="hello@biketag.org">hello@biketag.org</a> for help.</p>`
 		}
@@ -242,7 +252,7 @@ class BikeTag {
 						content: '<img src="' + this.getAttribute('href') + '"></img>'
 					});
 				}
-				
+
 			});
 			targetContainer.appendChild(tagContainer);
 		}
@@ -255,7 +265,7 @@ class BikeTag {
 			var split = image.description.split(' ')
 			tagNumber = Number.parseInt(split[0].substring(1))
 
-			if(image.description.indexOf('proof') !== -1) {
+			if (image.description.indexOf('proof') !== -1) {
 				tagNumber = 0 - tagNumber
 			}
 		}
@@ -310,29 +320,101 @@ class BikeTag {
 		return tagInformation;
 	}
 
+	showImageThumbnail(event) {
+		var target = event.target 
+		var file = target.files[0]
+		var fileReader = new FileReader()
+		var previewContainer = target.parentElement.querySelector('.m-imgur-post')
+
+		var changeToThumbnailImage = function(src, revoke = false) {
+			var img = previewContainer.querySelector('img')
+			previewContainer.classList.remove('hidden')
+			target.classList.add('hidden')
+			img.src = src
+			if (revoke) {
+				URL.revokeObjectURL(url)
+			}
+		}
+		var changeBackToUploader = function() {
+			previewContainer.classList.add('hidden')
+		}
+
+		if (file.type.match('image')) {
+			fileReader.onload = function () {
+				changeToThumbnailImage(fileReader.result)
+			}
+			fileReader.readAsDataURL(file)
+		} else {
+			fileReader.onload = function () {
+				var blob = new Blob([fileReader.result], {
+					type: file.type
+				})
+				var url = URL.createObjectURL(blob)
+				var video = document.createElement('video')
+				
+				var timeupdate = function () {
+					if (snapImage()) {
+						video.removeEventListener('timeupdate', timeupdate)
+						video.pause()
+					}
+				}
+
+				video.addEventListener('loadeddata', function () {
+					if (snapImage()) {
+						video.removeEventListener('timeupdate', timeupdate)
+					}
+				})
+
+				var snapImage = function () {
+					var canvas = document.createElement('canvas')
+					canvas.width = video.videoWidth
+					canvas.height = video.videoHeight
+					canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height)
+					var image = canvas.toDataURL()
+					var success = image.length > 100000
+					if (success) {
+						changeToThumbnailImage(image, true)
+					}
+					return success
+				}
+
+				video.addEventListener('timeupdate', timeupdate)
+				video.preload = 'metadata'
+				video.src = url
+
+				// Load video in Safari / IE11
+				video.muted = true
+				video.playsInline = true
+				video.play()
+			}
+
+			fileReader.readAsArrayBuffer(file)
+		}
+	}
+
 	showLatestTagImages(count) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this));
+			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this))
 		}
 
 		var images = imgur.imgurAlbumPictures;
-		count = Number.isInteger(count) ? count : this.getUrlParam('count');
+		count = Number.isInteger(count) ? count : this.getUrlParam('count')
 
 		if (!!images && images.length) {
-			$('.content .inner').empty();
+			$('.content .inner').empty()
 			if (!!count) {
 				count = count.toUpperCase() == "ALL" ? images.length : Number(count);
 				for (var i = 0;
 					(i < (count * 2)) && (i < images.length); ++i) {
-					var image = images[i];
-					this.renderBikeTag(image, image.description);
+					var image = images[i]
+					this.renderBikeTag(image, image.description)
 				}
 			} else {
-				var lastImage = images[0];
-				var secondToLastImage = images.length > 1 ? images[1] : null;
-				var thirdToLastImage = images.length > 2 ? images[2] : null;
+				var lastImage = images[0]
+				var secondToLastImage = images.length > 1 ? images[1] : null
+				var thirdToLastImage = images.length > 2 ? images[2] : null
 
-				this.renderBikeTag(lastImage, "Current mystery location to find");
+				this.renderBikeTag(lastImage, "Current mystery location to find")
 
 				// Removed the multiple tags on the main page
 				// if (secondToLastImage) {
@@ -344,9 +426,11 @@ class BikeTag {
 			}
 
 			// Set the form with the tag information
-			var currentTagInfo = this.getCurrentTagInformation();
-			$('#proofHeading').html($('#proofHeading').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?');
-			$('#nextTagHeading').html($('#nextTagHeading').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber + ' here');
+			var currentTagInfo = this.getCurrentTagInformation()
+			$('#proofHeading').html($('#proofHeading').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
+			$('#nextTagHeading').html($('#nextTagHeading').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber + ' here')
+			$('#tagNumber').html(poundSymbol + currentTagInfo.nextTagNumber)
+			$('#proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
 		}
 
 		// DON'T DO THIS RIGHT NOW
@@ -401,15 +485,58 @@ class BikeTag {
 		this.targetSelector = targetSelector
 		this.target = document.querySelector(this.targetSelector)
 
-		this.appendBiketagForm(this. target)
+		this.appendBiketagForm(this.target)
 
 		var form = document.querySelector(this.targetSelector)
-		
+
 		form.addEventListener('submit', function (e) {
 			e.preventDefault()
 			self.onUploadFormSubmit(e.currentTarget).bind(self)
 		})
 
+		form.querySelectorAll('input[type="file"]').forEach(function (fileInput) {
+			fileInput.addEventListener('change', this.showImageThumbnail.bind(this))
+		}.bind(this))
+
+		var locationInput = form.querySelector('input[name="location"]')
+		locationInput.addEventListener('change', function(event) {
+			var target = event.target
+			var text = target.value
+			var preview = form.querySelector('#proofPreview')
+
+			preview.innerText = text
+		})
+
+		var hintInput = form.querySelector('input[name="hint"]')
+		hintInput.addEventListener('change', function(event) {
+			var target = event.target
+			var text = target.value
+			var preview = form.querySelector('#hintPreview')
+
+			preview.innerText = text
+		})
+
+		var nameInput = form.querySelector('input[name="name"]')
+		nameInput.addEventListener('change', function(event) {
+			var target = event.target
+			var text = target.value
+			var previews = form.querySelectorAll('#namePreview')
+
+			previews.forEach(function(preview) {
+				preview.innerText = text
+			})
+		})
+
+		var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
+		deleteImageButtons.forEach(function(button) {
+			button.addEventListener('click', function(event) {
+				var previewContainer = event.target.parentElement
+				var inputContainer = previewContainer.parentElement
+				var fileInput = inputContainer.querySelector('input')
+				fileInput.classList.remove('hidden')
+				previewContainer.classList.add('hidden')
+			})
+		})
 	}
 }
 
