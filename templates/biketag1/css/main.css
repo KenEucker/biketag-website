@@ -1550,7 +1550,7 @@ body.is-preload #header .content .inner {
 }
 #main #tagit #biketagUploadForm .upload-box span {
   position: absolute;
-  bottom: -2px;
+  bottom: -6px;
   width: 100%;
   display: block;
   max-width: 90%;
@@ -1752,12 +1752,16 @@ body.is-preload #footer {
   position: relative;
   max-width: 85%;
 }
+#tagit #biketagUploadForm .m-imgur-post span {
+  display: none;
+}
 #tagit #biketagUploadForm .m-imgur-post .close {
   top: -15px;
   width: 3rem;
   height: 3rem;
   transform: scale(0.75);
   right: 10%;
+  display: block;
 }
 #tagit #biketagUploadForm .m-imgur-post img {
   max-width: 17em;
