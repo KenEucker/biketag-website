@@ -1509,14 +1509,16 @@ body.is-preload #header .content .inner {
 #main #tagit #biketagUploadForm > div {
   padding-bottom: 15px;
 }
-#main #tagit #biketagUploadForm .previousTag h3, #main #tagit #biketagUploadForm .previousTag .upload-box {
+#main #tagit #biketagUploadForm #previousTag h3, #main #tagit #biketagUploadForm #previousTag .upload-box {
   color: #FF652F;
 }
-#main #tagit #biketagUploadForm .nextTag h3, #main #tagit #biketagUploadForm .nextTag .upload-box {
+#main #tagit #biketagUploadForm #nextTag h3, #main #tagit #biketagUploadForm #nextTag .upload-box {
   color: #14A76C;
 }
+#main #tagit #biketagUploadForm #name h3, #main #tagit #biketagUploadForm #name .upload-box {
+  color: #FFE400;
+}
 #main #tagit #biketagUploadForm .upload-box {
-  border: 1px floralwhite dotted;
   border-radius: 10px;
   margin: auto;
   margin-bottom: 2em;
@@ -1530,15 +1532,21 @@ body.is-preload #header .content .inner {
 #main #tagit #biketagUploadForm .upload-box::before {
   content: "";
 }
+#main #tagit #biketagUploadForm .upload-box img {
+  max-width: 18vh;
+}
 #main #tagit #biketagUploadForm .upload-box i {
   font-size: 3.5rem;
   border-radius: 10px;
   padding: 16px;
 }
 #main #tagit #biketagUploadForm .upload-box::after {
-  content: "upload your image";
+  content: "upload your image of";
   font-size: 0.9em;
   display: block;
+}
+#main #tagit #biketagUploadForm .upload-box.s--uploaded::after {
+  content: "image uploaded";
 }
 #main #tagit #biketagUploadForm .upload-box span {
   position: absolute;
@@ -1568,6 +1576,7 @@ body.is-preload #header .content .inner {
 #main #tagit #biketagUploadForm .actions {
   padding-top: 25px;
   float: right;
+  display: block;
 }
 #main article {
   -moz-transform: translateY(0.25rem);

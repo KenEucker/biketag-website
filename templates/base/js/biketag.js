@@ -45,21 +45,61 @@ class BikeTag {
 		var form = document.createElement('form')
 		form.id = this.formID
 
-		var first = document.createElement('div')
+		var heading = document.createElement('div')
 		var hr1 = document.createElement('hr')
+		var first = document.createElement('div')
 		var hr2 = document.createElement('hr')
-		var hr3 = document.createElement('hr')
 		var second = document.createElement('div')
 		var third = document.createElement('div')
+		var hr3 = document.createElement('hr')
 		var fourth = document.createElement('div')
 		var jameson = document.createElement('div')
 
 		var submit = document.createElement('ul')
 
-		var uploadBox = `<div class="upload-box">
-			<i class="fa fa-icon fa-bicycle"></i>
-			<i class="fa fa-icon fa-image"></i>
-			<span></span>
+		window.pageData = !!window.pageData ? window.pageData : {}
+		
+		window.pageData.newBikeTagMessage = window.pageData.newBikeTagMessage ? window.pageData.newBikeTagMessage : 'Did you find the Mystery Location played in round'
+		window.pageData.proofTagMessage = window.pageData.proofTagMessage ? window.pageData.proofTagMessage : 'BikeTag @ matching Mystery Location'
+		window.pageData.proofTagTitle = window.pageData.proofTagTitle ? window.pageData.proofTagTitle : 'Play a BikeTag that matches the Biketag in round'
+		window.pageData.nextTagMessage = window.pageData.nextTagMessage ? window.pageData.nextTagMessage : 'BikeTag @ new Mystery Location'
+		window.pageData.nextTagTitle = window.pageData.nextTagTitle ? window.pageData.nextTagTitle : 'Play a new BikeTag at a new Mystery Location to begin round'
+		window.pageData.locationMessage = window.pageData.locationMessage ? window.pageData.locationMessage : 'Describe where the Mystery Location was found'
+		window.pageData.locationPlaceholder = window.pageData.locationPlaceholder ? window.pageData.locationPlaceholder : 'e.g. Cathedral Park, NE 42nd and Shaver, etc.'
+		window.pageData.hintMessage = window.pageData.hintMessage ? window.pageData.hintMessage : 'Provide a hint for the new Mystery Location'
+		window.pageData.hintPlaceholder = window.pageData.hintPlaceholder ? window.pageData.hintPlaceholder : 'e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred'
+		window.pageData.nameTitle = window.pageData.nameTitle ? window.pageData.nameTitle : 'What do you go by?'
+		window.pageData.nameMessage = window.pageData.nameMessage ? window.pageData.nameMessage : 'Provide a Name, UserName, Alias'
+		window.pageData.namePlaceholder = window.pageData.namePlaceholder ? window.pageData.namePlaceholder : 'e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name'
+		window.pageData.playButtonText = window.pageData.playButtonText ? window.pageData.playButtonText : 'Play BikeTag!'
+
+		var newBikeTagMessage = window.pageData.newBikeTagMessage
+		var proofTagMessage = window.pageData.proofTagMessage
+		var proofTagTitle = window.pageData.proofTagTitle
+		var nextTagMessage = window.pageData.nextTagMessage
+		var nextTagTitle = window.pageData.nextTagTitle
+		var locationMessage = window.pageData.locationMessage
+		var locationPlaceholder = window.pageData.locationPlaceholder
+		var hintMessage = window.pageData.hintMessage
+		var hintPlaceholder = window.pageData.hintPlaceholder
+		var nameTitle = window.pageData.nameTitle
+		var nameMessage = window.pageData.nameMessage
+		var namePlaceholder = window.pageData.namePlaceholder
+		var playButtonText = window.pageData.playButtonText
+
+		// var uploadBox = `<div class="upload-box">
+		// 	<i class="fa fa-icon fa-bicycle"></i>
+		// 	<i class="fa fa-icon fa-image"></i>
+		// 	<span></span>
+		// </div>`
+
+		var uploadBox = `<div class="upload-box" data-message="(MESSAGE)">
+			<img src="../../../assets/img//blank-tag.png"></img>
+			<span>(MESSAGE)</span>
+		</div>`
+
+		var currentPreview = `<div class="m-imgur-post">
+
 		</div>`
 
 		var proofPreview = `<div class="m-imgur-post hidden">
@@ -74,37 +114,49 @@ class BikeTag {
 			<h2 class="description"><span id="tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
 		</div>`
 
-		first.className = "field half first previousTag"
+		heading.className = "field half"
+		first.className = "field half first"
 		second.className = "field half first"
-		third.className = "field half nextTag"
+		third.className = "field half"
 		fourth.className = "field half"
 		jameson.className = "field"
 		submit.className = "actions"
 
-		first.innerHTML = `<h3>Did you find the Mystery Location played in round</h3>
-		<label for="currentTag">Your bike + Mystery Location</label>
+		heading.innerHTML = `<h1>${newBikeTagMessage}</h1>${currentPreview}`
+
+		first.innerHTML = `<h3>${proofTagTitle}</h3>
+		<label for="currentTag"></label>
 		<input type="file" name="currentTag" class="hidden" required />
-		${uploadBox}
+		${uploadBox.replace(/MESSAGE/g, proofTagMessage)}
 		${proofPreview}`
 
-		second.innerHTML = `<label for="location">Describe where the Mystery Location was found</label>
-		<input type="text" name="location" placeholder="e.g. Cathedral Park, NE 42nd and Shaver, etc." />`
+		second.innerHTML = `<label for="location">${locationMessage}</label>
+		<input type="text" name="location" placeholder="${locationPlaceholder}" />`
 
-		third.innerHTML = `<h3>Play a new BikeTag Mystery Location to begin round</h3>
-		<label for="nextTag">Your bike + new BikeTag</label>
+		third.innerHTML = `<h3>${nextTagTitle}</h3>
+		<label for="nextTag"></label>
 		<input type="file" name="nextTag" class="hidden" required />
-		${uploadBox}
+		${uploadBox.replace(/MESSAGE/g, nextTagMessage)}
 		${nextPreview}`
 
-		fourth.innerHTML = `<label for="hint">Provide a hint for the new Mystery Location</label>
-		<input type="text" name="hint" placeholder="e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred" />`
+		fourth.innerHTML = `<label for="hint">${hintMessage}</label>
+		<input type="text" name="hint" placeholder="${hintPlaceholder}" />`
 
-		jameson.innerHTML = `<label for="name">Provide a Name</label>
-		<input type="text" name="name" placeholder="e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name" />`
+		jameson.innerHTML = `<h3>${nameTitle}</h3><label for="name">${nameMessage}</label>
+		<input type="text" name="name" placeholder="${namePlaceholder}" />`
 
-		submit.innerHTML = `<li><button id="submit">Play BikeTag!</button></li>`
+		submit.innerHTML = `<li><button id="submit">${playButtonText}</button></li>`
 
-		// form.appendChild(hr1)
+		heading.id = "heading"
+		first.id = "previousTag"
+		second.id = "location"
+		third.id = "nextTag"
+		fourth.id = "hint"
+		jameson.id = "name"
+		submit.id = "submit"
+
+		form.appendChild(heading)
+		form.appendChild(hr1)
 		form.appendChild(first)
 		form.appendChild(second)
 		form.appendChild(hr2)
@@ -136,7 +188,7 @@ class BikeTag {
 	onUploadFormSubmit(formEl) {
 		var self = this
 		var theButton = formEl.querySelector('ul')
-		theButton.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="24px"></i>`
+		theButton.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="font-style:24px;"></i>`
 
 		try {
 			var form = $(`#${this.formID}`)
@@ -344,6 +396,7 @@ class BikeTag {
 			var uploadFilenameSpan = uploadContainer.querySelector('span')
 
 			previewContainer.classList.remove('hidden')
+			uploadContainer.classList.add('s--uploaded')
 			uploadContainer.classList.add('hidden')
 
 			uploadFilenameSpan.innerText = file.name
@@ -355,6 +408,8 @@ class BikeTag {
 		}
 		var changeBackToUploader = function() {
 			previewContainer.classList.add('hidden')
+			uploadContainer.classList.remove('hidden')
+			uploadContainer.classList.remove('hidden')
 		}
 
 		if (file.type.match('image')) {
@@ -420,6 +475,9 @@ class BikeTag {
 
 		if (!!images && images.length) {
 			$('.content .inner').empty()
+			var lastImage = images[0]
+
+			this.renderBikeTag(lastImage, "Current mystery location to find", `#${this.formID} #heading`)
 			if (!!count) {
 				count = count.toUpperCase() == "ALL" ? images.length : Number(count);
 				for (var i = 0;
@@ -428,7 +486,6 @@ class BikeTag {
 					this.renderBikeTag(image, image.description)
 				}
 			} else {
-				var lastImage = images[0]
 				var secondToLastImage = images.length > 1 ? images[1] : null
 				var thirdToLastImage = images.length > 2 ? images[2] : null
 
@@ -445,8 +502,9 @@ class BikeTag {
 
 			// Set the form with the tag information
 			var currentTagInfo = this.getCurrentTagInformation()
-			$('#proofHeading').html($('#proofHeading').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
-			$('#nextTagHeading').html($('#nextTagHeading').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber + ' here')
+			$('#biketagUploadForm h1').html($('#biketagUploadForm h1').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
+			$('#previousTag h3').html($('#previousTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
+			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber + ' here')
 			$('#tagNumber').html(poundSymbol + currentTagInfo.nextTagNumber)
 			$('#proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
 		}
@@ -561,9 +619,14 @@ class BikeTag {
 		deleteImageButtons.forEach(function(button) {
 			button.addEventListener('click', function(event) {
 				var previewContainer = event.target.parentElement
-				var inputContainer = previewContainer.parentElement.querySelector('.upload-box')
+				var uploadContainer = previewContainer.parentElement.querySelector('.upload-box')
+				var uploadSpanEl = uploadContainer.querySelector('span')
 
-				inputContainer.classList.remove('hidden')
+				$(uploadContainer).parent().find('input[type="file"]').val('')
+
+				uploadSpanEl.innerText = uploadContainer.dataset.message
+				uploadContainer.classList.remove('s--uploaded')
+				uploadContainer.classList.remove('hidden')
 				previewContainer.classList.add('hidden')
 			})
 		})

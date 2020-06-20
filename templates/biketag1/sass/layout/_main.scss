@@ -28,20 +28,26 @@
 				padding-bottom: 15px;
 			}
 
-			.previousTag {
+			#previousTag {
 				h3, .upload-box {
 					color: _palette(orange);
 				}
 			}
 
-			.nextTag {
+			#nextTag {
 				h3, .upload-box {
 					color: _palette(green);
 				}
 			}
 
+			#name {
+				h3, .upload-box {
+					color: _palette(yellow);
+				}
+			}
+
 			.upload-box {
-				border: 1px floralwhite dotted;
+				// border: 1px floralwhite dotted;
 				border-radius: 10px;
 				margin: auto;
 				margin-bottom: 2em;
@@ -56,6 +62,10 @@
 					content: "";
 				}
 
+				img {
+					max-width: 18vh;
+				}
+
 				i {
 					font-size: 3.5rem;
 					border-radius: 10px;
@@ -63,9 +73,13 @@
 				}
 
 				&::after {
-					content: "upload your image";
+					content: "upload your image of";
 					font-size: 0.9em;
 					display: block;
+				}
+
+				&.s--uploaded::after {
+					content: "image uploaded";
 				}
 
 				span {
@@ -103,6 +117,7 @@
 			.actions {
 				padding-top: 25px;
 				float: right;
+				display: block;
 			}
 		}
 	}

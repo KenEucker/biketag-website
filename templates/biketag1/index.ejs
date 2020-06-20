@@ -145,12 +145,19 @@
 	<div id="bg"></div>
 
 	<!-- Priority Scripts -->
+	<script>
+		try {
+			window.pageData = JSON.parse(`<%- JSON.stringify(page) %>`)
+		} catch(e) {
+			console.log('Could not load sexy page data', { error: e })
+		}
+	</script>
 	<script src="js/biketag.js"></script>
 	<script>
 		var biketagUploadContainerSelector = '#tagit'
 		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
 		window.biketag.config = {
-			adminEmailAddresses: ("<%= page.adminEmailAddresses %>").split(','),
+			adminEmailAddresses: window.pageData.adminEmailAddresses,
 		}
 		<% if (!page.readonly) { %>
 			window.biketag.init(biketagUploadContainerSelector)

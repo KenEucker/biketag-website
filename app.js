@@ -137,7 +137,7 @@ function getPublicConfigurationValues(subdomain, host) {
 	publicConfig.subdomains = Object.values(config.subdomains).reduce((out, subdomainInformation, index) => {
 		const subdomainName = subdomains[index]
 
-		const pageData = {
+		const pageData = merge( config.page, {
 			location: subdomainInformation.location,
 			images: subdomainInformation.images,
 			adminEmailAddresses: subdomainInformation.adminEmailAddresses,
@@ -150,7 +150,7 @@ function getPublicConfigurationValues(subdomain, host) {
 			metaDescription: subdomainInformation.metaDescription || config.metaDescription,
 			gaUA: subdomainInformation.gaUA || config.gaUA,
 			readonly: subdomainInformation.readonly,
-		}
+		})
 		
 		out[subdomainName] = pageData
 
