@@ -38,12 +38,14 @@
 				.m-imgur-post {
 					margin: auto;
 					position: relative;
+					max-width: 75%;
 
 					.close {
 						top: -15px;
 						width: 3rem;
 						height: 3rem;
 						transform: scale(0.75);
+						right: 10%;
 					}
 
 					img {

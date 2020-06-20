@@ -1518,12 +1518,14 @@ body.is-preload #header .content .inner {
 #main #tagit #biketagUploadForm .m-imgur-post {
   margin: auto;
   position: relative;
+  max-width: 75%;
 }
 #main #tagit #biketagUploadForm .m-imgur-post .close {
   top: -15px;
   width: 3rem;
   height: 3rem;
   transform: scale(0.75);
+  right: 10%;
 }
 #main #tagit #biketagUploadForm .m-imgur-post img {
   max-width: 17em;
