@@ -107,6 +107,11 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
   transition: none !important;
 }
 
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
 /* Type */
 .normal-text {
   font-family: "Lato", "Georgia", sans-serif;
@@ -166,6 +171,10 @@ p {
   margin: 0 0 2rem 0;
   font-size: 1.25rem;
   font-family: "Lato", "Georgia", sans-serif;
+}
+
+.family {
+  font-family: TrashHand;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1065,6 +1074,10 @@ body.is-preload #bg:before {
 }
 
 /* Wrapper */
+body.archive #wrapper #countChanger {
+  display: inline;
+}
+
 #wrapper {
   display: -moz-flex;
   display: -webkit-flex;
@@ -1087,6 +1100,7 @@ body.is-preload #bg:before {
   width: 100%;
   padding: 4rem 2rem;
   z-index: 3;
+  margin-top: 0;
 }
 #wrapper .cssanimations.csstransforms #notification {
   transform: translateY(-50px);
@@ -1241,7 +1255,6 @@ body.is-preload #bg:before {
   -ms-transition: opacity 0.325s ease-in-out;
   transition: opacity 0.325s ease-in-out;
   position: relative;
-  margin-top: 3.5rem;
 }
 #header > *:before {
   display: block;
@@ -1258,14 +1271,19 @@ body.is-preload #bg:before {
 #header > :first-child:before {
   display: none;
 }
+#header .headingText {
+  display: inline;
+}
 #header .headingText > * {
-  position: absolute;
+  display: inline-block;
 }
-#header .headingText :nth-child(1) {
-  left: -6em;
-}
-#header .headingText :nth-child(2) {
-  right: -5.5em;
+#header .headingText span {
+  font-size: 4rem;
+  font-family: TrashHand;
+  margin-top: -3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: -0.75rem;
 }
 #header .logo {
   width: 5.5rem;
@@ -1284,8 +1302,6 @@ body.is-preload #bg:before {
 #header .content {
   border-style: solid;
   border-color: #ffffff;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
   max-width: 100%;
 }
 #header .content .inner {
@@ -1297,7 +1313,7 @@ body.is-preload #bg:before {
   -webkit-transition-delay: 0.25s;
   -ms-transition-delay: 0.25s;
   transition-delay: 0.25s;
-  padding: 3rem 2rem;
+  padding: 0 !important;
   overflow: hidden;
 }
 #header .content .inner > :last-child {
@@ -1309,6 +1325,13 @@ body.is-preload #bg:before {
   font-size: 0.8rem;
   line-height: 2;
 }
+#header nav#head ul li {
+  align-self: flex-end;
+}
+#header nav#head ul li:nth-child(2) {
+  height: 6rem;
+  max-width: 15rem;
+}
 #header nav ul {
   display: -moz-flex;
   display: -webkit-flex;
@@ -1317,25 +1340,24 @@ body.is-preload #bg:before {
   margin-bottom: 0;
   list-style: none;
   padding-left: 0;
-  border: solid 1px #ffffff;
-  border-radius: 4px;
+  max-width: 60vw;
 }
 #header nav ul li {
   padding-left: 0;
-  border-left: solid 1px #ffffff;
-}
-#header nav ul li:first-child {
-  border-left: 0;
+  border: solid 1px #ffffff;
+  border-radius: 10px;
+  margin: 0.75rem;
+  height: 3rem;
+  line-height: 3rem;
+  display: inline-block;
 }
 #header nav ul li a {
   display: block;
   min-width: 8.5rem;
-  height: 2.75rem;
-  line-height: 2.75rem;
   padding: 0 1.25rem 0 1.45rem;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border-bottom: 0;
 }
 #header nav ul li a:hover {
@@ -1379,44 +1401,30 @@ body.is-preload #header .content .inner {
   padding-bottom: 0;
   opacity: 0;
 }
+@media screen and (min-width: 981px) {
+  #header .content p br {
+    display: none;
+  }
+  #header .longer-text {
+    display: inline;
+    visibility: visible;
+  }
+}
 @media screen and (max-width: 1280px) {
-  #header .headingText > * {
-    top: -122px;
-  }
-  #header .headingText :nth-child(1) {
-    left: -6em;
-  }
-  #header .headingText :nth-child(2) {
-    right: -5.5em;
-  }
   #header .content p br {
     display: none;
   }
 }
 @media screen and (min-width: 737px) {
-  #header .headingText > * {
-    top: -3.4em;
-  }
-  #header .headingText :nth-child(1) {
-    left: -6em;
+  #header nav .extra-text {
+    display: inline;
+    visibility: visible;
   }
 }
 @media screen and (max-width: 736px) {
-  #header > * {
-    margin-top: 2rem;
-  }
   #header > *:before {
     top: calc(-2rem - 1px);
     height: calc(2rem + 1px);
-  }
-  #header .headingText h1 {
-    top: -3em;
-  }
-  #header .headingText :nth-child(1) {
-    left: -7em;
-  }
-  #header .headingText :nth-child(2) {
-    right: -7em;
   }
   #header .logo {
     width: 4.75rem;
@@ -1425,9 +1433,6 @@ body.is-preload #header .content .inner {
   }
   #header .logo .icon:before {
     font-size: 1.75rem;
-  }
-  #header .content .inner {
-    padding: 2.5rem 1rem;
   }
   #header .content .inner a span:nth-child(1) {
     font-size: 24px;
@@ -1441,31 +1446,36 @@ body.is-preload #header .content .inner {
 }
 @media screen and (max-width: 480px) {
   #header {
-    padding: 1.5rem 0;
+    margin-top: -2rem;
+  }
+  #header .extra-text {
+    display: none;
+    visibility: hidden;
   }
   #header .content .inner {
     padding: 2.5rem 0;
   }
+  ul li a #header nav.head:nth-child(2) {
+    padding: 0;
+  }
   #header nav ul {
-    -moz-flex-direction: column;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    -moz-flex-direction: row;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
     min-width: 10rem;
     max-width: 100%;
   }
   #header nav ul li {
-    border-left: 0;
     border-top: solid 1px #ffffff;
-  }
-  #header nav ul li:first-child {
-    border-top: 0;
   }
   #header nav ul li a {
     height: 3rem;
     line-height: 3rem;
     min-width: 0;
     width: 100%;
+    margin: 0;
+    padding: 0.3rem 0.6rem;
   }
   #header nav.use-middle:after {
     display: none;
@@ -1501,10 +1511,6 @@ body.is-preload #header .content .inner {
   position: relative;
   max-width: 100%;
   z-index: 3;
-}
-#main .hidden {
-  visibility: hidden;
-  display: none;
 }
 #main #tagit #biketagUploadForm > div {
   padding-bottom: 15px;
@@ -1811,7 +1817,6 @@ body.archive .m-imgur-post.s--popup .description {
   border-bottom-right-radius: 0;
   border-top: 1px floralwhite solid;
   max-height: 25em;
-  height: 100%;
 }
 #tagit #biketagUploadForm .m-imgur-post .description {
   max-width: 14.2em;

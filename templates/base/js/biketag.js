@@ -303,16 +303,17 @@ class BikeTag {
 			var tagTemplate = this.biketagImageTemplate(tag, heading || "Tag", true)
 			tagContainer.innerHTML = tagTemplate
 			tagContainer.querySelector('a').addEventListener('click', function (e) {
-				var count = self.getUrlParam('count')
+				var isArchive = document.body.classList.contains('archive')
 				var content = '<img src="' + this.getAttribute('href') + '"></img>'
-				if (count) {
+
+				if (isArchive) {
 					content = `${tagTemplate}`
 				}
 
 				e.preventDefault()
 				e.stopPropagation()
 
-				if (window.uglipop && count) {
+				if (window.uglipop && isArchive) {
 					window.uglipop({
 						source: 'html',
 						class: 'm-imgur-post s--popup',
@@ -371,20 +372,31 @@ class BikeTag {
 			currentTagNumber: 0,
 			hasTag: false,
 			currentTag: null,
-		};
+			hint: null,
+			credit: null,
+		}
 
 		if (imgur.imgurAlbumPictures.length) {
-			tagInformation.currentTag = imgur.imgurAlbumPictures[0];
+			tagInformation.currentTag = imgur.imgurAlbumPictures[0]
 
 			if (tagInformation.currentTag) {
-				tagInformation.hasTag = true;
-				tagInformation.currentTagNumber = Number(tagInformation.currentTag.description.split(' ')[0].substr(1));
+				var tagHintSplit = tagInformation.currentTag.description.split('(')
+				var tagHint = tagHintSplit.length ? tagHintSplit[1].split(')')[0] : null
+				var tagCreditSplit = tagInformation.currentTag.description.split('by')
+				var tagCredit = tagCreditSplit[tagCreditSplit.length - 1]
+				var tagNumberSplit = tagInformation.currentTag.description.split(' ')
+				var tagNumberString = tagNumberSplit.length ? tagNumberSplit[0].substr(1) : -1
+
+				tagInformation.hasTag = true
+				tagInformation.currentTagNumber = Number(tagNumberString)
+				tagInformation.credit = tagCredit
+				tagInformation.hint = tagHint
 			}
 		}
 
-		tagInformation.nextTagNumber = tagInformation.currentTagNumber + 1;
+		tagInformation.nextTagNumber = tagInformation.currentTagNumber + 1
 
-		return tagInformation;
+		return tagInformation
 	}
 
 	showImageThumbnail(event) {
@@ -468,40 +480,24 @@ class BikeTag {
 		}
 	}
 
-	showLatestTagImages(count) {
+	setLatestTagInformation() {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this))
+			return imgur.getImgurAlbumPictures(null, this.setLatestTagInformation.bind(this))
 		}
 
-		var images = imgur.imgurAlbumPictures;
-		count = Number.isInteger(count) ? count : this.getUrlParam('count')
+		if (!this.latestTagInformationHasBeenSet) {
+			this.latestTagInformationHasBeenSet = true
+		} else {
+			return
+		}
 
+		console.log('loading lazy load images')
+		window.lazyLoadInstance = new LazyLoad()
+
+		var images = imgur.imgurAlbumPictures
 		if (!!images && images.length) {
-			$('.content .inner').empty()
 			var lastImage = images[0]
-
 			this.renderBikeTag(lastImage, "Current mystery location to find", `#${this.formID} #heading`)
-			if (!!count) {
-				count = count.toUpperCase() == "ALL" ? images.length : Number(count);
-				for (var i = 1;
-					(i <= (count * 2)) && (i < images.length); ++i) {
-					var image = images[i]
-					this.renderBikeTag(image, image.description)
-				}
-			} else {
-				var secondToLastImage = images.length > 1 ? images[1] : null
-				var thirdToLastImage = images.length > 2 ? images[2] : null
-
-				this.renderBikeTag(lastImage, "Current mystery location to find")
-
-				// Removed the multiple tags on the main page
-				// if (secondToLastImage) {
-				// 	this.renderBikeTag(secondToLastImage, "Proof image");
-				// }
-				// if (thirdToLastImage) {
-				// 	this.renderBikeTag(thirdToLastImage, "Previous tag mystery location");
-				// }
-			}
 
 			// Set the form with the tag information
 			var currentTagInfo = this.getCurrentTagInformation()
@@ -510,22 +506,60 @@ class BikeTag {
 			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber)
 			$('#tagNumber').html(poundSymbol + currentTagInfo.nextTagNumber)
 			$('#proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
+			if (!!currentTagInfo.hint && currentTagInfo.hint.length) {
+				$('#hintText').text(currentTagInfo.hint)
+				$('#userLeftHintMessage').text('provided the following hint:')
+			} else {
+				$('#hintText').text(`"${currentTagInfo.hint}"`)
+				$('#userLeftHintMessage').text('did not leave a hint :(')
+			}
+			if (!!currentTagInfo.credit && currentTagInfo.credit.length) {
+				$('#userCredit').text(currentTagInfo.credit)
+			} else {
+				$('#userCredit').text('user did not provide a name')
+			}
+		}
+	}
+
+	showLatestTagImages(count = -1) {
+		if (!imgur.imgurAlbumPictures) {
+			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this))
 		}
 
-		// DON'T DO THIS RIGHT NOW
-		// $('#nextTagHeading').text('Next Tag info (#' + currentTagInfo.nextTagNumber + ')');
+		this.setLatestTagInformation()
+		var countParam = this.getUrlParam('count')
+		count = count == -1 ? false : (Number.isInteger(count) ? count : (countParam === 'all' ? countParam : Number(countParam)))
+		console.log({count})
 
-		console.log('loading lazy load images');
-		window.lazyLoadInstance = new LazyLoad();
+		if (count) {
+			this.showArchiveTags(count)
+		} else {
+			document.body.classList.remove('archive')
+			$('#header .content .inner').empty()
 
-		setTimeout(function () {
-			// Hide the overlay and show the content
-			$('#loader .logo').animate({
-				top: "-200px"
-			});
-			$('#loader').fadeOut();
-			$('#main').fadeIn();
-		}, 1000);
+			var images = imgur.imgurAlbumPictures;
+			var lastImage = images[0]
+			this.renderBikeTag(lastImage, "Current mystery location to find")
+		}
+	}
+
+	showArchiveTags(count) {
+		if (!imgur.imgurAlbumPictures) {
+			return imgur.getImgurAlbumPictures(null, this.showArchiveTags.bind(this))
+		}
+		console.log({count})
+		document.body.classList.add('archive')
+		$('#header .content .inner').empty()
+
+		var images = imgur.imgurAlbumPictures;
+		count = Number.isInteger(count) ? count : this.getUrlParam('count')
+		count = Number.isInteger(count) ? count : !count || (count.toUpperCase() === "ALL") ? images.length : Number(count)
+
+		for (var i = 1;
+			(i <= (count * 2)) && (i < images.length); ++i) {
+			var image = images[i]
+			this.renderBikeTag(image, image.description)
+		}
 	}
 
 	showBikeTagNumber(tagNumber) {
@@ -559,23 +593,30 @@ class BikeTag {
 	}
 
 	init(targetSelector) {
-
 		var self = this
 		this.targetSelector = targetSelector
 		this.target = document.querySelector(this.targetSelector)
-
 		this.appendBiketagForm(this.target)
 
 		var form = document.querySelector(this.targetSelector)
-
 		form.addEventListener('submit', function (e) {
 			e.preventDefault()
 			self.onUploadFormSubmit(e.currentTarget).bind(self)
 		})
 
+		var headerLogo = document.querySelector('#header > .logo')
+		headerLogo.addEventListener('click', function () {
+			self.showLatestTagImages()
+		})
+
+		var tagItButton = document.getElementById('tagItButton')
+		tagItButton.addEventListener('click', function(){
+			self.showLatestTagImages()
+		})
+
 		form.querySelectorAll('input[type="file"]').forEach(function (fileInput) {
-			fileInput.addEventListener('change', this.showImageThumbnail.bind(this))
-		}.bind(this))
+			fileInput.addEventListener('change', self.showImageThumbnail.bind(self))
+		})
 
 		var uploadBoxes = form.querySelectorAll('.upload-box')
 		uploadBoxes.forEach(function (uploadBox) {
@@ -584,6 +625,11 @@ class BikeTag {
 				var uploadFileInput = parentElement.querySelector('input[type="file"]')
 				uploadFileInput.click()
 			})
+		})
+
+		var archiveButtonEl = document.getElementById('archiveButton')
+		archiveButtonEl.addEventListener('click', function(event) {
+			self.showArchiveTags(10)
 		})
 
 		var inputChangedEvent = 'keyup'

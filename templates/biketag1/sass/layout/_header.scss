@@ -35,11 +35,12 @@
 		background-image: radial-gradient(rgba(0,0,0,0.25) 25%, rgba(0,0,0,0) 55%);
 		max-width: 100%;
 		text-align: center;
+		// padding: 0 !important;
 
 		> * {
 			@include vendor('transition', 'opacity #{_duration(article)} ease-in-out');
 			position: relative;
-			margin-top: 3.5rem;
+			// margin-top: 3.5rem;
 
 			&:before {
 				// content: '';
@@ -63,16 +64,19 @@
 
 
 		.headingText {
+			display: inline;
+
 			> * {
-				position: absolute;
+				display: inline-block;
 			}
 
-			:nth-child(1) {
-				left: -6em;
-			}
-
-			:nth-child(2) {
-				right: -5.5em;
+			span {
+				font-size: 4rem;
+				font-family: _font(family);
+				margin-top: -3rem;
+				padding-left: 0.5rem;
+				padding-right: 0.5rem;
+				margin-left: -0.75rem;
 			}
 		}
 
@@ -98,8 +102,6 @@
 		.content {
 			border-style: solid;
 			border-color: _palette(border);
-			border-top-width: _size(border-width);
-			border-bottom-width: _size(border-width);
 			max-width: 100%;
 
 			.inner {
@@ -109,7 +111,7 @@
 					'opacity #{_duration(article)} ease-in-out'
 				));
 				@include vendor('transition-delay', '0.25s');
-				padding: 3rem 2rem;
+				padding: 0 !important;
 				overflow: hidden;
 
 				> :last-child {
@@ -126,31 +128,43 @@
 		}
 
 		nav {
+			&#head {
+				ul {
+					li {
+						align-self: flex-end;
+
+						&:nth-child(2) {
+							height: 6rem;
+							max-width: 15rem;
+						}
+					}
+				}
+			}
+
 			ul {
 				@include vendor('display', 'flex');
 				margin-bottom: 0;
 				list-style: none;
 				padding-left: 0;
-				border: solid _size(border-width) _palette(border);
-				border-radius: _size(border-radius);
+				max-width: 60vw;
+
 
 				li {
 					padding-left: 0;
-					border-left: solid _size(border-width) _palette(border);
-
-					&:first-child {
-						border-left: 0;
-					}
+					border: solid _size(border-width) _palette(border);
+					border-radius: 10px;
+					margin: 0.75rem;
+					height: 3rem;
+					line-height: 3rem;
+					display: inline-block;
 
 					a {
 						display: block;
 						min-width: 8.5rem;
-						height: 2.75rem;
-						line-height: 2.75rem;
-						padding: 0 1.25rem 0 (1.25rem + _font(letter-spacing));
+						padding: 0 1.25rem 0 1.45rem;
 						text-transform: uppercase;
-						letter-spacing: _font(letter-spacing);
-						font-size: 1.5rem;
+						letter-spacing: 0.2rem;
+						font-size: 2rem;
 						border-bottom: 0;
 
 						&:hover {
@@ -209,21 +223,23 @@
 			}
 		}
 
-		@include breakpoint('<=large') {
-			.headingText {
-				> * {
-					top: -122px;
-				}
-
-				:nth-child(1) {
-					left: -6em;
-				}
-
-				:nth-child(2) {
-					right: -5.5em;
+		
+		@include breakpoint('>=large') {
+			.content {
+				p {
+					br {
+						display: none;
+					}
 				}
 			}
-			
+
+			.longer-text {
+				display: inline;
+				visibility: visible;
+			}
+		}
+
+		@include breakpoint('<=large') {
 			.content {
 				p {
 					br {
@@ -232,43 +248,25 @@
 				}
 			}
 		}
-		@include breakpoint('>=medium') {
-			.headingText {
-				> * {
-					top: -3.4em;
-				}
 
-				:nth-child(1) {
-					left: -6em;
+		@include breakpoint('>=medium') {
+			nav {
+
+				.extra-text {
+					display: inline;
+					visibility: visible;
 				}
 			}
 		}
 
 		@include breakpoint('<=small') {
 			> * {
-				margin-top: 2rem;
-
 				&:before {
 					top: calc(-2rem - 1px);
 					height: calc(2rem + 1px);
 				}
 			}
 
-			.headingText {
-
-				h1 {
-					top: -3em;
-				}
-
-				:nth-child(1) {
-					left: -7em;
-				}
-
-				:nth-child(2) {
-					right: -7em;
-				}
-			}			
-			
 			.logo {
 				width: 4.75rem;
 				height: 4.75rem;
@@ -283,7 +281,7 @@
 
 			.content {
 				.inner {
-					padding: 2.5rem 1rem;
+					// padding: 2.5rem 1rem;
 
 					a {
 						span {
@@ -305,7 +303,13 @@
 		}
 
 		@include breakpoint('<=xsmall') {
-			padding: 1.5rem 0;
+			// padding: 1.5rem 0;
+			margin-top: -2rem;
+
+			.extra-text {
+				display: none;
+				visibility: hidden;
+			}
 
 			.content {
 				.inner {
@@ -314,24 +318,31 @@
 			}
 
 			nav {
+				&.head {
+					ul li a &:nth-child(2) {
+						padding: 0;
+					}
+				}
 				ul {
-					@include vendor('flex-direction', 'column');
+					@include vendor('flex-direction', 'row');
 					min-width: 10rem;
 					max-width: 100%;
 
 					li {
-						border-left: 0;
+						// border-left: 0;
 						border-top: solid _size(border-width) _palette(border);
 
-						&:first-child {
-							border-top: 0;
-						}
+						// &:first-child {
+						// 	border-top: 0;
+						// }
 
 						a {
 							height: 3rem;
 							line-height: 3rem;
 							min-width: 0;
 							width: 100%;
+							margin: 0;
+							padding: 0.3rem 0.6rem;
 						}
 					}
 				}

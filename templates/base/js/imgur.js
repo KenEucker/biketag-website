@@ -45,7 +45,7 @@
 			if (albumInfo.images_count != window.imgur.imgurAlbumPictures.length) {
 				console.log('image count has changed, updating most recent tags');
 				this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
-				this.showLatestTagImages();
+				biketag.showLatestTagImages()
 			}
 		},
 
@@ -218,11 +218,6 @@
 				}
 
 				console.log('imgur integration initialized.');
-			});
-
-			$('#header > .logo').click(function () {
-				window.location = window.location.origin
-				// document.getElementById('tagItButton').click();
 			});
 
 			return self;

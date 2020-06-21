@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+s<!DOCTYPE HTML>
 <!--
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
@@ -37,13 +37,8 @@
 </head>
 
 <body class="is-preload <%= thisSubdomain %>">
-	<!-- <div id="loader">
-		<div class="logo spin">
-			<span class="icon fa-bicycle"></span>
-		</div>
-	</div> -->
-	<!-- Wrapper -->
 	<div id="wrapper">
+
 		<div id="countChanger">
 			<nav>
 				<ul>
@@ -53,6 +48,7 @@
 				</ul>
 			</nav>
 		</div>
+
 		<!-- Header -->
 		<header id="header">
 			<div class="logo spin">
@@ -60,30 +56,32 @@
 			</div>
 			<div class="headingText">
 				<h1><%= thisSubdomain %></h1>
+				<span>.</span>
 				<h1>biketag</h1>
 			</div>
-			<!-- <nav>
+			<nav id="head">
 				<ul>
-					<li><a href="#howto">How To Play BikeTag!</a></li>
-					<li><a id="tagItButton" href="#tagit">Play The Next Round</a></li>
-					<li><a href="#about">Archive of Past Rounds</a></li>
+					<li><a id="archiveButton" href="javascript:();">Archive</a></li>
+					<li><a id="tagItButton" href="#tagit">Play <span class="longer-text hidden">The Next </span><span class="extra-text hidden">Round </span>(<span id="tagNumber"></span>)</a></li>
+					<li><a href="#howto">How To</a></li>
 				</ul>
-			</nav> -->
+			</nav>
 			<div class="content">
 				<div class="inner">
 
 				</div>
 			</div>
-			<nav>
+			<nav id="foot">
 				<ul>
-					<li><a id="tagItButton" href="#tagit">Tag it!</a></li>
+					<!-- <li><a id="tagItButton" href="#tagit">Tag it!</a></li>
 					<li><a href="#howto">How To</a></li>
 					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
-					<!-- <li><a href="#about">About</a></li>
-					<li><a href="#discuss">Discussion for Tag #</a></li>
-					<li><a href="#donate">Donate</a></li> -->
-					<!--<li><a href="#elements">Elements</a></li>-->
+					<li><a href="#contact">Contact</a></li> -->
+					<li><a href="#about">About</a></li>
+					<li><a id="hintButton" href="#hint">Hint<span id="tagNumber"></span></a></li>
+					<!-- <li><a href="#discuss">Discussion for Tag <span id="tagNumber"></span></a></li> -->
+					<li><a href="#donate">Donate</a></li>
+					<!--<li><a href="#elements">Elements</a></li> -->
 				</ul>
 			</nav>
 		</header>
@@ -102,11 +100,24 @@
 				
 				<%- content.howto %>
 
-				<span id="easter" style="font-style: italic;">Get these instructions via audio</span>
-				<audio id="biketag-jingle">
-					<source src="<%= page.easter.jingle %>" type="audio/mpeg">
-					Your browser does not support the audio element.
-				</audio>
+				<p>
+					<span id="easter" style="font-style: italic;">Get these instructions via audio</span>
+					<audio id="biketag-jingle">
+						<source src="<%= page.easter.jingle %>" type="audio/mpeg">
+						Your browser does not support the audio element.
+					</audio>
+				</p>
+			</article>
+
+			<!-- Work -->
+			<article id="hint">
+				<h2 class="major">Need a hint?</h2>
+				<p>
+					user [<span id="userCredit"></span>]
+					<span id="userLeftHintMessage"></span>
+					<br>
+					<br>
+					<span id="hintText" class="family"></span>
 				</p>
 			</article>
 
@@ -122,6 +133,12 @@
 					<a href="http://<%= region %>.biketag.org">BikeTag in <%= subdomains[region].region %></a><br>
 					<% }) %>
 				</p>
+
+			</article>
+
+			<!-- About -->
+			<article id="donate">
+				<h2 class="major">Donate to BikeTag.Org</h2>
 				
 				<%- content.devnotice %>
 

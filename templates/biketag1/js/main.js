@@ -14,19 +14,7 @@
 		} else {
 			return searchParams.get(param);
 		}
-	};
-
-	hideShowCountChanger = function (show) {
-		display = 'none';
-		var count = $('#countChanger');
-		if (count.length) {
-			if (show) {
-				count.fadeIn();
-			} else {
-				count.fadeOut();
-			}
-		}
-	};
+	}
 
 	getArticleContents = function (target, componentName) {
 		var data = {
@@ -48,7 +36,7 @@
 		}).catch(function (error) {
 			console.error('Error:', error)
 		});
-	};
+	}
 
 	$(function () {
 
@@ -113,25 +101,12 @@
 
 		// Main.
 		var delay = 325,
-			locked = false,
-			extradelay = 7000,
-			spinDelay = 15000;
+			locked = false
 
 		// getArticleContents("#tagit", "TagIt");
 		// getArticleContents("#howto", "HowTo");
 		// getArticleContents("#about", "About");
 		// getArticleContents("#contact", "Contact");
-
-		if (getUrlParam('count')) {
-			extradelay = 1000;
-		}
-
-		setTimeout(function () {
-			// If the main content is showing
-			if ($('#header')[0].style.display != 'none') {
-				hideShowCountChanger(true);
-			}
-		}, extradelay);
 
 		// setInterval(function(){
 		// 	var logo = $('#header > div')[0];
@@ -366,7 +341,6 @@
 			$('<div class="close">Close</div>')
 				.appendTo($this)
 				.on('click', function () {
-					hideShowCountChanger(true);
 					location.hash = '';
 				});
 
@@ -382,7 +356,6 @@
 
 			// Article visible? Hide.
 			if ($body.hasClass('is-article-visible')) {
-				hideShowCountChanger(true);
 				$main._hide(true);
 			}
 
@@ -428,8 +401,6 @@
 				event.preventDefault();
 				event.stopPropagation();
 
-				hideShowCountChanger();
-
 				// Show article.
 				$main._show(location.hash.substr(1));
 
@@ -459,10 +430,6 @@
 				});
 
 		}
-
-		// $('#nav a').on('click', function () {
-		// 	hideShowCountChanger(false);
-		// });
 
 		// Initialize.
 
