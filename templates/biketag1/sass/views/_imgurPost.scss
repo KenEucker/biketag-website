@@ -1,6 +1,5 @@
 .m-imgur-post {
 	margin-bottom: 2em;
-	background-color: gray;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 
@@ -13,7 +12,7 @@
 		margin: 0;
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
-        width: 640px;
+		width: 640px;
 		max-width: 75vw;
 		margin-top: -0.6em;
 		background-color: _palette(postcard-white);
@@ -22,40 +21,40 @@
 	}
 
 	a {
-        position: relative; 
-        border: none;
+		position: relative;
+		border: none;
 		cursor: pointer;
 
-        span {
-            position: absolute;
+		span {
+			position: absolute;
 
-            &:nth-child(1) {
-                font-size: 40px;
-                font-weight: 500;
-                text-shadow: 2px 2px #292828e6;
-                background-color: rgba(0,0,0,0.75);
-                padding: 0 0.5rem;
-                border-radius: 10px;
-            }
+			&:nth-child(1) {
+				font-size: 40px;
+				font-weight: 500;
+				text-shadow: 2px 2px #292828e6;
+				background-color: rgba(0, 0, 0, 0.75);
+				padding: 0 0.5rem;
+				border-radius: 10px;
+			}
 
-            &:nth-child(2) {
-                bottom: 4px;
-                right: 2%;
-                font-size: 32px;
-                text-shadow: 2px 2px #292828e6;
-            }
-        }
-    }
+			&:nth-child(2) {
+				bottom: 4px;
+				right: 2%;
+				font-size: 32px;
+				text-shadow: 2px 2px #292828e6;
+			}
+		}
+	}
 
-    img {
+	img {
 		border-top-right-radius: 10px;
 		border-top-left-radius: 10px;
 		border: 1px _palette(postcard-white) solid;
-        width: 640px;
+		width: 640px;
 		max-width: 75vw;
 		border-bottom: 0;
 		border-top: 0;
-		background-color: rgba(0,0,0,0.7);
+		background-color: rgba(0, 0, 0, 0.7);
 		padding: 0.5em;
 		padding-top: 0.1em;
 	}
@@ -78,7 +77,6 @@ body.archive {
 	}
 
 	.m-imgur-post {
-		background-color: gray;
 		backface-visibility: hidden;
 		position: relative;
 
@@ -93,19 +91,20 @@ body.archive {
 			margin-right: 20vw;
 			z-index: 100;
 		}
+	}
 
-		&.s--popup {			
-			transform: unset;
-			margin-left: unset;
-			margin-top: unset;
-			margin-right: unset;
-			z-index: unset;
-			width: 75vw;
+	#biketagUploadForm .m-imgur-post,
+	.m-imgur-post.s--popup {
+		transform: unset;
+		margin-left: unset;
+		margin-top: unset;
+		margin-right: unset;
+		z-index: unset;
+		width: 75vw;
 
-			.description {
-				width: unset;
-				height: unset;
-			}
+		.description {
+			width: unset;
+			height: unset;
 		}
 	}
 }
@@ -137,6 +136,7 @@ body.archive {
 				border-bottom-right-radius: 0;
 				border-top: 1px _palette(postcard-white) solid;
 			}
+
 			.description {
 				max-width: 14.2em;
 				font-size: 1.2em;
