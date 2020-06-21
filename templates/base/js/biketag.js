@@ -381,7 +381,7 @@ class BikeTag {
 
 			if (tagInformation.currentTag) {
 				var tagHintSplit = tagInformation.currentTag.description.split('(')
-				var tagHint = tagHintSplit.length ? tagHintSplit[1].split(')')[0] : null
+				var tagHint = tagHintSplit.length > 1 ? tagHintSplit[1].split(')')[0] : null
 				var tagCreditSplit = tagInformation.currentTag.description.split('by')
 				var tagCredit = tagCreditSplit[tagCreditSplit.length - 1]
 				var tagNumberSplit = tagInformation.currentTag.description.split(' ')
