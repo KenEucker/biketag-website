@@ -1696,6 +1696,7 @@ body.is-preload #footer {
 
 .m-imgur-post {
   margin-bottom: 2em;
+  background-color: gray;
 }
 .m-imgur-post .description {
   border-style: solid;
@@ -1743,11 +1744,47 @@ body.is-preload #footer {
   max-width: 75vw;
   border-bottom: 0;
   border-top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0.5em;
+  padding-top: 0.1em;
 }
 @media screen and (min-width: 737px) {
   .m-imgur-post .description {
     margin-top: -0.4em;
   }
+}
+
+body.archive #header .content .inner {
+  overflow: visible !important;
+}
+body.archive .m-imgur-post {
+  background-color: gray;
+  backface-visibility: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+}
+body.archive .m-imgur-post:nth-child(even) {
+  transform: rotate(5deg) scale(0.8);
+  margin-left: 20vw;
+  margin-top: -50vh;
+}
+body.archive .m-imgur-post:nth-child(odd) {
+  transform: rotate(-5deg) scale(0.8);
+  margin-right: 20vw;
+  z-index: 100;
+}
+body.archive .m-imgur-post.s--popup {
+  transform: unset;
+  margin-left: unset;
+  margin-top: unset;
+  margin-right: unset;
+  z-index: unset;
+  width: 75vw;
+}
+body.archive .m-imgur-post.s--popup .description {
+  width: unset;
+  height: unset;
 }
 
 #tagit #biketagUploadForm #heading span {

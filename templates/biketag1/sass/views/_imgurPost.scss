@@ -1,6 +1,7 @@
 .m-imgur-post {
 	margin-bottom: 2em;
-	
+	background-color: gray;
+
 	.description {
 		border-style: solid;
 		border-radius: 5px;
@@ -52,11 +53,59 @@
 		max-width: 75vw;
 		border-bottom: 0;
 		border-top: 0;
+		background-color: rgba(0,0,0,0.7);
+		padding: 0.5em;
+		padding-top: 0.1em;
 	}
 
 	@include breakpoint('>=medium') {
 		.description {
 			margin-top: -0.4em;
+		}
+	}
+}
+
+body.archive {
+
+	#header {
+		.content {
+			.inner {
+				overflow: visible !important;
+			}
+		}
+	}
+
+	.m-imgur-post {
+		background-color: gray;
+		backface-visibility: hidden;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		position: relative;
+
+		&:nth-child(even) {
+			transform: rotate(5deg) scale(0.8);
+			margin-left: 20vw;
+			margin-top: -50vh;
+		}
+
+		&:nth-child(odd) {
+			transform: rotate(-5deg) scale(0.8);
+			margin-right: 20vw;
+			z-index: 100;
+		}
+
+		&.s--popup {			
+			transform: unset;
+			margin-left: unset;
+			margin-top: unset;
+			margin-right: unset;
+			z-index: unset;
+			width: 75vw;
+
+			.description {
+				width: unset;
+				height: unset;
+			}
 		}
 	}
 }

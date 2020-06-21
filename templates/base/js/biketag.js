@@ -58,7 +58,7 @@ class BikeTag {
 		var submit = document.createElement('ul')
 
 		window.pageData = !!window.pageData ? window.pageData : {}
-		
+
 		window.pageData.newBikeTagMessage = window.pageData.newBikeTagMessage ? window.pageData.newBikeTagMessage : 'Did you find the Mystery Location played in round'
 		window.pageData.proofTagMessage = window.pageData.proofTagMessage ? window.pageData.proofTagMessage : 'BikeTag @ matching Mystery Location'
 		window.pageData.proofTagTitle = window.pageData.proofTagTitle ? window.pageData.proofTagTitle : 'Play a BikeTag that matches the Biketag in round'
@@ -298,18 +298,25 @@ class BikeTag {
 		var targetContainer = document.querySelector(targetSelector || '.content .inner');
 
 		if (targetContainer) {
-			var tagContainer = document.createElement('div');
-			tagContainer.className = "m-imgur-post";
-			tagContainer.innerHTML = this.biketagImageTemplate(tag, heading || "Tag");
+			var tagContainer = document.createElement('div')
+			tagContainer.className = "m-imgur-post"
+			var tagTemplate = this.biketagImageTemplate(tag, heading || "Tag", true)
+			tagContainer.innerHTML = tagTemplate
 			tagContainer.querySelector('a').addEventListener('click', function (e) {
+				var count = self.getUrlParam('count')
+				var content = '<img src="' + this.getAttribute('href') + '"></img>'
+				if (count) {
+					content = `${tagTemplate}`
+				}
 
 				if (window.uglipop) {
-					e.preventDefault();
-					e.stopPropagation();
+					e.preventDefault()
+					e.stopPropagation()
 
 					window.uglipop({
 						source: 'html',
-						content: '<img src="' + this.getAttribute('href') + '"></img>'
+						class: 'm-imgur-post s--popup',
+						content,
 					});
 				}
 
@@ -333,7 +340,7 @@ class BikeTag {
 		return tagNumber
 	}
 
-	biketagImageTemplate(image, title) {
+	biketagImageTemplate(image, title, loadImage = false) {
 		var imageLinkStringSplit = image.link.split('.')
 		var imageLinkStringEnd = '.' + imageLinkStringSplit[imageLinkStringSplit.length - 1]
 		var thumbnail = image.link.replace(imageLinkStringEnd, 'l' + imageLinkStringEnd)
@@ -351,12 +358,12 @@ class BikeTag {
 		}
 
 		// console.log('setting image link', image.link, image);
-		return '<a href="' + image.link + '" target="_blank">\
-					<span>' + tagNumber + '</span>\
-					<span>' + tagCredit + '</span>\
-					<img data-src="' + thumbnail + '">\
-					<h2 class="description">' + title + '</h2>\
-				</a>';
+		return `<a href="${image.link}" target="_blank">
+					<span>${tagNumber}</span>
+					<span>${tagCredit}</span>
+					<img ${!!loadImage ? `src="${thumbnail}"` : ''} data-src="${thumbnail}">
+					<h2 class="description">${title}</h2>
+				</a>`
 	}
 
 	getCurrentTagInformation() {
@@ -381,13 +388,13 @@ class BikeTag {
 	}
 
 	showImageThumbnail(event) {
-		var target = event.target 
+		var target = event.target
 		var file = target.files[0]
 		var fileReader = new FileReader()
 		var uploadContainer = target.parentElement.querySelector('.upload-box')
 		var previewContainer = target.parentElement.querySelector('.m-imgur-post')
 
-		var changeToThumbnailImage = function(src, revoke = false) {
+		var changeToThumbnailImage = function (src, revoke = false) {
 			var img = previewContainer.querySelector('img')
 			var uploadFilenameSpan = uploadContainer.querySelector('span')
 
@@ -402,7 +409,7 @@ class BikeTag {
 				URL.revokeObjectURL(url)
 			}
 		}
-		var changeBackToUploader = function() {
+		var changeBackToUploader = function () {
 			previewContainer.classList.add('hidden')
 			uploadContainer.classList.remove('hidden')
 			uploadContainer.classList.remove('hidden')
@@ -420,7 +427,7 @@ class BikeTag {
 				})
 				var url = URL.createObjectURL(blob)
 				var video = document.createElement('video')
-				
+
 				var timeupdate = function () {
 					if (snapImage()) {
 						video.removeEventListener('timeupdate', timeupdate)
@@ -476,8 +483,8 @@ class BikeTag {
 			this.renderBikeTag(lastImage, "Current mystery location to find", `#${this.formID} #heading`)
 			if (!!count) {
 				count = count.toUpperCase() == "ALL" ? images.length : Number(count);
-				for (var i = 0;
-					(i < (count * 2)) && (i < images.length); ++i) {
+				for (var i = 1;
+					(i <= (count * 2)) && (i < images.length); ++i) {
 					var image = images[i]
 					this.renderBikeTag(image, image.description)
 				}
@@ -571,8 +578,8 @@ class BikeTag {
 		}.bind(this))
 
 		var uploadBoxes = form.querySelectorAll('.upload-box')
-		uploadBoxes.forEach(function(uploadBox) {
-			uploadBox.addEventListener('click', function(event) {
+		uploadBoxes.forEach(function (uploadBox) {
+			uploadBox.addEventListener('click', function (event) {
 				var parentElement = event.target.parentElement.parentElement
 				var uploadFileInput = parentElement.querySelector('input[type="file"]')
 				uploadFileInput.click()
@@ -582,7 +589,7 @@ class BikeTag {
 		var inputChangedEvent = 'keyup'
 
 		var locationInput = form.querySelector('input[name="location"]')
-		locationInput.addEventListener(inputChangedEvent, function(event) {
+		locationInput.addEventListener(inputChangedEvent, function (event) {
 			var target = event.target
 			var text = target.value
 			var preview = form.querySelector('#proofPreview')
@@ -591,7 +598,7 @@ class BikeTag {
 		})
 
 		var hintInput = form.querySelector('input[name="hint"]')
-		hintInput.addEventListener(inputChangedEvent, function(event) {
+		hintInput.addEventListener(inputChangedEvent, function (event) {
 			var target = event.target
 			var text = target.value
 			var preview = form.querySelector('#hintPreview')
@@ -600,19 +607,19 @@ class BikeTag {
 		})
 
 		var nameInput = form.querySelector('input[name="name"]')
-		nameInput.addEventListener(inputChangedEvent, function(event) {
+		nameInput.addEventListener(inputChangedEvent, function (event) {
 			var target = event.target
 			var text = target.value
 			var previews = form.querySelectorAll('#namePreview')
 
-			previews.forEach(function(preview) {
+			previews.forEach(function (preview) {
 				preview.innerText = text
 			})
 		})
 
 		var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
-		deleteImageButtons.forEach(function(button) {
-			button.addEventListener('click', function(event) {
+		deleteImageButtons.forEach(function (button) {
+			button.addEventListener('click', function (event) {
 				var previewContainer = event.target.parentElement
 				var uploadContainer = previewContainer.parentElement.querySelector('.upload-box')
 				var uploadSpanEl = uploadContainer.querySelector('span')

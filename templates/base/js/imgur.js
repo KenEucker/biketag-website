@@ -198,6 +198,7 @@
 				if (count) {
 					self.imgurAlbumPicturesRefreshFrequency = false
 					biketag.showLatestTagImages(count)
+					document.body.classList.add('archive')
 				} else if (tagnumber) {
 					self.imgurAlbumPicturesRefreshFrequency = false
 					biketag.showBikeTagNumber(tagnumber)
