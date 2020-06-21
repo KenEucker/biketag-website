@@ -14,7 +14,8 @@
 		max-width: 75vw;
 		margin-top: -0.6em;
 		background-color: _palette(postcard-white);
-    	color: black;
+		color: black;
+		padding: 1rem;
 	}
 
 	a {
@@ -66,7 +67,7 @@
 		#heading span {
 			display: none;
 		}
-		
+
 		.m-imgur-post {
 			margin: auto;
 			position: relative;

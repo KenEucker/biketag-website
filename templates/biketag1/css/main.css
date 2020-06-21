@@ -1711,6 +1711,7 @@ body.is-preload #footer {
   margin-top: -0.6em;
   background-color: floralwhite;
   color: black;
+  padding: 1rem;
 }
 .m-imgur-post a {
   position: relative;
