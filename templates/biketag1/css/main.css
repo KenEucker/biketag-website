@@ -1748,6 +1748,8 @@ body.is-preload #footer {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   padding-top: 0.1em;
+  max-height: 50vh;
+  height: 100vh;
 }
 @media screen and (min-width: 737px) {
   .m-imgur-post .description {
@@ -1808,6 +1810,8 @@ body.archive .m-imgur-post.s--popup .description {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-top: 1px floralwhite solid;
+  max-height: 25em;
+  height: 100%;
 }
 #tagit #biketagUploadForm .m-imgur-post .description {
   max-width: 14.2em;

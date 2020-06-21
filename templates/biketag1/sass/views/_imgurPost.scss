@@ -57,6 +57,8 @@
 		background-color: rgba(0, 0, 0, 0.7);
 		padding: 0.5em;
 		padding-top: 0.1em;
+		max-height: 50vh;
+		height: 100vh;
 	}
 
 	@include breakpoint('>=medium') {
@@ -135,6 +137,8 @@ body.archive {
 				border-bottom-left-radius: 0;
 				border-bottom-right-radius: 0;
 				border-top: 1px _palette(postcard-white) solid;
+				max-height: 25em;
+				height: 100%;
 			}
 
 			.description {
