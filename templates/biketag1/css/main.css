@@ -1522,8 +1522,14 @@ body.is-preload #header .content .inner {
 #main #tagit #biketagUploadForm #previousTag h3, #main #tagit #biketagUploadForm #previousTag .upload-box {
   color: #FF652F;
 }
+#main #tagit #biketagUploadForm #previousTag .close:before {
+  background-color: #FF652F !important;
+}
 #main #tagit #biketagUploadForm #nextTag h3, #main #tagit #biketagUploadForm #nextTag .upload-box {
   color: #14A76C;
+}
+#main #tagit #biketagUploadForm #nextTag .close:before {
+  background-color: #14A76C !important;
 }
 #main #tagit #biketagUploadForm #name h3, #main #tagit #biketagUploadForm #name .upload-box {
   color: #FFE400;
@@ -1544,6 +1550,7 @@ body.is-preload #header .content .inner {
 }
 #main #tagit #biketagUploadForm .upload-box img {
   max-width: 18vh;
+  margin-top: -5px;
 }
 #main #tagit #biketagUploadForm .upload-box i {
   font-size: 3.5rem;
@@ -1552,15 +1559,15 @@ body.is-preload #header .content .inner {
 }
 #main #tagit #biketagUploadForm .upload-box::after {
   content: "upload your image of";
-  font-size: 0.9em;
   display: block;
+  margin-top: -20px;
 }
 #main #tagit #biketagUploadForm .upload-box.s--uploaded::after {
   content: "image uploaded";
 }
 #main #tagit #biketagUploadForm .upload-box span {
   position: absolute;
-  bottom: -6px;
+  bottom: 1px;
   width: 100%;
   display: block;
   font-family: Lota;
@@ -1663,6 +1670,11 @@ body.is-preload #header .content .inner {
   }
   #main #tagit #biketagUploadForm .upload-box {
     min-width: 60%;
+    border-bottom: inset;
+    border-top-width: thin;
+    border: dashed;
+    border-right-width: thin;
+    border-left-width: thin;
   }
 }
 @media screen and (max-width: 480px) {
@@ -1808,11 +1820,11 @@ body.archive .m-imgur-post.s--popup .description {
   max-width: 85%;
 }
 #tagit #biketagUploadForm .m-imgur-post .close {
-  top: -15px;
-  width: 3rem;
-  height: 3rem;
+  top: -20px;
+  width: 4rem;
+  height: 4rem;
   transform: scale(0.75);
-  right: 10%;
+  right: -30px;
 }
 #tagit #biketagUploadForm .m-imgur-post img {
   max-width: 17em;
