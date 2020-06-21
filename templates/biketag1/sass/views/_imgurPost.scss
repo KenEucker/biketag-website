@@ -62,14 +62,15 @@
 
 #tagit {
 	#biketagUploadForm {
+
+		#heading span {
+			display: none;
+		}
+		
 		.m-imgur-post {
 			margin: auto;
 			position: relative;
 			max-width: 85%;
-
-			#heading span {
-				display: none;
-			}
 
 			.close {
 				top: -15px;

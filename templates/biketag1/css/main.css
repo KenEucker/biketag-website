@@ -1749,13 +1749,13 @@ body.is-preload #footer {
   }
 }
 
+#tagit #biketagUploadForm #heading span {
+  display: none;
+}
 #tagit #biketagUploadForm .m-imgur-post {
   margin: auto;
   position: relative;
   max-width: 85%;
-}
-#tagit #biketagUploadForm .m-imgur-post #heading span {
-  display: none;
 }
 #tagit #biketagUploadForm .m-imgur-post .close {
   top: -15px;

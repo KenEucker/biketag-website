@@ -98,10 +98,6 @@ class BikeTag {
 			<span>(MESSAGE)</span>
 		</div>`
 
-		var currentPreview = `<div class="m-imgur-post">
-
-		</div>`
-
 		var proofPreview = `<div class="m-imgur-post hidden">
 			<span class="close"></span>
 			<img src="../../../assets/img/none.png">
@@ -122,7 +118,7 @@ class BikeTag {
 		jameson.className = "field"
 		submit.className = "actions"
 
-		heading.innerHTML = `<h1>${newBikeTagMessage}</h1>${currentPreview}`
+		heading.innerHTML = `<h1>${newBikeTagMessage}</h1>`
 
 		first.innerHTML = `<h3>${proofTagTitle}</h3>
 		<label for="currentTag"></label>
