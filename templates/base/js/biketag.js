@@ -500,7 +500,7 @@ class BikeTag {
 			var currentTagInfo = this.getCurrentTagInformation()
 			$('#biketagUploadForm h1').html($('#biketagUploadForm h1').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
 			$('#previousTag h3').html($('#previousTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
-			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber + ' here')
+			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber)
 			$('#tagNumber').html(poundSymbol + currentTagInfo.nextTagNumber)
 			$('#proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
 		}
