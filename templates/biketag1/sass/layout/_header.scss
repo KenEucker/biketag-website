@@ -251,10 +251,29 @@
 
 		@include breakpoint('>=medium') {
 			nav {
+				&#head {
+					ul {
+						max-width: 55vh;
+					}
+				}
 
-				.extra-text {
+				.connecting-text {
 					display: inline;
 					visibility: visible;
+				}
+			}
+		}
+
+		@include breakpoint('>=small') {
+			nav {
+				&#head {
+					ul {
+						
+						&:nth-child(2) { 
+							min-width: 12rem;
+							padding: 0;
+						}
+					}
 				}
 			}
 		}
@@ -306,7 +325,7 @@
 			// padding: 1.5rem 0;
 			margin-top: -2rem;
 
-			.extra-text {
+			.connecting-text {
 				display: none;
 				visibility: hidden;
 			}
@@ -318,11 +337,6 @@
 			}
 
 			nav {
-				&.head {
-					ul li a &:nth-child(2) {
-						padding: 0;
-					}
-				}
 				ul {
 					@include vendor('flex-direction', 'row');
 					min-width: 10rem;
@@ -342,7 +356,7 @@
 							min-width: 0;
 							width: 100%;
 							margin: 0;
-							padding: 0.3rem 0.6rem;
+							padding: 0 0.6rem;
 						}
 					}
 				}
