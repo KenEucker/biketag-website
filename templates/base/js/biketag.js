@@ -309,10 +309,10 @@ class BikeTag {
 					content = `${tagTemplate}`
 				}
 
-				if (window.uglipop) {
-					e.preventDefault()
-					e.stopPropagation()
+				e.preventDefault()
+				e.stopPropagation()
 
+				if (window.uglipop && count) {
 					window.uglipop({
 						source: 'html',
 						class: 'm-imgur-post s--popup',
