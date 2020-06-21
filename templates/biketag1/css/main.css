@@ -1454,9 +1454,6 @@ body.is-preload #header .content .inner {
   }
 }
 @media screen and (max-width: 480px) {
-  #header {
-    margin-top: -2rem;
-  }
   #header .connecting-text {
     display: none;
     visibility: hidden;
