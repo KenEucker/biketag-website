@@ -167,10 +167,7 @@ class BikeTag {
 
 	sendNotificationEmail(emailAddress, subject, body) {
 		return Email.send({
-			// Host: "smtp.gmail.com",
-			// Username: "biketagorg",
-			// Password: "BikeTagOrg720!",
-			SecureToken: "1dc9bf22-d96c-46a6-86d7-1a3521d62781",
+			SecureToken: "cb941e93-d300-4314-97d4-bf01dedf7b4a",
 			To: emailAddress,
 			From: "biketagorg@gmail.com",
 			Subject: subject,
