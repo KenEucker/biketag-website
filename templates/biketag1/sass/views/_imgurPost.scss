@@ -1,6 +1,8 @@
 .m-imgur-post {
 	margin-bottom: 2em;
 	background-color: gray;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 
 	.description {
 		border-style: solid;
@@ -78,8 +80,6 @@ body.archive {
 	.m-imgur-post {
 		background-color: gray;
 		backface-visibility: hidden;
-		border-top-left-radius: 10px;
-		border-top-right-radius: 10px;
 		position: relative;
 
 		&:nth-child(even) {

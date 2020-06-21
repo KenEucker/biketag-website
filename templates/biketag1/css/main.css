@@ -1697,6 +1697,8 @@ body.is-preload #footer {
 .m-imgur-post {
   margin-bottom: 2em;
   background-color: gray;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .m-imgur-post .description {
   border-style: solid;
@@ -1760,8 +1762,6 @@ body.archive #header .content .inner {
 body.archive .m-imgur-post {
   background-color: gray;
   backface-visibility: hidden;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
   position: relative;
 }
 body.archive .m-imgur-post:nth-child(even) {
