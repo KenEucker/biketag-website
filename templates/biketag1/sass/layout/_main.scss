@@ -63,6 +63,11 @@
 				cursor: pointer;
 				width: 50%;
 				position: relative;
+				border-bottom: inset;
+				border-top-width: thin;
+				border: dashed;
+				border-right-width: thin;
+				border-left-width: thin;
 
 				&::before {
 					content: "";
@@ -212,11 +217,6 @@
 			#biketagUploadForm {
 				.upload-box {
 					min-width: 60%;
-					border-bottom: inset;
-					border-top-width: thin;
-					border: dashed;
-					border-right-width: thin;
-					border-left-width: thin;
 				}
 			}
 		}

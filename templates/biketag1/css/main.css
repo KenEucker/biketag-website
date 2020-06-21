@@ -1544,6 +1544,11 @@ body.is-preload #header .content .inner {
   cursor: pointer;
   width: 50%;
   position: relative;
+  border-bottom: inset;
+  border-top-width: thin;
+  border: dashed;
+  border-right-width: thin;
+  border-left-width: thin;
 }
 #main #tagit #biketagUploadForm .upload-box::before {
   content: "";
@@ -1670,11 +1675,6 @@ body.is-preload #header .content .inner {
   }
   #main #tagit #biketagUploadForm .upload-box {
     min-width: 60%;
-    border-bottom: inset;
-    border-top-width: thin;
-    border: dashed;
-    border-right-width: thin;
-    border-left-width: thin;
   }
 }
 @media screen and (max-width: 480px) {
