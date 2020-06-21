@@ -1487,6 +1487,46 @@ body.is-preload #header .content .inner {
 }
 
 /* Main */
+.bg-green {
+  background-color: #14A76C;
+}
+
+.bg-grey {
+  background-color: #747474;
+}
+
+.bg-yellow {
+  background-color: #FFE400;
+}
+
+.bg-black {
+  background-color: #272727;
+}
+
+.bg-orange {
+  background-color: #FF652F !important;
+}
+
+.green {
+  color: #14A76C;
+}
+
+.grey {
+  color: #747474;
+}
+
+.yellow {
+  color: #FFE400;
+}
+
+.black {
+  color: #272727;
+}
+
+.orange {
+  color: #FF652F;
+}
+
 #main {
   -moz-flex-grow: 1;
   -webkit-flex-grow: 1;

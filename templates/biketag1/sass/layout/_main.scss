@@ -6,6 +6,46 @@
 
 /* Main */
 
+.bg-green {
+	background-color: _palette(green);
+}
+
+.bg-grey {
+	background-color: #747474;
+}
+
+.bg-yellow {
+	background-color: #FFE400;
+}
+
+.bg-black {
+	background-color: #272727;
+}
+
+.bg-orange {
+	background-color: _palette(orange) !important;
+}
+
+.green {
+	color: #14A76C;
+}
+
+.grey {
+	color: #747474;
+}
+
+.yellow {
+	color: #FFE400;
+}
+
+.black {
+	color: #272727;
+}
+
+.orange {
+	color: _palette(orange);
+}
+
 #main {
 	@include vendor('flex-grow', '1');
 	@include vendor('flex-shrink', '1');

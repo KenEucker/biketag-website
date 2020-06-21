@@ -8,6 +8,30 @@ class BikeTag {
 		this.formID = "biketagUploadForm"
 	}
 
+	closeNotification() {
+		var notification = document.getElementById("notification")
+		if (notification) {
+			$(notification).fadeOut()
+			// notification.style.display = 'none'
+		}
+	}
+
+	createNotification(message, color) {
+		var wrapper = document.getElementById('wrapper');
+		var notification = document.createElement('div');
+		notification.id = 'notification';
+		notification.className = color 
+		notification.innerHTML = `${message} <a class="close">[close]</a>`;
+		wrapper.prepend(notification);
+
+
+		var close = document.querySelector('#notification .close')
+		close.addEventListener('click', this.closeNotification)
+
+		window.setTimeout(this.closeNotification, 2000)
+
+	}
+
 	getUrlParam(param) {
 		var searchParams = new URLSearchParams(window.location.search);
 
@@ -594,6 +618,9 @@ class BikeTag {
 		this.targetSelector = targetSelector
 		this.target = document.querySelector(this.targetSelector)
 		this.appendBiketagForm(this.target)
+
+		// COVID-19 Banner
+		this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange")
 
 		var form = document.querySelector(this.targetSelector)
 		form.addEventListener('submit', function (e) {
