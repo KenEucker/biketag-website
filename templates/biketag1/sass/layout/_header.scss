@@ -134,8 +134,12 @@
 						align-self: flex-end;
 
 						&:nth-child(2) {
-							height: 6rem;
-							max-width: 15rem;
+							height: 5rem;
+							max-width: 8rem;
+
+							a {
+								line-height: 2.2rem;
+							}
 						}
 					}
 				}
@@ -146,8 +150,6 @@
 				margin-bottom: 0;
 				list-style: none;
 				padding-left: 0;
-				max-width: 60vw;
-
 
 				li {
 					padding-left: 0;
@@ -253,8 +255,16 @@
 			nav {
 				&#head {
 					ul {
-						// margin-left: -2rem;
-						max-width: 55vh;
+						li {
+							&:nth-child(2) {
+								height: 6rem;
+								max-width: 15rem;
+
+								a {
+									line-height: 2.8rem;
+								}
+							}
+						}
 					}
 				}
 

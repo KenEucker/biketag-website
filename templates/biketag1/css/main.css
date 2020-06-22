@@ -1329,8 +1329,11 @@ body.archive #wrapper #countChanger {
   align-self: flex-end;
 }
 #header nav#head ul li:nth-child(2) {
-  height: 6rem;
-  max-width: 15rem;
+  height: 5rem;
+  max-width: 8rem;
+}
+#header nav#head ul li:nth-child(2) a {
+  line-height: 2.2rem;
 }
 #header nav ul {
   display: -moz-flex;
@@ -1340,7 +1343,6 @@ body.archive #wrapper #countChanger {
   margin-bottom: 0;
   list-style: none;
   padding-left: 0;
-  max-width: 60vw;
 }
 #header nav ul li {
   padding-left: 0;
@@ -1416,8 +1418,12 @@ body.is-preload #header .content .inner {
   }
 }
 @media screen and (min-width: 737px) {
-  #header nav#head ul {
-    max-width: 55vh;
+  #header nav#head ul li:nth-child(2) {
+    height: 6rem;
+    max-width: 15rem;
+  }
+  #header nav#head ul li:nth-child(2) a {
+    line-height: 2.8rem;
   }
   #header nav .connecting-text {
     display: inline;

@@ -16,19 +16,19 @@ class BikeTag {
 		}
 	}
 
-	createNotification(message, color) {
+	createNotification(message, color, expire = 3000) {
 		var wrapper = document.getElementById('wrapper');
 		var notification = document.createElement('div');
 		notification.id = 'notification';
 		notification.className = color 
-		notification.innerHTML = `${message} <a class="close">[close]</a>`;
+		notification.innerHTML = `${message} <a class="close">close</a>`;
 		wrapper.prepend(notification);
 
 
 		var close = document.querySelector('#notification .close')
 		close.addEventListener('click', this.closeNotification)
 
-		window.setTimeout(this.closeNotification, 2000)
+		window.setTimeout(this.closeNotification, expire)
 
 	}
 
@@ -550,7 +550,6 @@ class BikeTag {
 		this.setLatestTagInformation()
 		var countParam = this.getUrlParam('count')
 		count = count == -1 ? false : (Number.isInteger(count) ? count : (countParam === 'all' ? countParam : Number(countParam)))
-		console.log({count})
 
 		if (count) {
 			this.showArchiveTags(count)
@@ -568,7 +567,6 @@ class BikeTag {
 		if (!imgur.imgurAlbumPictures) {
 			return imgur.getImgurAlbumPictures(null, this.showArchiveTags.bind(this))
 		}
-		console.log({count})
 		document.body.classList.add('archive')
 		$('#header .content .inner').empty()
 
@@ -620,7 +618,7 @@ class BikeTag {
 		this.appendBiketagForm(this.target)
 
 		// COVID-19 Banner
-		this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange")
+		this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
 
 		var form = document.querySelector(this.targetSelector)
 		form.addEventListener('submit', function (e) {

@@ -163,5 +163,26 @@
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
 		]
+	},
+	"vancouver": {
+		"metaTitle": "VancouverBikeTag!",
+		"region": "Vancouver, British Columbia",
+		"tagline": "The BikeTag game in Vancouver, British Columbia",
+		"imgur": {
+			"imgurAlbumHash": "tt9bov6"
+		},
+		"reddit": {
+			"redditSubreddit": "vancouvercycling"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
+		]
 	}
 }
