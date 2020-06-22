@@ -1803,7 +1803,7 @@ body.is-preload #footer {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border: 1px floralwhite solid;
-  max-width: 25vw;
+  max-width: 75vw;
   border-bottom: 0;
   border-top: 0;
   background-color: rgba(0, 0, 0, 0.7);
