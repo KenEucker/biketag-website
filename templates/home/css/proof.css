@@ -14,6 +14,46 @@
 	src: url('../../assets/fonts/TrashHand.woff2')
 }
 
+.bg-green {
+	background-color: #14A76C;
+}
+
+.bg-grey {
+	background-color: #747474;
+}
+
+.bg-yellow {
+	background-color: #FFE400;
+}
+
+.bg-black {
+	background-color: #272727;
+}
+
+.bg-orange {
+	background-color: #FF652F;
+}
+
+.green {
+	color: #14A76C;
+}
+
+.grey {
+	color: #747474;
+}
+
+.yellow {
+	color: #FFE400;
+}
+
+.black {
+	color: #272727;
+}
+
+.orange {
+	color: #FF652F;
+}
+
 body {
 	background-color: #272727;
 	font-family: Roboto, sans-serif;
@@ -286,45 +326,6 @@ p {
 }
 
 
-.bg-green {
-	background-color: #14A76C;
-}
-
-.bg-grey {
-	background-color: #747474;
-}
-
-.bg-yellow {
-	background-color: #FFE400;
-}
-
-.bg-black {
-	background-color: #272727;
-}
-
-.bg-orange {
-	background-color: #FF652F;
-}
-
-.green {
-	color: #14A76C;
-}
-
-.grey {
-	color: #747474;
-}
-
-.yellow {
-	color: #FFE400;
-}
-
-.black {
-	color: #272727;
-}
-
-.orange {
-	color: #FF652F;
-}
 
 
 .article {
@@ -342,7 +343,7 @@ p {
 
 .article:hover {
 	background-color: #747474;
-	color: #FFE400;
+	color: #FFE400 !important;
 }
 
 .article.suggested {
