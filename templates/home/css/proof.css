@@ -73,6 +73,7 @@ p {
 	font-size: 16px;
 	line-height: 23px;
 	font-weight: 300;
+	color: #747474;
 }
 
 .button {
@@ -134,13 +135,12 @@ p {
 }
 
 #about h1 {
-	color: #FF652F;
+	/* color: #FF652F; */
 }
 
 #about {
 	padding: 1em;
 	text-align: center;
-	color: #14A76C;
 }
 
 #about a {
@@ -336,7 +336,7 @@ p {
 	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12);
 	-webkit-transition: background-color 300ms ease, color 300ms ease;
 	transition: background-color 300ms ease, color 300ms ease;
-	color: #14A76C;
+	color: white;
 	text-decoration: none;
 }
 
