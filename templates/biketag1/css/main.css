@@ -1803,15 +1803,13 @@ body.is-preload #footer {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border: 1px floralwhite solid;
-  width: 640px;
-  max-width: 75vw;
+  max-width: 25vw;
   border-bottom: 0;
   border-top: 0;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   padding-top: 0.1em;
-  max-height: 50vh;
-  height: 100vh;
+  max-height: 100vh;
 }
 @media screen and (min-width: 737px) {
   .m-imgur-post .description {
