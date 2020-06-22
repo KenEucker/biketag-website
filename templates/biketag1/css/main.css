@@ -1816,8 +1816,8 @@ body.is-preload #footer {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   padding-top: 0.1em;
-  max-height: 50vh;
-  height: 100vh;
+  max-height: 60vh;
+  height: auto;
 }
 @media screen and (min-width: 737px) {
   .m-imgur-post .description {
