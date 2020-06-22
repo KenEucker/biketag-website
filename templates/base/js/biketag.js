@@ -618,7 +618,7 @@ class BikeTag {
 		this.appendBiketagForm(this.target)
 
 		// COVID-19 Banner
-		this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
+		// this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
 
 		var form = document.querySelector(this.targetSelector)
 		form.addEventListener('submit', function (e) {
