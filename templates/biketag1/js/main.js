@@ -254,6 +254,7 @@
 			// Add state?
 			if (typeof addState != 'undefined' &&
 				addState === true)
+				console.log({history: '#'})
 				history.pushState(null, null, '#');
 
 			// Handle lock.
@@ -448,8 +449,7 @@
 			location.hash != '#')
 			$window.on('load', function () {
 				$main._show(location.hash.substr(1), true);
-			});
-
+			})
 	});
 
 })(jQuery);

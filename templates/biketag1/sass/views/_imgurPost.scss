@@ -2,6 +2,13 @@
 	margin-bottom: 2em;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+	max-width: 80vw;
+	min-width: 50vw;
+
+	img, .descrtipion {
+		min-width: 50vw;
+		max-width: 80vw;
+	}
 
 	.description {
 		border-style: solid;
@@ -12,8 +19,6 @@
 		margin: 0;
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
-		width: 640px;
-		max-width: 75vw;
 		margin-top: -0.6em;
 		background-color: _palette(postcard-white);
 		color: black;
@@ -50,15 +55,13 @@
 		border-top-right-radius: 10px;
 		border-top-left-radius: 10px;
 		border: 1px _palette(postcard-white) solid;
-		width: 640px;
-		max-width: 75vw;
 		border-bottom: 0;
 		border-top: 0;
 		background-color: rgba(0, 0, 0, 0.7);
 		padding: 0.5em;
 		padding-top: 0.1em;
-		max-height: 60vh;
-		height: auto;
+		max-height: 100vh;
+		min-height: 50vh;
 	}
 
 	@include breakpoint('>=medium') {

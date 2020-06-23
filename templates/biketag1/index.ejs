@@ -169,6 +169,21 @@
 			console.log('Could not load sexy page data', { error: e })
 		}
 	</script>
+	<script>
+		(function (w, d) {
+			var b = d.getElementsByTagName('body')[0];
+			var s = d.createElement("script");
+			s.async = true;
+			var v = !("IntersectionObserver" in w) ? "8.7.1" : "10.5.2";
+			s.src = "https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/" + v + "/lazyload.min.js";
+			w.lazyLoadOptions = {
+				class_loading: 'invisible',
+				class_loaded: 'fadeIn',
+			}; // Your options here. See "recipes" for more information about async.
+			b.appendChild(s);
+
+		}(window, document));
+	</script>
 	<script src="js/biketag.js"></script>
 	<script>
 		var biketagUploadContainerSelector = '#tagit'
@@ -182,19 +197,6 @@
 			var biketagUploadContainerEl = document.querySelector(biketagUploadContainerSelector)
 			biketagUploadContainerEl.innerHTML = "<h3>Region not supported</h3><p>Currently, this version of biketag is being managed elsewhere. If you need to create a biketag post that is not affiliated with any region, go to <a href='Http://post.biketag.org'>here to post a global tag</a>.</p>"
 		<% } %>
-	</script>
-
-	<script>
-		(function (w, d) {
-			var b = d.getElementsByTagName('body')[0];
-			var s = d.createElement("script");
-			s.async = true;
-			var v = !("IntersectionObserver" in w) ? "8.7.1" : "10.5.2";
-			s.src = "https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/" + v + "/lazyload.min.js";
-			w.lazyLoadOptions = {}; // Your options here. See "recipes" for more information about async.
-			b.appendChild(s);
-
-		}(window, document));
 	</script>
 	<script>
 	</script>

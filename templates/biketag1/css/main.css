@@ -297,6 +297,18 @@ hr {
   text-align: right;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  animation: fadeIn 2.5s;
+}
+
 /* Form */
 form {
   margin: 0 0 2rem 0;
@@ -1493,6 +1505,10 @@ body.is-preload #header .content .inner {
 }
 
 /* Main */
+.insivible {
+  visibility: hidden;
+}
+
 .bg-green {
   background-color: #14A76C;
 }
@@ -1766,6 +1782,12 @@ body.is-preload #footer {
   margin-bottom: 2em;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  max-width: 80vw;
+  min-width: 50vw;
+}
+.m-imgur-post img, .m-imgur-post .descrtipion {
+  min-width: 50vw;
+  max-width: 80vw;
 }
 .m-imgur-post .description {
   border-style: solid;
@@ -1776,8 +1798,6 @@ body.is-preload #footer {
   margin: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  width: 640px;
-  max-width: 75vw;
   margin-top: -0.6em;
   background-color: floralwhite;
   color: black;
@@ -1809,15 +1829,13 @@ body.is-preload #footer {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border: 1px floralwhite solid;
-  width: 640px;
-  max-width: 75vw;
   border-bottom: 0;
   border-top: 0;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   padding-top: 0.1em;
-  max-height: 60vh;
-  height: auto;
+  max-height: 100vh;
+  min-height: 50vh;
 }
 @media screen and (min-width: 737px) {
   .m-imgur-post .description {
