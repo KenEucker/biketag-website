@@ -97,8 +97,7 @@
 			"logo": ""
 		},
 		"adminEmailAddresses": [
-			"keneucker@gmail.com",
-			"jackiesulhoff@gmail.com "
+			"keneucker@gmail.com"
 		]
 	},
 	"seattle": {
@@ -170,6 +169,27 @@
 		"tagline": "The BikeTag game in Vancouver, British Columbia",
 		"imgur": {
 			"imgurAlbumHash": "tt9bov6"
+		},
+		"reddit": {
+			"redditSubreddit": "vancouvercycling"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
+		]
+	},
+	"vienna": {
+		"metaTitle": "ViennaBikeTag!",
+		"region": "Vienna, Austria",
+		"tagline": "The BikeTag game in Vienna, Austria",
+		"imgur": {
+			"imgurAlbumHash": "2nIYv2H"
 		},
 		"reddit": {
 			"redditSubreddit": "vancouvercycling"
