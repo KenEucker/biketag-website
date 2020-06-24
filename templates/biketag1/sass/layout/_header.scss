@@ -80,21 +80,26 @@
 			}
 		}
 
-		.logo {
-			width: 5.5rem;
-			height: 5.5rem;
-			line-height: 5.5rem;
-			border: solid _size(border-width) _palette(border);
-			border-radius: 100%;
+		.header--logo {
+			cursor: pointer;
+			
+			.logo {
+				width: 5.5rem;
+				height: 5.5rem;
+				line-height: 5.5rem;
+				border: solid _size(border-width) _palette(border);
+				border-radius: 100%;
+				margin: auto;
 
-			&.spin, &:hover {
-				cursor: pointer;
-				animation: spin 2s;
-			}
+				&.spin, &:hover {
+					cursor: pointer;
+					animation: spin 2s;
+				}
 
-			.icon {
-				&:before {
-					font-size: 2rem;
+				.icon {
+					&:before {
+						font-size: 2rem;
+					}
 				}
 			}
 		}

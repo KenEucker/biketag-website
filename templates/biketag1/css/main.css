@@ -1297,18 +1297,22 @@ body.archive #wrapper #countChanger {
   padding-right: 0.5rem;
   margin-left: -0.75rem;
 }
-#header .logo {
+#header .header--logo {
+  cursor: pointer;
+}
+#header .header--logo .logo {
   width: 5.5rem;
   height: 5.5rem;
   line-height: 5.5rem;
   border: solid 1px #ffffff;
   border-radius: 100%;
+  margin: auto;
 }
-#header .logo.spin, #header .logo:hover {
+#header .header--logo .logo.spin, #header .header--logo .logo:hover {
   cursor: pointer;
   animation: spin 2s;
 }
-#header .logo .icon:before {
+#header .header--logo .logo .icon:before {
   font-size: 2rem;
 }
 #header .content {

@@ -392,6 +392,10 @@ class BikeTag {
 	}
 
 	getCurrentTagInformation() {
+		if (!!this.currentTagInfo) {
+			return this.currentTagInfo
+		}
+
 		var tagInformation = {
 			currentTagNumber: 0,
 			hasTag: false,
@@ -419,6 +423,8 @@ class BikeTag {
 		}
 
 		tagInformation.nextTagNumber = tagInformation.currentTagNumber + 1
+
+		this.currentTagInfo = tagInformation
 
 		return tagInformation
 	}
@@ -504,15 +510,15 @@ class BikeTag {
 		}
 	}
 	
-	setLatestTagInformation(cb) {
+	setCurrentTagInformation(cb) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(null, !!cb ? cb.bind(this) : this.setLatestTagInformation.bind(this))
+			return imgur.getImgurAlbumPictures(null, !!cb ? cb.bind(this) : this.setCurrentTagInformation.bind(this))
 		}
 
 		if (!this.latestTagInformationHasBeenSet) {
 			this.latestTagInformationHasBeenSet = true
 		} else {
-			return
+			return this.getCurrentTagInformation()
 		}
 
 		// console.log('loading lazy load images')
@@ -559,7 +565,7 @@ class BikeTag {
 		if (count) {
 			this.showArchiveTags(count)
 		} else {
-			const currentTagInfo = this.setLatestTagInformation()
+			const currentTagInfo = this.setCurrentTagInformation()
 
 			document.body.classList.remove('archive')
 			$('#header .content .inner').empty()
@@ -630,7 +636,7 @@ class BikeTag {
 			self.onUploadFormSubmit(e.currentTarget).bind(self)
 		})
 
-		var headerLogo = document.querySelector('#header > .logo')
+		var headerLogo = document.querySelector('#header .header--logo')
 		headerLogo.addEventListener('click', function () {
 			self.showLatestTagImages()
 		})
