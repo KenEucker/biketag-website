@@ -55,6 +55,7 @@ function setVars() {
 	}
 
 	for (const subdomain of subdomains) {
+		config.subdomains[subdomain] = merge(config.defaults, config.subdomains[subdomain])
 		const tokens = config.subdomains[subdomain];
 
 		// Assign the subdomain based imgur authorization information, or use the default
@@ -150,6 +151,7 @@ function getPublicConfigurationValues(subdomain, host) {
 			metaDescription: subdomainInformation.metaDescription || config.metaDescription,
 			gaUA: subdomainInformation.gaUA || config.gaUA,
 			readonly: subdomainInformation.readonly,
+			newGameImage: subdomainInformation.newGameImage,
 		})
 		
 		out[subdomainName] = pageData
@@ -289,6 +291,7 @@ function getTagNumberIndex(images, tagNumber, proof = false) {
 
 function renderTemplate(template, data, res) {
 	const pageTemplate = path.join(config.templatePath, template, 'index')
+
 	if (config.supportRendering && fs.existsSync(`${pageTemplate}.ejs`)) {
 
 		// console.log('rendering template', pageTemplate)
@@ -556,9 +559,9 @@ function authentication() {
 			const subdomain = getSubdomainPrefix(req)
 			const response = {
 				imgurAlbumHash: config.subdomains[subdomain].imgur.imgurAlbumHash,
-				imgurAuthorization: config.subdomains[subdomain].imgur.imgurAuthorization
+				imgurAuthorization: config.subdomains[subdomain].imgur.imgurAuthorization,
 			}
-			console.log({response})
+			console.log({getTokenResponse: response})
 
 			if (isValidRequestOrigin(req)) {
 				response.imgurRefreshToken = authTokens[subdomain].imgur.imgurRefreshToken
@@ -685,6 +688,17 @@ function authentication() {
 	}
 }
 
+function getSubdomainOpts(req) {
+
+	const subdomain = getSubdomainPrefix(req, true)
+	
+	return {
+		requestSubdomain: subdomain,
+		...config.subdomains[subdomain]
+	}
+
+}
+
 function ImgurConnector() {
 
 }
@@ -694,6 +708,16 @@ function ingestNewRedditPostForBikeTag() {
 }
 
 function createNewBikeTagPostOnReddit(config, callback) {
+	const opts = {
+		username: config.redditUserName,
+		password: config.redditPassword,
+		appId: config.redditClientID,
+		appSecret: config.redditClientSecret,
+		userAgent: config.redditUserAgent.replace('VERSION', version)
+	}
+	console.log('reddit opts', opts)
+	reddit = new Reddit(opts)
+
 	return reddit.post('/api/submit', {
 		// sr: config.redditSubreddit,
 		sr: 'biketag',
@@ -705,19 +729,9 @@ function createNewBikeTagPostOnReddit(config, callback) {
 }
 
 function RedditConnector(config) {
-	const opts = {
-		username: config.redditUserName,
-		password: config.redditPassword,
-		appId: config.redditClientID,
-		appSecret: config.redditClientSecret,
-		userAgent: config.redditUserAgent.replace('VERSION', version)
-	}
-	console.log('reddit opts', opts)
-	reddit = new Reddit(opts)
-
 	app.post('/post/reddit', async (req, res) => {
 		try {
-			return createNewBikeTagPostOnReddit((response) => {
+			return createNewBikeTagPostOnReddit(getSubdomainOpts(req), (response) => {
 				res.json({response})
 			})
 		} catch (error) {

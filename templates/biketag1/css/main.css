@@ -1787,11 +1787,6 @@ body.is-preload #footer {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   max-width: 80vw;
-  min-width: 50vw;
-}
-.m-imgur-post img, .m-imgur-post .descrtipion {
-  min-width: 50vw;
-  max-width: 80vw;
 }
 .m-imgur-post .description {
   border-style: solid;
@@ -1799,7 +1794,6 @@ body.is-preload #footer {
   border-color: floralwhite;
   border-width: 1px;
   border-top-width: 0px;
-  margin: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   margin-top: -0.6em;
@@ -1807,10 +1801,20 @@ body.is-preload #footer {
   color: black;
   padding: 1rem;
 }
+.m-imgur-post img, .m-imgur-post .descrtipion {
+  max-width: 80vw;
+}
 .m-imgur-post a {
   position: relative;
   border: none;
   cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  background-color: floralwhite;
+}
+.m-imgur-post a div {
+  display: inline;
+  position: relative;
 }
 .m-imgur-post a span {
   position: absolute;
@@ -1824,21 +1828,22 @@ body.is-preload #footer {
   border-radius: 10px;
 }
 .m-imgur-post a span:nth-child(2) {
-  bottom: 4px;
+  bottom: 0;
   right: 2%;
   font-size: 32px;
   text-shadow: 2px 2px #292828e6;
 }
-.m-imgur-post img {
+.m-imgur-post a, .m-imgur-post img {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+}
+.m-imgur-post img {
   border: 1px floralwhite solid;
   border-bottom: 0;
   border-top: 0;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   padding-top: 0.1em;
-  max-height: 100vh;
   min-height: 50vh;
 }
 @media screen and (min-width: 737px) {
@@ -1850,19 +1855,23 @@ body.is-preload #footer {
 body.archive #header .content .inner {
   overflow: visible !important;
 }
+body.archive #header .content .inner > :last-child {
+  margin-bottom: -100%;
+}
 body.archive .m-imgur-post {
   backface-visibility: hidden;
   position: relative;
 }
 body.archive .m-imgur-post:nth-child(even) {
-  transform: rotate(5deg) scale(0.8);
-  margin-left: 20vw;
-  margin-top: -50vh;
+  transform: translate(15%, -85%) rotate(5deg) scale(0.8);
 }
 body.archive .m-imgur-post:nth-child(odd) {
-  transform: rotate(-5deg) scale(0.8);
-  margin-right: 20vw;
+  transform: translateX(-10%) rotate(-5deg) scale(0.8);
+  margin-top: -100%;
   z-index: 100;
+}
+body.archive .m-imgur-post:first-child {
+  margin-top: 0;
 }
 body.archive #biketagUploadForm .m-imgur-post,
 body.archive .m-imgur-post.s--popup {
@@ -1895,7 +1904,7 @@ body.archive .m-imgur-post.s--popup .description {
   right: -30px;
 }
 #tagit #biketagUploadForm .m-imgur-post img {
-  max-width: 17em;
+  width: 100%;
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -1903,9 +1912,7 @@ body.archive .m-imgur-post.s--popup .description {
   max-height: 25em;
 }
 #tagit #biketagUploadForm .m-imgur-post .description {
-  max-width: 14.2em;
   font-size: 1.2em;
-  margin: auto;
   margin-top: -0.5em;
 }
 

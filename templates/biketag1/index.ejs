@@ -142,7 +142,7 @@
 			<article id="donate">
 				<h3 class="major">Donate to BikeTag.Org</h3>
 				
-				<%- content.devnotice %>
+				<%- content.donate %>
 
 			</article>
 
@@ -192,6 +192,7 @@
 		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
 		window.biketag.config = {
 			adminEmailAddresses: window.pageData.adminEmailAddresses,
+			newGameImage: window.pageData.newGameImage,
 		}
 		<% if (!page.readonly) { %>
 			window.biketag.init(biketagUploadContainerSelector)

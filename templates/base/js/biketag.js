@@ -384,9 +384,11 @@ class BikeTag {
 
 		// console.log('setting image link', image.link, image);
 		return `<a href="${image.link}" target="_blank">
-					<span>${tagNumber}</span>
-					<span>${tagCredit}</span>
-					<img class="${!!loadImage ? '' : 'hidden'}" ${!!loadImage ? `src="${thumbnail}"` : ''} data-src="${thumbnail}">
+					<div>
+						<span>${tagNumber}</span>
+						<span>${tagCredit}</span>
+						<img class="${!!loadImage ? '' : 'hidden'}" ${!!loadImage ? `src="${thumbnail}"` : ''} data-src="${thumbnail}">
+					</div>
 					<h2 class="description">${title}</h2>
 				</a>`
 	}
@@ -528,6 +530,10 @@ class BikeTag {
 		if (!!images && images.length) {
 			var currentTagInfo = this.getCurrentTagInformation()
 			
+			if (!currentTagInfo.currentTag) {
+				return currentTagInfo
+			}
+
 			this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find", `#${this.formID} #heading`)
 
 			// Set the form with the tag information
@@ -569,8 +575,17 @@ class BikeTag {
 
 			document.body.classList.remove('archive')
 			$('#header .content .inner').empty()
-			this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find")
+
+			if (currentTagInfo.currentTag) {
+				this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find")
+			} else {
+				this.showNewGameImage()
+			}
 		}
+	}
+
+	showNewGameImage() {
+		this.renderBikeTag(this.config.newGameImage, "Current mystery location to find")
 	}
 
 	showArchiveTags(count) {

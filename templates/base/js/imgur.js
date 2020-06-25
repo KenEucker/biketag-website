@@ -176,6 +176,7 @@
 				var count = self.getUrlParam('count')
 				var tagnumber = biketag.getTagNumberFromURL()
 
+				console.log({getImgurTokens: response})
 				self.imgurAlbumHash = response.imgurAlbumHash
 				self.imgurAuthorization = response.imgurAuthorization
 

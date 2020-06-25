@@ -3,12 +3,6 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	max-width: 80vw;
-	min-width: 50vw;
-
-	img, .descrtipion {
-		min-width: 50vw;
-		max-width: 80vw;
-	}
 
 	.description {
 		border-style: solid;
@@ -16,19 +10,33 @@
 		border-color: _palette(postcard-white);
 		border-width: 1px;
 		border-top-width: 0px;
-		margin: 0;
+		// margin: 0;
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
 		margin-top: -0.6em;
 		background-color: _palette(postcard-white);
 		color: black;
 		padding: 1rem;
+		// min-width: 100%;
+	}
+
+	img, .descrtipion {
+		// min-width: 30em;
+		max-width: 80vw;
 	}
 
 	a {
 		position: relative;
 		border: none;
 		cursor: pointer;
+		display: inline-block;
+		width: 100%;
+		background-color: _palette(postcard-white);
+
+		div {
+			display: inline;
+			position: relative;
+		}
 
 		span {
 			position: absolute;
@@ -43,7 +51,7 @@
 			}
 
 			&:nth-child(2) {
-				bottom: 4px;
+				bottom: 0;
 				right: 2%;
 				font-size: 32px;
 				text-shadow: 2px 2px #292828e6;
@@ -51,16 +59,19 @@
 		}
 	}
 
-	img {
+	a, img {
 		border-top-right-radius: 10px;
 		border-top-left-radius: 10px;
+	}
+
+	img {
 		border: 1px _palette(postcard-white) solid;
 		border-bottom: 0;
 		border-top: 0;
 		background-color: rgba(0, 0, 0, 0.7);
 		padding: 0.5em;
 		padding-top: 0.1em;
-		max-height: 100vh;
+		// max-height: 100vh;
 		min-height: 50vh;
 	}
 
@@ -77,6 +88,10 @@ body.archive {
 		.content {
 			.inner {
 				overflow: visible !important;
+
+				> :last-child {
+					margin-bottom: -100%;
+				}
 			}
 		}
 	}
@@ -86,15 +101,19 @@ body.archive {
 		position: relative;
 
 		&:nth-child(even) {
-			transform: rotate(5deg) scale(0.8);
-			margin-left: 20vw;
-			margin-top: -50vh;
+			transform: translate(15%, -85%) rotate(5deg) scale(0.8);
+			// margin-left: 20vw;
+			// margin-top: -50vh;
 		}
 
 		&:nth-child(odd) {
-			transform: rotate(-5deg) scale(0.8);
-			margin-right: 20vw;
+			transform: translateX(-10%) rotate(-5deg) scale(0.8);
+			margin-top: -100%;
 			z-index: 100;
+		}
+
+		&:first-child {
+			margin-top: 0;
 		}
 	}
 
@@ -135,7 +154,7 @@ body.archive {
 			}
 
 			img {
-				max-width: 17em;
+				width: 100%;
 				border-radius: 10px;
 				border-bottom-left-radius: 0;
 				border-bottom-right-radius: 0;
@@ -144,9 +163,9 @@ body.archive {
 			}
 
 			.description {
-				max-width: 14.2em;
+				// max-width: 14.2em;
 				font-size: 1.2em;
-				margin: auto;
+				// margin: auto;
 				margin-top: -0.5em;
 			}
 		}
