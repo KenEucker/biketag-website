@@ -315,15 +315,13 @@ class BikeTag {
 		return tagNumberIndex;
 	}
 
-	renderBikeTag(tag, heading, targetSelector, fadeIn = false, popDialogue = true) {
+	renderBikeTag(tag, heading, targetSelector, isTagitForm = false, popDialogue = true) {
 		var targetContainer = document.querySelector(targetSelector || '.content .inner');
 
 		if (targetContainer) {
 			var tagContainer = document.createElement('div')
 			tagContainer.className = "m-imgur-post fadeIn"
 			var tagTemplate = this.biketagImageTemplate(tag, heading || "Tag", true)
-			tagTemplate = tagTemplate.replace('l.', '.')
-
 			tagContainer.innerHTML = tagTemplate
 
 			tagContainer.querySelector('a').addEventListener('click', function (e) {
@@ -341,7 +339,7 @@ class BikeTag {
 					window.uglipop({
 						source: 'html',
 						class: 'm-imgur-post s--popup',
-						content,
+						content: content.replace('l.', '.'),
 					});
 				}
 
