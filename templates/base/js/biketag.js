@@ -315,13 +315,14 @@ class BikeTag {
 		return tagNumberIndex;
 	}
 
-	renderBikeTag(tag, heading, targetSelector, fadeIn = false) {
+	renderBikeTag(tag, heading, targetSelector, fadeIn = false, popDialogue = true) {
 		var targetContainer = document.querySelector(targetSelector || '.content .inner');
 
 		if (targetContainer) {
 			var tagContainer = document.createElement('div')
 			tagContainer.className = "m-imgur-post fadeIn"
 			var tagTemplate = this.biketagImageTemplate(tag, heading || "Tag", true)
+			tagTemplate = tagTemplate.replace('l.', '.')
 
 			tagContainer.innerHTML = tagTemplate
 
@@ -336,7 +337,7 @@ class BikeTag {
 				e.preventDefault()
 				e.stopPropagation()
 
-				if (window.uglipop && isArchive) {
+				if (window.uglipop && (isArchive || popDialogue)) {
 					window.uglipop({
 						source: 'html',
 						class: 'm-imgur-post s--popup',
@@ -585,7 +586,7 @@ class BikeTag {
 	}
 
 	showNewGameImage() {
-		this.renderBikeTag(this.config.newGameImage, "Current mystery location to find")
+		this.renderBikeTag(this.config.newGameImage, "New BikeTag game coming soon!")
 	}
 
 	showArchiveTags(count) {
