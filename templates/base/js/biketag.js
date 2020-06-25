@@ -338,7 +338,7 @@ class BikeTag {
 				if (window.uglipop && (isArchive || popDialogue)) {
 					window.uglipop({
 						source: 'html',
-						class: 'm-imgur-post s--popup',
+						class: 'm-imgur-post s--popup fadeInSlow',
 						content: content.replace('l.', '.'),
 					});
 				}

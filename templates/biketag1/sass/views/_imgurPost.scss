@@ -1,5 +1,5 @@
 .m-imgur-post {
-	margin-bottom: 2em;
+	margin-bottom: -50%;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	max-width: 80vw;
@@ -71,11 +71,22 @@
 		background-color: rgba(0, 0, 0, 0.7);
 		padding: 0.5em;
 		padding-top: 0.1em;
-		// max-height: 100vh;
+		max-width: 100%;
 		min-height: 50vh;
 	}
 
+	@include breakpoint('>=large') {
+		max-width: 80vw;
+	}
+	
 	@include breakpoint('>=medium') {
+		max-width: 38vw;
+		margin-bottom: 5%;
+			
+		&:nth-child(even) {
+			transform: translate(15%, -50%) rotate(5deg) scale(0.8);
+		}
+
 		.description {
 			margin-top: -0.4em;
 		}
@@ -101,7 +112,7 @@ body.archive {
 		position: relative;
 
 		&:nth-child(even) {
-			transform: translate(15%, -85%) rotate(5deg) scale(0.8);
+			transform: translate(15%, -50%) rotate(5deg) scale(0.8);
 			// margin-left: 20vw;
 			// margin-top: -50vh;
 		}
@@ -114,6 +125,15 @@ body.archive {
 
 		&:first-child {
 			margin-top: 0;
+		}
+		
+		@include breakpoint('>=medium') {
+			max-width: 38vw;
+			margin-bottom: 5%;
+				
+			&:nth-child(even) {
+				transform: translate(15%, -85%) rotate(5deg) scale(0.8);
+			}
 		}
 	}
 
@@ -167,6 +187,14 @@ body.archive {
 				font-size: 1.2em;
 				// margin: auto;
 				margin-top: -0.5em;
+			}
+			
+			@include breakpoint('>=medium') {
+				margin-bottom: unset;
+					
+				&:nth-child(even) {
+					transform: unset;
+				}
 			}
 		}
 	}

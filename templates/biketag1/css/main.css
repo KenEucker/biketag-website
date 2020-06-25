@@ -305,8 +305,20 @@ hr {
     opacity: 1;
   }
 }
+@keyframes fadeInSlow {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .fadeIn {
   animation: fadeIn 2.5s;
+}
+
+.fadeInSlow {
+  animation: fadeInSlow 4s;
 }
 
 /* Form */
@@ -1783,7 +1795,7 @@ body.is-preload #footer {
 }
 
 .m-imgur-post {
-  margin-bottom: 2em;
+  margin-bottom: -50%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   max-width: 80vw;
@@ -1844,9 +1856,22 @@ body.is-preload #footer {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   padding-top: 0.1em;
+  max-width: 100%;
   min-height: 50vh;
 }
+@media screen and (min-width: 981px) {
+  .m-imgur-post {
+    max-width: 80vw;
+  }
+}
 @media screen and (min-width: 737px) {
+  .m-imgur-post {
+    max-width: 38vw;
+    margin-bottom: 5%;
+  }
+  .m-imgur-post:nth-child(even) {
+    transform: translate(15%, -50%) rotate(5deg) scale(0.8);
+  }
   .m-imgur-post .description {
     margin-top: -0.4em;
   }
@@ -1863,7 +1888,7 @@ body.archive .m-imgur-post {
   position: relative;
 }
 body.archive .m-imgur-post:nth-child(even) {
-  transform: translate(15%, -85%) rotate(5deg) scale(0.8);
+  transform: translate(15%, -50%) rotate(5deg) scale(0.8);
 }
 body.archive .m-imgur-post:nth-child(odd) {
   transform: translateX(-10%) rotate(-5deg) scale(0.8);
@@ -1872,6 +1897,15 @@ body.archive .m-imgur-post:nth-child(odd) {
 }
 body.archive .m-imgur-post:first-child {
   margin-top: 0;
+}
+@media screen and (min-width: 737px) {
+  body.archive .m-imgur-post {
+    max-width: 38vw;
+    margin-bottom: 5%;
+  }
+  body.archive .m-imgur-post:nth-child(even) {
+    transform: translate(15%, -85%) rotate(5deg) scale(0.8);
+  }
 }
 body.archive #biketagUploadForm .m-imgur-post,
 body.archive .m-imgur-post.s--popup {
@@ -1914,6 +1948,14 @@ body.archive .m-imgur-post.s--popup .description {
 #tagit #biketagUploadForm .m-imgur-post .description {
   font-size: 1.2em;
   margin-top: -0.5em;
+}
+@media screen and (min-width: 737px) {
+  #tagit #biketagUploadForm .m-imgur-post {
+    margin-bottom: unset;
+  }
+  #tagit #biketagUploadForm .m-imgur-post:nth-child(even) {
+    transform: unset;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
