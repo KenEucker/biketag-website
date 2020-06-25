@@ -496,8 +496,8 @@ function authentication() {
 		done(null, obj);
 	});
 
-	if (config.imgurClientID) {
-		console.log('configuring imgur API authentication for appID:', config.imgurClientID);
+	if (config.defaults.imgurClientID) {
+		console.log('configuring imgur API authentication for appID:', config.defaults.imgurClientID);
 
 		const setImgurTokens = function (accessToken, refreshToken, profile) {
 			// FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
@@ -515,10 +515,16 @@ function authentication() {
 			}
 		};
 
+		console.log({
+			clientID: config.defaults.imgurClientID,
+			clientSecret: config.defaults.imgurClientSecret,
+			callbackURL: config.defaults.imgurCallbackURL,
+		})
+
 		const imgurStrategy = new ImgurStrategy({
-				clientID: config.imgurClientID,
-				clientSecret: config.imgurClientSecret,
-				callbackURL: config.imgurCallbackURL,
+				clientID: config.defaults.imgurClientID,
+				clientSecret: config.defaults.imgurClientSecret,
+				callbackURL: config.defaults.imgurCallbackURL,
 				passReqToCallback: true,
 			},
 			((req, accessToken, refreshToken, profile, done) => {
@@ -602,9 +608,9 @@ function authentication() {
 		};
 
 		const redditStrategy = new RedditStrategy({
-				clientID: config.redditClientID,
-				clientSecret: config.redditClientSecret,
-				callbackURL: config.redditCallbackURL,
+				clientID: config.defaults.redditClientID,
+				clientSecret: config.defaults.redditClientSecret,
+				callbackURL: config.defaults.redditCallbackURL,
 				passReqToCallback: true,
 			},
 			((req, accessToken, refreshToken, profile, done) => {
