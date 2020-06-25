@@ -26,6 +26,7 @@ box-shadow: 0px 0px 39px 12px rgba(0,0,0,0.75);
 #uglipop_popbox {
 	width: 100%;
 	max-width: 100%;
+	z-index: 100;
 }
 
 #uglipop_content_fixed {
