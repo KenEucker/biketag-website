@@ -528,7 +528,7 @@ function authentication() {
 				passReqToCallback: true,
 			},
 			((req, accessToken, refreshToken, profile, done) => {
-				if (profile.email == config.imgurEmailAddress) {
+				if (profile.email == config.defaults.imgurEmailAddress) {
 					console.log('imgur auth callback with valid profile', profile);
 					setImgurTokens(accessToken, refreshToken, profile);
 					return done(null, profile);
