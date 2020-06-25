@@ -326,7 +326,8 @@ class BikeTag {
 
 			tagContainer.querySelector('a').addEventListener('click', function (e) {
 				var isArchive = document.body.classList.contains('archive')
-				var content = '<img src="' + this.getAttribute('href') + '"></img>'
+				/// TODO: progressively load this image
+				var content = '<img src="' + this.getAttribute('href').replace('l.', '.') + '"></img>'
 
 				if (isArchive) {
 					content = `${tagTemplate}`
@@ -339,7 +340,7 @@ class BikeTag {
 					window.uglipop({
 						source: 'html',
 						class: 'm-imgur-post s--popup fadeInSlow',
-						content: content.replace('l.', '.'),
+						content,
 					});
 				}
 
