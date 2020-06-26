@@ -44,7 +44,8 @@
 
 			if (albumInfo.images_count != window.imgur.imgurAlbumPictures.length) {
 				console.log('image count has changed, updating most recent tags');
-				this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
+			/// TODO: Fix a bug at this line
+			this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
 				biketag.showLatestTagImages()
 			}
 		},
