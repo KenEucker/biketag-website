@@ -745,7 +745,7 @@ function createNewBikeTagPostOnReddit(config, callback) {
 		title: `[X-Post r/${config.redditSubreddit}] TEST`,
 		url: 'https://www.reddit.com/r/CyclePDX/comments/h7q3kk/bike_tag_228/'
 	  },
-	  opts.accessToken
+	  `Bearer ${opts.accessToken}`
 	  ).then(callback)
 }
 
