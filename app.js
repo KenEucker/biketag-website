@@ -140,8 +140,6 @@ function getPublicConfigurationValues(subdomain, host) {
 		const customCssPath = path.join(__dirname, 'assets/css', `${subdomain}.css`)
 		const hasCustomCss = fs.existsSync(customCssPath)
 
-		console.log({hasCustomCss, customCssPath})
-
 		const pageData = merge( config.page, {
 			location: subdomainInformation.location,
 			images: subdomainInformation.images,
@@ -670,12 +668,11 @@ function authentication() {
 			// Check for origin via state token
 			if (req.query.state == req.session.state) {
 				console.log("passporting reddit", {req})
+
 				passport.authenticate('reddit', {
 					successRedirect: '/',
 					failureRedirect: '/fail',
-				}, (req, res, next) => {
-					res.redirect('/')
-				})
+				}, (req, res, next))
 			} else {
 				console.log("Error 403", { incomingState: req.query.state, sessionState: req.session.state })
 				next(new Error(403))
