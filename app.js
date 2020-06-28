@@ -758,7 +758,7 @@ function RedditConnector(config) {
 	app.post('/post/reddit', async (req, res) => {
 		try {
 			return createNewBikeTagPostOnReddit(getSubdomainOpts(req), (response) => {
-				res.json({response})
+				res.json(JSON.stringify(response))
 			})
 		} catch (error) {
 			console.log('reddit post api error', { error })
