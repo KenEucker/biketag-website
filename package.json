@@ -52,7 +52,7 @@
 		"passport-oauth2-refresh": "^1.1.0",
 		"passport-reddit": "^0.2.4",
 		"path": "^0.12.7",
-		"reddit": "keneucker/reddit",
+		"reddit": "https://github.com/KenEucker/reddit.git",
 		"reload": "^2.4.0",
 		"safe-timers": "^1.1.0",
 		"serve-favicon": "^2.5.0",
