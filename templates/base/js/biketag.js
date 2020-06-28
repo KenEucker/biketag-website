@@ -125,13 +125,13 @@ class BikeTag {
 		var proofPreview = `<div class="m-imgur-post hidden">
 			<span class="close"></span>
 			<img src="../../../assets/img/none.png">
-			<h2 class="description"><span id="proofNumber"></span> found at (<span id="proofPreview"></span>) by <span id="namePreview"></span></h2>
+			<h2 class="description"><span class="s--proofNumber"></span> found at (<span id="proofPreview"></span>) by <span id="namePreview"></span></h2>
 		</div>`
 
 		var nextPreview = `<div class="m-imgur-post hidden">
 			<span class="close"></span>
 			<img src="../../../assets/img/none.png">
-			<h2 class="description"><span id="tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
+			<h2 class="description"><span class="s--tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
 		</div>`
 
 		heading.className = "field half"
@@ -540,8 +540,8 @@ class BikeTag {
 			$('#biketagUploadForm h1').html($('#biketagUploadForm h1').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
 			$('#previousTag h3').html($('#previousTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
 			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber)
-			$('#tagNumber').html(poundSymbol + currentTagInfo.nextTagNumber)
-			$('#proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
+			$('.s--tagNumber').html(poundSymbol + currentTagInfo.nextTagNumber)
+			$('.s--proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
 
 			if (!!currentTagInfo.hint && currentTagInfo.hint.length) {
 				$('#hintText').text(currentTagInfo.hint)
@@ -565,13 +565,13 @@ class BikeTag {
 			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this))
 		}
 
+		var currentTagInfo = this.setCurrentTagInformation()
 		var countParam = this.getUrlParam('count')
 		count = count == -1 ? false : (Number.isInteger(count) ? count : (countParam === 'all' ? countParam : Number(countParam)))
 
 		if (count) {
 			this.showArchiveTags(count)
 		} else {
-			const currentTagInfo = this.setCurrentTagInformation()
 
 			document.body.classList.remove('archive')
 			$('#header .content .inner').empty()

@@ -1703,6 +1703,8 @@ body.is-preload #header .content .inner {
 }
 #main article h2.major {
   font-size: 3rem;
+  max-width: 100%;
+  text-align: center;
 }
 #main article .close {
   display: block;

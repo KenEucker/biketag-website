@@ -9,7 +9,7 @@
 	"hintMessage": "Provide a hint for the new Mystery Location",
 	"hintPlaceholder": "e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred",
 	"nameTitle": "What do you go by?",
-	"nameMessage": "Provide a Name",
+	"nameMessage": "Provide a Name that will be used to credit you for posting BikeTag <span class='s--tagNumber'></span>",
 	"playButtonText": "Play BikeTag!",
 	"namePlaceholder": "e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name"
 }
