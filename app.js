@@ -489,15 +489,16 @@ function endpoints() {
 
 function authentication() {
 	passport.serializeUser((user, done) => {
-		done(null, user);
-	});
+		done(null, user)
+	})
 
 	passport.deserializeUser((obj, done) => {
-		done(null, obj);
-	});
+		done(null, obj)
+	})
 
+	/// TODO: map tokens to each subdomain
 	if (config.defaults.imgurClientID) {
-		console.log('configuring imgur API authentication for appID:', config.defaults.imgurClientID);
+		console.log('configuring imgur API authentication for appID:', config.defaults.imgurClientID)
 
 		const setImgurTokens = function (accessToken, refreshToken, profile) {
 			// FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
@@ -513,7 +514,7 @@ function authentication() {
 				authTokens[subdomain].imgur.imgurProfile = authTokens[subdomain].imgur.imgurProfile || profile;
 				console.log(`imgur authentication information for subdomain: subdomain`, authTokens[subdomain].imgur);
 			}
-		};
+		}
 
 		console.log({
 			clientID: config.defaults.imgurClientID,
@@ -521,6 +522,7 @@ function authentication() {
 			callbackURL: config.defaults.imgurCallbackURL,
 		})
 
+		/// TODO: map tokens to each subdomain
 		const imgurStrategy = new ImgurStrategy({
 				clientID: config.defaults.imgurClientID,
 				clientSecret: config.defaults.imgurClientSecret,
@@ -529,38 +531,41 @@ function authentication() {
 			},
 			((req, accessToken, refreshToken, profile, done) => {
 				if (profile.email == config.defaults.imgurEmailAddress) {
-					console.log('imgur auth callback with valid profile', profile);
-					setImgurTokens(accessToken, refreshToken, profile);
-					return done(null, profile);
+					console.log('imgur auth callback with valid profile', profile)
+					setImgurTokens(accessToken, refreshToken, profile)
+					return done(null, profile)
 				}
 				// Someone else wants to authorize our app? Why?
-				console.error('Someone else wants to authorize our app? Why?', profile.email, config.imgurEmailAddress);
+				console.error('Someone else wants to authorize our app? Why?', { req, email: profile.email, imgurEmail: config.imgurEmailAddress })
 
 
 				// console.log('received imgur info', accessToken, refreshToken, profile);
-				return done();
-			}));
-		passport.use(imgurStrategy);
-		refresh.use(imgurStrategy);
+				return done()
+			}))
+		passport.use(imgurStrategy)
+		refresh.use(imgurStrategy)
 
-		const imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
+		const imgurRefreshFrequency = 29 * (1000 * 60 * 60 * 24) // 29 days
 		const refreshImgurTokens = function () {
-			const theRefreshTokenToUse = authTokens.default.imgur.imgurRefreshToken;
-			console.log('attempting to refresh imgur access token using the refresh token:', theRefreshTokenToUse);
+			const theRefreshTokenToUse = authTokens.default.imgur.imgurRefreshToken
+			console.log('attempting to refresh imgur access token using the refresh token:', theRefreshTokenToUse)
+
 			refresh.requestNewAccessToken('imgur', theRefreshTokenToUse, (err, accessToken, refreshToken) => {
-				console.log('imgur access token has been refreshed:', refreshToken);
-				setImgurTokens(accessToken, refreshToken, null);
-			});
-		};
-		setInterval(refreshImgurTokens, imgurRefreshFrequency);
+				console.log('imgur access token has been refreshed:', refreshToken)
+				setImgurTokens(accessToken, refreshToken, null)
+			})
+		}
+		setInterval(refreshImgurTokens, imgurRefreshFrequency)
 
 		// Imgur OAuth2 Integration
-		app.get('/auth/imgur', passport.authenticate('imgur'));
+		app.get('/auth/imgur', passport.authenticate('imgur'))
+
 		app.get('/auth/imgur/callback', passport.authenticate('imgur', {
 			session: false,
 			failureRedirect: '/fail',
 			successRedirect: '/',
-		}));
+		}))
+
 		app.post('/auth/imgur/getToken', (req, res) => {
 			const subdomain = getSubdomainPrefix(req)
 			const response = {
@@ -577,18 +582,19 @@ function authentication() {
 
 			// This will only return the imgur access token if the request is coming from the site itself
 			res.json(response)
-		});
+		})
 	} else {
 		app.get('/auth/imgur/*', (req, res) => {
-			res.send("I don't have imgur data set in my configuration");
+			res.send("I don't have imgur data set in my configuration")
 		});
 		app.post('/auth/*', (req, res) => {
-			res.json({});
+			res.json({})
 		})
 	}
 
-	if (config.redditClientID) {
-		console.log('configuring reddit API authentication for appID:', config.redditClientID);
+	/// TODO: map tokens to each subdomain
+	if (config.defaults.redditClientID) {
+		console.log('configuring reddit API authentication for appID:', config.defaults.redditClientID)
 
 		const setRedditTokens = function (accessToken, refreshToken, profile) {
 			// FOR DOMAIN SPECIFIC USER ACCOUNTS ( DO NOT DELETE )
@@ -599,14 +605,16 @@ function authentication() {
 			// authTokens["imgur"][subdomain].imgurProfile = profile;
 
 			for (const subdomain of subdomains) {
-				console.log('setting reddit authentication information for subdomain:', subdomain);
-				authTokens[subdomain].reddit.redditAccessToken = accessToken;
-				authTokens[subdomain].reddit.redditRefreshToken = authTokens[subdomain].reddit.redditRefreshToken || refreshToken;
-				authTokens[subdomain].reddit.redditProfile = authTokens[subdomain].reddit.redditProfile || profile;
-				authTokens[subdomain].reddit.redditUserName = authTokens[subdomain].reddit.redditUserName || profile.name;
+				console.log('setting reddit authentication information for subdomain:', subdomain)
+
+				authTokens[subdomain].reddit.redditAccessToken = accessToken
+				authTokens[subdomain].reddit.redditRefreshToken = authTokens[subdomain].reddit.redditRefreshToken || refreshToken
+				authTokens[subdomain].reddit.redditProfile = authTokens[subdomain].reddit.redditProfile || profile
+				authTokens[subdomain].reddit.redditUserName = authTokens[subdomain].reddit.redditUserName || profile.name
 			}
 		};
 
+		/// TODO: map tokens to each subdomain
 		const redditStrategy = new RedditStrategy({
 				clientID: config.defaults.redditClientID,
 				clientSecret: config.defaults.redditClientSecret,
@@ -615,31 +623,31 @@ function authentication() {
 			},
 			((req, accessToken, refreshToken, profile, done) => {
 				if (profile.name == config.redditUserName) {
-					console.log('reddit auth callback with valid profile', profile);
-					setRedditTokens(accessToken, refreshToken, profile);
+					console.log('reddit auth callback with valid profile', profile)
+					setRedditTokens(accessToken, refreshToken, profile)
 
-					return done(null, profile);
+					return done(null, profile)
 				}
-				console.error('Someone else wants to authorize our app? Why?', profile.name, config.redditUserName);
+				console.error('Someone else wants to authorize our app? Why?', profile.name, config.redditUserName)
 				// Someone else wants to authorize our app? Why?
 
 
-				process.nextTick(() => done());
-			}));
+				process.nextTick(() => done())
+			}))
 
-		const redditRefreshFrequency = 29 * (1000 * 60 * 60 * 24); // 29 days
+		const redditRefreshFrequency = 29 * (1000 * 60 * 60 * 24) // 29 days
 		const refreshRedditTokens = function () {
 			const theRefreshTokenToUse = authTokens.default.reddit.redditRefreshToken;
 			console.log('attempting to refresh reddit access token using the refresh token:', theRefreshTokenToUse);
 			refresh.requestNewAccessToken('reddit', theRefreshTokenToUse, (err, accessToken, refreshToken) => {
-				console.log('reddit access token has been refreshed:', refreshToken);
-				setRedditTokens(accessToken, refreshToken, null);
-			});
-		};
-		setInterval(refreshRedditTokens, redditRefreshFrequency);
+				console.log('reddit access token has been refreshed:', refreshToken)
+				setRedditTokens(accessToken, refreshToken, null)
+			})
+		}
+		setInterval(refreshRedditTokens, redditRefreshFrequency)
 
-		passport.use(redditStrategy);
-		refresh.use(redditStrategy);
+		passport.use(redditStrategy)
+		refresh.use(redditStrategy)
 
 		// Reddit OAuth2 Integration
 		app.get('/auth/reddit', (req, res, next) => {
@@ -648,8 +656,9 @@ function authentication() {
 			passport.authenticate('reddit', {
 				state: req.session.state,
 				duration: 'permanent',
-			})(req, res, next);
-		});
+			})(req, res, next)
+		})
+
 		app.get('/auth/reddit/callback', (req, res, next) => {
 			// Check for origin via state token
 			if (req.query.state == req.session.state) {
@@ -657,12 +666,13 @@ function authentication() {
 				passport.authenticate('reddit', {
 					successRedirect: '/',
 					failureRedirect: '/fail',
-				})(req, res, next);
+				})(req, res, next)
 			} else {
 				// console.log("Error 403")
 				next(new Error(403))
 			}
 		})
+
 		app.post('/auth/reddit/getToken', (req, res) => {
 			const subdomain = getSubdomainPrefix(req)
 			let tokensValue = 'unauthorized access'
