@@ -625,7 +625,7 @@ function authentication() {
 			((req, accessToken, refreshToken, profile, done) => {
 				/// TODO: map tokens to each subdomain
 				if (profile.name == config.defaults.redditUserName) {
-					console.log('reddit auth callback with valid profile', profile)
+					console.log('reddit auth callback with valid profile', { profile, accessToken, refreshToken })
 					setRedditTokens(accessToken, refreshToken, profile)
 
 					return done(null, profile)
