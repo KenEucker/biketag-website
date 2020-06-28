@@ -672,7 +672,8 @@ function authentication() {
 				passport.authenticate('reddit', {
 					successRedirect: '/',
 					failureRedirect: '/fail',
-				}, (req, res, next))
+				})(req, res, next)
+				
 			} else {
 				console.log("Error 403", { incomingState: req.query.state, sessionState: req.session.state })
 				next(new Error(403))
