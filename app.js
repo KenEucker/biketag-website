@@ -668,7 +668,7 @@ function authentication() {
 					failureRedirect: '/fail',
 				})(req, res, next)
 			} else {
-				// console.log("Error 403")
+				console.log("Error 403", { incomingState: req.query.state, sessionState: req.session.state })
 				next(new Error(403))
 			}
 		})
