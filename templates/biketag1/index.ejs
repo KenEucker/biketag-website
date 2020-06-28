@@ -33,7 +33,9 @@
 	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
 	<noscript>
 		<link rel="stylesheet" href="css/noscript.css" /></noscript>
-	<link rel="stylesheet" href="../assets/css/<%= thisSubdomain %>.css" />
+	<% if (page.hasCustomCss) { %>
+		<link rel="stylesheet" href="../assets/css/<%= thisSubdomain %>.css" />
+	<% } %>
 </head>
 
 <body class="is-preload <%= thisSubdomain %>">

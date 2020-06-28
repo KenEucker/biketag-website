@@ -137,6 +137,10 @@ function getPublicConfigurationValues(subdomain, host) {
 
 	publicConfig.subdomains = Object.values(config.subdomains).reduce((out, subdomainInformation, index) => {
 		const subdomainName = subdomains[index]
+		const customCssPath = path.join(__dirname, 'assets/css', `${subdomain}.css`)
+		const hasCustomCss = fs.existsSync(customCssPath)
+
+		console.log({hasCustomCss, customCssPath})
 
 		const pageData = merge( config.page, {
 			location: subdomainInformation.location,
@@ -152,6 +156,7 @@ function getPublicConfigurationValues(subdomain, host) {
 			gaUA: subdomainInformation.gaUA || config.gaUA,
 			readonly: subdomainInformation.readonly,
 			newGameImage: subdomainInformation.newGameImage,
+			hasCustomCss,
 		})
 		
 		out[subdomainName] = pageData
