@@ -673,7 +673,7 @@ function authentication() {
 					successRedirect: '/',
 					failureRedirect: '/fail',
 				})(req, res, next)
-				
+
 			} else {
 				console.log("Error 403", { incomingState: req.query.state, sessionState: req.session.state })
 				next(new Error(403))
@@ -744,7 +744,7 @@ function createNewBikeTagPostOnReddit(config, callback) {
 
 	return reddit.post('/api/submit', {
 		// sr: config.redditSubreddit,
-		sr: 'biketag',
+		sr: 'sandbox',
 		kind: 'link',
 		// resubmit: true,
 		title: `[X-Post r/${config.redditSubreddit}] TEST`,
