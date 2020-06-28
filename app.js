@@ -535,6 +535,7 @@ function authentication() {
 					setImgurTokens(accessToken, refreshToken, profile)
 					return done(null, profile)
 				}
+
 				// Someone else wants to authorize our app? Why?
 				console.error('Someone else wants to authorize our app? Why?', { req, email: profile.email, imgurEmail: config.imgurEmailAddress })
 
@@ -622,14 +623,15 @@ function authentication() {
 				passReqToCallback: true,
 			},
 			((req, accessToken, refreshToken, profile, done) => {
-				if (profile.name == config.redditUserName) {
+				/// TODO: map tokens to each subdomain
+				if (profile.name == config.defaults.redditUserName) {
 					console.log('reddit auth callback with valid profile', profile)
 					setRedditTokens(accessToken, refreshToken, profile)
 
 					return done(null, profile)
 				}
-				console.error('Someone else wants to authorize our app? Why?', profile.name, config.redditUserName)
-				// Someone else wants to authorize our app? Why?
+
+				console.error('Someone else wants to authorize our app? Why?', { profileName: profile.name, redditUserName: config.defaults.redditUserName })
 
 
 				process.nextTick(() => done())
