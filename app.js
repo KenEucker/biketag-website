@@ -668,16 +668,16 @@ function authentication() {
 
 		app.get('/auth/reddit/callback', (req, res, next) => {
 			// Check for origin via state token
-			if (req.query.state == req.session.state) {
+			// if (req.query.state == req.session.state) {
 				// console.log("passporting")
 				passport.authenticate('reddit', {
 					successRedirect: '/',
 					failureRedirect: '/fail',
 				})(req, res, next)
-			} else {
-				console.log("Error 403", { incomingState: req.query.state, sessionState: req.session.state })
-				next(new Error(403))
-			}
+			// } else {
+			// 	console.log("Error 403", { incomingState: req.query.state, sessionState: req.session.state })
+			// 	next(new Error(403))
+			// }
 		})
 
 		app.post('/auth/reddit/getToken', (req, res) => {
