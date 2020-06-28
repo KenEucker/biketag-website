@@ -731,7 +731,8 @@ function createNewBikeTagPostOnReddit(config, callback) {
 		password: config.redditPassword,
 		appId: config.redditClientID,
 		appSecret: config.redditClientSecret,
-		userAgent: config.redditUserAgent.replace('VERSION', version)
+		userAgent: config.redditUserAgent.replace('VERSION', version),
+		accessToken: authTokens[config.requestSubdomain].reddit.redditAccessToken
 	}
 	console.log('reddit opts', opts)
 	reddit = new Reddit(opts)
@@ -743,7 +744,9 @@ function createNewBikeTagPostOnReddit(config, callback) {
 		// resubmit: true,
 		title: `[X-Post r/${config.redditSubreddit}] TEST`,
 		url: 'https://www.reddit.com/r/CyclePDX/comments/h7q3kk/bike_tag_228/'
-	  }).then(callback)
+	  },
+	  opts.accessToken
+	  ).then(callback)
 }
 
 function RedditConnector(config) {
