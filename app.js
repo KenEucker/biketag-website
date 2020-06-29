@@ -657,7 +657,7 @@ function authentication() {
 		// Reddit OAuth2 Integration
 		app.get('/auth/reddit', (req, res, next) => {
 			req.session.state = crypto.randomBytes(32).toString('hex');
-			console.log('authenticating')
+			console.log('authenticating reddit')
 			passport.authenticate('reddit', {
 				state: req.session.state,
 				duration: 'permanent',
@@ -667,7 +667,7 @@ function authentication() {
 		app.get('/auth/reddit/callback', (req, res, next) => {
 			// Check for origin via state token
 			if (req.query.state == req.session.state) {
-				console.log("passporting reddit", {req})
+				console.log("passporting reddit") //, {req})
 
 				passport.authenticate('reddit', {
 					successRedirect: '/',
@@ -746,12 +746,10 @@ function createNewBikeTagPostOnReddit(config, callback) {
 		// sr: config.redditSubreddit,
 		sr: 'sandbox',
 		kind: 'link',
-		// resubmit: true,
+		resubmit: true,
 		title: `[X-Post r/${config.redditSubreddit}] TEST`,
 		url: 'https://www.reddit.com/r/CyclePDX/comments/h7q3kk/bike_tag_228/'
-	  },
-	  opts.accessToken
-	  ).then(callback)
+	  }).then(callback)
 }
 
 function RedditConnector(config) {
