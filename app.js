@@ -741,7 +741,7 @@ function createNewBikeTagPostOnReddit(config, callback) {
 		userAgent: config.redditUserAgent.replace('VERSION', version),
 		accessToken: `bearer ${authTokens[config.requestSubdomain].reddit.redditAccessToken}`
 	}
-	console.log('reddit opts', opts)
+	console.log('reddit opts', { opts, config })
 	reddit = new Reddit(opts)
 
 	return getTagInformation(config.thisSubdomain, 'latest', config.imgur.imgurAlbumHash, (data) => {
