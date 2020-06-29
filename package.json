@@ -46,7 +46,7 @@
 		"gulp-s3-upload": "^1.7.3",
 		"gulp-watch": "^5.0.1",
 		"imgur": "^0.3.1",
-		"nodemailer": "^6.4.6",
+		"nodemailer": "^6.4.10",
 		"passport": "^0.4.0",
 		"passport-imgur": "^0.0.3",
 		"passport-oauth2-refresh": "^1.1.0",

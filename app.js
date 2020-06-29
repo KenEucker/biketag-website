@@ -4,6 +4,7 @@ const path = require('path')
 const fs = require('fs')
 const bodyParser = require('body-parser')
 const merge = require('deepmerge')
+const nodemailer = require('nodemailer')
 
 const app = express()
 const {
@@ -29,7 +30,9 @@ const gulpS3 = require('gulp-s3-upload')
 const http = require('http')
 const reload = require('reload')
 
-const { version } = require('./package.json')
+const {
+	version
+} = require('./package.json')
 let config = require('./config.json')
 
 let reddit
@@ -43,7 +46,9 @@ let debug = process.argv.length > 2 ? process.argv[2].indexOf('--debug') > -1 : 
 debug = process.env.NODE_ENV !== 'production' ? debug : false;
 
 if (debug) {
-	config = merge(config, require('./config.debug'), { version })
+	config = merge(config, require('./config.debug'), {
+		version
+	})
 }
 
 const port = debug ? 8080 : config.port || 80;
@@ -106,14 +111,16 @@ function setVars() {
 	const contentFolder = path.join(__dirname, 'data', 'content')
 	const contentFiles = fs.readdirSync(contentFolder)
 	const content = {}
-	
+
 	contentFiles.forEach((contentFile) => {
 		const contentFileSplit = contentFile.split('.')
 		const contentFileName = contentFileSplit[0]
 		const contentFileExtension = contentFileSplit[1]
 
 		if (contentFileExtension === 'html') {
-			const html = fs.readFileSync(path.join(contentFolder, contentFile), { encoding:'utf8' })
+			const html = fs.readFileSync(path.join(contentFolder, contentFile), {
+				encoding: 'utf8'
+			})
 			content[contentFileName] = html
 		}
 	})
@@ -141,7 +148,7 @@ function getPublicConfigurationValues(subdomain, host) {
 		const customCssPath = path.join(__dirname, 'assets/css', `${subdomain}.css`)
 		const hasCustomCss = fs.existsSync(customCssPath)
 
-		const pageData = merge( config.page, {
+		const pageData = merge(config.page, {
 			location: subdomainInformation.location,
 			images: subdomainInformation.images,
 			adminEmailAddresses: subdomainInformation.adminEmailAddresses,
@@ -156,8 +163,11 @@ function getPublicConfigurationValues(subdomain, host) {
 			readonly: subdomainInformation.readonly,
 			newGameImage: subdomainInformation.newGameImage,
 			hasCustomCss,
+			reddit: {
+				subreddit: subdomainInformation.reddit.redditSubreddit,
+			}
 		})
-		
+
 		out[subdomainName] = pageData
 
 		if (subdomain === subdomainName) {
@@ -172,6 +182,59 @@ function getPublicConfigurationValues(subdomain, host) {
 
 
 	return publicConfig
+}
+
+async function sendEmail(config, to, subject, text, callback, html, from) {
+	const configEmailAddressIsSet = !!config.emailAccountAddress 
+	const configEmailHostIsSet = !!config.emailAccountHost 
+	const configEmailServiceIsSet = !!config.emailService 
+
+	// Generate test SMTP service account from ethereal.email
+	// Only needed if you don't have a real mail account for testing
+	const auth = configEmailAddressIsSet ? { user: config.emailAccountAddress, pass: config.emailAccountPassword } : await nodemailer.createTestAccount()
+	
+	const host = configEmailHostIsSet ? config.emailAccountHost : "smtp.ethereal.email"
+	const port = configEmailHostIsSet ? config.emailAccountPort : 587
+	const secure = configEmailHostIsSet ? config.emailAccountIsSecure : 587
+
+	const service = configEmailServiceIsSet ? config.emailService : null
+	from = !!from ? from : auth.user
+	let transporter
+
+	if (configEmailServiceIsSet) {
+		transporter = nodemailer.createTransport({
+			service,
+			auth,
+		})
+
+	} else {
+		// create reusable transporter object using the default SMTP transport
+		transporter = nodemailer.createTransport({
+			host,
+			port,
+			secure, // true for 465, false for other ports
+			auth,
+		})
+	}
+
+	// send mail with defined transport object
+	const info = await transporter.sendMail({
+		from, // sender address
+		to, // list of receivers
+		subject, // Subject line
+		text, // plain text body
+		html, // html body
+	})
+
+	console.log("Message sent: %s", info.messageId)
+
+	if (!configEmailAddressIsSet) {
+		// Preview only available when sending through an Ethereal account
+		console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
+		// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+	}
+
+	callback(info)
 }
 
 function getSubdomainPrefix(req, returnAlias = false) {
@@ -234,7 +297,7 @@ function getBikeTagNumberFromImage(image) {
 		var split = image.description.split(' ')
 		tagNumber = Number.parseInt(split[0].substring(1))
 
-		if(image.description.indexOf('proof') !== -1) {
+		if (image.description.indexOf('proof') !== -1) {
 			tagNumber = 0 - tagNumber
 		}
 	}
@@ -264,13 +327,13 @@ function getImagesByUploadDate(images, newestFirst) {
 
 function getTagNumberIndex(images, tagNumber, proof = false) {
 	let tagNumberIndex = ((images.length + 1) - (((tagNumber - (tagNumber % 2) + 1) * 2)));
-	
+
 	const verifyTagNumber = function (index) {
 		let compare = `#${tagNumber} tag`
 		if (proof) {
 			compare = `#${tagNumber} proof`
 		}
-		
+
 		return index > -1 && !!images[index] ? images[index].description.indexOf(compare) !== -1 : false
 	}
 
@@ -304,7 +367,7 @@ function renderTemplate(template, data, res) {
 
 	const pageFile = `${pageTemplate}.html`
 	if (fs.existsSync(pageFile)) {
-		
+
 		console.log('serving html file', pageFile)
 		return res.sendFile(pageFile)
 		/// TODO: Send data somehow?
@@ -322,7 +385,7 @@ function getTagInformation(subdomain, tagNumber, albumHash, callback) {
 		const latestTagNumber = getBikeTagNumberFromImage(images[0])
 		tagNumber = tagNumber == 'latest' ? latestTagNumber : tagNumber
 		// console.log('hello', { tagNumber, images: { images: [0] }, latestTagNumber })
-		
+
 		const prevTagNumber = tagNumber > 1 ? tagNumber - 1 : 1
 		const nextTagNumber = tagNumber > 1 ? tagNumber : 2
 		const nextTagIndex = getTagNumberIndex(images, nextTagNumber)
@@ -358,7 +421,9 @@ function getTagInformation(subdomain, tagNumber, albumHash, callback) {
 
 	if (!debug) {
 		getTagRequest.catch((err) => {
-			console.error({ getTagError: err.message })
+			console.error({
+				getTagError: err.message
+			})
 			res.send(err.message)
 		})
 	}
@@ -411,7 +476,7 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 		}
 
 		const template = getTemplateNameFromSubdomain(subdomain)
-		const data =  getPublicConfigurationValues(subdomain, host)
+		const data = getPublicConfigurationValues(subdomain, host)
 
 		return renderTemplate(template, data, res)
 	})
@@ -419,9 +484,12 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 	Object.keys(config.subdomains).forEach((subdomain) => {
 		if (!!config.subdomains[subdomain]) {
 			const subdomainTemplate = config.subdomains[subdomain].template
-			
+
 			if (!!subdomainTemplate) {
-				console.log({templatePath, subdomainTemplate})
+				console.log({
+					templatePath,
+					subdomainTemplate
+				})
 				const subdomainTemplatePath = path.join(templatePath, subdomainTemplate)
 
 				if (fs.existsSync(subdomainTemplatePath)) {
@@ -429,10 +497,15 @@ function templating(templatePath = path.join(__dirname, '/templates/'), supportR
 
 					app.use(express.static(subdomainTemplatePath))
 				} else {
-					console.log('subdomain template not found', {subdomain, subdomainTemplatePath})
+					console.log('subdomain template not found', {
+						subdomain,
+						subdomainTemplatePath
+					})
 				}
 			} else {
-				console.log('subdomain template not set', { subdomain })
+				console.log('subdomain template not set', {
+					subdomain
+				})
 			}
 		} else {
 			console.log('cannot configure subdomain', subdomain)
@@ -481,9 +554,13 @@ function endpoints() {
 		const host = req.headers.host
 		const redditTemplatePath = path.join(config.templatePath, 'reddit', 'post')
 
-		console.log(`reddit endpoint request for tag #${tagnumber}`, { host })
+		console.log(`reddit endpoint request for tag #${tagnumber}`, {
+			host
+		})
 
-		console.log({ tagnumber })
+		console.log({
+			tagnumber
+		})
 		return getTagInformation(subdomain, tagnumber, albumHash, (data) => {
 			data.host = host
 			return res.render(redditTemplatePath, data)
@@ -541,7 +618,11 @@ function authentication() {
 				}
 
 				// Someone else wants to authorize our app? Why?
-				console.error('Someone else wants to authorize our app? Why?', { req, email: profile.email, imgurEmail: config.imgurEmailAddress })
+				console.error('Someone else wants to authorize our app? Why?', {
+					req,
+					email: profile.email,
+					imgurEmail: config.imgurEmailAddress
+				})
 
 
 				// console.log('received imgur info', accessToken, refreshToken, profile);
@@ -577,7 +658,9 @@ function authentication() {
 				imgurAlbumHash: config.subdomains[subdomain].imgur.imgurAlbumHash,
 				imgurAuthorization: config.subdomains[subdomain].imgur.imgurAuthorization,
 			}
-			console.log({getTokenResponse: response})
+			console.log({
+				getTokenResponse: response
+			})
 
 			if (isValidRequestOrigin(req)) {
 				response.imgurRefreshToken = authTokens[subdomain].imgur.imgurRefreshToken
@@ -629,13 +712,20 @@ function authentication() {
 			((req, accessToken, refreshToken, profile, done) => {
 				/// TODO: map tokens to each subdomain
 				if (profile.name == config.defaults.redditUserName) {
-					console.log('reddit auth callback with valid profile', { profile, accessToken, refreshToken })
+					console.log('reddit auth callback with valid profile', {
+						profile,
+						accessToken,
+						refreshToken
+					})
 					setRedditTokens(accessToken, refreshToken, profile)
 
 					return done(null, profile)
 				}
 
-				console.error('Someone else wants to authorize our app? Why?', { profileName: profile.name, redditUserName: config.defaults.redditUserName })
+				console.error('Someone else wants to authorize our app? Why?', {
+					profileName: profile.name,
+					redditUserName: config.defaults.redditUserName
+				})
 
 
 				process.nextTick(() => done())
@@ -676,7 +766,10 @@ function authentication() {
 				})(req, res, next)
 
 			} else {
-				console.log("Error 403", { incomingState: req.query.state, sessionState: req.session.state })
+				console.log("Error 403", {
+					incomingState: req.query.state,
+					sessionState: req.session.state
+				})
 				next(new Error(403))
 			}
 		})
@@ -712,20 +805,16 @@ function authentication() {
 	}
 }
 
-
 function getSubdomainOpts(req) {
 
 	const subdomain = getSubdomainPrefix(req, true)
 	const subdomainConfig = config.subdomains[subdomain]
-	
+
 	return {
 		requestSubdomain: subdomain,
-		...subdomainConfig
+		...subdomainConfig,
+		host: req.host
 	}
-
-}
-
-function ImgurConnector() {
 
 }
 
@@ -742,33 +831,71 @@ function createNewBikeTagPostOnReddit(config, callback) {
 		userAgent: config.redditUserAgent.replace('VERSION', version),
 		accessToken: `bearer ${authTokens[config.requestSubdomain].reddit.redditAccessToken}`
 	}
-	console.log('reddit opts', { opts, config })
+	console.log('reddit opts', {
+		opts,
+		config
+	})
 	reddit = new Reddit(opts)
 
-	return getTagInformation(config.requestSubdomain, 'latest', config.imgur.imgurAlbumHash, (data) => {
-		const latestTagNumber = data.latestTagNumber
-		
+	// return getTagInformation(config.requestSubdomain, 'latest', config.imgur.imgurAlbumHash, (data) => {
+		// const latestTagNumber = data.latestTagNumber
+
 		return reddit.post('/api/submit', {
 			// sr: config.redditSubreddit,
 			sr: 'biketag',
 			kind: 'link',
 			resubmit: true,
-			title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${latestTagNumber} (${config.region})`,
+			title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${config.latestTagNumber} (${config.region})`,
 			url: `https://www.reddit.com/r/${config.redditSubreddit}/`
 		}).then(callback)
 
-	})
+	// })
 }
 
-function RedditConnector(config) {
-	app.post('/post/reddit', async (req, res) => {
+function BikeTagRouter() {
+
+	app.post('/post/email', async (req, res) => {
 		try {
-			return createNewBikeTagPostOnReddit(getSubdomainOpts(req), (response) => {
-				res.json(JSON.stringify(response))
+			const subdomainConfig = getSubdomainOpts(req)
+			return getTagInformation(subdomainConfig.requestSubdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
+				const latestTagNumber = subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
+				const subject = `New Bike Tag Post (#${latestTagNumber}) [${subdomainConfig.requestSubdomain}]`
+				const body = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${subdomainConfig.host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${subdomainConfig.host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
+
+				subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
+					sendEmail(subdomainConfig, emailAddress, subject, body, (info) => {
+						console.log(`email sent to ${emailAddress}`, info)
+						// res.json(JSON.stringify(info))
+					})
+				})
 			})
 		} catch (error) {
-			console.log('reddit post api error', { error })
-			res.json( { error } )
+			console.log('email api error', {
+				error
+			})
+			res.json({
+				error
+			})
+		}
+	})
+
+	app.post('/post/reddit', async (req, res) => {
+		try {
+			const subdomainConfig = getSubdomainOpts(req)
+			return getTagInformation(subdomainConfig.requestSubdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
+				subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
+				
+				return createNewBikeTagPostOnReddit(subdomainConfig, (response) => {
+					console.log('posted to reddit', response)
+				})
+			})
+		} catch (error) {
+			console.log('reddit post api error', {
+				error
+			})
+			res.json({
+				error
+			})
 		}
 	})
 }
@@ -860,10 +987,8 @@ setVars()
 security()
 /*   /     */
 endpoints()
-// /*    /    */ AWSS3Connector()
 /*    /    */
-RedditConnector(config)
-// /*    /    */ ImgurConnector()
+BikeTagRouter()
 /*   /     */
 templating()
 /*  /      */

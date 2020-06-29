@@ -213,6 +213,8 @@ class BikeTag {
 			var files = []
 			var user = ''
 			var proofLocation = ''
+			window.pageData = !!window.pageData ? window.pageData : {}
+
 
 			// get the latest tag number
 			var currentTagInfo = this.getCurrentTagInformation()
@@ -248,9 +250,13 @@ class BikeTag {
 				imgur.uploadImageToImgur(files[1], image2Description, function () {
 					var emailPromises = []
 
+					/// TODO: Send message to the server that a new tag has been queued
 					biketag.config.adminEmailAddresses.forEach(function (emailAddress) {
-						const subject = "New Bike Tag Post (#" + currentTagInfo.nextTagNumber + ")"
-						const body = "Hello BikeTag Admin, A new post has been created!\r\nTo post this tag to Reddit manually, go to " + window.location.host + "/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + window.location.host + "). Reply to this email to request to be removed from this admin list."
+						const subject = "New Bike Tag posted (#" + currentTagInfo.nextTagNumber + ")"
+						const host = window.location.host
+						const subreddit = window.pageData.reddit.subreddit
+						const body = "Hello BikeTag Admin, A new BikeTag post has been queued and is ready for your review!\r\nTo post this tag to Reddit manually, go to " + host + "/get/reddit to get the reddit post template for the regional subreddit (https://reddit.com/r/" + subreddit + ").\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + host + "). Reply to this email to request to be removed from this admin list."
+						// console.log({host, subject, body, subreddit})
 						emailPromises.push(self.sendNotificationEmail(emailAddress, subject, body))
 					})
 
