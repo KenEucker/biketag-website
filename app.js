@@ -745,16 +745,16 @@ function createNewBikeTagPostOnReddit(config, callback) {
 	reddit = new Reddit(opts)
 
 	return getTagInformation(config.requestSubdomain, 'latest', config.imgur.imgurAlbumHash, (data) => {
-		console.log({data})
-
-		// return reddit.post('/api/submit', {
-		// 	// sr: config.redditSubreddit,
-		// 	sr: 'biketag',
-		// 	kind: 'link',
-		// 	resubmit: true,
-		// 	title: `[X-Post r/${config.redditSubreddit}] Bike Tag #${config.newBikeTagNumber} (${config.region})`,
-		// 	url: 'https://www.reddit.com/r/CyclePDX/comments/h7q3kk/bike_tag_228/'
-		// }).then(callback)
+		const latestTagNumber = data.latestTagNumber
+		
+		return reddit.post('/api/submit', {
+			// sr: config.redditSubreddit,
+			sr: 'biketag',
+			kind: 'link',
+			resubmit: true,
+			title: `[X-Post r/${config.redditSubreddit}] Bike Tag #${latestTagNumber} (${config.region})`,
+			url: `https://www.reddit.com/r/${config.redditSubreddit}/`
+		}).then(callback)
 
 	})
 }
