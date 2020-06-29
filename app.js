@@ -744,7 +744,7 @@ function createNewBikeTagPostOnReddit(config, callback) {
 	console.log('reddit opts', { opts, config })
 	reddit = new Reddit(opts)
 
-	return getTagInformation(config.thisSubdomain, 'latest', config.imgur.imgurAlbumHash, (data) => {
+	return getTagInformation(config.requestSubdomain, 'latest', config.imgur.imgurAlbumHash, (data) => {
 		console.log({data})
 
 		// return reddit.post('/api/submit', {
