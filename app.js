@@ -480,7 +480,7 @@ function endpoints() {
 		const host = req.headers.host
 		const redditTemplatePath = path.join(config.templatePath, 'reddit', 'post')
 
-		console.log(`reddit endpoint request for tag #${tagnumber}`)
+		console.log(`reddit endpoint request for tag #${tagnumber}`, { host })
 
 		console.log({ tagnumber })
 		return getTagInformation(subdomain, tagnumber, albumHash, (data) => {
@@ -711,13 +711,15 @@ function authentication() {
 	}
 }
 
+
 function getSubdomainOpts(req) {
 
 	const subdomain = getSubdomainPrefix(req, true)
+	const subdomainConfig = config.subdomains[subdomain]
 	
 	return {
 		requestSubdomain: subdomain,
-		...config.subdomains[subdomain]
+		...subdomainConfig
 	}
 
 }
@@ -742,14 +744,19 @@ function createNewBikeTagPostOnReddit(config, callback) {
 	console.log('reddit opts', opts)
 	reddit = new Reddit(opts)
 
-	return reddit.post('/api/submit', {
-		// sr: config.redditSubreddit,
-		sr: 'sandbox',
-		kind: 'link',
-		resubmit: true,
-		title: `[X-Post r/${config.redditSubreddit}] TEST`,
-		url: 'https://www.reddit.com/r/CyclePDX/comments/h7q3kk/bike_tag_228/'
-	  }).then(callback)
+	return getTagInformation(config.thisSubdomain, 'latest', config.imgur.imgurAlbumHash, (data) => {
+		console.log({data})
+
+		// return reddit.post('/api/submit', {
+		// 	// sr: config.redditSubreddit,
+		// 	sr: 'biketag',
+		// 	kind: 'link',
+		// 	resubmit: true,
+		// 	title: `[X-Post r/${config.redditSubreddit}] Bike Tag #${config.newBikeTagNumber} (${config.region})`,
+		// 	url: 'https://www.reddit.com/r/CyclePDX/comments/h7q3kk/bike_tag_228/'
+		// }).then(callback)
+
+	})
 }
 
 function RedditConnector(config) {
