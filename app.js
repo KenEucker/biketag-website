@@ -51,7 +51,7 @@ const port = debug ? 8080 : config.port || 80;
 function setVars() {
 	const getValueFromConfig = function (name, tokens) {
 		// Assign the subdomain based value or use the default from the base cofig
-		return tokens[name] || config[name];
+		return !!tokens[name] ? tokens[name] : (!!config[name] ? config[name] : config.defaults[name])
 	}
 
 	for (const subdomain of subdomains) {
@@ -78,6 +78,7 @@ function setVars() {
 		tokens.reddit.redditClientSecret = getValueFromConfig('redditClientSecret', tokens.reddit);
 		tokens.reddit.redditCallbackURL = getValueFromConfig('redditCallbackURL', tokens.reddit);
 		tokens.reddit.redditUserName = getValueFromConfig('redditUserName', tokens.reddit);
+		tokens.reddit.redditSubreddit = getValueFromConfig('redditSubreddit', tokens.reddit);
 
 		authTokens[subdomain] = tokens;
 	}
@@ -121,7 +122,7 @@ function setVars() {
 
 	// merge(config, data)
 	// Object.assign(config, data, {})
-	// console.log(config)
+	// console.log(config.subdomains.portland)
 }
 
 /// TODO: refactor this request to only use the data from the data folder, with whatever else is required, instead of chunking out the data from the config
@@ -752,7 +753,7 @@ function createNewBikeTagPostOnReddit(config, callback) {
 			sr: 'biketag',
 			kind: 'link',
 			resubmit: true,
-			title: `[X-Post r/${config.redditSubreddit}] Bike Tag #${latestTagNumber} (${config.region})`,
+			title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${latestTagNumber} (${config.region})`,
 			url: `https://www.reddit.com/r/${config.redditSubreddit}/`
 		}).then(callback)
 
