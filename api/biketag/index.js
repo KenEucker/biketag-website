@@ -190,8 +190,7 @@ const routes = (app) => {
 	const appConfig = app.config
 
 	app.filterSubdomainRequest("/:tagnumber?", (subdomain, req, res) => {
-		console.log({headers: req.headers})
-		const host = req.headers.hostname
+		const host = req.headers.host
   
 		if (!subdomain) {
 		  const hostSubdomainEnd = host.indexOf(".") + 1
