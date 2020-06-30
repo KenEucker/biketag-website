@@ -2,7 +2,8 @@
 	margin-bottom: -50%;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	max-width: 80vw;
+	max-width: 90vw;
+	margin: auto;
 
 	.description {
 		border-style: solid;
@@ -20,7 +21,8 @@
 		// min-width: 100%;
 	}
 
-	img, .descrtipion {
+	img,
+	.descrtipion {
 		// min-width: 30em;
 		max-width: 80vw;
 	}
@@ -59,7 +61,8 @@
 		}
 	}
 
-	a, img {
+	a,
+	img {
 		border-top-right-radius: 10px;
 		border-top-left-radius: 10px;
 	}
@@ -71,18 +74,19 @@
 		background-color: rgba(0, 0, 0, 0.7);
 		padding: 0.5em;
 		padding-top: 0.1em;
-		max-width: 100%;
-		min-height: 50vh;
+		max-width: 30vw;
+		min-height: 100%;
+		min-width: 100%;
 	}
 
 	@include breakpoint('>=large') {
 		max-width: 80vw;
 	}
-	
+
 	@include breakpoint('>=medium') {
-		max-width: 38vw;
+		// max-width: 38vw;
 		margin-bottom: 5%;
-			
+
 		&:nth-child(even) {
 			transform: translate(15%, -50%) rotate(5deg) scale(0.8);
 		}
@@ -96,7 +100,14 @@
 body.archive {
 
 	#header {
+		nav {
+			&#foot {
+				margin-top: 40%;
+			}
+		}
 		.content {
+			margin-top: -25%;
+
 			.inner {
 				overflow: visible !important;
 
@@ -124,13 +135,37 @@ body.archive {
 		}
 
 		&:first-child {
-			margin-top: 0;
+			margin-top: 25%;
 		}
-		
-		@include breakpoint('>=medium') {
-			max-width: 38vw;
+
+		@include breakpoint('<medium') {
+			.description {
+				font-size: 1em;
+			}
+		}
+	}
+
+	@include breakpoint('>large') {
+		nav {
+			&#foot {
+				margin-top: 5% !important;
+			}
+		}
+	}
+
+	@include breakpoint('>=medium') {
+		.m-imgur-post {
+			max-width: 80vw;
 			margin-bottom: 5%;
-				
+
+			// img {
+			// 	max-width: 80vw;
+			// }
+
+			&:first-child {
+				margin-top: 50%;
+			}
+
 			&:nth-child(even) {
 				transform: translate(15%, -85%) rotate(5deg) scale(0.8);
 			}
@@ -188,10 +223,10 @@ body.archive {
 				// margin: auto;
 				margin-top: -0.5em;
 			}
-			
+
 			@include breakpoint('>=medium') {
 				margin-bottom: unset;
-					
+
 				&:nth-child(even) {
 					transform: unset;
 				}

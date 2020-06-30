@@ -25,7 +25,7 @@ body.archive {
 	padding: 4rem 2rem;
 	z-index: 3;
 	margin-top: 0;
-	// padding: 1em !important;
+	overflow: hidden;
 
 	.cssanimations.csstransforms #notification {
 		transform: translateY(-50px);

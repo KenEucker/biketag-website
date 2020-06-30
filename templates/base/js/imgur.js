@@ -176,8 +176,9 @@
 			this.getImgurTokens(function (response) {
 				var count = self.getUrlParam('count')
 				var tagnumber = biketag.getTagNumberFromURL()
+				var archive = biketag.getLastOfUrlPath().toLowerCase().indexOf('archive') !== -1
 
-				console.log({getImgurTokens: response})
+				// console.log({getImgurTokens: response})
 				self.imgurAlbumHash = response.imgurAlbumHash
 				self.imgurAuthorization = response.imgurAuthorization
 
@@ -200,7 +201,8 @@
 				if (count) {
 					self.imgurAlbumPicturesRefreshFrequency = false
 					biketag.showLatestTagImages(count)
-					document.body.classList.add('archive')
+				} else if (archive) {
+					biketag.showLatestTagImages(count || 10)
 				} else if (tagnumber) {
 					self.imgurAlbumPicturesRefreshFrequency = false
 					biketag.showBikeTagNumber(tagnumber)

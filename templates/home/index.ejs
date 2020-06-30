@@ -37,7 +37,7 @@
 <body data-gr-c-s-loaded="true">
 	<div class="all-content w-clearfix">
 		<header class="header main-column">
-			<img id="logo-img" style="display: none;" src="assets/img/none.png" data-src="<%= page.images.header %>"></img>
+			<img id="logo-img" style="display: none;" src="public/img/none.png" data-src="<%= page.images.header %>"></img>
 			<h1 class="logo" id="logo-text">
 				BIKETAG 
 			</h1>
@@ -48,9 +48,9 @@
 				<div class="byline"><a style="text-decoration: none; color: unset;" href="https://github.com/keneucker/biketag-website"></a>developed on Github</a></div>
 			</div>
 			<div class="footer-wrapper w-clearfix">
-				<a class="footer-nav-link w-inline-block" href="/"><img src="assets/img/radbike-icon.svg"></a>
-				<a class="footer-nav-link w-inline-block" href="https://www.reddit.com/r/biketag"><img class="invert" src="assets/img/reddit-icon.svg"></a>
-				<a class="footer-nav-link w-inline-block" href="https://www.instagram.com/biketagorg"><img class="invert" src="assets/img/instagram-icon.svg"></a>
+				<a class="footer-nav-link w-inline-block" href="/"><img src="public/img/radbike-icon.svg"></a>
+				<a class="footer-nav-link w-inline-block" href="https://www.reddit.com/r/biketag"><img class="invert" src="public/img/reddit-icon.svg"></a>
+				<a class="footer-nav-link w-inline-block" href="https://www.instagram.com/biketagorg"><img class="invert" src="public/img/instagram-icon.svg"></a>
 				<a class="footer-nav-link w-inline-block" href="/join"><div class="subscribe">Join</div></a>
 			</div>
 		</header>
@@ -166,7 +166,7 @@
 				link.className = "article w-clearfix w-inline-block"
 				link.innerHTML =
 					`<div class="image-wrapper">
-						<img class="thumbnail" src="${ !!region.images.logo ? `assets/img/${region.images.logo}-small.png` : "assets/img/none.png"}" width="109">
+						<img class="thumbnail" src="${ !!region.images.logo ? `public/img/${region.images.logo}-small.png` : "public/img/none.png"}" width="109">
 					</div>
 					<section class="article-text-wrapper w-clearfix">
 						<h2 class="arrow">></span></h2>

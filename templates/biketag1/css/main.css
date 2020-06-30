@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
 @font-face {
   font-family: trashHand;
-  src: url("../../assets/fonts/TrashHand.woff2");
+  src: url("../../public/fonts/TrashHand.woff2");
 }
 /*
 	Dimension by HTML5 UP
@@ -1125,6 +1125,7 @@ body.archive #wrapper #countChanger {
   padding: 4rem 2rem;
   z-index: 3;
   margin-top: 0;
+  overflow: hidden;
 }
 #wrapper .cssanimations.csstransforms #notification {
   transform: translateY(-50px);
@@ -1279,6 +1280,7 @@ body.archive #wrapper #countChanger {
   -ms-transition: opacity 0.325s ease-in-out;
   transition: opacity 0.325s ease-in-out;
   position: relative;
+  width: 100%;
 }
 #header > *:before {
   display: block;
@@ -1311,11 +1313,13 @@ body.archive #wrapper #countChanger {
 }
 #header .header--logo {
   cursor: pointer;
+  z-index: 100;
+  max-height: 90px;
 }
 #header .header--logo .logo {
-  width: 5.5rem;
-  height: 5.5rem;
-  line-height: 5.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
   border: solid 1px #ffffff;
   border-radius: 100%;
   margin: auto;
@@ -1353,6 +1357,13 @@ body.archive #wrapper #countChanger {
   font-size: 0.8rem;
   line-height: 2;
 }
+#header nav#head {
+  z-index: 100;
+}
+#header nav#head ul {
+  margin-bottom: 0;
+  margin-left: 0;
+}
 #header nav#head ul li {
   align-self: flex-end;
 }
@@ -1364,11 +1375,10 @@ body.archive #wrapper #countChanger {
   line-height: 2.2rem;
 }
 #header nav ul {
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  margin-bottom: 0;
+  display: -moz-inline-flex;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flex;
+  display: inline-flex;
   list-style: none;
   padding-left: 0;
 }
@@ -1404,6 +1414,10 @@ body.archive #wrapper #countChanger {
   width: 1px;
   height: 100%;
   background: #ffffff;
+}
+#header nav#foot ul {
+  margin-bottom: 0;
+  margin-left: 0;
 }
 body.is-article-visible #header {
   -moz-transform: scale(0.95);
@@ -1446,6 +1460,14 @@ body.is-preload #header .content .inner {
   }
 }
 @media screen and (min-width: 737px) {
+  #header .header--logo {
+    max-height: unset;
+  }
+  #header .header--logo .logo {
+    width: 5.5rem;
+    height: 5.5rem;
+    line-height: 5.5rem;
+  }
   #header nav#head ul li:nth-child(2) {
     height: 6rem;
     max-width: 15rem;
@@ -1800,7 +1822,8 @@ body.is-preload #footer {
   margin-bottom: -50%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  max-width: 80vw;
+  max-width: 90vw;
+  margin: auto;
 }
 .m-imgur-post .description {
   border-style: solid;
@@ -1815,7 +1838,8 @@ body.is-preload #footer {
   color: black;
   padding: 1rem;
 }
-.m-imgur-post img, .m-imgur-post .descrtipion {
+.m-imgur-post img,
+.m-imgur-post .descrtipion {
   max-width: 80vw;
 }
 .m-imgur-post a {
@@ -1847,7 +1871,8 @@ body.is-preload #footer {
   font-size: 32px;
   text-shadow: 2px 2px #292828e6;
 }
-.m-imgur-post a, .m-imgur-post img {
+.m-imgur-post a,
+.m-imgur-post img {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -1858,8 +1883,9 @@ body.is-preload #footer {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 0.5em;
   padding-top: 0.1em;
-  max-width: 100%;
-  min-height: 50vh;
+  max-width: 30vw;
+  min-height: 100%;
+  min-width: 100%;
 }
 @media screen and (min-width: 981px) {
   .m-imgur-post {
@@ -1868,7 +1894,6 @@ body.is-preload #footer {
 }
 @media screen and (min-width: 737px) {
   .m-imgur-post {
-    max-width: 38vw;
     margin-bottom: 5%;
   }
   .m-imgur-post:nth-child(even) {
@@ -1879,6 +1904,12 @@ body.is-preload #footer {
   }
 }
 
+body.archive #header nav#foot {
+  margin-top: 40%;
+}
+body.archive #header .content {
+  margin-top: -25%;
+}
 body.archive #header .content .inner {
   overflow: visible !important;
 }
@@ -1898,12 +1929,25 @@ body.archive .m-imgur-post:nth-child(odd) {
   z-index: 100;
 }
 body.archive .m-imgur-post:first-child {
-  margin-top: 0;
+  margin-top: 25%;
+}
+@media screen and (max-width: 736px) {
+  body.archive .m-imgur-post .description {
+    font-size: 1em;
+  }
+}
+@media screen and (min-width: 1281px) {
+  body.archive nav#foot {
+    margin-top: 5% !important;
+  }
 }
 @media screen and (min-width: 737px) {
   body.archive .m-imgur-post {
-    max-width: 38vw;
+    max-width: 80vw;
     margin-bottom: 5%;
+  }
+  body.archive .m-imgur-post:first-child {
+    margin-top: 50%;
   }
   body.archive .m-imgur-post:nth-child(even) {
     transform: translate(15%, -85%) rotate(5deg) scale(0.8);

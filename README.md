@@ -47,7 +47,7 @@ To use within html:
 </audio>
 ```
 
-The homepage landing page is in the /templates/home/ folder using the template file index.ejs. Each template should use it's own root folder for theme resources. There is an assets folder in the root of the project for items that span multiple templates. Within the assets folder there is a js folder that contains javascript available to all consumption. There is also a content folder within the assets folder that contains raw html content which is available for editing by site administrators using git.
+The homepage landing page is in the /templates/home/ folder using the template file index.ejs. Each template should use it's own root folder for theme resources. There is a public folder in the root of the project for items that span multiple templates. Within the public folder there is a js folder that contains javascript available to all consumption. There is also a content folder within the public folder that contains raw html content which is available for editing by site administrators using git.
 
 Note: When running in dev mode, changes to the files in the /templates/ folder are reflected immediately, with the page autoreloading.
 

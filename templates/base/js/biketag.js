@@ -118,19 +118,19 @@ class BikeTag {
 		// </div>`
 
 		var uploadBox = `<div class="upload-box" data-message="(MESSAGE)">
-			<img src="../../../assets/img//blank-tag.png"></img>
+			<img src="../../../public/img//blank-tag.png"></img>
 			<span>(MESSAGE)</span>
 		</div>`
 
 		var proofPreview = `<div class="m-imgur-post hidden">
 			<span class="close"></span>
-			<img src="../../../assets/img/none.png">
+			<img src="../../../public/img/none.png">
 			<h2 class="description"><span class="s--proofNumber"></span> found at (<span id="proofPreview"></span>) by <span id="namePreview"></span></h2>
 		</div>`
 
 		var nextPreview = `<div class="m-imgur-post hidden">
 			<span class="close"></span>
-			<img src="../../../assets/img/none.png">
+			<img src="../../../public/img/none.png">
 			<h2 class="description"><span class="s--tagNumber"></span> tag (<span id="hintPreview"></span>) by <span id="namePreview"></span></h2>
 		</div>`
 
@@ -151,7 +151,7 @@ class BikeTag {
 		${proofPreview}`
 
 		second.innerHTML = `<label for="location">${locationMessage}</label>
-		<input type="text" name="location" placeholder="${locationPlaceholder}" />`
+		<input type="text" name="location" placeholder="${locationPlaceholder}" required />`
 
 		third.innerHTML = `<h3>${nextTagTitle}</h3>
 		<label for="nextTag"></label>
@@ -163,7 +163,7 @@ class BikeTag {
 		<input type="text" name="hint" placeholder="${hintPlaceholder}" />`
 
 		jameson.innerHTML = `<h3>${nameTitle}</h3><label for="name">${nameMessage}</label>
-		<input type="text" name="name" placeholder="${namePlaceholder}" />`
+		<input type="text" name="name" placeholder="${namePlaceholder}" required />`
 
 		submit.innerHTML = `<li><button id="submit">${playButtonText}</button></li>`
 
@@ -568,17 +568,21 @@ class BikeTag {
 
 	showLatestTagImages(count = -1) {
 		if (!imgur.imgurAlbumPictures) {
+			this.tempCount = count
 			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this))
 		}
 
 		var currentTagInfo = this.setCurrentTagInformation()
 		var countParam = this.getUrlParam('count')
+		count = !!this.tempCount ? this.tempCount : count
 		count = count == -1 ? false : (Number.isInteger(count) ? count : (countParam === 'all' ? countParam : Number(countParam)))
+		this.tempCount = null
 
 		if (count) {
 			this.showArchiveTags(count)
 		} else {
 
+			document.body.classList.remove('single')
 			document.body.classList.remove('archive')
 			$('#header .content .inner').empty()
 
@@ -600,6 +604,7 @@ class BikeTag {
 		}
 		document.body.classList.add('archive')
 		$('#header .content .inner').empty()
+		window.history.pushState({}, '/#archive', '/#archive')
 
 		var images = imgur.imgurAlbumPictures;
 		count = Number.isInteger(count) ? count : this.getUrlParam('count')
@@ -617,6 +622,7 @@ class BikeTag {
 			return imgur.getImgurAlbumPictures(null, this.showBikeTagNumber.bind(this));
 		}
 
+		document.body.classList.add('single')
 		tagNumber = this.getTagNumberFromURL(tagNumber)
 		var images = imgur.imgurAlbumPictures
 		var imageCount = Math.round((images.length / 2) + ((images.length - 1) % 2))
@@ -659,6 +665,7 @@ class BikeTag {
 
 		var headerLogo = document.querySelector('#header .header--logo')
 		headerLogo.addEventListener('click', function () {
+			window.history.pushState({}, '/', '/');
 			self.showLatestTagImages()
 		})
 
