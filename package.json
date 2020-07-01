@@ -8,7 +8,7 @@
 	"scripts": {
 		"compile": "npm run compileBiketag1",
 		"compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
-		"dev": "node app.js -- --debug",
+		"dev": "node app.js -- --debug=true",
 		"run": "node app.js",
 		"server-erase-config": "rm ~/biketag-website/config.json && rm ~/config.json",
 		"server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
