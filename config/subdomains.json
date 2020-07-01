@@ -7,10 +7,10 @@
 			"redditSubreddit": "biketag"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -23,10 +23,10 @@
 			"imgurAlbumHash": "DNCiJTC"
 		},
 		"easter": {
-			"jingle": "assets/media/biketag-jingle-1.mp3"
+			"jingle": "public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -43,10 +43,10 @@
 			"redditSubreddit": "CyclePDX"
 		},
 		"easter": {
-			"jingle": "assets/media/biketag-pdx-jingle-1.mp3"
+			"jingle": "public/media/biketag-pdx-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": "pdx-bike-tag"
 		},
 		"adminEmailAddresses": [
@@ -66,10 +66,10 @@
 			"redditSubreddit": "CycleDenver"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": "denver-bike-tag"
 		},
 		"adminEmailAddresses": [
@@ -87,10 +87,10 @@
 			"redditSubreddit": "BikeIN"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -108,10 +108,10 @@
 			"redditSubreddit": "seattlebike"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -129,10 +129,10 @@
 			"redditSubreddit": "OmahaMetroCycling"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-denver-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-denver-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -150,10 +150,10 @@
 			"redditSubreddit": "StLouisBiking"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -171,10 +171,10 @@
 			"redditSubreddit": "vancouvercycling"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -192,10 +192,10 @@
 			"redditSubreddit": "radwien"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -213,10 +213,10 @@
 			"redditSubreddit": "miamibiking"
 		},
 		"easter": {
-			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../assets/img/biketag-logo-1.png",
+			"header": "../../public/img/biketag-logo-1.png",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
