@@ -84,13 +84,6 @@
 	}
 
 	@include breakpoint('>=medium') {
-		// max-width: 38vw;
-		margin-bottom: 5%;
-
-		&:nth-child(even) {
-			transform: translate(15%, -50%) rotate(5deg) scale(0.8);
-		}
-
 		.description {
 			margin-top: -0.4em;
 		}
@@ -185,6 +178,16 @@ body.archive {
 			width: unset;
 			height: unset;
 		}
+	}
+}
+
+.single {
+
+	.m-imgur-post {
+		backface-visibility: hidden;
+		position: relative;
+
+		margin-bottom: 4em;
 	}
 }
 

@@ -332,17 +332,18 @@ class BikeTag {
 
 			tagContainer.querySelector('a').addEventListener('click', function (e) {
 				var isArchive = document.body.classList.contains('archive')
+				var isSingle = document.body.classList.contains('single')
 				/// TODO: progressively load this image
 				var content = '<img src="' + this.getAttribute('href').replace('l.', '.') + '"></img>'
 
-				if (isArchive) {
+				if (isArchive || isSingle) {
 					content = `${tagTemplate}`
 				}
 
 				e.preventDefault()
 				e.stopPropagation()
 
-				if (window.uglipop && (isArchive || popDialogue)) {
+				if (window.uglipop && (isArchive || popDialogue || isSingle)) {
 					window.uglipop({
 						source: 'html',
 						class: 'm-imgur-post s--popup fadeInSlow',
@@ -384,8 +385,9 @@ class BikeTag {
 			var split = image.description.split(' ')
 			tagNumber = split[0].replace('#', poundSymbol)
 
-			var split = image.description.split('by')
-			tagCredit = split[split.length - 1]
+			var splitFor = image.description.split('for')
+			var splitBy = image.description.split('by')
+			tagCredit = splitBy.length > 1 ? splitBy[splitBy.length - 1] : splitFor[splitFor.length - 1]
 		}
 
 		// console.log('setting image link', image.link, image);
