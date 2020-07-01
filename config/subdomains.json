@@ -201,5 +201,26 @@
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
 		]
+	},
+	"miami": {
+		"metaTitle": "MiamiBikeTag!",
+		"region": "Miami, Florida",
+		"tagline": "The BikeTag game in Miami, Florida",
+		"imgur": {
+			"imgurAlbumHash": "mNRJSZg"
+		},
+		"reddit": {
+			"redditSubreddit": "miamibiking"
+		},
+		"easter": {
+			"jingle": "../../assets/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../assets/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
+		]
 	}
 }
