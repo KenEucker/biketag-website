@@ -17,8 +17,10 @@
 				return console.log('imgur album hash not set')
 			}
 
+			var url = 'https://api.imgur.com/3/album/' + albumHash + ''
+
 			$.ajax({
-				url: 'https://api.imgur.com/3/album/' + albumHash + '',
+				url,
 				success: function (data) {
 					console.log(data);
 
@@ -78,30 +80,36 @@
 
 		getImgurAlbumPictures(albumHash, callback) {
 			if (!albumHash) {
-				albumHash = this.imgurAlbumHash;
+				albumHash = this.imgurAlbumHash
 			}
 
 			if (!albumHash) {
 				return console.log('imgur album hash not set')
 			}
 
+			var url = 'https://api.imgur.com/3/album/' + albumHash + '/images'
+
+			// console.log({imgurRequestUrl: url})
+
 			$.ajax({
-				url: 'https://api.imgur.com/3/album/' + albumHash + '/images',
+				url,
 				success: function (data) {
-					// console.log(data);
-					this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(data.data);
+					// console.log(data)
+					this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(data.data)
 
 					if (callback) {
-						callback(data);
+						callback(data)
 					}
 				}.bind(this),
-				error: function (err) {
-					console.log('error getting images from imgur', err);
+				error: function (e) {
+					console.log('error getting images from imgur', { albumHash, imgurApiError: e })
 				},
 				beforeSend: function (xhr) {
-					xhr.setRequestHeader("Authorization", this.imgurAuthorization);
+					if (!!this.imgurAuthorization) {
+						xhr.setRequestHeader("Authorization", this.imgurAuthorization)
+					}
 				}.bind(this),
-			});
+			})
 		},
 		
 		uploadImageToImgur(image, description, next) {
@@ -135,8 +143,9 @@
 		},
 
 		getImgurTokens(done) {
-			var self = this;
-			fetch('/auth/imgur/getToken', {
+			var self = this
+			var url = '/auth/imgur/getToken'
+			fetch(url, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -152,6 +161,8 @@
 						self.imgurAlbumHash = response.imgurAlbumHash || self.imgurAlbumHash
 						self.imgurAccessToken = response.imgurAccessToken ? 'Bearer ' + response.imgurAccessToken : self.imgurAccessToken
 						self.imgurAuthorization = response.imgurAuthorization ? 'Client-ID ' + response.imgurAuthorization : self.imgurAuthorization
+					} else {
+						console.log('invalid imgur getToken response', { response, url })
 					}
 
 					done(response);

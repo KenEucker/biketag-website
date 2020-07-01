@@ -23,7 +23,7 @@ If you'd like to contribute to this project you can [file an issue](https://gith
 Run `npm install` to install the node module dependencies. 
 
 ## Required Configuration
-The app loads a config.json file found in the root folder. There's sample of the minimum configuration to get the local site to display images for the Portland subdomain, as well as the default landing page. [sample.config.json](config.sample.json)
+The app loads a configuration files found in the config folder. The repository is set to ignore a config.json file, for security reasons, but there's sample of the minimum configuration to get the local site to display images for the Portland subdomain, as well as the default landing page. [sample.config.json](config.sample.json). Copy this file to config/config.json `cp config.sample.json config/config.json` to get started from scratch. Note: for some features to work, API values will need to be set.
 
 ## Start local server
 Run `npm run run` to run the webserver and then navigate to http://localhost:80 or whichever port you have set in the config.json. You can also run `npm run dev` to run in debugging mode for local development, which provides greater logging and hot-reloading.

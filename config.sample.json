@@ -1,4 +1,32 @@
 {
+	"defaults": {
+		"newGameImage": "https://i.imgur.com/CtJVstG.png",
+
+		"metaUrl": "http://biketag.org",
+		"metaType": "article",
+		"metaTitle": "BikeTag!",
+		"metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
+		"gaUA": "UA-119956764-1",
+	
+		"imgurClientID": "79ea70333c45883",
+		"imgurAuthorization": "Client-ID 79ea70333c45883",
+		"imgurClientSecret": "",
+		"imgurCallbackURL": "",
+		"imgurEmailAddress": "",
+	
+		"redditClientID": "",
+		"redditClientSecret": "",
+		"redditCallbackURL": "",
+		"redditUserName": "",
+		"redditPassword": "",
+		"redditUserAgent": "",
+		"redditSubreddit": "biketag",
+
+		"emailAccountAddress": "",
+		"emailAccountPassword": "",
+		"emailService": ""
+	},
+
 	"subdomains": {
 		"default": {
 			"template": "home",
@@ -6,9 +34,6 @@
 				"home",
 				"biketag"
 			],
-			"imgur": {
-				"imgurAuthorization": "Client-ID 79ea70333c45883"
-			},
 			"adminEmailAddresses": [
 				"biketagorg@gmail.com"
 			]
@@ -20,7 +45,7 @@
 				"post"
 			],
 			"imgur": {
-				"imgurAuthorization": "Client-ID 79ea70333c45883"
+				"imgurAlbumHash": "DNCiJTC",
 			},
 			"adminEmailAddresses": [
 				"biketagorg@gmail.com"
@@ -32,22 +57,6 @@
 				"pdx",
 				"oregon"
 			],
-			"imgur": {
-				"imgurAuthorization": "Client-ID 79ea70333c45883"
-			},
-			"adminEmailAddresses": [
-				"biketagorg@gmail.com"
-			]
-		},
-		"denver": {
-			"template": "biketag1",
-			"aliases": [
-				"den",
-				"colorado"
-			],
-			"imgur": {
-				"imgurAuthorization": "Client-ID 79ea70333c45883"
-			},
 			"adminEmailAddresses": [
 				"biketagorg@gmail.com"
 			]
@@ -55,32 +64,9 @@
 	},
 
 	"supportedRegions": [
-		"portland",
-		"denver"
+		"portland"
 	],
-
-	"metaUrl": "http://biketag.org",
-	"metaType": "article",
-	"metaTitle": "BikeTag!",
-	"metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
-	"gaUA": "UA-119956764-1",
-
-	"imgurClientID": "",
-	"imgurClientSecret": "",
-	"imgurCallbackURL": "",
-	"imgurEmailAddress": "",
-	"redditClientID": "",
-	"redditClientSecret": "",
-	"redditCallbackURL": "",
-	"redditUserName": "",
-	"s3CdnUrl": "",
-	"s3EmailAddress": "",
-	"s3AccessKeyId": "",
-	"s3SecretAccessKey": "",
-	"s3Region": "",
-	"GoogleCoudBucket": "",
-
+	
 	"port": 80,
-	"bucket": "biketagorg",
 	"debug": false
 }
