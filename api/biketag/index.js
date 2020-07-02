@@ -189,8 +189,7 @@ const update = (req, res, next) => {
 const routes = (app) => {
 	const appConfig = app.config
 
-	app.filterSubdomainRequest("/:tagnumber?", (subdomain, req, res) => {
-		const host = req.headers.host
+	app.filterSubdomainRequest("/latest", (subdomain, req, res, host) => {
   
 		if (!subdomain) {
 		  const hostSubdomainEnd = host.indexOf(".") + 1
@@ -213,7 +212,30 @@ const routes = (app) => {
 		return app.renderTemplate(template, data, res)
 	  })
 
-	app.filterSubdomainRequest('/post/email', async (subdomain, req, res) => {
+	app.filterSubdomainRequest("/:tagnumber?", (subdomain, req, res, host) => {
+  
+		if (!subdomain) {
+		  const hostSubdomainEnd = host.indexOf(".") + 1
+		  const redirectToHost = `${req.protocol}://${host.substring(
+			hostSubdomainEnd
+		  )}`
+  
+		  console.log({
+			subdomain,
+			hostNotFound: host,
+			redirectToHost,
+		  })
+  
+		  return res.redirect(redirectToHost)
+		}
+  
+		const template = app.getTemplateNameFromSubdomain(subdomain)
+		const data = app.getPublicConfigurationValues(subdomain, host)
+  
+		return app.renderTemplate(template, data, res)
+	  })
+
+	app.filterSubdomainRequest('/post/email', async (subdomain, req, res, host) => {
 		try {
 			const subdomainConfig = app.getSubdomainOpts(req)
 			return getTagInformation(appConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
@@ -238,7 +260,7 @@ const routes = (app) => {
 		}
 	}, 'post')
 
-	app.filterSubdomainRequest('/post/reddit', async (subdomain, req, res) => {
+	app.filterSubdomainRequest('/post/reddit', async (subdomain, req, res, host) => {
 		const subdomainConfig = app.getSubdomainOpts(req)
 		return getTagInformation(subdomainConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
 			subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
@@ -257,9 +279,8 @@ const routes = (app) => {
 
 	app.filterSubdomainRequest(
 		"/get/reddit/:tagnumber?",
-		(subdomain, req, res) => {
+		(subdomain, req, res, host) => {
 			const tagnumber = req.params.tagnumber || "latest"
-			const host = req.headers.host
 			const redditTemplatePath = "reddit/post"
 			const subdomainConfig = app.getSubdomainOpts(req)
 			const albumHash = subdomainConfig.imgur.imgurAlbumHash

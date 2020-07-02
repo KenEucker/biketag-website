@@ -8,6 +8,7 @@ const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
 	publicConfig.subdomains = Object.values(appConfig.subdomains).reduce((out, subdomainInformation, index) => {
 		const subdomainName = subdomains[index]
 		const subdomainConfig = publicConfig.subdomains[subdomainName]
+		publicConfig.supportedRegions = appConfig.supportedRegions
 
 		// console.log({subdomainConfig})
 		const pageData = merge(subdomainConfig, {

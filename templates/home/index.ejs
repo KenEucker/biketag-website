@@ -166,7 +166,7 @@
 				link.className = "article w-clearfix w-inline-block"
 				link.innerHTML =
 					`<div class="image-wrapper">
-						<img class="thumbnail" src="${ !!region.images.logo ? `public/img/${region.images.logo}-small.png` : "public/img/none.png"}" width="109">
+						<img class="thumbnail" src="${ !!region.images.logo ? `public/img/${region.images.logo}${region.images.logo.indexOf('.') === -1 ? `-small.png` : ''}` : "public/img/none.png"}" width="109">
 					</div>
 					<section class="article-text-wrapper w-clearfix">
 						<h2 class="arrow">></span></h2>
