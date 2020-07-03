@@ -1657,7 +1657,7 @@ textarea.w-select {
 }
 .w-nav-button.w--open {
   background-color: #C8C8C8;
-  color: white;
+  /* color: white; */
 }
 .w-nav[data-collapse="all"] .w-nav-menu {
   display: none;

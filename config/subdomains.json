@@ -10,7 +10,7 @@
 			"jingle": "../../public/media/biketag-jingle-1.mp3"
 		},
 		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
+			"header": "../../public/img/Tag-Logo-Stacked-V2.svg",
 			"logo": ""
 		},
 		"adminEmailAddresses": [
@@ -91,7 +91,7 @@
 		},
 		"images": {
 			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "Indianapolis-Icon.svg"
+			"logo": "IndianapolisIcon.svg"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
@@ -112,7 +112,7 @@
 		},
 		"images": {
 			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "Seattle-Icon.svg"
+			"logo": "SeattleIcon.svg"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
@@ -133,7 +133,7 @@
 		},
 		"images": {
 			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "Omaha-Icon.svg"
+			"logo": "OmahaIcon.svg"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
@@ -154,7 +154,7 @@
 		},
 		"images": {
 			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "StLouis-Icon.svg"
+			"logo": "StLouisIcon.svg"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
@@ -175,7 +175,7 @@
 		},
 		"images": {
 			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "Vancouver-Icon.svg"
+			"logo": "VancouverIcon.svg"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
@@ -196,7 +196,7 @@
 		},
 		"images": {
 			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "Vienna-Icon.svg"
+			"logo": "ViennaIcon.svg"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
@@ -217,7 +217,7 @@
 		},
 		"images": {
 			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "Miami-Icon.svg"
+			"logo": "MiamiIcon.svg"
 		},
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"

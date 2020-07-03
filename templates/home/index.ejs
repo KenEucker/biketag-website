@@ -163,7 +163,7 @@
 				var region = regions[sub]
 				var link = document.createElement('a')
 				link.href = `${window.location.protocol}//${sub}.${window.location.host}`
-				link.className = "article w-clearfix w-inline-block"
+				link.className = "article w-clearfix w-inline-block " + sub
 				link.innerHTML =
 					`<div class="image-wrapper">
 						<img class="thumbnail" src="${ !!region.images.logo ? `public/img/${region.images.logo}${region.images.logo.indexOf('.') === -1 ? `-small.png` : ''}` : "public/img/none.png"}" width="109">
@@ -175,7 +175,7 @@
 							${region.tagline}
 						</p>
 						<div class="article-info-wrapper">
-							<!-- <div class="article-info-text grey">${regions[sub].region}</div> -->
+							<!-- <div class="article-info-text grey">${region.region}</div> -->
 							<!-- <div class="article-info-text tag"></div> -->
 							<!-- <div class="article-info-text tag"></div> -->
 						</div>
