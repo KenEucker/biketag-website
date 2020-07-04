@@ -9,7 +9,7 @@
 		"compile": "npm run compileBiketag1",
 		"compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
 		"dev": "node app.js -- --debug=true",
-		"run": "node app.js",
+		"start": "node app.js",
 		"server-erase-config": "rm ~/biketag-website/config.json && rm ~/config.json",
 		"server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
 		"server-update": "git pull",
@@ -38,7 +38,7 @@
 		"imgur": "^0.3.1",
 		"path": "^0.12.7",
 		"reddit": "https://github.com/KenEucker/reddit.git",
-		"sexpress": "0.0.6"
+		"sexpress": "0.0.9"
 	},
 	"devDependencies": {
 		"dart-sass": "^1.25.0",
