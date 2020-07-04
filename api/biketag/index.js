@@ -241,7 +241,7 @@ const routes = (app) => {
 			return getTagInformation(appConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
 				const latestTagNumber = subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
 				const subject = `New Bike Tag Post (#${latestTagNumber}) [${subdomain}]`
-				const body = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${subdomainConfig.host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${subdomainConfig.host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
+				const body = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
 
 				subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
 					app.sendEmail(subdomainConfig, emailAddress, subject, body, (info) => {
