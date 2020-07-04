@@ -2,7 +2,7 @@
 	"defaults": {
 		"newGameImage": "https://i.imgur.com/CtJVstG.png",
 
-		"metaUrl": "http://biketag.org",
+		"metaUrl": "https://biketag.org",
 		"metaType": "article",
 		"metaTitle": "BikeTag!",
 		"metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
