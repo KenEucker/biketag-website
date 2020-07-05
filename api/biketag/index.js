@@ -72,7 +72,7 @@ const postLatestBikeTagToReddit = (config, callback) => {
 		accessToken: `bearer ${config.reddit.redditAccessToken}`
 	}
 
-	console.log({redditOpts})
+	console.log({redditOpts, redditConfig: config.reddit})
 
 	reddit = new Reddit(redditOpts)
 
