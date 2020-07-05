@@ -72,16 +72,9 @@ const postLatestBikeTagToReddit = (config, callback) => {
 		accessToken: `bearer ${config.reddit.redditAccessToken}`
 	}
 
-	// console.log('reddit opts', {
-	// 	opts,
-	// })
 	reddit = new Reddit(opts)
 
-	const tagnumber = req.params.tagnumber || "latest"
-	const redditTemplatePath = "reddit/post"
-	const albumHash = config.imgur.imgurAlbumHash
-
-	return getTagInformation(config, config.requestSubdomain, tagnumber, albumHash, (tagData) => {
+	return getTagInformation(config, config.requestSubdomain, config.latestTagNumber, config.imgur.imgurAlbumHash, (tagData) => {
 		tagData.host = host
 
 		return reddit.post('/api/submit', {
@@ -89,7 +82,7 @@ const postLatestBikeTagToReddit = (config, callback) => {
 			kind: 'text',
 			resubmit: true,
 			title: `Bike Tag #${config.latestTagNumber}`,
-			text: ejs.render(redditTemplatePath, tagData),
+			text: ejs.render("reddit/post", tagData),
 		}).then((redditData) => {
 			console.log({redditData})
 
