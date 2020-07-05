@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const imgur = require('imgur')
-const Reddit = require('reddit')
+const reddit = require('snoowrap')
 const ejs = require('ejs')
 const fs = require('fs')
 
@@ -65,44 +65,43 @@ const getTagInformation = (config, tagNumber, albumHash, callback) => {
 
 const postLatestBikeTagToReddit = (config, callback) => {
 	const redditOpts = {
+		userAgent: config.reddit.redditUserAgent.replace('VERSION', config.version),
+		clientId: config.reddit.redditClientID,
+		clientSecret: config.reddit.redditClientSecret,
 		username: config.reddit.redditUserName,
 		password: config.reddit.redditPassword,
-		appId: config.reddit.redditClientID,
-		appSecret: config.reddit.redditClientSecret,
-		userAgent: config.reddit.redditUserAgent.replace('VERSION', config.version),
-		accessToken: `bearer ${config.reddit.redditAccessToken}`
+		// accessToken: `bearer ${config.reddit.redditAccessToken}`
 	}
 
-	console.log({redditOpts, redditConfig: config.reddit, config})
+	// console.log({redditOpts, redditConfig: config.reddit, config})
 
-	reddit = new Reddit(redditOpts)
+	const r = new reddit(redditOpts)
 
-	return getTagInformation(config, config.latestTagNumber, config.imgur.imgurAlbumHash, (tagData) => {
+	return getTagInformation(config, config.latestTagNumber, config.imgur.imgurAlbumHash, async (tagData) => {
 		tagData.host = config.host
 		const redditTemplatePath = `${config.viewsFolder}/reddit/post.ejs`
 		const redditTemplateString = fs.readFileSync(redditTemplatePath, 'utf-8')
 		const latestTagTemplate = ejs.render(redditTemplateString, tagData).replace('<pre>', '').replace('</pre>', '')
-		// console.log({tagData, latestTagTemplate})
-
-		return reddit.post('/api/submit', {
-			sr: config.reddit.redditSubreddit,
-			kind: 'self',
-			resubmit: true,
+		// console.log({tagData, latestTagTemplate, reddit: config.reddit})
+	
+		r.getSubreddit(config.reddit.redditSubreddit).submitSelfpost({
 			title: `Bike Tag #${config.latestTagNumber}`,
 			text: latestTagTemplate,
-		}).then((redditData) => {
-			console.log({redditData})
+		}).sticky().distinguish().approve().then((redditData) => {
+			if (!redditData.name) {
+				console.log('Error creating self post to reddit', redditOpts)
+				return callback()
+			}
 
-			// return reddit.post('/api/submit', {
-			// 	sr: 'biketag',
-			// 	kind: 'link',
-			// 	resubmit: true,
-			// 	title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${config.latestTagNumber} (${config.region})`,
-			// 	url: `https://www.reddit.com/r/${config.reddit.redditSubreddit}/`,
-			// }).then(callback)
-			callback()
-
-		})
+			r.getSubmission(redditData.name).fetch().then(submission => {
+				if (!!submission) {
+					r.getSubreddit('biketag').submitLink({
+						title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${config.latestTagNumber} (${config.region})`,
+						url: submission.url
+					}).then(callback)
+				}
+			  })
+		}).catch(callback)
 	})
 }
 
