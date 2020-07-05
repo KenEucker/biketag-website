@@ -81,7 +81,7 @@ const postLatestBikeTagToReddit = (config, callback) => {
 
 		return reddit.post('/api/submit', {
 			sr: config.reddit.redditSubreddit,
-			kind: 'text',
+			kind: 'self',
 			resubmit: true,
 			title: `Bike Tag #${config.latestTagNumber}`,
 			text: ejs.render("reddit/post", tagData),
@@ -89,7 +89,6 @@ const postLatestBikeTagToReddit = (config, callback) => {
 			console.log({redditData})
 
 			// return reddit.post('/api/submit', {
-			// 	// sr: config.redditSubreddit,
 			// 	sr: 'biketag',
 			// 	kind: 'link',
 			// 	resubmit: true,
@@ -284,8 +283,8 @@ const routes = (app) => {
 			subdomainConfig.requestSubdomain = subdomain
 			subdomainConfig.host = host
 
-			subdomainConfig.reddit.redditPassword = appConfig.defaults.redditPassword
-			subdomainConfig.reddit.redditUserName = appConfig.defaults.redditUserName
+			// subdomainConfig.reddit.redditPassword = appConfig.defaults.redditPassword
+			// subdomainConfig.reddit.redditUserName = appConfig.defaults.redditUserName
 
 			return postLatestBikeTagToReddit(subdomainConfig, (response) => {
 				console.log('posted to reddit', response)
