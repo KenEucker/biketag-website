@@ -63,7 +63,7 @@ const getTagInformation = (config, subdomain, tagNumber, albumHash, callback) =>
 }
 
 const postLatestBikeTagToReddit = (config, callback) => {
-	const opts = {
+	const redditOpts = {
 		username: config.reddit.redditUserName,
 		password: config.reddit.redditPassword,
 		appId: config.reddit.redditClientID,
@@ -72,7 +72,9 @@ const postLatestBikeTagToReddit = (config, callback) => {
 		accessToken: `bearer ${config.reddit.redditAccessToken}`
 	}
 
-	reddit = new Reddit(opts)
+	console.log({redditOpts})
+
+	reddit = new Reddit(redditOpts)
 
 	return getTagInformation(config, config.requestSubdomain, config.latestTagNumber, config.imgur.imgurAlbumHash, (tagData) => {
 		tagData.host = config.host
