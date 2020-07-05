@@ -8,7 +8,7 @@ const fs = require('fs')
 
 exports.engine = 'ejs';
 
-const getTagInformation = (config, subdomain, tagNumber, albumHash, callback) => {
+const getTagInformation = (config, tagNumber, albumHash, callback) => {
 	// console.trace({config})
 	imgur.setClientId(config.imgur.imgurClientID)
 
@@ -77,7 +77,7 @@ const postLatestBikeTagToReddit = (config, callback) => {
 
 	reddit = new Reddit(redditOpts)
 
-	return getTagInformation(config, config.requestSubdomain, config.latestTagNumber, config.imgur.imgurAlbumHash, (tagData) => {
+	return getTagInformation(config, config.latestTagNumber, config.imgur.imgurAlbumHash, (tagData) => {
 		tagData.host = config.host
 		const redditTemplatePath = `${config.viewsFolder}/reddit/post.ejs`
 		const redditTemplateString = fs.readFileSync(redditTemplatePath, 'utf-8')
@@ -258,7 +258,7 @@ const routes = (app) => {
 	app.filterSubdomainRequest('/post/email', async (subdomain, req, res, host) => {
 		try {
 			const subdomainConfig = app.getSubdomainOpts(req)
-			return getTagInformation(appConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
+			return getTagInformation(appConfig, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
 				const latestTagNumber = subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
 				const subject = `New Bike Tag Post (#${latestTagNumber}) [${subdomain}]`
 				const body = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
@@ -286,7 +286,7 @@ const routes = (app) => {
 		subdomainConfig.host = host
 		subdomainConfig.viewsFolder = appConfig.viewsFolder
 
-		return getTagInformation(subdomainConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
+		return getTagInformation(subdomainConfig, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
 			subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
 
 			// subdomainConfig.reddit.redditPassword = appConfig.defaults.redditPassword
@@ -312,7 +312,7 @@ const routes = (app) => {
 
 			console.log(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
 
-			return getTagInformation(subdomainConfig, subdomain, tagnumber, albumHash, (data) => {
+			return getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
 				data.host = host
 				return res.render(redditTemplatePath, data)
 			})
