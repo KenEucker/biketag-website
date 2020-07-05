@@ -70,10 +70,10 @@ const createNewBikeTagPostOnReddit = (config, callback) => {
 		userAgent: config.reddit.redditUserAgent.replace('VERSION', config.version),
 		accessToken: `bearer ${config.reddit.redditAccessToken}`
 	}
-	// console.log('reddit opts', {
-	// 	opts,
-	// 	config
-	// })
+	console.log('reddit opts', {
+		opts,
+		config
+	})
 	reddit = new Reddit(opts)
 
 	return reddit.post('/api/submit', {
