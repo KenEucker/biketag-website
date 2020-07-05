@@ -284,6 +284,8 @@ const routes = (app) => {
 			subdomainConfig.requestSubdomain = subdomain
 			subdomainConfig.host = host
 
+			subdomainConfig.reddit = appConfig.defaults.reddit
+
 			return postLatestBikeTagToReddit(subdomainConfig, (response) => {
 				console.log('posted to reddit', response)
 				res.json({ success: response })
