@@ -3,6 +3,7 @@
  */
 const imgur = require('imgur')
 const Reddit = require('reddit')
+const ejs = require('ejs')
 
 exports.engine = 'ejs';
 
@@ -61,7 +62,7 @@ const getTagInformation = (config, subdomain, tagNumber, albumHash, callback) =>
 	return getTagRequest
 }
 
-const createNewBikeTagPostOnReddit = (config, callback) => {
+const postLatestBikeTagToReddit = (config, callback) => {
 	const opts = {
 		username: config.reddit.redditUserName,
 		password: config.reddit.redditPassword,
@@ -70,20 +71,40 @@ const createNewBikeTagPostOnReddit = (config, callback) => {
 		userAgent: config.reddit.redditUserAgent.replace('VERSION', config.version),
 		accessToken: `bearer ${config.reddit.redditAccessToken}`
 	}
-	console.log('reddit opts', {
-		opts,
-		config
-	})
+
+	// console.log('reddit opts', {
+	// 	opts,
+	// })
 	reddit = new Reddit(opts)
 
-	return reddit.post('/api/submit', {
-		// sr: config.redditSubreddit,
-		sr: 'biketag',
-		kind: 'link',
-		resubmit: true,
-		title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${config.latestTagNumber} (${config.region})`,
-		url: `https://www.reddit.com/r/${config.reddit.redditSubreddit}/`
-	}).then(callback)
+	const tagnumber = req.params.tagnumber || "latest"
+	const redditTemplatePath = "reddit/post"
+	const albumHash = config.imgur.imgurAlbumHash
+
+	return getTagInformation(config, config.requestSubdomain, tagnumber, albumHash, (tagData) => {
+		tagData.host = host
+
+		return reddit.post('/api/submit', {
+			sr: config.reddit.redditSubreddit,
+			kind: 'text',
+			resubmit: true,
+			title: `Bike Tag #${config.latestTagNumber}`,
+			text: ejs.render(redditTemplatePath, tagData),
+		}).then((redditData) => {
+			console.log({redditData})
+
+			// return reddit.post('/api/submit', {
+			// 	// sr: config.redditSubreddit,
+			// 	sr: 'biketag',
+			// 	kind: 'link',
+			// 	resubmit: true,
+			// 	title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${config.latestTagNumber} (${config.region})`,
+			// 	url: `https://www.reddit.com/r/${config.reddit.redditSubreddit}/`,
+			// }).then(callback)
+			callback()
+
+		})
+	})
 }
 
 function getBikeTagNumberFromImage(image) {
@@ -262,12 +283,12 @@ const routes = (app) => {
 
 	app.filterSubdomainRequest('/post/reddit', async (subdomain, req, res, host) => {
 		const subdomainConfig = app.getSubdomainOpts(req)
+
 		return getTagInformation(subdomainConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
 			subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
+			subdomainConfig.requestSubdomain = subdomain
 
-			// console.log({ subdomainConfig })
-
-			return createNewBikeTagPostOnReddit(subdomainConfig, (response) => {
+			return postLatestBikeTagToReddit(subdomainConfig, (response) => {
 				console.log('posted to reddit', response)
 				res.json({ success: response })
 			})
