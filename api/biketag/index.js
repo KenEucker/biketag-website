@@ -75,7 +75,7 @@ const postLatestBikeTagToReddit = (config, callback) => {
 	reddit = new Reddit(opts)
 
 	return getTagInformation(config, config.requestSubdomain, config.latestTagNumber, config.imgur.imgurAlbumHash, (tagData) => {
-		tagData.host = host
+		tagData.host = config.host
 
 		return reddit.post('/api/submit', {
 			sr: config.reddit.redditSubreddit,
@@ -280,6 +280,7 @@ const routes = (app) => {
 		return getTagInformation(subdomainConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
 			subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
 			subdomainConfig.requestSubdomain = subdomain
+			subdomainConfig.host = host
 
 			return postLatestBikeTagToReddit(subdomainConfig, (response) => {
 				console.log('posted to reddit', response)
