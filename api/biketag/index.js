@@ -81,7 +81,7 @@ const postLatestBikeTagToReddit = (config, callback) => {
 		tagData.host = config.host
 		const redditTemplatePath = `${config.viewsFolder}/reddit/post.ejs`
 		const redditTemplateString = fs.readFileSync(redditTemplatePath, 'utf-8')
-		const latestTagTemplate = ejs.render(redditTemplateString, tagData)
+		const latestTagTemplate = ejs.render(redditTemplateString, tagData).replace('<pre>', '').replace('</pre>', '')
 		// console.log({tagData, latestTagTemplate})
 
 		return reddit.post('/api/submit', {
