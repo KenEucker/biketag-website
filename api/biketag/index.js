@@ -4,6 +4,7 @@
 const imgur = require('imgur')
 const Reddit = require('reddit')
 const ejs = require('ejs')
+const fs = require('fs')
 
 exports.engine = 'ejs';
 
@@ -72,19 +73,23 @@ const postLatestBikeTagToReddit = (config, callback) => {
 		accessToken: `bearer ${config.reddit.redditAccessToken}`
 	}
 
-	console.log({redditOpts, redditConfig: config.reddit})
+	console.log({redditOpts, redditConfig: config.reddit, config})
 
 	reddit = new Reddit(redditOpts)
 
 	return getTagInformation(config, config.requestSubdomain, config.latestTagNumber, config.imgur.imgurAlbumHash, (tagData) => {
 		tagData.host = config.host
+		const redditTemplatePath = `${config.viewsFolder}/reddit/post.ejs`
+		const redditTemplateString = fs.readFileSync(redditTemplatePath, 'utf-8')
+		const latestTagTemplate = ejs.render(redditTemplateString, tagData)
+		// console.log({tagData, latestTagTemplate})
 
 		return reddit.post('/api/submit', {
 			sr: config.reddit.redditSubreddit,
 			kind: 'self',
 			resubmit: true,
 			title: `Bike Tag #${config.latestTagNumber}`,
-			text: ejs.render("reddit/post", tagData),
+			text: latestTagTemplate,
 		}).then((redditData) => {
 			console.log({redditData})
 
@@ -277,11 +282,12 @@ const routes = (app) => {
 
 	app.filterSubdomainRequest('/post/reddit', async (subdomain, req, res, host) => {
 		const subdomainConfig = app.getSubdomainOpts(req)
+		subdomainConfig.requestSubdomain = subdomain
+		subdomainConfig.host = host
+		subdomainConfig.viewsFolder = appConfig.viewsFolder
 
 		return getTagInformation(subdomainConfig, subdomain, 'latest', subdomainConfig.imgur.imgurAlbumHash, (latestTagInfo) => {
 			subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
-			subdomainConfig.requestSubdomain = subdomain
-			subdomainConfig.host = host
 
 			// subdomainConfig.reddit.redditPassword = appConfig.defaults.redditPassword
 			// subdomainConfig.reddit.redditUserName = appConfig.defaults.redditUserName
