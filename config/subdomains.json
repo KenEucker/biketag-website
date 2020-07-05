@@ -33,7 +33,7 @@
 		]
 	},
 	"portland": {
-		"metaTitle": "PortlandBikeTag!",
+		"metaTitle": "Portland BikeTag!",
 		"region": "Portland, Oregon",
 		"tagline": "The BikeTag game in Portland, Oregon",
 		"imgur": {
@@ -55,7 +55,7 @@
 		]
 	},
 	"denver": {
-		"metaTitle": "DenverBikeTag!",
+		"metaTitle": "Denver BikeTag!",
 		"region": "Denver, Colorado",
 		"tagline": "The BikeTag game in Denver, Colorado",
 		"imgur": {
@@ -76,7 +76,7 @@
 		]
 	},
 	"indianapolis": {
-		"metaTitle": "IndyBikeTag!",
+		"metaTitle": "Indianapolis BikeTag!",
 		"region": "Indianapolis, Indiana",
 		"tagline": "The BikeTag game in Indianapolis, Indiana",
 		"imgur": {
@@ -97,7 +97,7 @@
 		]
 	},
 	"seattle": {
-		"metaTitle": "SeattleBikeTag!",
+		"metaTitle": "Seattle BikeTag!",
 		"region": "Seattle, Washington",
 		"tagline": "The BikeTag game in Seattle, Washington",
 		"imgur": {
@@ -118,7 +118,7 @@
 		]
 	},
 	"omaha": {
-		"metaTitle": "OmahaBikeTag!",
+		"metaTitle": "Omaha BikeTag!",
 		"region": "Omaha, Nebraska",
 		"tagline": "The BikeTag game in Omaha, Nebraska",
 		"imgur": {
@@ -139,7 +139,7 @@
 		]
 	},
 	"stlouis": {
-		"metaTitle": "StLouisBikeTag!",
+		"metaTitle": "St Louis BikeTag!",
 		"region": "St Louis, Missouri",
 		"tagline": "The BikeTag game in St Louis, Missouri",
 		"imgur": {
@@ -160,7 +160,7 @@
 		]
 	},
 	"vancouver": {
-		"metaTitle": "VancouverBikeTag!",
+		"metaTitle": "Vancouver BikeTag!",
 		"region": "Vancouver, British Columbia",
 		"tagline": "The BikeTag game in Vancouver, British Columbia",
 		"imgur": {
@@ -183,7 +183,7 @@
 	"vienna": {
 		"metaTitle": "ViennaBikeTag!",
 		"region": "Vienna, Austria",
-		"tagline": "The BikeTag game in Vienna, Austria",
+		"tagline": "The BikeT ag game in Vienna, Austria",
 		"imgur": {
 			"imgurAlbumHash": "2nIYv2H"
 		},
@@ -202,7 +202,7 @@
 		]
 	},
 	"miami": {
-		"metaTitle": "MiamiBikeTag!",
+		"metaTitle": "Miami BikeTag!",
 		"region": "Miami, Florida",
 		"tagline": "The BikeTag game in Miami, Florida",
 		"imgur": {
