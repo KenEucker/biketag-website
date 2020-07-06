@@ -37,7 +37,7 @@
 		"fs": "0.0.1-security",
 		"imgur": "^0.3.1",
 		"path": "^0.12.7",
-		"sexpress": "0.0.27",
+		"sexpress": "0.0.28",
 		"snoowrap": "^1.21.0"
 	},
 	"devDependencies": {
