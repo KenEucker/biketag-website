@@ -7,8 +7,8 @@ A website for biketag.org
 To allow anyone and everyone to play BikeTag! This site will ingest the Reddit posts playing biketag for a configured subreddit, and display them on biketag. Conversely, using the site you can create a new tag and will be automagically posted to Reddit! This lets anyone play the game without needing to know how to imgur or having a reddit account, while continuing to support those who have been playing biketag on reddit as well!
 
 ## Features of the webapp
-* See most recent round of BikeTag including matching Biketags, and an archive of past rounds of the game: http://pdx.biketag.org
-* A modal to play the nexrt round (provide matching and new BikeTag images, Mystery Location description, hint, and name): http://pdx.biketag.org/#tagit
+* See most recent round of BikeTag, and an archive of past rounds: http://pdx.biketag.org
+* A modal to play the next round (provide matching and new BikeTag images, Mystery Location description, hint, and name): http://pdx.biketag.org/#tagit
 * See all archived rounds of Biketag: http://portland.biketag.org/?count=all
 * See an individual round of BikeTag with matching images: http://pdx.biketag.org/95
 
