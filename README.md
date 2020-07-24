@@ -4,14 +4,13 @@
 A website for biketag.org
 
 ## Why?
-To allow anyone and everyone to play biketag! This site will ingest the Reddit posts playing biketag for a configured subreddit, and display them on biketag. Conversely, using the site you can create a new tag and will be automagically posted to Reddit! This lets anyone play the game without needing to know how to imgur or having a reddit account, while continuing to support those who have been playing biketag on reddit as well!
+To allow anyone and everyone to play BikeTag! This site will ingest the Reddit posts playing biketag for a configured subreddit, and display them on biketag. Conversely, using the site you can create a new tag and will be automagically posted to Reddit! This lets anyone play the game without needing to know how to imgur or having a reddit account, while continuing to support those who have been playing biketag on reddit as well!
 
 ## Features of the webapp
-* See current tag, previous proof tag, and original previous tag: http://pdx.biketag.org
-* Tag new location (provide next tag image, proof tag image, name, and other information like location): http://pdx.biketag.org/#tagit
-* See all historic tags: http://portland.biketag.org/?count=all
-* See individual tags with original tag and found it tag: http://pdx.biketag.org/95
-* Only region that is currently up and running is http://pdx.biketag.org, which the homepage mirrors. Other regions are supported, though not set up.
+* See most recent round of BikeTag, and an archive of past rounds: http://pdx.biketag.org
+* A modal to play the next round (provide matching and new BikeTag images, Mystery Location description, hint, and name): http://pdx.biketag.org/#tagit
+* See all archived rounds of Biketag: http://portland.biketag.org/?count=all
+* See an individual round of BikeTag with matching images: http://pdx.biketag.org/95
 
 # Contribute
 If you'd like to contribute to this project you can [file an issue](https://github.com/keneucker/biketag-website/issues), fork the code and [create a pull request](https://github.com/keneucker/biketag-website/pulls), or [donate money towards server costs](https://paypal.me/KenEucker) which currently run between $5-10/month.
