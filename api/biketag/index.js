@@ -104,49 +104,50 @@ const postLatestBikeTagToReddit = (config, callback) => {
 		const regionName = config.requestSubdomain.charAt(0).toUpperCase() + config.requestSubdomain.slice(1)
 		// console.log({tagData, latestTagTemplate, config})
 		
-		return sendEmailToAllAdministrators(config).then(callback)
+		/// Serverside send email
+		// sendEmailToAllAdministrators(config).then(callback)
+
+		return r.getSubreddit(config.reddit.redditSubreddit)
+			.submitSelfpost({
+				title: `Bike Tag #${config.latestTagNumber}`,
+				text: latestTagTemplate,
+			})
+			.assignFlair({text: config.reddit.postFlair || 'BikeTag'})
+			.approve()
+			.sticky()
+			.distinguish()
+			.submitCrosspost({
+				subredditName: 'biketag',
+				title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${config.latestTagNumber} (${config.region})`,
+				resubmit: false,
+			})
+			// .assignFlair({text: regionName})
+			.then((redditData) => {
+				if (!redditData.name) {
+					console.log('Error creating self post to reddit', redditOpts)
+					return callback()
+				}
+
+				// TODO: send emails of successful posting to reddit
+
+				redditOpts.username = _appConfig.defaults.redditUserName
+				redditOpts.password = _appConfig.defaults.redditPassword
+
+				r = new reddit(redditOpts)
+
+				/// TODO: Make this submission response handled by the u/biketagorg account for assigning
+				r.getSubmission(redditData.name).fetch().then(submission => {
+					if (!!submission) {
+						return r.getSubreddit(_appConfig.defaults.redditSubreddit)
+							.assignFlair({text: regionName})
+							.then(callback)
+							.catch(callback)
+					} else {
+						console.error('post to reddit error!')
+					}
+				}).catch(callback)
+			}).catch(callback)
 	})
-	// 	return r.getSubreddit(config.reddit.redditSubreddit)
-	// 		.submitSelfpost({
-	// 			title: `Bike Tag #${config.latestTagNumber}`,
-	// 			text: latestTagTemplate,
-	// 		})
-	// 		.assignFlair({text: config.reddit.postFlair || 'BikeTag'})
-	// 		.approve()
-	// 		.sticky()
-	// 		.distinguish()
-	// 		.submitCrosspost({
-	// 			subredditName: 'biketag',
-	// 			title: `[X-Post r/${config.reddit.redditSubreddit}] Bike Tag #${config.latestTagNumber} (${config.region})`,
-	// 			resubmit: false,
-	// 		})
-	// 		// .assignFlair({text: regionName})
-	// 		.then((redditData) => {
-	// 			if (!redditData.name) {
-	// 				console.log('Error creating self post to reddit', redditOpts)
-	// 				return callback()
-	// 			}
-
-	// 			// TODO: send emails of successful posting to reddit
-
-	// 			redditOpts.username = _appConfig.defaults.redditUserName
-	// 			redditOpts.password = _appConfig.defaults.redditPassword
-
-	// 			r = new reddit(redditOpts)
-
-	// 			/// TODO: Make this submission response handled by the u/biketagorg account for assigning
-	// 			r.getSubmission(redditData.name).fetch().then(submission => {
-	// 				if (!!submission) {
-	// 					return r.getSubreddit(_appConfig.defaults.redditSubreddit)
-	// 						.assignFlair({text: regionName})
-	// 						.then(callback)
-	// 						.catch(callback)
-	// 				} else {
-	// 					console.error('post to reddit error!')
-	// 				}
-	// 			}).catch(callback)
-	// 		}).catch(callback)
-	// })
 }
 
 function getBikeTagNumberFromImage(image) {
