@@ -222,5 +222,26 @@
 		"adminEmailAddresses": [
 			"keneucker@gmail.com"
 		]
+	},
+	"eugene": {
+		"metaTitle": "Eugene BikeTag!",
+		"region": "Eugene, Oregon",
+		"tagline": "The BikeTag game in Eugene, Oregon",
+		"imgur": {
+			"imgurAlbumHash": "s1vwiKY"
+		},
+		"reddit": {
+			"redditSubreddit": "eugenebiketag"
+		},
+		"easter": {
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../public/img/biketag-logo-1.png",
+			"logo": ""
+		},
+		"adminEmailAddresses": [
+			"keneucker@gmail.com"
+		]
 	}
 }
