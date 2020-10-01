@@ -350,9 +350,7 @@ const routes = (app) => {
 		})
 	}, 'post')
 
-	app.filterSubdomainRequest(
-		"/get/reddit/:tagnumber?",
-		(subdomain, req, res, host) => {
+	app.filterSubdomainRequest('/get/reddit/:tagnumber?', (subdomain, req, res, host) => {
 			const tagnumber = req.params.tagnumber || "latest"
 			const redditTemplatePath = "reddit/post"
 			const subdomainConfig = app.getSubdomainOpts(req)
@@ -362,6 +360,7 @@ const routes = (app) => {
 
 			return getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
 				data.host = host
+				data.region = subdomainConfig.region
 				return res.render(redditTemplatePath, data)
 			})
 		}
