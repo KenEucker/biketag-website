@@ -8,7 +8,7 @@
 
 <head>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=<%= page.gaUA %>"></script>
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=<%= page.gaUA %>"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 
@@ -17,7 +17,7 @@
 		}
 		gtag('js', new Date());
 		gtag('config', '<%= page.gaUA %>');
-	</script>
+	</script> -->
 
 	<title><%- page.metaTitle %></title>
 	<meta charset="utf-8" />
@@ -196,12 +196,7 @@
 			adminEmailAddresses: window.pageData.adminEmailAddresses,
 			newGameImage: window.pageData.newGameImage,
 		}
-		<% if (!page.readonly) { %>
-			window.biketag.init(biketagUploadContainerSelector)
-		<% } else { %>
-			var biketagUploadContainerEl = document.querySelector(biketagUploadContainerSelector)
-			biketagUploadContainerEl.innerHTML = "<h3>Region not supported</h3><p>Currently, this version of biketag is being managed elsewhere. If you need to create a biketag post that is not affiliated with any region, go to <a href='Http://post.biketag.org'>here to post a global tag</a>.</p>"
-		<% } %>
+		window.biketag.init(biketagUploadContainerSelector, window.pageData.readonly)
 	</script>
 	<script>
 	</script>

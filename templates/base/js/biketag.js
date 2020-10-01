@@ -650,14 +650,9 @@ class BikeTag {
 		}
 	}
 
-	init(targetSelector) {
+	addTagPostingEventListeners() {
 		var self = this
-		this.targetSelector = targetSelector
-		this.target = document.querySelector(this.targetSelector)
 		this.appendBiketagForm(this.target)
-
-		// COVID-19 Banner
-		// this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
 
 		var form = document.querySelector(this.targetSelector)
 		form.addEventListener('submit', function (e) {
@@ -665,15 +660,20 @@ class BikeTag {
 			self.onUploadFormSubmit(e.currentTarget).bind(self)
 		})
 
-		var headerLogo = document.querySelector('#header .header--logo')
-		headerLogo.addEventListener('click', function () {
-			window.history.pushState({}, '/', '/');
-			self.showLatestTagImages()
-		})
+		var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
+		deleteImageButtons.forEach(function (button) {
+			button.addEventListener('click', function (event) {
+				var previewContainer = event.target.parentElement
+				var uploadContainer = previewContainer.parentElement.querySelector('.upload-box')
+				var uploadSpanEl = uploadContainer.querySelector('span')
 
-		var tagItButton = document.getElementById('tagItButton')
-		tagItButton.addEventListener('click', function(){
-			self.showLatestTagImages()
+				$(uploadContainer).parent().find('input[type="file"]').val('')
+
+				uploadSpanEl.innerText = uploadContainer.dataset.message
+				uploadContainer.classList.remove('s--uploaded')
+				uploadContainer.classList.remove('hidden')
+				previewContainer.classList.add('hidden')
+			})
 		})
 
 		form.querySelectorAll('input[type="file"]').forEach(function (fileInput) {
@@ -687,11 +687,6 @@ class BikeTag {
 				var uploadFileInput = parentElement.querySelector('input[type="file"]')
 				uploadFileInput.click()
 			})
-		})
-
-		var archiveButtonEl = document.getElementById('archiveButton')
-		archiveButtonEl.addEventListener('click', function(event) {
-			self.showArchiveTags(10)
 		})
 
 		var inputChangedEvent = 'keyup'
@@ -725,20 +720,41 @@ class BikeTag {
 			})
 		})
 
-		var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
-		deleteImageButtons.forEach(function (button) {
-			button.addEventListener('click', function (event) {
-				var previewContainer = event.target.parentElement
-				var uploadContainer = previewContainer.parentElement.querySelector('.upload-box')
-				var uploadSpanEl = uploadContainer.querySelector('span')
+		// var tagItButton = document.getElementById('tagItButton')
+		// tagItButton.addEventListener('click', function(){
+		// 	self.showLatestTagImages()
+		// })
+	}
 
-				$(uploadContainer).parent().find('input[type="file"]').val('')
+	init(targetSelector, readonly) {
+		var self = this
+		this.readonly = readonly
+		this.targetSelector = targetSelector
+		this.target = document.querySelector(this.targetSelector)
 
-				uploadSpanEl.innerText = uploadContainer.dataset.message
-				uploadContainer.classList.remove('s--uploaded')
-				uploadContainer.classList.remove('hidden')
-				previewContainer.classList.add('hidden')
-			})
+		if (!this.readonly) {
+			this.addTagPostingEventListeners()
+		} else {
+			this.target.innerHTML = "<h3>Region not supported</h3><p>Currently, this version of biketag is being managed elsewhere. If you need to create a biketag post that is not affiliated with any region, go to <a href='Http://post.biketag.org'>here to post a global tag</a>.</p>"
+		}
+
+		// COVID-19 Banner
+		// this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
+
+		var headerLogo = document.querySelector('#header .header--logo')
+		headerLogo.addEventListener('click', function () {
+			window.history.pushState({}, '/', '/');
+			self.showLatestTagImages()
+		})
+
+		var archiveButtonEl = document.getElementById('archiveButton')
+		archiveButtonEl.addEventListener('click', function(event) {
+			self.showArchiveTags(10)
+		})
+
+		var tagItButton = document.getElementById('tagItButton')
+		tagItButton.addEventListener('click', function(){
+			self.showLatestTagImages()
 		})
 	}
 }
