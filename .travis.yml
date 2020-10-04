@@ -6,6 +6,6 @@ language: node_js
 
 # safelist
 branches:
-  only:
-    - production
-    - develop
+    only:
+        - production
+        - develop

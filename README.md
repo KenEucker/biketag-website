@@ -10,10 +10,10 @@ To allow anyone and everyone to play BikeTag! This site will ingest the Reddit p
 
 ## Features of the webapp
 
-- See most recent round of BikeTag, and an archive of past rounds: http://pdx.biketag.org
-- A modal to play the next round (provide matching and new BikeTag images, Mystery Location description, hint, and name): http://pdx.biketag.org/#tagit
-- See all archived rounds of Biketag: http://portland.biketag.org/?count=all
-- See an individual round of BikeTag with matching images: http://pdx.biketag.org/95
+-   See most recent round of BikeTag, and an archive of past rounds: http://pdx.biketag.org
+-   A modal to play the next round (provide matching and new BikeTag images, Mystery Location description, hint, and name): http://pdx.biketag.org/#tagit
+-   See all archived rounds of Biketag: http://portland.biketag.org/?count=all
+-   See an individual round of BikeTag with matching images: http://pdx.biketag.org/95
 
 # Contribute
 
