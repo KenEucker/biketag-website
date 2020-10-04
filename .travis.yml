@@ -1,11 +1,11 @@
 language: node_js
 
 # blocklist
-branches:
-  except:
+# branches:
+#   except:
 
 # safelist
 branches:
   only:
-  - production
-  - develop
+    - production
+    - develop

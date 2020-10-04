@@ -1,11 +1,9 @@
 {
-	"extends": "airbnb",
-	"rules": {
-		"indent": 0,
-		"no-tabs": 0,
-		"semi": 2
-	},
-	"plugins": [
-		"ejs-js"
-	]
+  "extends": "airbnb",
+  "rules": {
+    "indent": 0,
+    "no-tabs": 0,
+    "semi": 2
+  },
+  "plugins": ["ejs-js"]
 }

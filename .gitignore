@@ -60,5 +60,6 @@ typings/
 config.json
 uploads
 .DS_Store
+yarn.lock
 
 *.pem
