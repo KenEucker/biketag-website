@@ -1,15 +1,15 @@
 {
-	"newBikeTagMessage": "Did you find the Mystery Location played in round",
-	"proofTagMessage": "BikeTag @ matching Mystery Location",
-	"proofTagTitle": "Play a BikeTag that matches the Biketag in round",
-	"nextTagMessage": "BikeTag @ new Mystery Location",
-	"nextTagTitle": "Play a new BikeTag at a new Mystery Location to begin round",
-	"locationMessage": "Describe where the Mystery Location was found",
-	"locationPlaceholder": "e.g. Cathedral Park, NE 42nd and Shaver, etc.",
-	"hintMessage": "Provide a hint for the new Mystery Location",
-	"hintPlaceholder": "e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred",
-	"nameTitle": "What do you go by?",
-	"nameMessage": "Provide a Name that will be used to credit you for posting BikeTag <span class='s--tagNumber'></span>",
-	"playButtonText": "Play BikeTag!",
-	"namePlaceholder": "e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name"
+    "newBikeTagMessage": "Did you find the Mystery Location played in round",
+    "proofTagMessage": "BikeTag @ matching Mystery Location",
+    "proofTagTitle": "Play a BikeTag that matches the Biketag in round",
+    "nextTagMessage": "BikeTag @ new Mystery Location",
+    "nextTagTitle": "Play a new BikeTag at a new Mystery Location to begin round",
+    "locationMessage": "Describe where the Mystery Location was found",
+    "locationPlaceholder": "e.g. Cathedral Park, NE 42nd and Shaver, etc.",
+    "hintMessage": "Provide a hint for the new Mystery Location",
+    "hintPlaceholder": "e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred",
+    "nameTitle": "What do you go by?",
+    "nameMessage": "Provide a Name that will be used to credit you for posting BikeTag <span class='s--tagNumber'></span>",
+    "playButtonText": "Play BikeTag!",
+    "namePlaceholder": "e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name"
 }

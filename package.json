@@ -1,52 +1,54 @@
 {
-	"name": "biketag-website",
-	"version": "0.4.0",
-	"description": "A website for biketag.org",
-	"author": "Ken Eucker <keneucker@gmail.com>",
-	"contributors": [],
-	"bin": {},
-	"scripts": {
-		"compile": "npm run compileBiketag1",
-		"compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
-		"dev": "node app.js -- --debug=true",
-		"start": "node app.js",
-		"server-erase-config": "rm ~/biketag-website/config.json && rm ~/config.json",
-		"server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
-		"server-update": "git pull",
-		"server-reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm install",
-		"server-logs": "sudo pm2 logs BikeTag",
-		"server-dev": "sudo pm2 start ecosystem.config.js --env dev",
-		"server-start": "sudo pm2 start ecosystem.config.js --env production",
-		"server-restart": "sudo pm2 restart ecosystem.config.js --env production",
-		"server-run": "sudo pm2 start ecosystem.config.js --env production",
-		"server-stop": "sudo pm2 stop BikeTag",
-		"server-rerun": "sudo pm2 delete BikeTag && sudo pm2 start ecosystem.config.js --env production",
-		"server-deploy": "npm run server-update && npm run server-restart && npm run server-logs"
-	},
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/KenEucker/biketag-website.git"
-	},
-	"bugs": {
-		"url": "https://github.com/KenEucker/biketag-website/issues"
-	},
-	"keywords": [],
-	"dependencies": {
-		"deepmerge": "^4.2.2",
-		"fs": "0.0.1-security",
-		"imgur": "^0.3.1",
-		"path": "^0.12.7",
-		"sexpress": "0.0.28",
-		"snoowrap": "^1.21.0"
-	},
-	"devDependencies": {
-		"dart-sass": "^1.25.0",
-		"eslint": "^5.15.3",
-		"eslint-config-airbnb": "^17.1.0",
-		"eslint-plugin-import": "^2.16.0",
-		"eslint-plugin-jsx-a11y": "^6.2.1",
-		"eslint-plugin-react": "^7.12.4"
-	},
-	"license": "Unlicense"
+    "name": "biketag-website",
+    "version": "0.4.0",
+    "description": "A website for biketag.org",
+    "author": "Ken Eucker <keneucker@gmail.com>",
+    "contributors": [],
+    "bin": {},
+    "scripts": {
+        "compile": "npm run compileBiketag1",
+        "compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
+        "dev": "node app.js -- --debug=true",
+        "start": "node app.js",
+        "server-erase-config": "rm ~/biketag-website/config.json && rm ~/config.json",
+        "server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
+        "server-update": "git pull",
+        "server-reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm install",
+        "server-logs": "sudo pm2 logs BikeTag",
+        "server-dev": "sudo pm2 start ecosystem.config.js --env dev",
+        "server-start": "sudo pm2 start ecosystem.config.js --env production",
+        "server-restart": "sudo pm2 restart ecosystem.config.js --env production",
+        "server-run": "sudo pm2 start ecosystem.config.js --env production",
+        "server-stop": "sudo pm2 stop BikeTag",
+        "server-rerun": "sudo pm2 delete BikeTag && sudo pm2 start ecosystem.config.js --env production",
+        "server-deploy": "npm run server-update && npm run server-restart && npm run server-logs",
+        "prettier-all": "yarn prettier . --write"
+    },
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/KenEucker/biketag-website.git"
+    },
+    "bugs": {
+        "url": "https://github.com/KenEucker/biketag-website/issues"
+    },
+    "keywords": [],
+    "dependencies": {
+        "deepmerge": "^4.2.2",
+        "fs": "0.0.1-security",
+        "imgur": "^0.3.1",
+        "path": "^0.12.7",
+        "sexpress": "0.0.28",
+        "snoowrap": "^1.21.0"
+    },
+    "devDependencies": {
+        "dart-sass": "^1.25.0",
+        "eslint": "^5.15.3",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-jsx-a11y": "^6.2.1",
+        "eslint-plugin-react": "^7.12.4",
+        "prettier": "^2.1.2"
+    },
+    "license": "Unlicense"
 }

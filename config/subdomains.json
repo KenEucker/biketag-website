@@ -1,247 +1,227 @@
 {
-	"default": {
-		"imgur": {
-			"imgurAlbumHash": "JABitEa"
-		},
-		"reddit": {
-			"redditSubreddit": "biketag"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/Tag-Logo-Stacked-V2.svg",
-			"logo": ""
-		},
-		"adminEmailAddresses": [
-		]
-	},
-	"tag": {
-		"metaTitle": "Post A BikeTag!",
-		"tagline": "Create a tag which can be used anywhere",
-		"imgur": {
-			"imgurAlbumHash": "DNCiJTC"
-		},
-		"easter": {
-			"jingle": "public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": ""
-		},
-		"adminEmailAddresses": [
-		]
-	},
-	"portland": {
-		"metaTitle": "Portland BikeTag!",
-		"region": "Portland, Oregon",
-		"tagline": "The BikeTag game in Portland, Oregon",
-		"imgur": {
-			"imgurAlbumHash": "Y9PKtpI"
-		},
-		"reddit": {
-			"redditSubreddit": "CyclePDX"
-		},
-		"easter": {
-			"jingle": "public/media/biketag-pdx-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "pdx-bike-tag"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com",
-			"portland@biketag.org",
-			"jackiesulhoff@gmail.com"
-		]
-	},
-	"denver": {
-		"metaTitle": "Denver BikeTag!",
-		"region": "Denver, Colorado",
-		"tagline": "The BikeTag game in Denver, Colorado",
-		"imgur": {
-			"imgurAlbumHash": "xTnG1Io"
-		},
-		"reddit": {
-			"redditSubreddit": "CycleDenver"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "denver-bike-tag"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"indianapolis": {
-		"metaTitle": "Indianapolis BikeTag!",
-		"region": "Indianapolis, Indiana",
-		"tagline": "The BikeTag game in Indianapolis, Indiana",
-		"imgur": {
-			"imgurAlbumHash": "dr45yWS"
-		},
-		"reddit": {
-			"redditSubreddit": "BikeIN"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "IndianapolisIcon.svg"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"seattle": {
-		"metaTitle": "Seattle BikeTag!",
-		"region": "Seattle, Washington",
-		"tagline": "The BikeTag game in Seattle, Washington",
-		"imgur": {
-			"imgurAlbumHash": "3CIf8hy"
-		},
-		"reddit": {
-			"redditSubreddit": "cycleseattle"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "SeattleIcon.svg"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"omaha": {
-		"metaTitle": "Omaha BikeTag!",
-		"region": "Omaha, Nebraska",
-		"tagline": "The BikeTag game in Omaha, Nebraska",
-		"imgur": {
-			"imgurAlbumHash": "8Da1Xfa"
-		},
-		"reddit": {
-			"redditSubreddit": "OmahaMetroCycling"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-denver-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "OmahaIcon.svg"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"stlouis": {
-		"metaTitle": "St Louis BikeTag!",
-		"region": "St Louis, Missouri",
-		"tagline": "The BikeTag game in St Louis, Missouri",
-		"imgur": {
-			"imgurAlbumHash": "Zc3wzvE"
-		},
-		"reddit": {
-			"redditSubreddit": "StLouisBiking"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "StLouisIcon.svg"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"vancouver": {
-		"metaTitle": "Vancouver BikeTag!",
-		"region": "Vancouver, British Columbia",
-		"tagline": "The BikeTag game in Vancouver, British Columbia",
-		"imgur": {
-			"imgurAlbumHash": "tt9bov6"
-		},
-		"reddit": {
-			"redditSubreddit": "vancouvercycling"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "VancouverIcon.svg"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"vienna": {
-		"metaTitle": "ViennaBikeTag!",
-		"region": "Vienna, Austria",
-		"tagline": "The BikeT ag game in Vienna, Austria",
-		"imgur": {
-			"imgurAlbumHash": "2nIYv2H"
-		},
-		"reddit": {
-			"redditSubreddit": "radwien"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "ViennaIcon.svg"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"miami": {
-		"metaTitle": "Miami BikeTag!",
-		"region": "Miami, Florida",
-		"tagline": "The BikeTag game in Miami, Florida",
-		"imgur": {
-			"imgurAlbumHash": "mNRJSZg"
-		},
-		"reddit": {
-			"redditSubreddit": "miamibiking"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": "MiamiIcon.svg"
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	},
-	"eugene": {
-		"metaTitle": "Eugene BikeTag!",
-		"region": "Eugene, Oregon",
-		"tagline": "The BikeTag game in Eugene, Oregon",
-		"imgur": {
-			"imgurAlbumHash": "s1vwiKY"
-		},
-		"reddit": {
-			"redditSubreddit": "eugenebiketag"
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": ""
-		},
-		"adminEmailAddresses": [
-			"keneucker@gmail.com"
-		]
-	}
+    "default": {
+        "imgur": {
+            "imgurAlbumHash": "JABitEa"
+        },
+        "reddit": {
+            "redditSubreddit": "biketag"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/Tag-Logo-Stacked-V2.svg",
+            "logo": ""
+        },
+        "adminEmailAddresses": []
+    },
+    "tag": {
+        "metaTitle": "Post A BikeTag!",
+        "tagline": "Create a tag which can be used anywhere",
+        "imgur": {
+            "imgurAlbumHash": "DNCiJTC"
+        },
+        "easter": {
+            "jingle": "public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        },
+        "adminEmailAddresses": []
+    },
+    "portland": {
+        "metaTitle": "Portland BikeTag!",
+        "region": "Portland, Oregon",
+        "tagline": "The BikeTag game in Portland, Oregon",
+        "imgur": {
+            "imgurAlbumHash": "Y9PKtpI"
+        },
+        "reddit": {
+            "redditSubreddit": "CyclePDX"
+        },
+        "easter": {
+            "jingle": "public/media/biketag-pdx-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "pdx-bike-tag"
+        },
+        "adminEmailAddresses": [
+            "keneucker@gmail.com",
+            "portland@biketag.org",
+            "jackiesulhoff@gmail.com"
+        ]
+    },
+    "denver": {
+        "metaTitle": "Denver BikeTag!",
+        "region": "Denver, Colorado",
+        "tagline": "The BikeTag game in Denver, Colorado",
+        "imgur": {
+            "imgurAlbumHash": "xTnG1Io"
+        },
+        "reddit": {
+            "redditSubreddit": "CycleDenver"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "denver-bike-tag"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "indianapolis": {
+        "metaTitle": "Indianapolis BikeTag!",
+        "region": "Indianapolis, Indiana",
+        "tagline": "The BikeTag game in Indianapolis, Indiana",
+        "imgur": {
+            "imgurAlbumHash": "dr45yWS"
+        },
+        "reddit": {
+            "redditSubreddit": "BikeIN"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "IndianapolisIcon.svg"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "seattle": {
+        "metaTitle": "Seattle BikeTag!",
+        "region": "Seattle, Washington",
+        "tagline": "The BikeTag game in Seattle, Washington",
+        "imgur": {
+            "imgurAlbumHash": "3CIf8hy"
+        },
+        "reddit": {
+            "redditSubreddit": "cycleseattle"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "SeattleIcon.svg"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "omaha": {
+        "metaTitle": "Omaha BikeTag!",
+        "region": "Omaha, Nebraska",
+        "tagline": "The BikeTag game in Omaha, Nebraska",
+        "imgur": {
+            "imgurAlbumHash": "8Da1Xfa"
+        },
+        "reddit": {
+            "redditSubreddit": "OmahaMetroCycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-denver-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "OmahaIcon.svg"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "stlouis": {
+        "metaTitle": "St Louis BikeTag!",
+        "region": "St Louis, Missouri",
+        "tagline": "The BikeTag game in St Louis, Missouri",
+        "imgur": {
+            "imgurAlbumHash": "Zc3wzvE"
+        },
+        "reddit": {
+            "redditSubreddit": "StLouisBiking"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "StLouisIcon.svg"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "vancouver": {
+        "metaTitle": "Vancouver BikeTag!",
+        "region": "Vancouver, British Columbia",
+        "tagline": "The BikeTag game in Vancouver, British Columbia",
+        "imgur": {
+            "imgurAlbumHash": "tt9bov6"
+        },
+        "reddit": {
+            "redditSubreddit": "vancouvercycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "VancouverIcon.svg"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "vienna": {
+        "metaTitle": "ViennaBikeTag!",
+        "region": "Vienna, Austria",
+        "tagline": "The BikeT ag game in Vienna, Austria",
+        "imgur": {
+            "imgurAlbumHash": "2nIYv2H"
+        },
+        "reddit": {
+            "redditSubreddit": "radwien"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "ViennaIcon.svg"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "miami": {
+        "metaTitle": "Miami BikeTag!",
+        "region": "Miami, Florida",
+        "tagline": "The BikeTag game in Miami, Florida",
+        "imgur": {
+            "imgurAlbumHash": "mNRJSZg"
+        },
+        "reddit": {
+            "redditSubreddit": "miamibiking"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "MiamiIcon.svg"
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "eugene": {
+        "metaTitle": "Eugene BikeTag!",
+        "region": "Eugene, Oregon",
+        "tagline": "The BikeTag game in Eugene, Oregon",
+        "imgur": {
+            "imgurAlbumHash": "s1vwiKY"
+        },
+        "reddit": {
+            "redditSubreddit": "eugenebiketag"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
+    }
 }
