@@ -1,15 +1,15 @@
-const merge = require('deepmerge');
-const sexpress = require('sexpress');
+const merge = require('deepmerge')
+const sexpress = require('sexpress')
 
 /// BikeTag App specific configuration filters
 const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
-    const subdomains = Object.keys(appConfig.subdomains);
+    const subdomains = Object.keys(appConfig.subdomains)
 
     publicConfig.subdomains = Object.values(appConfig.subdomains).reduce(
         (out, subdomainInformation, index) => {
-            const subdomainName = subdomains[index];
-            const subdomainConfig = publicConfig.subdomains[subdomainName];
-            publicConfig.supportedRegions = appConfig.supportedRegions;
+            const subdomainName = subdomains[index]
+            const subdomainConfig = publicConfig.subdomains[subdomainName]
+            publicConfig.supportedRegions = appConfig.supportedRegions
 
             // console.log({subdomainConfig})
             const pageData = merge(subdomainConfig, {
@@ -23,24 +23,24 @@ const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
                 reddit: {
                     subreddit: subdomainInformation.reddit.redditSubreddit,
                 },
-            });
+            })
 
-            out[subdomainName] = pageData;
+            out[subdomainName] = pageData
 
             if (subdomain === subdomainName) {
-                publicConfig.page = pageData;
+                publicConfig.page = pageData
             }
 
-            return out;
+            return out
         },
         {},
-    );
+    )
 
-    return publicConfig;
-};
+    return publicConfig
+}
 
 const app = sexpress({
     publicConfigFilter,
-});
+})
 
-app.run();
+app.run()

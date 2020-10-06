@@ -48,7 +48,7 @@
         }
     },
 
-	"appName": "BikeTag",
+    "appName": "BikeTag",
     "supportedRegions": ["portland"],
 
     "port": 80,

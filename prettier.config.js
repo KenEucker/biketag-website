@@ -4,11 +4,11 @@ const config = {
     singleQuote: true,
     tabWidth: 4,
     useTabs: false,
-    semi: true,
+    semi: false,
     bracketSpacing: true,
     requirePragma: false,
     proseWrap: 'preserve',
     trailingComma: 'all',
-};
+}
 
-module.exports = config;
+module.exports = config
