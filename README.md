@@ -29,7 +29,11 @@ Run `npm install` to install the node module dependencies.
 
 ## Required Configuration
 
-The app loads a configuration files found in the config folder. The repository is set to ignore a config.json file, for security reasons, but there's sample of the minimum configuration to get the local site to display images for the Portland subdomain, as well as the default landing page. [sample.config.json](config.sample.json). Copy this file to config/config.json `cp config.sample.json config/config.json` to get started from scratch. Note: for some features to work, API values will need to be set.
+The app loads a set of configuration files found in the config folder. The repository is set to ignore a config.json file, for security reasons, but there's sample of the minimum configuration to get the local site to display images for the Portland subdomain, as well as the default landing page. [sample.config.json](config.sample.json). Copy this file to config/config.json 
+
+`cp config.sample.json config/config.json`
+
+to get started from scratch. Note: for some features to work, API values will need to be set.
 
 ## Start local server
 
@@ -60,6 +64,12 @@ To use within html:
 The homepage landing page is in the /templates/home/ folder using the template file index.ejs. Each template should use it's own root folder for theme resources. There is a public folder in the root of the project for items that span multiple templates. Within the public folder there is a js folder that contains javascript available to all consumption. There is also a content folder within the public folder that contains raw html content which is available for editing by site administrators using git.
 
 Note: When running in dev mode, changes to the files in the /templates/ folder are reflected immediately, with the page autoreloading.
+
+## Dependencies
+
+This website runs on [sexpress](https://github.com/KenEucker/sexpress), a wrapper around express, which provides a series of configurable features for a multitenant website. These features include subdomain support, api authentication using passport.js, ssl support, and more. Because these features are abstracted out of the biketag-website project, the core of this application lives inside /api/biketag/index.js to handle the BikeTag specific routes and functionality.
+
+Sexpress uses [clobfig](https://github.com/KenEucker/clobfig), a configurator library, which clobbers all of the files found in the /config folder. Clobfig clobbers all of the js files within the config folder that have 'config.js' in their name and all .json files. 
 
 # Credits
 
