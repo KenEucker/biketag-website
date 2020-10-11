@@ -228,13 +228,21 @@ class BikeTag {
 
 					// Reject big files
 					if ($files[0].size > $(this).data("max-size") * 1024) {
-						console.log("Please select a smaller file")
-						return false
+						window.alert("Please select a smaller file")
+						theButton.innerHTML = prevHTML
+						return
+					}
+
+					if (!$files[0].type.startsWith("image/")) {
+						window.alert("Please only select image files")
+						theButton.innerHTML = prevHTML
+						return
 					}
 
 					files.push($files[0])
 				} else {
 					console.log('I need both files!')
+					theButton.innerHTML = prevHTML
 					return
 				}
 			}
