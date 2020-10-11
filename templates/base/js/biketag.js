@@ -241,7 +241,7 @@ class BikeTag {
 
 					files.push($files[0])
 				} else {
-					console.log('I need both files!')
+					window.alert('I need both files!')
 					theButton.innerHTML = prevHTML
 					return
 				}
