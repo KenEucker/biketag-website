@@ -202,6 +202,14 @@ class BikeTag {
 		);
 	}
 
+	formatUserName(userName) {
+		if (userName.startsWith("U/")) {
+			return "u/" + userName.substr(2)
+		} else {
+			return userName
+		}
+	}
+
 	onUploadFormSubmit(formEl) {
 		const self = this
 		const theButton = formEl.querySelector('ul')
@@ -217,7 +225,7 @@ class BikeTag {
 
 			// get the latest tag number
 			const currentTagInfo = this.getCurrentTagInformation()
-			const user = form.find('input[name="name"]').val()
+			const user = this.formatUserName(form.find('input[name="name"]').val())
 			const proofLocation = form.find('input[name="location"]').val()
 			const hint = form.find('input[name="hint"]').val()
 
