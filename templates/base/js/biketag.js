@@ -20,7 +20,7 @@ class BikeTag {
 		var wrapper = document.getElementById('wrapper');
 		var notification = document.createElement('div');
 		notification.id = 'notification';
-		notification.className = color 
+		notification.className = color
 		notification.innerHTML = `${message} <a class="close">close</a>`;
 		wrapper.prepend(notification);
 
@@ -203,52 +203,64 @@ class BikeTag {
 	}
 
 	onUploadFormSubmit(formEl) {
-		var self = this
-		var theButton = formEl.querySelector('ul')
+		const self = this
+		const theButton = formEl.querySelector('ul')
+		const prevHTML = theButton.innerHTML
 		theButton.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="font-style:24px;"></i>`
 
 		try {
-			var form = $(`#${this.formID}`)
-			var fileInputs = form.find('input[type="file"]')
-			var files = []
-			var user = ''
-			var proofLocation = ''
+			const form = $(`#${this.formID}`)
+			const fileInputs = form.find('input[type="file"]')
+			const files = [];
 			window.pageData = !!window.pageData ? window.pageData : {}
 
 
 			// get the latest tag number
-			var currentTagInfo = this.getCurrentTagInformation()
-			var user = form.find('input[name="name"]').val()
-			var proofLocation = form.find('input[name="location"]').val()
-			var hint = form.find('input[name="hint"]').val()
+			const currentTagInfo = this.getCurrentTagInformation()
+			const user = form.find('input[name="name"]').val()
+			const proofLocation = form.find('input[name="location"]').val()
+			const hint = form.find('input[name="hint"]').val()
 
-			for (var i = 0; i < fileInputs.length; ++i) {
-				var $files = fileInputs[i].files
-				var $input = $(fileInputs[i])
+			for (let i = 0; i < fileInputs.length; ++i) {
+				const $files = fileInputs[i].files
 
 				if ($files.length) {
 
 					// Reject big files
 					if ($files[0].size > $(this).data("max-size") * 1024) {
-						console.log("Please select a smaller file")
-						return false
+						window.alert("Please select a smaller file")
+						theButton.innerHTML = prevHTML
+						return
+					}
+
+					if (!$files[0].type.startsWith("image/")) {
+						window.alert("Please only select image files")
+						theButton.innerHTML = prevHTML
+						return
 					}
 
 					files.push($files[0])
 				} else {
-					console.log('I need both files!')
+					window.alert('I need both files!')
+					theButton.innerHTML = prevHTML
 					return
 				}
 			}
 
-			var locationString = proofLocation && proofLocation.length ? ' found at ( ' + proofLocation + ' )' : ''
-			var hintString = hint && hint.length ? ' (hint:  ' + hint + ' )' : ''
-			var image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user
-			var image2Description = '#' + currentTagInfo.nextTagNumber + ' tag' + hintString + ' by ' + user
+			if (files[0].name === files[1].name && files[0].size === files[1].size) {
+				window.alert('The 2 pictures look identical. Please select 2 different pictures for the tag and the proof.')
+				theButton.innerHTML = prevHTML
+				return
+			}
+
+			const locationString = proofLocation && proofLocation.length ? ' found at ( ' + proofLocation + ' )' : ''
+			const hintString = hint && hint.length ? ' (hint:  ' + hint + ' )' : ''
+			const image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user
+			const image2Description = '#' + currentTagInfo.nextTagNumber + ' tag' + hintString + ' by ' + user
 
 			imgur.uploadImageToImgur(files[0], image1Description, function () {
 				imgur.uploadImageToImgur(files[1], image2Description, function () {
-					var emailPromises = []
+					const emailPromises = []
 
 					/// TODO: Send message to the server that a new tag has been queued
 					biketag.config.adminEmailAddresses.forEach(function (emailAddress) {
@@ -519,7 +531,7 @@ class BikeTag {
 			fileReader.readAsArrayBuffer(file)
 		}
 	}
-	
+
 	setCurrentTagInformation(cb) {
 		if (!imgur.imgurAlbumPictures) {
 			return imgur.getImgurAlbumPictures(null, !!cb ? cb.bind(this) : this.setCurrentTagInformation.bind(this))
@@ -537,7 +549,7 @@ class BikeTag {
 		var images = imgur.imgurAlbumPictures
 		if (!!images && images.length) {
 			var currentTagInfo = this.getCurrentTagInformation()
-			
+
 			if (!currentTagInfo.currentTag) {
 				return currentTagInfo
 			}
