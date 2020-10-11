@@ -58,6 +58,7 @@ typings/
 .env
 
 config.json
+config.json.bak
 uploads
 .DS_Store
 yarn.lock
