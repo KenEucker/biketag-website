@@ -151,7 +151,7 @@ class BikeTag {
 		${proofPreview}`
 
 		second.innerHTML = `<label for="location">${locationMessage}</label>
-		<input type="text" name="location" placeholder="${locationPlaceholder}" required />`
+		<input type="text" name="location" id="location" placeholder="${locationPlaceholder}" required />`
 
 		third.innerHTML = `<h3>${nextTagTitle}</h3>
 		<label for="nextTag"></label>
@@ -160,10 +160,10 @@ class BikeTag {
 		${nextPreview}`
 
 		fourth.innerHTML = `<label for="hint">${hintMessage}</label>
-		<input type="text" name="hint" placeholder="${hintPlaceholder}" />`
+		<input type="text" name="hint" id="hint" placeholder="${hintPlaceholder}" />`
 
 		jameson.innerHTML = `<h3>${nameTitle}</h3><label for="name">${nameMessage}</label>
-		<input type="text" name="name" placeholder="${namePlaceholder}" required />`
+		<input type="text" name="name" id="name" placeholder="${namePlaceholder}" required />`
 
 		submit.innerHTML = `<li><button id="submit">${playButtonText}</button></li>`
 
@@ -173,7 +173,6 @@ class BikeTag {
 		third.id = "nextTag"
 		fourth.id = "hint"
 		jameson.id = "name"
-		submit.id = "submit"
 
 		form.appendChild(heading)
 		form.appendChild(hr1)
@@ -415,7 +414,7 @@ class BikeTag {
 					<div>
 						<span>${tagNumber}</span>
 						<span>${tagCredit}</span>
-						<img class="${!!loadImage ? '' : 'hidden'}" ${!!loadImage ? `src="${thumbnail}"` : ''} data-src="${thumbnail}">
+						<img alt="${image.description}" class="${!!loadImage ? '' : 'hidden'}" ${!!loadImage ? `src="${thumbnail}"` : ''} data-src="${thumbnail}">
 					</div>
 					<h2 class="description">${title}</h2>
 				</a>`
