@@ -686,7 +686,7 @@ class BikeTag {
 				var uploadContainer = previewContainer.parentElement.querySelector('.upload-box')
 				var uploadSpanEl = uploadContainer.querySelector('span')
 
-				$(uploadContainer).parent().find('input[type="file"]').val('')
+				$(uploadContainer).find('input[type="file"]').val('')
 
 				uploadSpanEl.innerText = uploadContainer.dataset.message
 				uploadContainer.classList.remove('s--uploaded')
