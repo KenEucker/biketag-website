@@ -41,27 +41,29 @@ const routes = (app) => {
                         const latestTagNumber = (subdomainConfig.latestTagNumber =
                             latestTagInfo.latestTagNumber)
                         const subject = `New Bike Tag Post (#${latestTagNumber}) [${subdomain}]`
-						const text = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
-						const emailPromises = []
-						const emailResponses = []
+                        const text = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
+                        const emailPromises = []
+                        const emailResponses = []
 
                         subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
-                            emailPromises.push(app.sendEmail(subdomainConfig, {
-                                to: emailAddress,
-                                subject,
-                                text,
-                                callback: (info) => {
-									app.log.info(`email sent to ${emailAddress}`, info)
-									emailResponses.push(info.response)
-                                },
-                            }))
-						})
-						
-						Promise.all(emailPromises).then(() => {
-							return res.json({
-								emailResponses,
-							})
-						})
+                            emailPromises.push(
+                                app.sendEmail(subdomainConfig, {
+                                    to: emailAddress,
+                                    subject,
+                                    text,
+                                    callback: (info) => {
+                                        app.log.info(`email sent to ${emailAddress}`, info)
+                                        emailResponses.push(info.response)
+                                    },
+                                }),
+                            )
+                        })
+
+                        Promise.all(emailPromises).then(() => {
+                            return res.json({
+                                emailResponses,
+                            })
+                        })
                     },
                 )
             } catch (error) {
@@ -129,7 +131,7 @@ const routes = (app) => {
 }
 
 module.exports = {
-	index: "apidocs",
-	show: "apidocs",
-	routes,
+    index: 'apidocs',
+    show: 'apidocs',
+    routes,
 }

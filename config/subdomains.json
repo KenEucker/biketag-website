@@ -16,7 +16,10 @@
         "adminEmailAddresses": []
     },
     "tag": {
-        "metaTitle": "Post A BikeTag!",
+        "meta": {
+            "metaTitle": "Post A BikeTag!",
+            "metaUrl": "https://tag.biketag.org"
+        },
         "tagline": "Create a tag which can be used anywhere",
         "imgur": {
             "imgurAlbumHash": "DNCiJTC"
@@ -31,7 +34,10 @@
         "adminEmailAddresses": []
     },
     "portland": {
-        "metaTitle": "Portland BikeTag!",
+		"meta": {
+			"metaTitle": "Portland BikeTag!",
+			"metaUrl": "https://biketag.org"
+		},
         "region": "Portland, Oregon",
         "tagline": "The BikeTag game in Portland, Oregon",
         "imgur": {
@@ -54,7 +60,10 @@
         ]
     },
     "denver": {
-        "metaTitle": "Denver BikeTag!",
+		"meta": {
+        	"metaTitle": "Denver BikeTag!",
+            "metaUrl": "https://denver.biketag.org"
+        },
         "region": "Denver, Colorado",
         "tagline": "The BikeTag game in Denver, Colorado",
         "imgur": {
@@ -73,7 +82,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "indianapolis": {
-        "metaTitle": "Indianapolis BikeTag!",
+		"meta": {
+        	"metaTitle": "Indianapolis BikeTag!",
+            "metaUrl": "https://indianapolis.biketag.org"
+        },
         "region": "Indianapolis, Indiana",
         "tagline": "The BikeTag game in Indianapolis, Indiana",
         "imgur": {
@@ -92,7 +104,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "seattle": {
-        "metaTitle": "Seattle BikeTag!",
+		"meta": {
+        	"metaTitle": "Seattle BikeTag!",
+            "metaUrl": "https://seattle.biketag.org"
+        },
         "region": "Seattle, Washington",
         "tagline": "The BikeTag game in Seattle, Washington",
         "imgur": {
@@ -111,7 +126,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "omaha": {
-        "metaTitle": "Omaha BikeTag!",
+		"meta": {
+        	"metaTitle": "Omaha BikeTag!",
+            "metaUrl": "https://omaha.biketag.org"
+        },
         "region": "Omaha, Nebraska",
         "tagline": "The BikeTag game in Omaha, Nebraska",
         "imgur": {
@@ -130,7 +148,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "stlouis": {
-        "metaTitle": "St Louis BikeTag!",
+		"meta": {
+        	"metaTitle": "St Louis BikeTag!",
+            "metaUrl": "https://stlouis.biketag.org"
+        },
         "region": "St Louis, Missouri",
         "tagline": "The BikeTag game in St Louis, Missouri",
         "imgur": {
@@ -149,7 +170,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "vancouver": {
-        "metaTitle": "Vancouver BikeTag!",
+		"meta": {
+        	"metaTitle": "Vancouver BikeTag!",
+            "metaUrl": "https://vancouver.biketag.org"
+        },
         "region": "Vancouver, British Columbia",
         "tagline": "The BikeTag game in Vancouver, British Columbia",
         "imgur": {
@@ -168,7 +192,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "vienna": {
-        "metaTitle": "ViennaBikeTag!",
+		"meta": {
+        	"metaTitle": "ViennaBikeTag!",
+            "metaUrl": "https://vienna.biketag.org"
+        },
         "region": "Vienna, Austria",
         "tagline": "The BikeT ag game in Vienna, Austria",
         "imgur": {
@@ -187,7 +214,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "miami": {
-        "metaTitle": "Miami BikeTag!",
+		"meta": {
+        	"metaTitle": "Miami BikeTag!",
+            "metaUrl": "https://miami.biketag.org"
+        },
         "region": "Miami, Florida",
         "tagline": "The BikeTag game in Miami, Florida",
         "imgur": {
@@ -206,7 +236,10 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "eugene": {
-        "metaTitle": "Eugene BikeTag!",
+		"meta": {
+        	"metaTitle": "Eugene BikeTag!",
+            "metaUrl": "https://eugene.biketag.org"
+        },
         "region": "Eugene, Oregon",
         "tagline": "The BikeTag game in Eugene, Oregon",
         "imgur": {
