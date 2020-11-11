@@ -205,17 +205,6 @@ class BikeTag {
 				console.error('Post Email Error:', error)
 			})
 			.then((message) => console.log(message))
-
-		// return Email.send({
-		// 	SecureToken: "d10c468e-a0c1-4b46-b24a-92a695e9b52c",
-		// 	To: emailAddress,
-		// 	From: "biketagorg@gmail.com",
-		// 	Subject: subject,
-		// 	Body: body,
-		// 	Port: 587,
-		// }).then(
-		// 	message => console.log(message)
-		// );
 	}
 
 	formatUserName(userName) {
