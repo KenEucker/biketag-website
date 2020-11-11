@@ -33,7 +33,7 @@ const routes = (app) => {
         async (subdomain, req, res, host) => {
             try {
                 const subdomainConfig = app.getSubdomainOpts(req)
-                return getTagInformation(
+                return biketag.getTagInformation(
                     subdomainConfig,
                     'latest',
                     subdomainConfig.imgur.imgurAlbumHash,
@@ -41,19 +41,27 @@ const routes = (app) => {
                         const latestTagNumber = (subdomainConfig.latestTagNumber =
                             latestTagInfo.latestTagNumber)
                         const subject = `New Bike Tag Post (#${latestTagNumber}) [${subdomain}]`
-                        const body = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
+						const text = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
+						const emailPromises = []
+						const emailResponses = []
 
                         subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
-                            app.sendEmail(subdomainConfig, {
-                                emailAddress,
+                            emailPromises.push(app.sendEmail(subdomainConfig, {
+                                to: emailAddress,
                                 subject,
-                                body,
+                                text,
                                 callback: (info) => {
-                                    console.log(`email sent to ${emailAddress}`, info)
-                                    // res.json(JSON.stringify(info))
+									app.log.info(`email sent to ${emailAddress}`, info)
+									emailResponses.push(info.response)
                                 },
-                            })
-                        })
+                            }))
+						})
+						
+						Promise.all(emailPromises).then(() => {
+							return res.json({
+								emailResponses,
+							})
+						})
                     },
                 )
             } catch (error) {

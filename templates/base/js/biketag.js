@@ -189,16 +189,33 @@ class BikeTag {
 	}
 
 	sendNotificationEmail(emailAddress, subject, body) {
-		return Email.send({
-			SecureToken: "21bfd493-fcf4-48ad-ba4f-c9d59383350e",
-			To: emailAddress,
-			From: "biketagorg@gmail.com",
-			Subject: subject,
-			Body: body,
-			Port: 587,
-		}).then(
-			message => console.log(message)
-		);
+		return fetch('/api/post/email', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					subject,
+					body,
+				}),
+			}).then(function (res) {
+				return res.json()
+			})
+			.catch(function (error) {
+				console.error('Post Email Error:', error)
+			})
+			.then((message) => console.log(message))
+
+		// return Email.send({
+		// 	SecureToken: "d10c468e-a0c1-4b46-b24a-92a695e9b52c",
+		// 	To: emailAddress,
+		// 	From: "biketagorg@gmail.com",
+		// 	Subject: subject,
+		// 	Body: body,
+		// 	Port: 587,
+		// }).then(
+		// 	message => console.log(message)
+		// );
 	}
 
 	formatUserName(userName) {
@@ -268,16 +285,17 @@ class BikeTag {
 			imgur.uploadImageToImgur(files[0], image1Description, function () {
 				imgur.uploadImageToImgur(files[1], image2Description, function () {
 					const emailPromises = []
+					const subject = "New Bike Tag posted (#" + currentTagInfo.nextTagNumber + ")"
+					const host = window.location.host
+					const subreddit = window.pageData.reddit.subreddit
+					const body = "Hello BikeTag Admin, A new BikeTag post has been queued and is ready for your review!\r\nTo post this tag to Reddit manually, go to " + host + "/get/reddit to get the reddit post template for the regional subreddit (https://reddit.com/r/" + subreddit + ").\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + host + "). Reply to this email to request to be removed from this admin list."
 
 					/// TODO: Send message to the server that a new tag has been queued
-					biketag.config.adminEmailAddresses.forEach(function (emailAddress) {
-						const subject = "New Bike Tag posted (#" + currentTagInfo.nextTagNumber + ")"
-						const host = window.location.host
-						const subreddit = window.pageData.reddit.subreddit
-						const body = "Hello BikeTag Admin, A new BikeTag post has been queued and is ready for your review!\r\nTo post this tag to Reddit manually, go to " + host + "/get/reddit to get the reddit post template for the regional subreddit (https://reddit.com/r/" + subreddit + ").\r\n\r\nYou are getting this email because you are listed as an admin on the site (" + host + "). Reply to this email to request to be removed from this admin list."
+					// biketag.config.adminEmailAddresses.forEach(function (emailAddress) {
+						
 						// console.log({host, subject, body, subreddit})
 						emailPromises.push(self.sendNotificationEmail(emailAddress, subject, body))
-					})
+					// })
 
 					Promise.all(emailPromises).then(function () {
 						window.location.href = window.location.pathname + '?uploadSuccess=true'
