@@ -1,6 +1,6 @@
 {
     "name": "biketag-website",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "A website for biketag.org",
     "author": "Ken Eucker <keneucker@gmail.com>",
     "contributors": [],
@@ -37,8 +37,9 @@
         "deepmerge": "^4.2.2",
         "fs": "0.0.1-security",
         "imgur": "^0.3.1",
+        "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "0.0.28",
+        "sexpress": "^0.1.0",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {

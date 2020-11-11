@@ -29,7 +29,7 @@ Run `npm install` to install the node module dependencies.
 
 ## Required Configuration
 
-The app loads a set of configuration files found in the config folder. The repository is set to ignore a config.json file, for security reasons, but there's sample of the minimum configuration to get the local site to display images for the Portland subdomain, as well as the default landing page. [sample.config.json](config.sample.json). Copy this file to config/config.json 
+The app loads a set of configuration files found in the config folder. The repository is set to ignore a config.json file, for security reasons, but there's sample of the minimum configuration to get the local site to display images for the Portland subdomain, as well as the default landing page. [sample.config.json](config.sample.json). Copy this file to config/config.json
 
 `cp config.sample.json config/config.json`
 
@@ -69,7 +69,7 @@ Note: When running in dev mode, changes to the files in the /templates/ folder a
 
 This website runs on [sexpress](https://github.com/KenEucker/sexpress), a wrapper around express, which provides a series of configurable features for a multitenant website. These features include subdomain support, api authentication using passport.js, ssl support, and more. Because these features are abstracted out of the biketag-website project, the core of this application lives inside /api/biketag/index.js to handle the BikeTag specific routes and functionality.
 
-Sexpress uses [clobfig](https://github.com/KenEucker/clobfig), a configurator library, which clobbers all of the files found in the /config folder. Clobfig clobbers all of the js files within the config folder that have 'config.js' in their name and all .json files. 
+Sexpress uses [clobfig](https://github.com/KenEucker/clobfig), a configurator library, which clobbers all of the files found in the /config folder. Clobfig clobbers all of the js files within the config folder that have 'config.js' in their name and all .json files.
 
 # Credits
 
