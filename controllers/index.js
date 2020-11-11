@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-const biketag = require('../../lib/biketag')
+const biketag = require('../lib/biketag')
 
 const routes = (app) => {
     app.routeSubdomainRequest('/:tagnumber?', (subdomain, req, res, host) => {
