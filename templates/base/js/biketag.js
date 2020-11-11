@@ -190,7 +190,7 @@ class BikeTag {
 
 	sendNotificationEmail(emailAddress, subject, body) {
 		return Email.send({
-			SecureToken: "495f53a5-3b69-4627-9e70-20933b0dc190",
+			SecureToken: "21bfd493-fcf4-48ad-ba4f-c9d59383350e",
 			To: emailAddress,
 			From: "biketagorg@gmail.com",
 			Subject: subject,
