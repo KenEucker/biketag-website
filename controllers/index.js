@@ -33,8 +33,9 @@ const routes = (app) => {
         console.log(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
 
         return biketag.getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
+			console.log({data})
             data.host = host
-            data.region = subdomainConfig.region
+			data.region = subdomainConfig.region
             return res.render(redditTemplatePath, data)
         })
     })
