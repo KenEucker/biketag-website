@@ -3,13 +3,17 @@
  */
 const biketag = require('../lib/biketag')
 
+const init = (app) => {
+    biketag.setLogger(app.log.debug)
+}
+
 const routes = (app) => {
     app.routeSubdomainRequest('/:tagnumber?', (subdomain, req, res, host) => {
         if (!subdomain) {
             const hostSubdomainEnd = host.indexOf('.') + 1
             const redirectToHost = `${req.protocol}://${host.substring(hostSubdomainEnd)}`
 
-            console.log({
+            app.log.status({
                 subdomain,
                 hostNotFound: host,
                 redirectToHost,
@@ -24,24 +28,36 @@ const routes = (app) => {
         return app.renderTemplate(template, data, res)
     })
 
-    app.routeSubdomainRequest('/get/reddit/:tagnumber?', (subdomain, req, res, host) => {
+    app.routeSubdomainRequest('/get/reddit/:tagnumber?', function getRedditPost(
+        subdomain,
+        req,
+        res,
+        host,
+    ) {
         const tagnumber = req.params.tagnumber || 'latest'
         const redditTemplatePath = 'reddit/post'
-        const subdomainConfig = app.getSubdomainOpts(req)
-        const albumHash = subdomainConfig.imgur.imgurAlbumHash
+        const subdomainConfig = app.getSubdomainOpts(subdomain)
+        const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 
-        console.log(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
+        app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
 
-        return biketag.getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
-			console.log({data})
+        return biketag.getTagInformation(imgurClientID, tagnumber, imgurAlbumHash, (data) => {
+            if (!data) {
+                return res.json({
+                    tagNumberNotFound: tagnumber,
+                    imgurAlbumHash,
+                })
+            }
+
             data.host = host
-			data.region = subdomainConfig.region
+            data.region = subdomainConfig.region
             return res.render(redditTemplatePath, data)
         })
     })
 }
 
 module.exports = {
+    init,
     engine: 'ejs',
     routes,
 }

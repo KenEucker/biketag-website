@@ -1,21 +1,21 @@
 {
-	"newGameImage": "https://i.imgur.com/CtJVstG.png",
-	
-	"metaUrl": "https://biketag.org",
-	"metaImage": "https://i.imgur.com/CtJVstG.png",
-	"metaType": "article",
-	"metaTitle": "BikeTag!",
-	"metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
-	"gaUA": "UA-119956764-1",
+    "newGameImage": "https://i.imgur.com/CtJVstG.png",
 
-	"imgurEmailAddress": "pdxbiketag@gmail.com",
-	"imgurClientID": "79ea70333c45883",
-	"imgurCallbackURL": "https://biketag.org/auth/imgur/callback",
+    "metaUrl": "https://biketag.org",
+    "metaImage": "https://i.imgur.com/CtJVstG.png",
+    "metaType": "article",
+    "metaTitle": "BikeTag!",
+    "metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
+    "gaUA": "UA-119956764-1",
 
-	"redditUserName": "biketagorg",
-	"redditSubreddit": "biketag",
-	"redditClientID": "0EuafadwV1hgQw",
-	"redditCallbackURL": "https://biketag.org/auth/reddit/callback",
+    "imgurEmailAddress": "pdxbiketag@gmail.com",
+    "imgurClientID": "79ea70333c45883",
+    "imgurCallbackURL": "https://biketag.org/auth/imgur/callback",
 
-	"emailAccountAddress": "biketagorg@gmail.com"
+    "redditUserName": "biketagorg",
+    "redditSubreddit": "biketag",
+    "redditClientID": "0EuafadwV1hgQw",
+    "redditCallbackURL": "https://biketag.org/auth/reddit/callback",
+
+    "emailAccountAddress": "biketagorg@gmail.com"
 }

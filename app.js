@@ -22,7 +22,7 @@ const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
                 newGameImage: subdomainInformation.newGameImage,
                 reddit: {
                     subreddit: subdomainInformation.reddit.redditSubreddit,
-                }
+                },
             })
 
             out[subdomainName] = pageData

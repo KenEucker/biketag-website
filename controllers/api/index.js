@@ -3,135 +3,130 @@
  */
 const biketag = require('../../lib/biketag')
 
-const routes = (app) => {
-    app.routeSubdomainRequest(
-        '/:tagnumber',
-        (subdomain, req, res, host) => {
-            if (!subdomain) {
-                const hostSubdomainEnd = host.indexOf('.') + 1
-                const redirectToHost = `${req.protocol}://${host.substring(hostSubdomainEnd)}`
+class apiController {
+    init(app) {
+        biketag.setLogger(app.log.debug)
 
-                console.log({
-                    subdomain,
-                    hostNotFound: host,
-                    redirectToHost,
+        this.app = app
+
+        this.index = this.show = 'apidocs'
+    }
+
+    postToReddit(subdomain, req, res, host) {
+        const subdomainConfig = app.getSubdomainOpts(subdomain)
+        subdomainConfig.requestSubdomain = subdomain
+        subdomainConfig.host = host
+        subdomainConfig.viewsFolder = this.app.config.viewsFolder
+        subdomainConfig.version = this.app.config.version
+
+        return getTagInformation(
+            subdomainConfig,
+            'latest',
+            subdomainConfig.imgur.imgurAlbumHash,
+            (latestTagInfo) => {
+                subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
+
+                return postLatestBikeTagToReddit(subdomainConfig, (response) => {
+                    if (!!response.error) {
+                    } else {
+                        this.app.log.status('posted to reddit', response)
+                    }
+
+                    return res.json({ success: response })
                 })
+            },
+        ).catch((e) => {
+            this.app.log.error({ redditApiError: e })
 
-                return res.redirect(redirectToHost)
-            }
+            return res.json({ error: e.message })
+        })
+    }
 
-            const template = app.getTemplateNameFromSubdomain(subdomain)
-            const data = app.getPublicConfigurationValues(subdomain, host)
-
-            return app.renderTemplate(template, data, res)
-        },
-        'post',
-    )
-
-    app.routeSubdomainRequest(
-        '/post/email',
-        async (subdomain, req, res, host) => {
-            try {
-                const subdomainConfig = app.getSubdomainOpts(req)
-                return biketag.getTagInformation(
-                    subdomainConfig,
-                    'latest',
-                    subdomainConfig.imgur.imgurAlbumHash,
-                    (latestTagInfo) => {
-                        const latestTagNumber = (subdomainConfig.latestTagNumber =
-                            latestTagInfo.latestTagNumber)
-                        const subject = `New Bike Tag Post (#${latestTagNumber}) [${subdomain}]`
-                        const text = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
-                        const emailPromises = []
-                        const emailResponses = []
-
-                        subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
-                            emailPromises.push(
-                                app.sendEmail(subdomainConfig, {
-                                    to: emailAddress,
-                                    subject,
-                                    text,
-                                    callback: (info) => {
-                                        app.log.info(`email sent to ${emailAddress}`, info)
-                                        emailResponses.push(info.response)
-                                    },
-                                }),
-                            )
-                        })
-
-                        Promise.all(emailPromises).then(() => {
-                            return res.json({
-                                emailResponses,
-                            })
-                        })
-                    },
-                )
-            } catch (error) {
-                console.log('email api error', {
-                    error,
-                })
-                return res.json({
-                    error,
-                })
-            }
-        },
-        'post',
-    )
-
-    app.routeSubdomainRequest(
-        '/post/reddit/:tagnumber?',
-        async (subdomain, req, res, host) => {
-            const subdomainConfig = app.getSubdomainOpts(req)
-            subdomainConfig.requestSubdomain = subdomain
-            subdomainConfig.host = host
-            subdomainConfig.viewsFolder = app.config.viewsFolder
-            subdomainConfig.version = app.config.version
-
-            return getTagInformation(
+    sendEmailToAdministrators(subdomain, req, res, host) {
+        try {
+            const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+            return biketag.getTagInformation(
                 subdomainConfig,
                 'latest',
                 subdomainConfig.imgur.imgurAlbumHash,
                 (latestTagInfo) => {
-                    subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
+                    const latestTagNumber = (subdomainConfig.latestTagNumber =
+                        latestTagInfo.latestTagNumber)
+                    const subject = `New Bike Tag Post (#${latestTagNumber}) [${subdomain}]`
+                    const text = `Hello BikeTag Admin, A new BikeTag has been posted in ${subdomainConfig.region}!\r\nTo post this tag to Reddit manually, go to ${host}/get/reddit to get the reddit post template.\r\n\r\nYou are getting this email because you are listed as an admin on the site (${host}).\r\n\r\nReply to this email to request to be removed from this admin list.`
+                    const emailPromises = []
+                    const emailResponses = []
 
-                    return postLatestBikeTagToReddit(subdomainConfig, (response) => {
-                        if (!!response.error) {
-                        } else {
-                            console.log('posted to reddit', response)
-                        }
+                    subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
+                        emailPromises.push(
+                            this.app.sendEmail(subdomainConfig, {
+                                to: emailAddress,
+                                subject,
+                                text,
+                                callback: (info) => {
+                                    this.app.log.status(`email sent to ${emailAddress}`, info)
+                                    emailResponses.push(info.response)
+                                },
+                            }),
+                        )
+                    })
 
-                        return res.json({ success: response })
+                    Promise.all(emailPromises).then(() => {
+                        return res.json({
+                            emailResponses,
+                        })
                     })
                 },
-            ).catch((e) => {
-                console.log({ redditApiError: e })
-                return res.json({ error: e.message })
+            )
+        } catch (error) {
+            this.app.log.error('email api error', {
+                error,
             })
-        },
-        'post',
-    )
-
-    app.routeSubdomainRequest(
-        '/get/reddit/:tagnumber?',
-        (subdomain, req, res, host) => {
-            const tagnumber = req.params.tagnumber || 'latest'
-            const subdomainConfig = app.getSubdomainOpts(req)
-            const albumHash = subdomainConfig.imgur.imgurAlbumHash
-
-            console.log(`reddit endpoint request for tag #${tagnumber}`)
-
-            return getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
-                data.host = host
-                data.region = subdomainConfig.region
-                return res.json(data)
+            return res.json({
+                error,
             })
-        },
-        'post',
-    )
+        }
+    }
+
+    getRedditPost(subdomain, req, res, host) {
+        const tagnumber = req.params.tagnumber || 'latest'
+        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+        const albumHash = subdomainConfig.imgur.imgurAlbumHash
+
+        this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
+
+        return getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
+            data.host = host
+            data.region = subdomainConfig.region
+
+            return res.json(data)
+        })
+    }
+
+    getBikeTag(subdomain, req, res, host) {
+        const tagnumber = req.params.tagnumber || 'latest'
+        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+        const albumHash = subdomainConfig.imgur.imgurAlbumHash
+
+        this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
+
+        return getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
+            data.host = host
+            data.region = subdomainConfig.region
+
+            return res.json(data)
+        })
+    }
+
+    routes(app) {
+        app.routeSubdomainRequest('/post/email', this.sendEmailToAdministrators, 'post')
+
+        app.routeSubdomainRequest('/post/reddit/:tagnumber?', this.postToReddit, 'post')
+
+        app.routeSubdomainRequest('/get/reddit/:tagnumber?', this.getRedditPost, 'post')
+
+        app.routeSubdomainRequest('/get/biketag/:tagnumber?', this.getBikeTag, 'post')
+    }
 }
 
-module.exports = {
-    index: 'apidocs',
-    show: 'apidocs',
-    routes,
-}
+module.exports = new apiController()
