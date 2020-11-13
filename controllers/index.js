@@ -3,17 +3,23 @@
  */
 const biketag = require('../lib/biketag')
 
-const init = (app) => {
-    biketag.setLogger(app.log.debug)
+const _getTagNumberFromRequest = (req) => {
+    return req.body.tagnumber || req.params.tagnumber || 'latest'
 }
 
-const routes = (app) => {
-    app.routeSubdomainRequest('/:tagnumber?', (subdomain, req, res, host) => {
+class IndexController {
+    init(app) {
+        this.app = app
+        this.engine = 'ejs'
+        biketag.setLogger(app.log.debug)
+    }
+
+    indexHandler(subdomain, req, res, host) {
         if (!subdomain) {
             const hostSubdomainEnd = host.indexOf('.') + 1
             const redirectToHost = `${req.protocol}://${host.substring(hostSubdomainEnd)}`
 
-            app.log.status({
+            this.app.log.status({
                 subdomain,
                 hostNotFound: host,
                 redirectToHost,
@@ -22,24 +28,19 @@ const routes = (app) => {
             return res.redirect(redirectToHost)
         }
 
-        const template = app.getTemplateNameFromSubdomain(subdomain)
-        const data = app.getPublicConfigurationValues(subdomain, host)
+        const template = this.app.getTemplateNameFromSubdomain(subdomain)
+        const data = this.app.getPublicConfigurationValues(subdomain, host)
 
-        return app.renderTemplate(template, data, res)
-    })
+        return this.app.renderTemplate(template, data, res)
+    }
 
-    app.routeSubdomainRequest('/get/reddit/:tagnumber?', function getRedditPost(
-        subdomain,
-        req,
-        res,
-        host,
-    ) {
-        const tagnumber = req.params.tagnumber || 'latest'
+    getRedditPost(subdomain, req, res, host) {
+        const tagnumber = _getTagNumberFromRequest(req)
         const redditTemplatePath = 'reddit/post'
-        const subdomainConfig = app.getSubdomainOpts(subdomain)
+        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
         const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 
-        app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
+        this.app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
 
         return biketag.getTagInformation(imgurClientID, tagnumber, imgurAlbumHash, (data) => {
             if (!data) {
@@ -53,11 +54,13 @@ const routes = (app) => {
             data.region = subdomainConfig.region
             return res.render(redditTemplatePath, data)
         })
-    })
+    }
+
+    routes(app) {
+        app.routeSubdomainRequest('/:tagnumber?', this.indexHandler)
+
+        app.routeSubdomainRequest('/get/reddit/:tagnumber?', this.getRedditPost)
+    }
 }
 
-module.exports = {
-    init,
-    engine: 'ejs',
-    routes,
-}
+module.exports = new IndexController()

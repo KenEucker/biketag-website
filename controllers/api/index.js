@@ -3,17 +3,33 @@
  */
 const biketag = require('../../lib/biketag')
 
+const _getTagNumberFromRequest = (req) => {
+    return req.body.tagnumber || req.params.tagnumber || 'latest'
+}
+
 class apiController {
     init(app) {
         biketag.setLogger(app.log.debug)
 
         this.app = app
 
-        this.index = this.show = 'apidocs'
+        // this.index = this.show = 'apidocs'
     }
 
+    /**
+     * @swagger
+     * /post/reddit/:
+     *   post:
+     *     description: Posts the current biketag to the configured subreddit
+     *     responses:
+     *       200:
+     *         description: reddit post information for generated posts
+     * @summary Posts the current biketag to the configured subreddit
+     * @tags reddit
+     * @return {object} 200 - success response - application/json
+     */
     postToReddit(subdomain, req, res, host) {
-        const subdomainConfig = app.getSubdomainOpts(subdomain)
+        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
         subdomainConfig.requestSubdomain = subdomain
         subdomainConfig.host = host
         subdomainConfig.viewsFolder = this.app.config.viewsFolder
@@ -42,6 +58,18 @@ class apiController {
         })
     }
 
+    /**
+     * @swagger
+     * /post/email:
+     *   post:
+     *     description: Sends notification emails to BikeTag Ambassadors
+     *     responses:
+     *       200:
+     *         description: email success response
+     * @summary Sends notification emails to BikeTag Ambassadors
+     * @tags email
+     * @return {object} 200 - success response - application/json
+     */
     sendEmailToAdministrators(subdomain, req, res, host) {
         try {
             const subdomainConfig = this.app.getSubdomainOpts(subdomain)
@@ -88,14 +116,39 @@ class apiController {
         }
     }
 
+    /**
+     * @swagger
+     * /get/reddit/{tagnumber}:
+     *   post:
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - in: formData
+     *         name: tagnumber
+     *         description: the tag nunber to retrieve
+     *         schema:
+     *           type: integer
+     *       - in: path
+     *         name: tagnumber
+     *         description: the tag nunber to retrieve
+     *         schema:
+     *           type: integer
+     *     description: Retrieves the reddit post template for the given tag number, or latest
+     *     responses:
+     *       200:
+     *         description: reddit post text
+     * @summary Retrieves the reddit post template for the given tag number, or latest
+     * @tags reddit
+     * @return {string} 200 - success response - application/text
+     */
     getRedditPost(subdomain, req, res, host) {
-        const tagnumber = req.params.tagnumber || 'latest'
+        const tagnumber = _getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
         const albumHash = subdomainConfig.imgur.imgurAlbumHash
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
 
-        return getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
+        return biketag.getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
             data.host = host
             data.region = subdomainConfig.region
 
@@ -103,14 +156,39 @@ class apiController {
         })
     }
 
+    /**
+     * @swagger
+     * /get/biketag/{tagnumber}:
+     *   post:
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - in: formData
+     *         name: tagnumber
+     *         description: the tag nunber to retrieve
+     *         schema:
+     *           type: integer
+     *       - in: path
+     *         name: tagnumber
+     *         description: the tag nunber to retrieve
+     *         schema:
+     *           type: integer
+     *     description: Retrieves the current biketag information
+     *     responses:
+     *       200:
+     *         description: biketag information including images
+     * @summary Posts the current biketag to the configured subreddit
+     * @tags biketag
+     * @return {object} 200 - success response - application/json
+     */
     getBikeTag(subdomain, req, res, host) {
-        const tagnumber = req.params.tagnumber || 'latest'
+        const tagnumber = _getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
         const albumHash = subdomainConfig.imgur.imgurAlbumHash
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
 
-        return getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
+        return biketag.getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
             data.host = host
             data.region = subdomainConfig.region
 
