@@ -12,7 +12,6 @@ class apiController {
         biketag.setLogger(app.log.debug)
 
         this.app = app
-
         // this.index = this.show = 'apidocs'
     }
 
@@ -120,6 +119,8 @@ class apiController {
      * @swagger
      * /get/reddit/{tagnumber}:
      *   post:
+	 *     security:
+     *       - bearerAuth: []
      *     produces:
      *       - application/json
      *     parameters:
@@ -149,6 +150,12 @@ class apiController {
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
 
         return biketag.getTagInformation(subdomainConfig, tagnumber, albumHash, (data) => {
+			data = data || {
+				error: {
+					message: "tagnumber: Not Found",
+					tagnumber,
+				}
+			}
             data.host = host
             data.region = subdomainConfig.region
 
@@ -171,7 +178,9 @@ class apiController {
      *       - in: path
      *         name: tagnumber
      *         description: the tag nunber to retrieve
+	 *         required: false
      *         schema:
+	 *           default: null
      *           type: integer
      *     description: Retrieves the current biketag information
      *     responses:
@@ -197,13 +206,14 @@ class apiController {
     }
 
     routes(app) {
-        app.routeSubdomainRequest('/post/email', this.sendEmailToAdministrators, 'post')
+		const secure = true
+        app.route('/post/email', this.sendEmailToAdministrators, 'post', secure)
 
-        app.routeSubdomainRequest('/post/reddit/:tagnumber?', this.postToReddit, 'post')
+        app.route('/post/reddit/:tagnumber?', this.postToReddit, 'post', secure)
 
-        app.routeSubdomainRequest('/get/reddit/:tagnumber?', this.getRedditPost, 'post')
+        app.route('/get/reddit/:tagnumber?', this.getRedditPost, 'post')
 
-        app.routeSubdomainRequest('/get/biketag/:tagnumber?', this.getBikeTag, 'post')
+        app.route('/get/biketag/:tagnumber?', this.getBikeTag, 'post')
     }
 }
 

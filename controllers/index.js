@@ -10,7 +10,6 @@ const _getTagNumberFromRequest = (req) => {
 class IndexController {
     init(app) {
         this.app = app
-        this.engine = 'ejs'
         biketag.setLogger(app.log.debug)
     }
 
@@ -29,8 +28,9 @@ class IndexController {
         }
 
         const template = this.app.getTemplateNameFromSubdomain(subdomain)
-        const data = this.app.getPublicConfigurationValues(subdomain, host)
+        const data = this.app.getPublicConfig(subdomain, host)
 
+		console.log({views: this.app.get('views')})
         return this.app.renderTemplate(template, data, res)
     }
 
@@ -51,15 +51,16 @@ class IndexController {
             }
 
             data.host = host
-            data.region = subdomainConfig.region
-            return res.render(redditTemplatePath, data)
+			data.region = subdomainConfig.region
+			
+			return res.render(redditTemplatePath, data)
         })
     }
 
     routes(app) {
-        app.routeSubdomainRequest('/:tagnumber?', this.indexHandler)
+        app.route('/:tagnumber?', this.indexHandler)
 
-        app.routeSubdomainRequest('/get/reddit/:tagnumber?', this.getRedditPost)
+        app.route('/get/reddit/:tagnumber?', this.getRedditPost)
     }
 }
 

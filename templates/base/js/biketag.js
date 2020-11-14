@@ -265,7 +265,7 @@ class BikeTag {
 			const locationString = proofLocation && proofLocation.length ? ' found at ( ' + proofLocation + ' )' : ''
 			const hintString = hint && hint.length ? ' (hint:  ' + hint + ' )' : ''
 			const image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user
-			const image2Description = '#' + currentTagInfo.nextTagNumber + ' tag' + hintString + ' by ' + user
+			const image2Description = '#' + currentTagInfo.mysteryTagNumber + ' tag' + hintString + ' by ' + user
 
 			imgur.uploadImageToImgur(files[0], image1Description, function () {
 				imgur.uploadImageToImgur(files[1], image2Description, function () {
@@ -327,7 +327,7 @@ class BikeTag {
 			}
 		}
 
-		return tagNumberIndex;
+		return tagNumberIndex
 	}
 
 	renderBikeTag(tag, heading, targetSelector, isTagitForm = false, popDialogue = true) {
@@ -441,7 +441,7 @@ class BikeTag {
 			}
 		}
 
-		tagInformation.nextTagNumber = tagInformation.currentTagNumber + 1
+		tagInformation.mysteryTagNumber = tagInformation.currentTagNumber + 1
 
 		this.currentTagInfo = tagInformation
 
@@ -556,8 +556,8 @@ class BikeTag {
 			// Set the form with the tag information
 			$('#biketagUploadForm h1').html($('#biketagUploadForm h1').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
 			$('#previousTag h3').html($('#previousTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
-			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.nextTagNumber)
-			$('.s--tagNumber').html(poundSymbol + currentTagInfo.nextTagNumber)
+			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.mysteryTagNumber)
+			$('.s--tagNumber').html(poundSymbol + currentTagInfo.mysteryTagNumber)
 			$('.s--proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
 
 			if (!!currentTagInfo.hint && currentTagInfo.hint.length) {
