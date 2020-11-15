@@ -30,7 +30,7 @@ class IndexController {
         const template = this.app.getTemplateNameFromSubdomain(subdomain)
         const data = this.app.getPublicConfig(subdomain, host)
 
-		console.log({views: this.app.get('views')})
+        console.log({ views: this.app.get('views') })
         return this.app.renderTemplate(template, data, res)
     }
 
@@ -51,9 +51,9 @@ class IndexController {
             }
 
             data.host = host
-			data.region = subdomainConfig.region
-			
-			return res.render(redditTemplatePath, data)
+            data.region = subdomainConfig.region
+
+            return res.render(redditTemplatePath, data)
         })
     }
 
