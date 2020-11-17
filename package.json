@@ -38,7 +38,7 @@
         "imgur": "^0.3.1",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "^0.3.0",
+        "sexpress": "^0.3.3",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
