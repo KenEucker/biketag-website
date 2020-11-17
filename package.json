@@ -12,7 +12,7 @@
         "start": "node app.js",
         "server-erase-config": "rm ~/biketag-website/config.json && rm ~/config.json",
         "server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
-        "server-update": "git pull",
+        "server-update": "git pull && npm update",
         "server-reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm install",
         "server-logs": "sudo pm2 logs BikeTag",
         "server-dev": "sudo pm2 start ecosystem.config.js --env dev",
@@ -38,7 +38,7 @@
         "imgur": "^0.3.1",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "0.2.7",
+        "sexpress": "^0.3.0",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {

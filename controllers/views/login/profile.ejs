@@ -1,0 +1,6 @@
+WHOAMI:
+<% credentials = credentials || 'Not Logged In' %>
+<%= credentials %>
+<script>
+	console.log('You Are', JSON.parse(`<%- JSON.stringify(credentials) %>`))
+</script>

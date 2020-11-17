@@ -19,10 +19,14 @@ class apiController {
      * @swagger
      * /post/reddit/:
      *   post:
+     *     security:
+     *       - basic: []
      *     description: Posts the current biketag to the configured subreddit
      *     responses:
      *       200:
      *         description: reddit post information for generated posts
+     *       401:
+     *         $ref: '#/components/responses/UnauthorizedError'
      * @summary Posts the current biketag to the configured subreddit
      * @tags reddit
      * @return {object} 200 - success response - application/json
@@ -123,8 +127,6 @@ class apiController {
      * @swagger
      * /get/reddit/{tagnumber}:
      *   post:
-     *     security:
-     *       - bearer: []
      *     produces:
      *       - application/json
      *     parameters:

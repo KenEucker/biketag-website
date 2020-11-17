@@ -4,6 +4,7 @@ const sexpress = require('sexpress')
 /// BikeTag App specific configuration filters
 const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
     const subdomains = Object.keys(appConfig.subdomains)
+    console.log({ appConfig })
 
     publicConfig.subdomains = Object.values(appConfig.subdomains).reduce(
         (out, subdomainInformation, index) => {
@@ -21,7 +22,9 @@ const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
                 readonly: subdomainInformation.readonly,
                 newGameImage: subdomainInformation.newGameImage,
                 reddit: {
-                    subreddit: subdomainInformation.reddit.redditSubreddit,
+                    subreddit: subdomainInformation.reddit
+                        ? subdomainInformation.reddit.redditSubreddit
+                        : null,
                 },
             })
 

@@ -666,7 +666,7 @@ class BikeTag {
 		var form = document.querySelector(this.targetSelector)
 		form.addEventListener('submit', function (e) {
 			e.preventDefault()
-			self.onUploadFormSubmit(e.currentTarget).bind(self)
+			self.onUploadFormSubmit.bind(self)(e.currentTarget)
 		})
 
 		var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
