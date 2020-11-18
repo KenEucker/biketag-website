@@ -13,12 +13,12 @@ const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
             out[subdomainName] = subdomainConfig
 
             const subdomainPublicConfig = merge(subdomainConfig, {
-				location: subdomainInformation.location,
-				easter: subdomainInformation.easter,
-				tagline: subdomainInformation.tagline,
-				region: subdomainInformation.region,
-				readonly: subdomainInformation.readonly,
-				newGameImage: subdomainInformation.newGameImage,
+                location: subdomainInformation.location,
+                easter: subdomainInformation.easter,
+                tagline: subdomainInformation.tagline,
+                region: subdomainInformation.region,
+                readonly: subdomainInformation.readonly,
+                newGameImage: subdomainInformation.newGameImage,
             })
 
             out[subdomainName] = subdomainPublicConfig
@@ -30,8 +30,8 @@ const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
             return out
         },
         {},
-	)
-	
+    )
+
     return publicConfig
 }
 
