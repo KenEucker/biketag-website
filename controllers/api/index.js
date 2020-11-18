@@ -81,11 +81,11 @@ class apiController {
                 (latestTagInfo) => {
                     const latestTagNumber = (subdomainConfig.latestTagNumber =
                         latestTagInfo.latestTagNumber)
-                    const subject = this.app.sexyRenderSync('mail/newBikeTagSubject', {
+                    const subject = this.app.renderSync('mail/newBikeTagSubject', {
                         latestTagNumber,
                         subdomain,
                     })
-                    const text = this.app.sexyRenderSync('mail/newBikeTag', {
+                    const text = this.app.renderSync('mail/newBikeTag', {
                         region: subdomainConfig.region,
                         host,
                     })
@@ -126,6 +126,15 @@ class apiController {
     /**
      * @swagger
      * /get/reddit/{tagnumber}:
+     *   get:
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - in: path
+     *         name: tagnumber
+     *         description: the tag nunber to retrieve
+     *         schema:
+     *           type: integer
      *   post:
      *     produces:
      *       - application/json
@@ -135,15 +144,6 @@ class apiController {
      *         description: the tag nunber to retrieve
      *         schema:
      *           type: integer
-     *       - in: path
-     *         name: tagnumber
-     *         description: the tag nunber to retrieve
-     *         schema:
-     *           type: integer
-     *     description: Retrieves the reddit post template for the given tag number, or latest
-     *     responses:
-     *       200:
-     *         description: reddit post text
      * @summary Retrieves the reddit post template for the given tag number, or latest
      * @tags reddit
      * @return {string} 200 - success response - application/text
@@ -186,7 +186,6 @@ class apiController {
      *         description: the tag nunber to retrieve
      *         required: false
      *         schema:
-     *           default: null
      *           type: integer
      *     description: Retrieves the current biketag information
      *     responses:
@@ -218,9 +217,9 @@ class apiController {
 
         app.route('/post/reddit/:tagnumber?', this.postToReddit, 'post', secure)
 
-        app.route('/get/reddit/:tagnumber?', this.getRedditPost, 'post')
+        app.route('/get/reddit/:tagnumber?', this.getRedditPost, ['get', 'post'])
 
-        app.route('/get/biketag/:tagnumber?', this.getBikeTag, 'post')
+        app.route('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
     }
 }
 
