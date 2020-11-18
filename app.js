@@ -5,39 +5,33 @@ const sexpress = require('sexpress')
 const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
     const subdomains = Object.keys(appConfig.subdomains)
 
+    publicConfig.supportedRegions = appConfig.supportedRegions
     publicConfig.subdomains = Object.values(appConfig.subdomains).reduce(
         (out, subdomainInformation, index) => {
             const subdomainName = subdomains[index]
             const subdomainConfig = publicConfig.subdomains[subdomainName]
-            publicConfig.supportedRegions = appConfig.supportedRegions
+            out[subdomainName] = subdomainConfig
 
-            // console.log({subdomainConfig})
-            const pageData = merge(subdomainConfig, {
-                location: subdomainInformation.location,
-                easter: subdomainInformation.easter,
-                tagline: subdomainInformation.tagline,
-                jingle: subdomainInformation.jingle,
-                region: subdomainInformation.region,
-                readonly: subdomainInformation.readonly,
-                newGameImage: subdomainInformation.newGameImage,
-                reddit: {
-                    subreddit: subdomainInformation.reddit
-                        ? subdomainInformation.reddit.redditSubreddit
-                        : null,
-                },
+            const subdomainPublicConfig = merge(subdomainConfig, {
+				location: subdomainInformation.location,
+				easter: subdomainInformation.easter,
+				tagline: subdomainInformation.tagline,
+				region: subdomainInformation.region,
+				readonly: subdomainInformation.readonly,
+				newGameImage: subdomainInformation.newGameImage,
             })
 
-            out[subdomainName] = pageData
+            out[subdomainName] = subdomainPublicConfig
 
             if (subdomain === subdomainName) {
-                publicConfig.page = pageData
+                publicConfig.page = subdomainPublicConfig
             }
 
             return out
         },
         {},
-    )
-
+	)
+	
     return publicConfig
 }
 

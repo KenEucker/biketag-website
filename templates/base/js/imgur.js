@@ -6,7 +6,6 @@
 		imgurAlbumPictures: null,
 		imgurAlbumPicturesRefreshFrequency: 60000,
 		imgurPostComponent: 'ImgurPost',
-		adminEmailAddresses: window.biketag.config.adminEmailAddresses || [],
 		
 		getImgurAlbumInfo(albumHash, callback) {
 			if (!albumHash) {

@@ -1,0 +1,8 @@
+{
+    "meta": true,
+    "images": true,
+    "page": true,
+    "notifications": true,
+    "imgur": ["imgurAlbumHash"],
+    "reddit": ["redditSubreddit"]
+}

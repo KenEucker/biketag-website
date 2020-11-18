@@ -2,17 +2,21 @@
     "defaults": {
         "newGameImage": "https://i.imgur.com/CtJVstG.png",
 
-        "metaUrl": "https://biketag.org",
-        "metaType": "article",
-        "metaTitle": "BikeTag!",
-        "metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
-        "gaUA": "UA-119956764-1",
+		"meta": {
+			"metaUrl": "https://biketag.org",
+			"metaType": "article",
+			"metaTitle": "BikeTag!",
+			"metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
+			"gaUA": "UA-119956764-1"
+		},
 
-        "imgurClientID": "79ea70333c45883",
-        "imgurAuthorization": "Client-ID 79ea70333c45883",
-        "imgurClientSecret": "",
-        "imgurCallbackURL": "",
-        "imgurEmailAddress": "",
+		"imgur": {
+			"imgurClientID": "79ea70333c45883",
+			"imgurAuthorization": "Client-ID 79ea70333c45883",
+			"imgurClientSecret": "",
+			"imgurCallbackURL": "",
+			"imgurEmailAddress": ""
+		},
 
         "redditClientID": "",
         "redditClientSecret": "",

@@ -108,7 +108,7 @@
 				<p>
 					<span id="easter" style="font-style: italic;">Get these instructions via audio</span>
 					<audio id="biketag-jingle">
-						<source src="<%= page.easter.jingle %>" type="audio/mpeg">
+						<source src="<%= page.easter ? page.easter.jingle : '' %>" type="audio/mpeg">
 						Your browser does not support the audio element.
 					</audio>
 				</p>
@@ -194,7 +194,6 @@
 		var biketagUploadContainerSelector = '#tagit'
 		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
 		window.biketag.config = {
-			adminEmailAddresses: window.pageData.adminEmailAddresses,
 			newGameImage: window.pageData.newGameImage,
 		}
 		window.biketag.init(biketagUploadContainerSelector, window.pageData.readonly)

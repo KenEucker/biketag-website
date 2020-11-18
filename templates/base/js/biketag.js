@@ -81,35 +81,37 @@ class BikeTag {
 
 		var submit = document.createElement('ul')
 
-		window.pageData = !!window.pageData ? window.pageData : {}
+		window.pageData = !!window.pageData ? window.pageData : { page: {} }
+		var pageData = Object.assign({
+			newBikeTagMessage: 'Did you find the Mystery Location played in round',
+			proofTagMessage: 'BikeTag @ matching Mystery Location',
+			proofTagTitle: 'Play a BikeTag that matches the Biketag in round',
+			nextTagMessage: 'BikeTag @ new Mystery Location',
+			nextTagTitle: 'Play a new BikeTag at a new Mystery Location to begin round',
+			locationMessage: 'Describe where the Mystery Location was found',
+			locationPlaceholder: 'e.g. Cathedral Park, NE 42nd and Shaver, etc.',
+			hintMessage: 'Provide a hint for the new Mystery Location',
+			hintPlaceholder: 'e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred',
+			nameTitle: 'What do you go by?',
+			nameMessage: 'Provide a Name, UserName, Alias',
+			namePlaceholder: 'e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name',
+			playButtonText: 'Play BikeTag!',
+		}, window.pageData.page)
+		window.pageData.page = pageData
 
-		window.pageData.newBikeTagMessage = window.pageData.newBikeTagMessage ? window.pageData.newBikeTagMessage : 'Did you find the Mystery Location played in round'
-		window.pageData.proofTagMessage = window.pageData.proofTagMessage ? window.pageData.proofTagMessage : 'BikeTag @ matching Mystery Location'
-		window.pageData.proofTagTitle = window.pageData.proofTagTitle ? window.pageData.proofTagTitle : 'Play a BikeTag that matches the Biketag in round'
-		window.pageData.nextTagMessage = window.pageData.nextTagMessage ? window.pageData.nextTagMessage : 'BikeTag @ new Mystery Location'
-		window.pageData.nextTagTitle = window.pageData.nextTagTitle ? window.pageData.nextTagTitle : 'Play a new BikeTag at a new Mystery Location to begin round'
-		window.pageData.locationMessage = window.pageData.locationMessage ? window.pageData.locationMessage : 'Describe where the Mystery Location was found'
-		window.pageData.locationPlaceholder = window.pageData.locationPlaceholder ? window.pageData.locationPlaceholder : 'e.g. Cathedral Park, NE 42nd and Shaver, etc.'
-		window.pageData.hintMessage = window.pageData.hintMessage ? window.pageData.hintMessage : 'Provide a hint for the new Mystery Location'
-		window.pageData.hintPlaceholder = window.pageData.hintPlaceholder ? window.pageData.hintPlaceholder : 'e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred'
-		window.pageData.nameTitle = window.pageData.nameTitle ? window.pageData.nameTitle : 'What do you go by?'
-		window.pageData.nameMessage = window.pageData.nameMessage ? window.pageData.nameMessage : 'Provide a Name, UserName, Alias'
-		window.pageData.namePlaceholder = window.pageData.namePlaceholder ? window.pageData.namePlaceholder : 'e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name'
-		window.pageData.playButtonText = window.pageData.playButtonText ? window.pageData.playButtonText : 'Play BikeTag!'
-
-		var newBikeTagMessage = window.pageData.newBikeTagMessage
-		var proofTagMessage = window.pageData.proofTagMessage
-		var proofTagTitle = window.pageData.proofTagTitle
-		var nextTagMessage = window.pageData.nextTagMessage
-		var nextTagTitle = window.pageData.nextTagTitle
-		var locationMessage = window.pageData.locationMessage
-		var locationPlaceholder = window.pageData.locationPlaceholder
-		var hintMessage = window.pageData.hintMessage
-		var hintPlaceholder = window.pageData.hintPlaceholder
-		var nameTitle = window.pageData.nameTitle
-		var nameMessage = window.pageData.nameMessage
-		var namePlaceholder = window.pageData.namePlaceholder
-		var playButtonText = window.pageData.playButtonText
+		var newBikeTagMessage = pageData.newBikeTagMessage
+		var proofTagMessage = pageData.proofTagMessage
+		var proofTagTitle = pageData.proofTagTitle
+		var nextTagMessage = pageData.nextTagMessage
+		var nextTagTitle = pageData.nextTagTitle
+		var locationMessage = pageData.locationMessage
+		var locationPlaceholder = pageData.locationPlaceholder
+		var hintMessage = pageData.hintMessage
+		var hintPlaceholder = pageData.hintPlaceholder
+		var nameTitle = pageData.nameTitle
+		var nameMessage = pageData.nameMessage
+		var namePlaceholder = pageData.namePlaceholder
+		var playButtonText = pageData.playButtonText
 
 		// var uploadBox = `<div class="upload-box">
 		// 	<i class="fa fa-icon fa-bicycle"></i>
