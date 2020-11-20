@@ -256,5 +256,27 @@
             "logo": ""
         },
         "adminEmailAddresses": ["keneucker@gmail.com"]
+    },
+    "sanjose": {
+        "meta": {
+            "metaTitle": "San Jose BikeTag!",
+            "metaUrl": "https://eugene.biketag.org"
+        },
+        "region": "San Jose, California",
+        "tagline": "The BikeTag game in San Jose, California",
+        "imgur": {
+            "imgurAlbumHash": "PXGVuRY"
+        },
+        "reddit": {
+            "redditSubreddit": "CycleSanJose"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        },
+        "adminEmailAddresses": ["keneucker@gmail.com"]
     }
 }
