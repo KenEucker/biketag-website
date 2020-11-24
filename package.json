@@ -10,6 +10,7 @@
         "compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
         "dev": "node app.js -- --debug=true",
         "start": "node app.js",
+		"staging": "cp config.sample.json config/config.json",
         "server-erase-config": "rm ~/biketag-website/config.json && rm ~/config.json",
         "server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
         "server-update": "git pull && npm update",
