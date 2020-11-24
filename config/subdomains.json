@@ -1,5 +1,7 @@
 {
     "index": {
+		"template": "home",
+		"aliases": ["www"],
         "imgur": {
             "imgurAlbumHash": "JABitEa"
         },
@@ -16,6 +18,8 @@
         "adminEmailAddresses": []
     },
     "tag": {
+		"template": "tag",
+		"aliases": ["new", "post"],
         "meta": {
             "metaTitle": "Post A BikeTag!",
             "metaUrl": "https://tag.biketag.org"
@@ -34,6 +38,8 @@
         "adminEmailAddresses": []
     },
     "portland": {
+		"template": "biketag1",
+		"aliases": ["pdx", "oregon"],
         "meta": {
             "metaTitle": "Portland BikeTag!",
             "metaUrl": "https://biketag.org"
@@ -60,6 +66,8 @@
         ]
     },
     "denver": {
+		"template": "biketag1",
+		"aliases": ["colorado"],
         "meta": {
             "metaTitle": "Denver BikeTag!",
             "metaUrl": "https://denver.biketag.org"
@@ -82,6 +90,8 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "indianapolis": {
+		"template": "biketag1",
+		"aliases": ["indy", "indiana"],
         "meta": {
             "metaTitle": "Indianapolis BikeTag!",
             "metaUrl": "https://indianapolis.biketag.org"
@@ -104,6 +114,8 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "seattle": {
+		"template": "biketag1",
+		"aliases": ["sea", "washington"],
         "meta": {
             "metaTitle": "Seattle BikeTag!",
             "metaUrl": "https://seattle.biketag.org"
@@ -126,7 +138,8 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "omaha": {
-        "meta": {
+		"aliases": ["nebraska"],
+		"meta": {
             "metaTitle": "Omaha BikeTag!",
             "metaUrl": "https://omaha.biketag.org"
         },
@@ -148,6 +161,7 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "stlouis": {
+		"aliases": ["missouri"],
         "meta": {
             "metaTitle": "St Louis BikeTag!",
             "metaUrl": "https://stlouis.biketag.org"
@@ -170,6 +184,7 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "vancouver": {
+		"aliases": ["yvr", "bc"],
         "meta": {
             "metaTitle": "Vancouver BikeTag!",
             "metaUrl": "https://vancouver.biketag.org"
@@ -192,6 +207,8 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "vienna": {
+		"template": "biketag1",
+		"aliases": ["austria"],
         "meta": {
             "metaTitle": "ViennaBikeTag!",
             "metaUrl": "https://vienna.biketag.org"
@@ -214,6 +231,8 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "miami": {
+		"template": "biketag1",
+		"aliases": ["florida"],
         "meta": {
             "metaTitle": "Miami BikeTag!",
             "metaUrl": "https://miami.biketag.org"
@@ -236,6 +255,8 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "eugene": {
+		"readonly": true,
+		"template": "biketag1",
         "meta": {
             "metaTitle": "Eugene BikeTag!",
             "metaUrl": "https://eugene.biketag.org"
@@ -258,6 +279,8 @@
         "adminEmailAddresses": ["keneucker@gmail.com"]
     },
     "sanjose": {
+		"readonly": true,
+		"aliases": ["california"],
         "meta": {
             "metaTitle": "San Jose BikeTag!",
             "metaUrl": "https://eugene.biketag.org"
