@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Login to {{ name }}</title>
+	<!-- Google Fonts Roboto -->
+	{{ "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" | stylesheet_tag }}
+    <!-- Font Awesome -->
+	{{ "css/fa-all.min.css" | stylesheet_tag }}
+  </head>
+  <body>
+	<div class="main-container">
+		<header class="block">
+			<ul class="header-menu horizontal-list">
+				<li>
+					<a class="header-menu-tab" href="#1"><span class="icon entypo-cog scnd-font-color"></span>Settings</a>
+				</li>
+				<li>
+					<a class="header-menu-tab" href="#2"><span class="icon fontawesome-user scnd-font-color"></span>Account</a>
+				</li>
+				<li>
+					<a class="header-menu-tab" href="#3"><span class="icon fontawesome-envelope scnd-font-color"></span>Tag Queue</a>
+					<a class="header-menu-number" href="#4">5</a>
+				</li>
+				<li>
+					<a class="header-menu-tab" href="#5"><span class="icon fontawesome-star-empty scnd-font-color"></span>Favorites</a>
+				</li>
+			</ul>
+			<div class="profile-menu">
+				<p>Me <a href="#26"><span class="entypo-down-open scnd-font-color"></span></a></p>
+				<div class="profile-picture small-profile-picture">
+					<img width="40px" alt="Anne Hathaway picture" src="{{ user.picture }}">
+				</div>
+			</div>
+		</header>
+
+		<!-- LEFT-CONTAINER -->
+		<div class="left-container container">
+			<div class="menu-box block"> <!-- MENU BOX (LEFT-CONTAINER) -->
+				<h2 class="titular">MENU BOX</h2>
+				<ul class="menu-box-menu">
+					<li>
+						<a class="menu-box-tab" href="#6"><span class="icon fontawesome-envelope scnd-font-color"></span>Queued Tags<div class="menu-box-number">5</div></a>                            
+					</li>
+					<li>
+						<a class="menu-box-tab" href="#8"><span class="icon entypo-paper-plane scnd-font-color"></span>Messages<div class="menu-box-number">3</div></a>                            
+					</li>
+					<li>
+						<a class="menu-box-tab" href="#10"><span class="icon entypo-calendar scnd-font-color"></span>Events<div class="menu-box-number">5</div></a>                            
+					</li>
+					<li>
+						<a class="menu-box-tab" href="#12"><span class="icon entypo-cog scnd-font-color"></span>Site Settings</a>
+					</li>
+					<li>
+						<a class="menu-box-tab" href="#13"><sapn class="icon entypo-chart-line scnd-font-color"></sapn>Statistics</a>
+					</li>                        
+				</ul>
+			</div>
+			
+			
+			
+			<ul class="social horizontal-list block"> <!-- SOCIAL (LEFT-CONTAINER) -->
+				<li class="facebook"><p class="icon"><span class="zocial-facebook"></span></p><p class="number">248k</p></li>
+				<li class="twitter"><p class="icon"><span class="zocial-twitter"></span></p><p class="number">30k</p></li>
+				<li class="googleplus"><p class="icon"><span class="zocial-googleplus"></span></p><p class="number">124k</p></li>
+				<li class="mailbox"><p class="icon"><span class="fontawesome-envelope"></span></p><p class="number">89k</p></li>
+			</ul>
+		</div>
+
+		<!-- MIDDLE-CONTAINER -->
+		<div class="middle-container container">
+			<div class="profile block"> <!-- PROFILE (MIDDLE-CONTAINER) -->
+				<a class="add-button" href="#28"><span class="icon entypo-plus scnd-font-color"></span></a>
+				<div class="profile-picture big-profile-picture clear">
+					<img width="150px" alt="picture" src="{{ user.picture }}">
+				</div>
+				<h1 class="user-name">{{ user.username }}</h1>
+				<div class="profile-description">
+					<p class="scnd-font-color">{{ user.email }}</p>
+				</div>
+				<ul class="profile-options horizontal-list">
+					<li><a class="comments" href="#40"><p><span class="icon fontawesome-comment-alt scnd-font-color"></span>23</p></a></li><p></p>
+					<li><a class="views" href="#41"><p><span class="icon fontawesome-eye-open scnd-font-color"></span>841</p></a></li><p></p>
+					<li><a class="likes" href="#42"><p><span class="icon fontawesome-heart-empty scnd-font-color"></span>49</p></a></li><p></p>
+				</ul>
+			</div>
+			
+			 
+			
+		</div>
+
+		<!-- RIGHT-CONTAINER -->
+		<div class="right-container container">
+			
+			
+			
+			
+			 <div class="weather block clear"> <!-- WEATHER (MIDDLE-CONTAINER) -->
+				<h2 class="titular"><span class="icon entypo-location"></span><strong>CLUJ-NAPOCA</strong>/RO</h2>
+				<div class="current-day">
+					<p class="current-day-date">FRI 29/06</p>
+					<p class="current-day-temperature">24º<span class="icon-cloudy"></span></p>
+				</div>
+				<ul class="next-days">
+					<li>
+						<a href="#43">
+							<p class="next-days-date"><span class="day">SAT</span> <span class="scnd-font-color">29/06</span></p>
+							<p class="next-days-temperature">25º<span class="icon icon-cloudy scnd-font-color"></span></p>
+						</a>
+					</li>
+					<li>
+						<a href="#44">
+							<p class="next-days-date"><span class="day">SUN</span> <span class="scnd-font-color">30/06</span></p>
+							<p class="next-days-temperature">22º<span class="icon icon-cloudy2 scnd-font-color"></span></p>
+						</a>
+					</li>
+					<li>
+						<a href="#45">
+							<p class="next-days-date"><span class="day">MON</span> <span class="scnd-font-color">01/07</span></p>
+							<p class="next-days-temperature">24º<span class="icon icon-cloudy2 scnd-font-color"></span></p>
+						</a>
+					</li>
+					<li>
+						<a href="#46">
+							<p class="next-days-date"><span class="day">TUE</span> <span class="scnd-font-color">02/07</span></p>
+							<p class="next-days-temperature">26º<span class="icon icon-cloudy scnd-font-color"></span></p>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<p class="next-days-date"><span class="day">WED</span> <span class="scnd-font-color">03/07</span></p>
+							<p class="next-days-temperature">27º<span class="icon icon-sun scnd-font-color"></span></p>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<p class="next-days-date"><span class="day">THU</span> <span class="scnd-font-color">04/07</span></p>
+							<p class="next-days-temperature">29º<span class="icon icon-sun scnd-font-color"></span></p>
+						</a>
+					</li>
+				</ul>
+			</div> 
+		</div> 
+	</div>
+	</body>
+</html>

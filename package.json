@@ -1,15 +1,16 @@
 {
     "name": "biketag-website",
-    "version": "0.6.6",
+    "version": "0.7.0",
     "description": "A website for biketag.org",
     "author": "Ken Eucker <keneucker@gmail.com>",
     "contributors": [],
     "bin": {},
     "scripts": {
-        "compile": "npm run compileBiketag1",
-        "compileBiketag1": "./node_modules/.bin/dart-sass templates/biketag1/sass:templates/biketag1/css",
         "dev": "node app.js -- --debug=true",
         "start": "node app.js",
+        "staging": "cp config.sample.json config/config.json",
+        "docker-build": "docker build -t biketag-website .",
+        "docker": "docker run -p 8080:80 -d biketag-website",
         "server-erase-config": "rm ~/biketag-website/config.json && rm ~/config.json",
         "server-copy-config": "mv ~/config.json ~/biketag-website/config.json",
         "server-update": "git pull && npm update",
@@ -34,21 +35,15 @@
     },
     "keywords": [],
     "dependencies": {
-        "deepmerge": "^4.2.2",
+        "image-to-base64": "^2.1.1",
         "imgur": "^0.3.1",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "^0.4.2",
+        "sexpress": "^0.6.6",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
-        "dart-sass": "^1.25.0",
-        "eslint": "^5.15.3",
-        "eslint-config-airbnb": "^17.1.0",
-        "eslint-plugin-import": "^2.16.0",
-        "eslint-plugin-jsx-a11y": "^6.2.1",
-        "eslint-plugin-react": "^7.12.4",
-        "prettier": "^2.1.2"
+        "prettier": "^2.2.0"
     },
     "license": "Unlicense"
 }

@@ -1,5 +1,9 @@
 {
     "keneucker@gmail.com": "all",
     "biketagorg@gmail.com": "all",
-    "pdxbiketag@gmail.com": "portland"
+    "pdxbiketag@gmail.com": "pdx",
+    "portland@biketag.org": {
+        "paths": ["*"],
+        "subddomains": ["portland"]
+    }
 }

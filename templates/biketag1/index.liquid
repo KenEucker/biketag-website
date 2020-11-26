@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+
+<head>
+	{% include "page/gtm" %}
+	{% include "page/meta" %}
+	{% include "page/css" %}
+</head>
+
+<body class="is-preload {{ thisSubdomain }}">
+	<div id="wrapper">
+
+		<div id="countChanger">
+			<nav>
+				<ul>
+					<li><a href="?count=10">10</a></li>
+					<li><a href="?count=50">50</a></li>
+					<li><a href="?count=all">all</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Header -->
+		<header id="header">
+			<div class="header--logo">
+				<div class="logo spin">
+					<span class="icon fa-bicycle"></span>
+				</div>
+				<div class="headingText">
+					<h1>{{ thisSubdomain }}</h1>
+					<span>.</span>
+					<h1>biketag</h1>
+				</div>
+			</div>
+			<nav id="head">
+				<ul>
+					<li><a id="archiveButton" href="javascript:();">Archive</a></li>
+					<li><a id="tagItButton" href="#tagit">Play <span class="longer-text hidden">The Next </span><span class="connecting-text hidden">Round </span>(<span class="s--tagNumber"></span>)</a></li>
+					<li><a href="#howto">How<span class="connecting-text hidden"> To</span></a></li>
+				</ul>
+			</nav>
+			<div class="content">
+				<div class="inner">
+					{% if latestBikeTag %}
+
+					<div class="m-imgur-post">
+						<a href="{{ latestBikeTag.nextTagURL }}" target="_blank">
+							<div>
+								<span><div class="normal-text">#</div>{{ latestBikeTag.latestTagNumber }}</span>
+								<span> {{ latestBikeTag.credit }} </span>
+								<img alt="{{ latestBikeTag.description }}" class="" src="{{ latestBikeTag.nextTagURL }}">
+							</div>
+							<h2 class="description">Current mystery location to find</h2>
+						</a>
+					</div>
+
+					{% endif %}
+				</div>
+			</div>
+			<nav id="foot">
+				<ul>
+					<li><a href="#about">About</a></li>
+					<li><a id="hintButton" href="#hint">Hint</a></li>
+					<!-- <li><a href="#discuss">Discussion for Tag <span class="s--tagNumber"></span></a></li> -->
+					<li><a href="#donate">Donate</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Main -->
+		<div id="main">
+			<article id="tagit">
+			</article>
+
+			<article id="howto">
+				<h2 class="major">How To Play BikeTag</h2>
+
+				{{ content.howto }}
+
+				{% include "biketag/easter" %}
+			</article>
+
+			<article id="hint">
+				<h2 class="major">Need a hint?</h2>
+				<p>
+					user [<span id="userCredit"></span>]
+					<span id="userLeftHintMessage"></span>
+					<br>
+					<br>
+					<span id="hintText" class="family"></span>
+				</p>
+			</article>
+
+			<!-- About -->
+			<article id="about">
+				<h2 class="major">Bike Tag Game</h2>
+
+				{{ content.about }}
+
+				<p>
+					{% for region in supportedRegions %}
+					<a href="https://{{ region }}.biketag.org">BikeTag in {{ subdomains[region].region }}</a><br>
+					{% endfor %}
+				</p>
+
+			</article>
+
+			<article id="donate">
+				<h3 class="major">Donate to BikeTag.Org</h3>
+
+				{{ content.donate }}
+
+			</article>
+
+			<article id="contact">
+				<h2 class="major">Contact</h2>
+				{{ content.contact }}
+			</article>
+		</div>
+
+		{% include "page/footer" %}
+
+	</div>
+
+	<div id="bg"></div>
+
+	<!-- Priority Scripts -->
+	{% include "biketag/lazy" %}
+	
+	<script>
+		try {
+			window.pageData = JSON.parse(`{{ page | json }}`)
+		} catch(e) {
+			console.log('Could not load sexy page data', { error: e })
+		}
+	</script>
+
+	{{ "js/biketag.js" | javascript_tag }}
+	<script>
+		var biketagUploadContainerSelector = '#tagit'
+		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
+		window.biketag.config = {
+			newGameImage: window.pageData.newGameImage,
+		}
+		window.biketag.init(biketagUploadContainerSelector, window.pageData.readonly)
+	</script>
+
+	<!-- Scripts -->
+	{{ "js/jquery.min.js" | javascript_tag }}
+	{{ "js/uglipop.min.js" | javascript_tag }}
+	{{ "js/browser.min.js" | javascript_tag }}
+	{{ "js/breakpoints.min.js" | javascript_tag }}
+	{{ "js/util.js" | javascript_tag }}
+	{{ "js/main.js" | javascript_tag }}
+	{{ "js/imgur.js" | javascript_tag }}
+
+	{% if debug { %}
+	{{ content.localdev }}
+	{% endif %}
+
+</body>
+
+</html>

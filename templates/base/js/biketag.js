@@ -6,6 +6,7 @@ class BikeTag {
 		this.target = null
 		this.targetSelector = 'form #submit'
 		this.formID = "biketagUploadForm"
+		this.imgurAlbumHash = window.pageData && window.pageData.imgur ? window.pageData.imgur.imgurAlbumHash : null
 	}
 
 	closeNotification() {
@@ -214,7 +215,6 @@ class BikeTag {
 	}
 
 	onUploadFormSubmit(formEl) {
-		const self = this
 		const theButton = formEl.querySelector('ul')
 		const prevHTML = theButton.innerHTML
 		theButton.innerHTML = `Please wait while your images are uploaded <i class="fa fa-spinner fa-spin" style="font-style:24px;"></i>`
@@ -269,10 +269,10 @@ class BikeTag {
 			const image1Description = '#' + currentTagInfo.currentTagNumber + ' proof' + locationString + ' by ' + user
 			const image2Description = '#' + currentTagInfo.mysteryTagNumber + ' tag' + hintString + ' by ' + user
 
-			imgur.uploadImageToImgur(files[0], image1Description, function () {
-				imgur.uploadImageToImgur(files[1], image2Description, function () {
+			imgur.uploadImageToImgur(files[0], image1Description, () => {
+				imgur.uploadImageToImgur(files[1], image2Description, () => {
 					/// TODO: Send message to the server that a new tag has been queued
-					self.sendNotificationEmail().then(function () {
+					this.sendNotificationEmail().then(function () {
 						window.location.href = window.location.pathname + '?uploadSuccess=true'
 					})
 				})
@@ -332,13 +332,16 @@ class BikeTag {
 		return tagNumberIndex
 	}
 
-	renderBikeTag(tag, heading, targetSelector, isTagitForm = false, popDialogue = true) {
+	renderBikeTag(tag, heading, targetSelector, eraseContent = false) {
 		var targetContainer = document.querySelector(targetSelector || '.content .inner');
 
 		if (targetContainer) {
+			if (eraseContent) {
+				targetContainer.innerHTML = ""
+			}
 			var tagContainer = document.createElement('div')
 			tagContainer.className = "m-imgur-post fadeIn"
-			var tagTemplate = this.biketagImageTemplate(tag, heading || "Tag", true)
+			var tagTemplate = this.biketagImageTemplate(tag, heading || "Tag")
 			tagContainer.innerHTML = tagTemplate
 
 			tagContainer.querySelector('a').addEventListener('click', function (e) {
@@ -386,10 +389,11 @@ class BikeTag {
 		var imageLinkStringSplit = image.link.split('.')
 		var imageLinkStringEnd = '.' + imageLinkStringSplit[imageLinkStringSplit.length - 1]
 		var thumbnail = image.link.replace(imageLinkStringEnd, 'l' + imageLinkStringEnd)
-		var tagNumber = '0', tagCredit = "your'e it";
+		var tagNumber = '0', tagCredit = "your'e it", imageToLoad = image.link
 
 		if (image.gifv) {
-			thumbnail = image.link;
+			thumbnail = image.link
+			imageToLoad = image.gifv
 		}
 
 		if (image.description) {
@@ -406,7 +410,7 @@ class BikeTag {
 					<div>
 						<span>${tagNumber}</span>
 						<span>${tagCredit}</span>
-						<img alt="${image.description}" class="${!!loadImage ? '' : 'hidden'}" ${!!loadImage ? `src="${thumbnail}"` : ''} data-src="${thumbnail}">
+						<img alt="${image.description}" class="lazy" src="${thumbnail}" data-src="${imageToLoad}">
 					</div>
 					<h2 class="description">${title}</h2>
 				</a>`
@@ -427,21 +431,24 @@ class BikeTag {
 
 		if (imgur.imgurAlbumPictures.length) {
 			tagInformation.currentTag = !!imgur.imgurAlbumPictures[0].description ? imgur.imgurAlbumPictures[0] : (imgur.imgurAlbumPictures.length > 1 ? imgur.imgurAlbumPictures[1] : 0)
-
-			if (tagInformation.currentTag) {
-				var tagHintSplit = tagInformation.currentTag.description ? tagInformation.currentTag.description.split('(') : []
-				var tagHint = tagHintSplit.length > 1 ? tagHintSplit[1].split(')')[0] : ''
-				var tagCreditSplit = tagInformation.currentTag.description ? tagInformation.currentTag.description.split('by') : []
-				var tagCredit = tagCreditSplit.length ? tagCreditSplit[tagCreditSplit.length - 1] : ''
-				var tagNumberSplit = tagInformation.currentTag.description ? tagInformation.currentTag.description.split(' ') : []
-				var tagNumberString = tagNumberSplit.length ? tagNumberSplit[0].substr(1) : 0
-
-				tagInformation.hasTag = true
-				tagInformation.currentTagNumber = Number(tagNumberString)
-				tagInformation.credit = tagCredit
-				tagInformation.hint = tagHint
-			}
+		} else if (window.latestBikeTag) {
+			tagInformation.currentTag = window.latestBikeTag.image
 		}
+
+		if (tagInformation.currentTag) {
+			var tagHintSplit = tagInformation.currentTag.description ? tagInformation.currentTag.description.split('(') : []
+			var tagHint = tagHintSplit.length > 1 ? tagHintSplit[1].split(')')[0] : ''
+			var tagCreditSplit = tagInformation.currentTag.description ? tagInformation.currentTag.description.split('by') : []
+			var tagCredit = tagCreditSplit.length ? tagCreditSplit[tagCreditSplit.length - 1] : ''
+			var tagNumberSplit = tagInformation.currentTag.description ? tagInformation.currentTag.description.split(' ') : []
+			var tagNumberString = tagNumberSplit.length ? tagNumberSplit[0].substr(1) : 0
+
+			tagInformation.hasTag = true
+			tagInformation.currentTagNumber = Number(tagNumberString)
+			tagInformation.credit = tagCredit
+			tagInformation.hint = tagHint
+		}
+		
 
 		tagInformation.mysteryTagNumber = tagInformation.currentTagNumber + 1
 
@@ -533,7 +540,7 @@ class BikeTag {
 
 	setCurrentTagInformation(cb) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(null, !!cb ? cb.bind(this) : this.setCurrentTagInformation.bind(this))
+			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, !!cb ? cb : this.setCurrentTagInformation.bind(this))
 		}
 
 		if (!this.latestTagInformationHasBeenSet) {
@@ -541,9 +548,6 @@ class BikeTag {
 		} else {
 			return this.getCurrentTagInformation()
 		}
-
-		// console.log('loading lazy load images')
-		// window.lazyLoadInstance = new LazyLoad()
 
 		var images = imgur.imgurAlbumPictures
 		if (!!images && images.length) {
@@ -554,9 +558,10 @@ class BikeTag {
 			}
 
 			this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find", `#${this.formID} #heading`)
+			window.lazyLoadInstance.update()
 
 			// Set the form with the tag information
-			$('#biketagUploadForm h1').html($('#biketagUploadForm h1').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
+			$(`#${this.form} h1`).html($(`#${this.form} h1`).text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
 			$('#previousTag h3').html($('#previousTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
 			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.mysteryTagNumber)
 			$('.s--tagNumber').html(poundSymbol + currentTagInfo.mysteryTagNumber)
@@ -582,7 +587,7 @@ class BikeTag {
 	showLatestTagImages(count = -1) {
 		if (!imgur.imgurAlbumPictures) {
 			this.tempCount = count
-			return imgur.getImgurAlbumPictures(null, this.showLatestTagImages.bind(this))
+			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, this.showLatestTagImages.bind(this))
 		}
 
 		var currentTagInfo = this.setCurrentTagInformation()
@@ -601,6 +606,7 @@ class BikeTag {
 
 			if (currentTagInfo.currentTag) {
 				this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find")
+				window.lazyLoadInstance.update()
 			} else {
 				this.showNewGameImage()
 			}
@@ -609,11 +615,12 @@ class BikeTag {
 
 	showNewGameImage() {
 		this.renderBikeTag(this.config.newGameImage, "New BikeTag game coming soon!")
+		window.lazyLoadInstance.update()
 	}
 
 	showArchiveTags(count) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(null, this.showArchiveTags.bind(this))
+			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, this.showArchiveTags)
 		}
 		document.body.classList.add('archive')
 		$('#header .content .inner').empty()
@@ -628,11 +635,12 @@ class BikeTag {
 			var image = images[i]
 			this.renderBikeTag(image, image.description)
 		}
+		window.lazyLoadInstance.update()
 	}
 
 	showBikeTagNumber(tagNumber) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(null, this.showBikeTagNumber.bind(this));
+			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, this.showBikeTagNumber);
 		}
 
 		document.body.classList.add('single')
@@ -650,25 +658,21 @@ class BikeTag {
 			if (theTag) {
 				this.renderBikeTag(theTag, "Original Tag");
 			}
-
-			// window.lazyLoadInstance = new LazyLoad();
 		} else if (tagNumber == imageCount) {
 			var newTag = images[this.getTagNumberIndex(tagNumber)];
 
 			this.renderBikeTag(newTag, "Current Tag");
-
-			// window.lazyLoadInstance = new LazyLoad();
 		}
+		window.lazyLoadInstance.update()
 	}
 
 	addTagPostingEventListeners() {
-		var self = this
 		this.appendBiketagForm(this.target)
 
 		var form = document.querySelector(this.targetSelector)
-		form.addEventListener('submit', function (e) {
+		form.addEventListener('submit', (e) => {
 			e.preventDefault()
-			self.onUploadFormSubmit.bind(self)(e.currentTarget)
+			this.onUploadFormSubmit(e.currentTarget)
 		})
 
 		var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
@@ -687,8 +691,8 @@ class BikeTag {
 			})
 		})
 
-		form.querySelectorAll('input[type="file"]').forEach(function (fileInput) {
-			fileInput.addEventListener('change', self.showImageThumbnail.bind(self))
+		form.querySelectorAll('input[type="file"]').forEach((fileInput) => {
+			fileInput.addEventListener('change', this.showImageThumbnail)
 		})
 
 		var uploadBoxes = form.querySelectorAll('.upload-box')
@@ -738,10 +742,15 @@ class BikeTag {
 	}
 
 	init(targetSelector, readonly) {
-		var self = this
 		this.readonly = readonly
 		this.targetSelector = targetSelector
 		this.target = document.querySelector(this.targetSelector)
+
+		if (window.latestBikeTag) {
+			console.log('page loaded with latest biketag', window.latestBikeTag)
+
+			this.renderBikeTag(window.latestBikeTag.image, "Current mystery location to find", '.content .inner', true)
+		}
 
 		if (!this.readonly) {
 			this.addTagPostingEventListeners()
@@ -753,19 +762,19 @@ class BikeTag {
 		// this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
 
 		var headerLogo = document.querySelector('#header .header--logo')
-		headerLogo.addEventListener('click', function () {
+		headerLogo.addEventListener('click', () => {
 			window.history.pushState({}, '/', '/');
-			self.showLatestTagImages()
+			this.showLatestTagImages()
 		})
 
 		var archiveButtonEl = document.getElementById('archiveButton')
-		archiveButtonEl.addEventListener('click', function(event) {
-			self.showArchiveTags(10)
+		archiveButtonEl.addEventListener('click', () => {
+			this.showArchiveTags(10)
 		})
 
 		var tagItButton = document.getElementById('tagItButton')
-		tagItButton.addEventListener('click', function(){
-			self.showLatestTagImages()
+		tagItButton.addEventListener('click', () => {
+			this.showLatestTagImages()
 		})
 	}
 }

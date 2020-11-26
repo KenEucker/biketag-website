@@ -1,0 +1,9 @@
+{
+    "meta": true,
+    "images": true,
+    "page": true,
+    "notifications": true,
+    "content": true,
+
+    "imgur": ["imgurAlbumHash", "imgurClientID"]
+}

@@ -3,7 +3,7 @@
         "paths": ["*"],
         "subdomains": ["*"]
     },
-    "portland": {
+    "pdx": {
         "paths": ["*"],
         "subddomains": ["portland"]
     }

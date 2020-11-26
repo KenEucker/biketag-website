@@ -1,0 +1,48 @@
+{
+    "components": {
+        "examples": {
+            "BikeTag": {
+                "summary": "",
+                "externalValue": ""
+            }
+        },
+
+        "tags": {
+            "name": "biketag",
+            "description": "The BikeTag api - all you need to play the game of BikeTag!",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "/api/?api=BikeTag"
+            }
+        },
+
+        "schemas": {
+            "getTagRequest": {},
+            "BikeTag": {}
+        },
+
+        "responses": {
+            "GetTagResponse": {
+                "description": "Bike Tag",
+                "schema": {
+                    "ref": "#/components/schemas/BikeTag"
+                }
+            }
+        },
+
+        "requestBodies": {
+            "getTagBody": {
+                "description": "How to retrieve a Bike Tag",
+                "required": false,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "ref": "#/components/schemas/getTagRequest"
+                        },
+                        "example": {}
+                    }
+                }
+            }
+        }
+    }
+}

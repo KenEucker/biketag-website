@@ -1,0 +1,27 @@
+{{ "js/utils.js" | javascript_tag }}
+<script>
+	/// TODO: turn this pattern into a frontend package using {{ "utils" | javascript_package }}
+	/// TODO: accompanying the above: {{ "biketag" | javascript_package: "window.imgur.init()" }}
+	((utils) => {
+		const success = utils.getUrlParam('success')
+		const sso = utils.getUrlParam('sso')
+
+
+		if (sso === 'window') {
+			window.close()
+			console.log({success, sso})
+		}
+	})(window.utils)
+</script>
+{% if credentials %}
+<div class="container">
+	
+</div>
+{% else %}
+{% assign credentials = credentials | { username: 'Not Logged In' } %}
+{% endif %}
+
+
+<script>
+	console.log('Whoami', {{ credentials | json }} )
+</script>

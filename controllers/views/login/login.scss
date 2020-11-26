@@ -1,0 +1,44 @@
+.form-signin {
+    max-width: 35em;
+    width: 85vw;
+}
+
+.sso-buttons {
+    img {
+        max-width: 240px;
+        min-height: 52 px;
+        border-radius: 7px;
+    }
+
+    a {
+        margin-left: -30px;
+        span {
+            vertical-align: sub;
+            margin-left: -110px;
+            font-size: 1.45em;
+            color: white;
+        }
+    }
+
+    .imgur {
+        a {
+            top: 10px;
+            span {
+                margin-left: -83px;
+            }
+        }
+    }
+
+    .google {
+        a {
+            img {
+                border-radius: 14px;
+            }
+            span {
+                margin-left: -180px;
+                font-size: 1.25em;
+                top: 21px;
+            }
+        }
+    }
+}

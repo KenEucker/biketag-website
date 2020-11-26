@@ -1,0 +1,16 @@
+@import 'sass/main';
+@import 'sass/noscript';
+@import 'css/font-awesome.min.css';
+@import 'css/uglipop.css';
+
+footer {
+	margin-top: 2em;
+
+	p.copyright {
+		letter-spacing: 0.2rem;
+		font-size: 0.6rem;
+		opacity: 0.75;
+		margin-bottom: 0;
+		text-transform: uppercase;
+	}
+}

@@ -1,30 +1,28 @@
-const merge = require('deepmerge')
 const sexpress = require('sexpress')
 
 /// BikeTag App specific configuration filters
-const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
+const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain) {
     const subdomains = Object.keys(appConfig.subdomains)
 
-    publicConfig.supportedRegions = appConfig.supportedRegions
-    publicConfig.subdomains = Object.values(appConfig.subdomains).reduce(
+    publicData.supportedRegions = appConfig.supportedRegions
+    publicData.subdomains = Object.values(appConfig.subdomains).reduce(
         (out, subdomainInformation, index) => {
             const subdomainName = subdomains[index]
-            const subdomainConfig = publicConfig.subdomains[subdomainName]
+            const subdomainConfig = publicData.subdomains[subdomainName]
+
+            if (subdomainInformation.imgur) {
+                subdomainConfig.imgur = subdomainConfig.imgur || {}
+                subdomainConfig.imgur.imgurClientID = subdomainInformation.imgur.imgurClientID
+                subdomainConfig.imgur.imgurAlbumHash = subdomainInformation.imgur.imgurAlbumHash
+                subdomainConfig.imgur.imgurAuthorization =
+                    subdomainInformation.imgur.imgurAuthorization
+            }
             out[subdomainName] = subdomainConfig
 
-            const subdomainPublicConfig = merge(subdomainConfig, {
-                location: subdomainInformation.location,
-                easter: subdomainInformation.easter,
-                tagline: subdomainInformation.tagline,
-                region: subdomainInformation.region,
-                readonly: subdomainInformation.readonly,
-                newGameImage: subdomainInformation.newGameImage,
-            })
-
-            out[subdomainName] = subdomainPublicConfig
+            out[subdomainName] = subdomainInformation
 
             if (subdomain === subdomainName) {
-                publicConfig.page = subdomainPublicConfig
+                publicData.page = subdomainInformation
             }
 
             return out
@@ -32,11 +30,11 @@ const publicConfigFilter = (publicConfig, appConfig, subdomain) => {
         {},
     )
 
-    return publicConfig
+    return publicData
 }
 
 const app = sexpress({
-    publicConfigFilter,
+	publicFilter,
 })
 
 app.run()

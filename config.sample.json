@@ -1,60 +1,30 @@
 {
-    "defaults": {
-        "newGameImage": "https://i.imgur.com/CtJVstG.png",
-
-        "meta": {
-            "metaUrl": "https://biketag.org",
-            "metaType": "article",
-            "metaTitle": "BikeTag!",
-            "metaDescription": "BikeTag.org is a place for people to see the most recent Bike Tags in their city and participate in the game in an easy and simple way, without needing to login to anything.",
-            "gaUA": "UA-119956764-1"
+    "authentication": {
+        "enabled": true,
+        "credentials": {
+            "username": "dev"
         },
 
         "imgur": {
-            "imgurClientID": "79ea70333c45883",
-            "imgurAuthorization": "Client-ID 79ea70333c45883",
-            "imgurClientSecret": "",
-            "imgurCallbackURL": "",
-            "imgurEmailAddress": ""
-        },
-
-        "redditClientID": "",
-        "redditClientSecret": "",
-        "redditCallbackURL": "",
-        "redditUserName": "",
-        "redditPassword": "",
-        "redditUserAgent": "",
-        "redditSubreddit": "biketag",
-
-        "emailAccountAddress": "",
-        "emailAccountPassword": "",
-        "emailService": ""
-    },
-
-    "subdomains": {
-        "default": {
-            "template": "home",
-            "aliases": ["home", "biketag"],
-            "adminEmailAddresses": ["biketagorg@gmail.com"]
-        },
-        "tag": {
-            "template": "tag",
-            "aliases": ["new", "post"],
-            "imgur": {
-                "imgurAlbumHash": "DNCiJTC"
-            },
-            "adminEmailAddresses": ["biketagorg@gmail.com"]
-        },
-        "portland": {
-            "template": "biketag1",
-            "aliases": ["pdx", "oregon"],
-            "adminEmailAddresses": ["biketagorg@gmail.com"]
+            "imgurClientID": "a404f3d0c94ee79",
+            "imgurClientSecret": "310744f351ff8d9f11d2d84726497908823c5013",
+            "imgurEmailAddress": "pdxbiketag@gmail.com"
         }
     },
 
-    "appName": "BikeTag",
-    "supportedRegions": ["portland"],
+    "favicon": "img/Tag-Logo-Stacked-V2.svg",
 
-    "port": 80,
-    "debug": false
+    "api": {
+        "secureApiDocs": false
+    },
+
+    "login": true,
+
+    "rendering": {
+        "overrideViewEngine": "liquid"
+    },
+
+    "logging": {
+        "onlyLogErrors": false
+    }
 }

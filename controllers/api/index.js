@@ -3,24 +3,16 @@
  */
 const biketag = require('../../lib/biketag')
 
-const _getTagNumberFromRequest = (req) => {
-    return req.body.tagnumber || req.params.tagnumber || 'latest'
-}
-
-class apiController {
-    init(app) {
-        biketag.setLogger(app.log.debug)
-
-        this.app = app
-        // this.index = this.show = 'apidocs'
-    }
-
+class bikeTagController {
+    /********		api documented methods		**********/
     /**
      * @swagger
      * /post/reddit/:
      *   post:
      *     security:
      *       - basic: []
+     *     tags:
+     *       - biketag
      *     description: Posts the current biketag to the configured subreddit
      *     responses:
      *       200:
@@ -61,6 +53,8 @@ class apiController {
      * @swagger
      * /post/email:
      *   post:
+     *     tags:
+     *       - biketag
      *     description: Sends notification emails to BikeTag Ambassadors
      *     responses:
      *       200:
@@ -84,13 +78,18 @@ class apiController {
                     const subject = this.app.renderSync('mail/newBikeTagSubject', {
                         latestTagNumber,
                         subdomain,
-                    })
-                    const text = this.app.renderSync('mail/newBikeTag', {
-                        region: subdomainConfig.region,
-                        host,
-                    })
-                    const emailPromises = []
-                    const emailResponses = []
+					})
+					const renderOpts = {
+						region: subdomainConfig.region,
+						subdomainIcon: subdomainConfig.meta.image,
+						host,
+						latestTagInfo,
+					}
+                    const text = this.app.renderSync('mail/newBikeTagText', renderOpts)
+					const html = this.app.renderSync('mail/newBikeTag', renderOpts)
+					
+					const emailPromises = []
+					const emailResponses = []
 
                     subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
                         emailPromises.push(
@@ -101,7 +100,8 @@ class apiController {
                                 callback: (info) => {
                                     this.app.log.status(`email sent to ${emailAddress}`, info)
                                     emailResponses.push(info.response)
-                                },
+								},
+								html,
                             }),
                         )
                     })
@@ -127,6 +127,8 @@ class apiController {
      * @swagger
      * /get/reddit/{tagnumber}:
      *   get:
+     *     tags:
+     *       - biketag
      *     produces:
      *       - application/json
      *     parameters:
@@ -135,7 +137,16 @@ class apiController {
      *         description: the tag nunber to retrieve
      *         schema:
      *           type: integer
+     *     responses:
+     *       200:
+     *         description: reddit post information for generated posts
+     *       401:
+     *         $ref: '#/components/responses/UnauthorizedError'
+     *       500:
+     *         $ref: '#/components/responses/UnauthorizedError'
      *   post:
+     *     tags:
+     *       - biketag
      *     produces:
      *       - application/json
      *     parameters:
@@ -144,12 +155,19 @@ class apiController {
      *         description: the tag nunber to retrieve
      *         schema:
      *           type: integer
+     *     responses:
+     *       200:
+     *         description: reddit post information for generated posts
+     *       401:
+     *         $ref: '#/components/responses/UnauthorizedError'
+     *       500:
+     *         $ref: '#/components/responses/UnauthorizedError'
      * @summary Retrieves the reddit post template for the given tag number, or latest
      * @tags reddit
      * @return {string} 200 - success response - application/text
      */
     getRedditPost(subdomain, req, res, host) {
-        const tagnumber = _getTagNumberFromRequest(req)
+        const tagnumber = biketag.getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
         const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 
@@ -178,16 +196,18 @@ class apiController {
      *     parameters:
      *       - in: formData
      *         name: tagnumber
-     *         description: the tag nunber to retrieve
+     *         description: the tag number to retrieve
      *         schema:
      *           type: integer
      *       - in: path
      *         name: tagnumber
-     *         description: the tag nunber to retrieve
+     *         description: the tag number to retrieve
      *         required: false
      *         schema:
      *           type: integer
      *     description: Retrieves the current biketag information
+     *     tags:
+     *       - biketag
      *     responses:
      *       200:
      *         description: biketag information including images
@@ -196,7 +216,7 @@ class apiController {
      * @return {object} 200 - success response - application/json
      */
     getBikeTag(subdomain, req, res, host) {
-        const tagnumber = _getTagNumberFromRequest(req)
+        const tagnumber = biketag.getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
         const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 
@@ -210,17 +230,23 @@ class apiController {
         })
     }
 
+    /********		controller methods			**********/
+    init(app) {
+        biketag.setLogger(app.log.debug)
+
+        this.app = app
+        // this.index = this.show = 'apidocs'
+    }
+
     routes(app) {
-        const secure = true
+        app.route('/api/post/email', this.sendEmailToAdministrators, 'post')
 
-        app.route('/post/email', this.sendEmailToAdministrators, 'post')
+        app.apiRoute('/post/reddit/:tagnumber?', this.postToReddit, 'post')
 
-        app.route('/post/reddit/:tagnumber?', this.postToReddit, 'post', secure)
+        app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPost, ['post'])
 
-        app.route('/get/reddit/:tagnumber?', this.getRedditPost, ['get', 'post'])
-
-        app.route('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
+        app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
     }
 }
 
-module.exports = new apiController()
+module.exports = new bikeTagController()

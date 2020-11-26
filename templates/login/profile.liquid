@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Login to {{ name }}</title>
+	<!-- Google Fonts Roboto -->
+	{{ "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" | stylesheet_tag }}
+    <!-- Font Awesome -->
+	{{ "css/fa-all.min.css" | stylesheet_tag }}
+	{{ user | json | console_log }}
+  </head>
+  <body>
+	<div class="main-container">
+		<header class="block">
+			<ul class="header-menu horizontal-list">
+				<li>
+					<a class="header-menu-tab" href="#1"><span class="icon entypo-cog scnd-font-color"></span>Settings</a>
+				</li>
+				
+				
+				<li>
+					<a class="header-menu-tab" href="#5"><span class="icon fontawesome-star-empty scnd-font-color"></span>Favorites</a>
+				</li>
+			</ul>
+			<div class="profile-menu">
+				<p>Me <a href="#26"><span class="entypo-down-open scnd-font-color"></span></a></p>
+				<div class="profile-picture small-profile-picture">
+					<img width="40px" alt="Anne Hathaway picture" src="{{ user.picture }}">
+				</div>
+			</div>
+		</header>
+
+		<!-- LEFT-CONTAINER -->
+		<div class="left-container container">
+			<div class="menu-box block"> <!-- MENU BOX (LEFT-CONTAINER) -->
+				<h2 class="titular">MENU BOX</h2>
+				<ul class="menu-box-menu">
+					<li>
+						<a class="menu-box-tab" href="#6"><span class="icon scnd-font-color"></span>Coming Soon<div class="menu-box-number"></div></a>                            
+					</li>
+				</ul>
+			</div>
+			<ul class="social horizontal-list block"> <!-- SOCIAL (LEFT-CONTAINER) -->
+				<li class="facebook"><p class="icon"><span class="zocial-facebook"></span></p><p class="number">248k</p></li>
+				<li class="twitter"><p class="icon"><span class="zocial-twitter"></span></p><p class="number">30k</p></li>
+				<li class="googleplus"><p class="icon"><span class="zocial-googleplus"></span></p><p class="number">124k</p></li>
+				<li class="mailbox"><p class="icon"><span class="fontawesome-envelope"></span></p><p class="number">89k</p></li>
+			</ul>
+		</div>
+
+		<!-- MIDDLE-CONTAINER -->
+		<div class="middle-container container">
+			<div class="profile block"> <!-- PROFILE (MIDDLE-CONTAINER) -->
+				<a class="add-button" href="#28"><span class="icon entypo-plus scnd-font-color"></span></a>
+				<div class="profile-picture big-profile-picture clear">
+					<img width="150px" alt="picture" src="{{ user.picture }}">
+				</div>
+				<h1 class="user-name">{{ user.username }}</h1>
+				<div class="profile-description">
+					<p class="scnd-font-color">{{ user.email }}</p>
+				</div>
+				<ul class="profile-options horizontal-list">
+					<li><a class="comments" href="#40"><p><span class="icon fontawesome-comment-alt scnd-font-color"></span>23</p></a></li><p></p>
+					<li><a class="views" href="#41"><p><span class="icon fontawesome-eye-open scnd-font-color"></span>841</p></a></li><p></p>
+					<li><a class="likes" href="#42"><p><span class="icon fontawesome-heart-empty scnd-font-color"></span>49</p></a></li><p></p>
+				</ul>
+			</div>
+			
+		</div>
+
+		<!-- RIGHT-CONTAINER -->
+		<div class="right-container container">
+		</div> 
+	</div>
+  </body>
+</html>

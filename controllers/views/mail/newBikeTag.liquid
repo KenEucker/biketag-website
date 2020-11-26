@@ -1,0 +1,115 @@
+{% assign imageSize = 'm' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            body {
+                margin: 1em;
+                padding: 3em;
+			}
+			@media only screen and (max-width: 480px){
+				#templateColumns{
+					width:100% !important;
+				}
+
+				.templateColumnContainer{
+					display:block !important;
+					width:100% !important;
+				}
+
+				.columnImage{
+					height:auto !important;
+					max-width:480px !important;
+					width:100% !important;
+				}
+
+				.leftColumnContent{
+					font-size:16px !important;
+					line-height:125% !important;
+				}
+
+				.rightColumnContent{
+					font-size:16px !important;
+					line-height:125% !important;
+				}
+			}
+
+			.biketagIcon {
+				text-align:center;
+				max-width: 15em;
+			}
+        </style>
+    </head>
+    <body>		
+		<table border="0" cellpadding="10" cellspacing="0" width="600">
+			{% if subdomainIcon %}
+			<tr>
+				<td align="center" width="50%" valign="top" class="middleColumnContent">
+					<img src="https://i.imgur.com/CtJVstG.png" class="biketagIcon">
+				</td>
+			</tr>
+			{% endif %}
+			<tr>
+				<td align="center" width="50%" valign="bottom" class="middleColumnContent">
+					<h4>Hello BikeTag Admin, A new BikeTag has been posted by [{{ latestTagInfo.credit }}] in {{ region }}!</h4>
+					<p>You are getting this email because you are listed as an admin on the site ({{ host }}).</p>
+				</td>
+			</tr>
+		</table>
+		
+		<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateColumns">
+			<tr>
+				<td align="center" valign="top" width="50%" class="templateColumnContainer">
+					<table border="0" cellpadding="10" cellspacing="0" width="100%">
+						<tr>
+							<td valign="top" class="leftColumnContent">
+								<h1>Proof for #{{ latestTagInfo.previousMysteryTagNumber }}</h1>
+								The Previous Mystery Tag
+							</td>
+						</tr>
+						<tr>
+							<td valign="bottom" class="leftColumnContent">
+								<img src="{{ latestTagInfo.proofTagURLDirect | biketag_image: imageSize }}" width="280" style="max-width:280px;" class="columnImage" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td align="center" valign="top" width="50%" class="templateColumnContainer">
+					<table border="0" cellpadding="10" cellspacing="0" width="100%">
+						<tr>
+							<td valign="top" class="rightColumnContent">
+								<h1>Mystery Tag #{{ latestTagInfo.previousMysteryTagNumber }}</h1>
+								Previous Mystery Tag
+							</td>
+						</tr>
+						<tr>
+							<td valign="bottom" class="rightColumnContent">
+								<img src="{{ latestTagInfo.previousMysteryTagURL | biketag_image: imageSize }}" width="280" style="max-width:280px;" class="columnImage" />
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		
+		<table border="0" cellpadding="10" cellspacing="0" width="600">
+			<tr>
+				<td align="center" width="50%" valign="top" class="middleColumnContent">
+					<h1>Tag #{{ latestTagInfo.mysteryTagNumber }}</h1>
+					<span>New Mystery Tag</span>
+					<p>To post this tag to Reddit manually, go to <a href="{{ host }}/get/reddit">{{ host }}/get/reddit</a> to get the reddit post template.</p>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" width="50%" valign="bottom" class="middleColumnContent">
+					<img src="{{ latestTagInfo.nextTagURL | biketag_image: imageSize }}" width="280" style="max-width:280px;" class="columnImage" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" width="50%" valign="top" class="middleColumnContent">
+					Reply to this email to request to be removed from this admin list.
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
