@@ -1,4 +1,4 @@
-{{ "js/utils.js" | javascript_tag }}
+{{ "js/utils.js" | javascript_tag: nonce }}
 <script nonce={{nonce}}>
 	/// TODO: turn this pattern into a frontend package using {{ "utils" | javascript_package }}
 	/// TODO: accompanying the above: {{ "biketag" | javascript_package: "window.imgur.init()" }}

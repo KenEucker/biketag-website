@@ -140,7 +140,7 @@
 		}
 	</script>
 
-	{{ "js/biketag.js" | javascript_tag }}
+	{{ "js/biketag.js" | javascript_tag: nonce }}
 	<script nonce="{{ nonce }}">
 		var biketagUploadContainerSelector = '#tagit'
 		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
@@ -151,13 +151,13 @@
 	</script>
 
 	<!-- Scripts -->
-	{{ "js/jquery.min.js" | javascript_tag }}
-	{{ "js/uglipop.min.js" | javascript_tag }}
-	{{ "js/browser.min.js" | javascript_tag }}
-	{{ "js/breakpoints.min.js" | javascript_tag }}
-	{{ "js/util.js" | javascript_tag }}
-	{{ "js/main.js" | javascript_tag }}
-	{{ "js/imgur.js" | javascript_tag }}
+	{{ "js/jquery.min.js" | javascript_tag: nonce }}
+	{{ "js/uglipop.min.js" | javascript_tag: nonce }}
+	{{ "js/browser.min.js" | javascript_tag: nonce }}
+	{{ "js/breakpoints.min.js" | javascript_tag: nonce }}
+	{{ "js/util.js" | javascript_tag: nonce }}
+	{{ "js/main.js" | javascript_tag: nonce }}
+	{{ "js/imgur.js" | javascript_tag: nonce }}
 
 	{% if debug { %}
 	{{ content.localdev }}
