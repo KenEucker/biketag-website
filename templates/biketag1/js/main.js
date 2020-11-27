@@ -27,6 +27,7 @@
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
+			credentials: 'include',
 			body: JSON.stringify(data),
 		}).then(function (res) {
 			return res.text();

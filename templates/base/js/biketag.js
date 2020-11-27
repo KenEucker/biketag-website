@@ -197,6 +197,7 @@ class BikeTag {
 				headers: {
 					'Content-Type': 'application/json'
 				},
+				credentials: 'include',
 			}).then(function (res) {
 				return res.json()
 			})

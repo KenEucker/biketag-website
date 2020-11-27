@@ -132,7 +132,7 @@
 	<!-- Priority Scripts -->
 	{% include "biketag/lazy" %}
 	
-	<script>
+	<script nonce="{{ nonce }}">
 		try {
 			window.pageData = JSON.parse(`{{ page | json }}`)
 		} catch(e) {
@@ -141,7 +141,7 @@
 	</script>
 
 	{{ "js/biketag.js" | javascript_tag }}
-	<script>
+	<script nonce="{{ nonce }}">
 		var biketagUploadContainerSelector = '#tagit'
 		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
 		window.biketag.config = {

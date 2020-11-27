@@ -65,7 +65,7 @@
 	</div>
 	
 	<!-- Priority Scripts -->
-	<script>
+	<script nonce={{nonce}}>
 		try {
 			window.pageData = JSON.parse(`{{ page | json }}`)
 		} catch(e) {
@@ -73,7 +73,7 @@
 		}
 	</script>
 	
-	<script>
+	<script nonce={{nonce}}>
 		(function () {
 			var navMenu = document.querySelector('.nav-menu')
 			var navMenuLinks = navMenu.querySelectorAll('.nav-link')
@@ -181,7 +181,7 @@
 		Your browser does not support the audio element.
 	</audio>
 
-	<script>
+	<script nonce={{nonce}}>
 		(function () {
 			const mute = document.getElementById('mute')
 			mute.addEventListener('click', function () {
