@@ -8,12 +8,14 @@
     <title>Login to {{ name }}</title>
 	<!-- Google Fonts Roboto -->
 	{{ "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" | stylesheet_tag }}
+	<!-- MDB -->
+	{{ "css/mdb.min.css" | stylesheet_tag }}
     <!-- Font Awesome -->
 	{{ "css/fa-all.min.css" | stylesheet_tag }}
 	{{ user | json | console_log }}
   </head>
   <body>
-	<div class="main-container">
+	<div class="container my-5">
 		<header class="block">
 			<ul class="header-menu horizontal-list">
 				<li>
@@ -26,54 +28,86 @@
 				</li>
 			</ul>
 			<div class="profile-menu">
-				<p>Me <a href="#26"><span class="entypo-down-open scnd-font-color"></span></a></p>
+				<button class="btn btn-primary dropdown-toggle mr-4 scnd-font-color" type="button" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false">Me</button>
+
+				<div class="dropdown-menu">
+				<!-- <a class="dropdown-item" href="#">Action</a>
+				<a class="dropdown-item" href="#">Another action</a>
+				<a class="dropdown-item" href="#">Something else here</a> -->
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="/logout">Logout</a>
+				</div>
+				<!-- <p>Me <a href="#26"><span class="entypo-down-open scnd-font-color"></span></a></p> -->
 				<div class="profile-picture small-profile-picture">
 					<img width="40px" alt="Anne Hathaway picture" src="{{ user.picture }}">
 				</div>
 			</div>
 		</header>
 
-		<!-- LEFT-CONTAINER -->
-		<div class="left-container container">
-			<div class="menu-box block"> <!-- MENU BOX (LEFT-CONTAINER) -->
-				<h2 class="titular">MENU BOX</h2>
-				<ul class="menu-box-menu">
-					<li>
-						<a class="menu-box-tab" href="#6"><span class="icon scnd-font-color"></span>Coming Soon<div class="menu-box-number"></div></a>                            
-					</li>
-				</ul>
-			</div>
-			<ul class="social horizontal-list block"> <!-- SOCIAL (LEFT-CONTAINER) -->
-				<li class="facebook"><p class="icon"><span class="zocial-facebook"></span></p><p class="number">248k</p></li>
-				<li class="twitter"><p class="icon"><span class="zocial-twitter"></span></p><p class="number">30k</p></li>
-				<li class="googleplus"><p class="icon"><span class="zocial-googleplus"></span></p><p class="number">124k</p></li>
-				<li class="mailbox"><p class="icon"><span class="fontawesome-envelope"></span></p><p class="number">89k</p></li>
-			</ul>
-		</div>
-
-		<!-- MIDDLE-CONTAINER -->
-		<div class="middle-container container">
-			<div class="profile block"> <!-- PROFILE (MIDDLE-CONTAINER) -->
-				<a class="add-button" href="#28"><span class="icon entypo-plus scnd-font-color"></span></a>
-				<div class="profile-picture big-profile-picture clear">
-					<img width="150px" alt="picture" src="{{ user.picture }}">
+		<!-- Section -->
+		<section>
+			<div class="row">
+				<!-- Grid column -->
+				<div class="col-lg-4 col-md-6 mb-4">
+				<!-- Panel -->
+				<div class="profile block"> <!-- PROFILE (MIDDLE-CONTAINER) -->
+					<a class="add-button" href="#28"><span class="icon entypo-plus scnd-font-color"></span></a>
+					<div class="profile-picture big-profile-picture clear">
+						<img width="150px" alt="picture" src="{{ user.picture }}">
+					</div>
+					<h1 class="user-name">{{ user.username }}</h1>
+					<div class="profile-description">
+						<p class="scnd-font-color">{{ user.email }}</p>
+					</div>
+					<ul class="profile-options horizontal-list">
+						<li><a class="comments" href="#40"><p><span class="icon fontawesome-comment-alt scnd-font-color"></span>23</p></a></li><p></p>
+						<li><a class="views" href="#41"><p><span class="icon fontawesome-eye-open scnd-font-color"></span>841</p></a></li><p></p>
+						<li><a class="likes" href="#42"><p><span class="icon fontawesome-heart-empty scnd-font-color"></span>49</p></a></li><p></p>
+					</ul>
 				</div>
-				<h1 class="user-name">{{ user.username }}</h1>
-				<div class="profile-description">
-					<p class="scnd-font-color">{{ user.email }}</p>
+				<!-- Panel -->
 				</div>
-				<ul class="profile-options horizontal-list">
-					<li><a class="comments" href="#40"><p><span class="icon fontawesome-comment-alt scnd-font-color"></span>23</p></a></li><p></p>
-					<li><a class="views" href="#41"><p><span class="icon fontawesome-eye-open scnd-font-color"></span>841</p></a></li><p></p>
-					<li><a class="likes" href="#42"><p><span class="icon fontawesome-heart-empty scnd-font-color"></span>49</p></a></li><p></p>
-				</ul>
-			</div>
+				<!-- Grid column -->
+				
+				<!-- Grid column -->
+				<div class="col-lg-4 col-md-12 mb-4">
+					<!-- Panel -->
+					<div class="">
 			
-		</div>
-
-		<!-- RIGHT-CONTAINER -->
-		<div class="right-container container">
-		</div> 
-	</div>
+						<div class="menu-box block"> <!-- MENU BOX (LEFT-CONTAINER) -->
+							<h2 class="titular">MENU BOX</h2>
+							<ul class="menu-box-menu">
+								<li>
+									<a class="menu-box-tab" href="#6"><span class="icon scnd-font-color"></span>Coming Soon<div class="menu-box-number"></div></a>                            
+								</li>
+							</ul>
+						</div>
+						<ul class="social horizontal-list block"> <!-- SOCIAL (LEFT-CONTAINER) -->
+							<li class="facebook"><p class="icon"><span class="zocial-facebook"></span></p><p class="number">248k</p></li>
+							<li class="twitter"><p class="icon"><span class="zocial-twitter"></span></p><p class="number">30k</p></li>
+							<li class="googleplus"><p class="icon"><span class="zocial-googleplus"></span></p><p class="number">124k</p></li>
+							<li class="mailbox"><p class="icon"><span class="fontawesome-envelope"></span></p><p class="number">89k</p></li>
+						</ul>
+			
+					</div>
+					<!-- Panel -->
+				</div>
+				<!-- Grid column -->
+		
+				<!-- Grid column -->
+				<div class="col-lg-4 col-md-6 mb-4">
+					<!-- Panel -->
+					<!-- Panel -->
+				</div>
+				<!-- Grid column -->
+		  </div>
+		</section>
+		<!-- Section -->
+	  
+	  </div>
+	<!-- MDB -->
+	{{ "js/mdb.min.js" | javascript_tag }}
+	{{ "js/login.js" | javascript_tag }}
   </body>
 </html>

@@ -41,8 +41,14 @@ class IndexController {
 
     getRedditPost(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
-        const redditTemplatePath = 'reddit/post'
-        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+		const redditTemplatePath = 'reddit/post'
+		const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+		
+		if (!subdomainConfig.imgur) {
+			this.app.log.status(`imgur not set for host on subdomain [${subdomain}]`, host)
+			return res.send('no image data set')
+		}
+
         const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })

@@ -64,3 +64,6 @@ uploads
 yarn.lock
 
 *.pem
+
+public/js/biketag-website-api.js
+public/js/biketag-website-api.js.map

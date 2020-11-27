@@ -66,7 +66,7 @@ class bikeTagController {
     sendEmailToAdministrators(subdomain, req, res, host) {
         try {
             const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-            const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+			const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 
             return biketag.getTagInformation(
                 imgurClientID,
@@ -239,12 +239,15 @@ class bikeTagController {
     }
 
     routes(app) {
-        app.route('/api/post/email', this.sendEmailToAdministrators, 'post')
+		/// How to create an insecure api route from the api controller {host}/api/post/email
+        app.route('/post/email', this.sendEmailToAdministrators, 'post', false)
 
-        app.apiRoute('/post/reddit/:tagnumber?', this.postToReddit, 'post')
+		/// Generates the default api routes on both internal and external api servers
+        app.apiRoute('/post/reddit/:tagnumber?', this.postToReddit)
 
-        app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPost, ['post'])
-
+        app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPost)
+		
+		/// Generates the default api routes and adds an insecure get method on the root {host}/get/biketag/:number?
         app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
     }
 }
