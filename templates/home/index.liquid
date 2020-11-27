@@ -1,16 +1,18 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
 	{% include "page/gtm" %}
 	{% include "page/meta" %}
+	{% include "page/css" %}
 
-	<link href="css/normalize.css" rel="stylesheet" type="text/css">
-	<link href="css/webflow.css" rel="stylesheet" type="text/css">
-	<link href="css/proof.css" rel="stylesheet" type="text/css">
+	{{ "css/normalize.css" | stylesheet_tag }}
+	{{ "css/webflow.css" | stylesheet_tag }}
+	{{ "css/proof.css" | stylesheet_tag }}
 
-	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+	{{ "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" | javascript_tag }}
 	<script nonce="{{nonce}} type="text/javascript">WebFont.load({  google: {    families: ["Roboto:300,regular,500","Roboto Condensed:300,regular,700","Roboto Slab:300,regular"]  }});</script>
-	<!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+	{{ "https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" | ie_script }}
 	<script nonce="{{nonce}} type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
 </head>
 
@@ -176,6 +178,7 @@
 			})
 		})()
 	</script>
+	
 	<audio id="biketag-jingle">
 		<source id="audioSource" type="audio/mpeg">
 		Your browser does not support the audio element.
@@ -207,10 +210,10 @@
 		})()
 	</script>
 
-	<script src="js/jquery.min.js" type="text/javascript"></script>
-	<script src="js/webflow.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="css/fa-all.min.css" type='text/css'>
-  	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+	{{ "js/jquery.min.js" | javascript_tag: nonce }}
+	{{ "js/webflow.js" | javascript_tag: nonce }}
+	{{ "css/fa-all.min.css" | stylesheet_tag }}
+	{{ "https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js" | ie_script }}
 
 	{% if debug { %}
 	{{ content.localdev }}

@@ -272,8 +272,8 @@
         "region": "San Jose, California",
         "tagline": "The BikeTag game in San Jose, California",
         "imgur": {
-			"imgurAlbumHash": "PXGVuRY",
-			"queueAlbumHash": "GENERATE ME IF I DON'T EXIST"
+            "imgurAlbumHash": "PXGVuRY",
+            "queueAlbumHash": "GENERATE ME IF I DON'T EXIST"
         },
         "reddit": {
             "redditSubreddit": "CycleSanJose"

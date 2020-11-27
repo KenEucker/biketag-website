@@ -66,7 +66,7 @@ class bikeTagController {
     sendEmailToAdministrators(subdomain, req, res, host) {
         try {
             const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-			const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+            const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 
             return biketag.getTagInformation(
                 imgurClientID,
@@ -78,18 +78,18 @@ class bikeTagController {
                     const subject = this.app.renderSync('mail/newBikeTagSubject', {
                         latestTagNumber,
                         subdomain,
-					})
-					const renderOpts = {
-						region: subdomainConfig.region,
-						subdomainIcon: subdomainConfig.meta.image,
-						host,
-						latestTagInfo,
-					}
+                    })
+                    const renderOpts = {
+                        region: subdomainConfig.region,
+                        subdomainIcon: subdomainConfig.meta.image,
+                        host,
+                        latestTagInfo,
+                    }
                     const text = this.app.renderSync('mail/newBikeTagText', renderOpts)
-					const html = this.app.renderSync('mail/newBikeTag', renderOpts)
-					
-					const emailPromises = []
-					const emailResponses = []
+                    const html = this.app.renderSync('mail/newBikeTag', renderOpts)
+
+                    const emailPromises = []
+                    const emailResponses = []
 
                     subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
                         emailPromises.push(
@@ -100,8 +100,8 @@ class bikeTagController {
                                 callback: (info) => {
                                     this.app.log.status(`email sent to ${emailAddress}`, info)
                                     emailResponses.push(info.response)
-								},
-								html,
+                                },
+                                html,
                             }),
                         )
                     })
@@ -239,15 +239,15 @@ class bikeTagController {
     }
 
     routes(app) {
-		/// How to create an insecure api route from the api controller {host}/api/post/email
+        /// How to create an insecure api route from the api controller {host}/api/post/email
         app.route('/post/email', this.sendEmailToAdministrators, 'post', false)
 
-		/// Generates the default api routes on both internal and external api servers
+        /// Generates the default api routes on both internal and external api servers
         app.apiRoute('/post/reddit/:tagnumber?', this.postToReddit)
 
         app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPost)
-		
-		/// Generates the default api routes and adds an insecure get method on the root {host}/get/biketag/:number?
+
+        /// Generates the default api routes and adds an insecure get method on the root {host}/get/biketag/:number?
         app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
     }
 }

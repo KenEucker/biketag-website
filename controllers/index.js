@@ -13,10 +13,11 @@ class IndexController {
 
             /// Set the description of the API for this subdomain to the tagline.
             subdomainInformation.meta = subdomainInformation.meta ? subdomainInformation.meta : {}
-			subdomainInformation.meta.description = subdomainInformation.tagline
-			
-			/// Copy over the email information, if it's not set by the subdomain
-			subdomainInformation.email = subdomainInformation.email || this.app.config.authentication.email
+            subdomainInformation.meta.description = subdomainInformation.tagline
+
+            /// Copy over the email information, if it's not set by the subdomain
+            subdomainInformation.email =
+                subdomainInformation.email || this.app.config.authentication.email
 
             this.app.config.subdomains[subdomain] = subdomainInformation
         })
@@ -41,13 +42,13 @@ class IndexController {
 
     getRedditPost(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
-		const redditTemplatePath = 'reddit/post'
-		const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-		
-		if (!subdomainConfig.imgur) {
-			this.app.log.status(`imgur not set for host on subdomain [${subdomain}]`, host)
-			return res.send('no image data set')
-		}
+        const redditTemplatePath = 'reddit/post'
+        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+
+        if (!subdomainConfig.imgur) {
+            this.app.log.status(`imgur not set for host on subdomain [${subdomain}]`, host)
+            return res.send('no image data set')
+        }
 
         const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
 

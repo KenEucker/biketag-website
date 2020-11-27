@@ -1,6 +1,4 @@
-<noscript>
-<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-</noscript>
+{{ "css/ie9.css" | ie_style }}
 {% if page.hasCustomCss { %}
-<link rel="stylesheet" href="../public/css/{{ thisSubdomain }}.css" />
+{{ "css/{{ thisSubdomain }}.css" | asset_url | stylesheet_tag }}
 {% endif %}

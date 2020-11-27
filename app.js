@@ -34,7 +34,7 @@ const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain
 }
 
 const app = sexpress({
-	publicFilter,
+    publicFilter,
 })
 
 app.run()
