@@ -218,8 +218,12 @@ class bikeTagController {
      * @return {object} 200 - success response - application/json
      */
     getBikeTag(subdomain, req, res, host) {
-        const tagnumber = biketag.getTagNumberFromRequest(req)
-        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+		const tagnumber = biketag.getTagNumberFromRequest(req)
+		/// TODO: put this into sexpress
+		const subdomainIsApi = subdomain === 'api'
+		const requestSubdomain = subdomainIsApi ? req.path.match(/^\/[^\/]+/)[0].substr(1) : subdomain
+		
+		const subdomainConfig = this.app.getSubdomainOpts(requestSubdomain)
         const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
