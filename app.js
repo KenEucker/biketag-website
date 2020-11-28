@@ -8,12 +8,13 @@ const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain
     publicData.subdomains = Object.values(appConfig.subdomains).reduce(
         (out, subdomainInformation, index) => {
             const subdomainName = subdomains[index]
-            const subdomainConfig = publicData.subdomains[subdomainName]
+            const subdomainConfig = publicData.subdomains[subdomainName] || {}
 
+			console.log({subdomainConfig, subdomainInformation})
             if (subdomainInformation.imgur) {
                 subdomainConfig.imgur = subdomainConfig.imgur || {}
                 subdomainConfig.imgur.imgurClientID = subdomainInformation.imgur.imgurClientID
-                subdomainConfig.imgur.imgurAlbumHash = subdomainInformation.imgur.imgurAlbumHash
+                subdomainConfig.imgur.albumHash = subdomainInformation.imgur.albumHash
                 subdomainConfig.imgur.imgurAuthorization =
                     subdomainInformation.imgur.imgurAuthorization
             }

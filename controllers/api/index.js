@@ -29,9 +29,9 @@ class bikeTagController {
         subdomainConfig.host = host
         subdomainConfig.viewsFolder = this.app.config.viewsFolder
         subdomainConfig.version = this.app.config.version
-        const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
 
-        return getTagInformation(imgurClientID, 'latest', imgurAlbumHash, (latestTagInfo) => {
+        return getTagInformation(imgurClientID, 'latest', albumHash, (latestTagInfo) => {
             subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
 
             return postLatestBikeTagToReddit(subdomainConfig, (response) => {
@@ -66,12 +66,12 @@ class bikeTagController {
     sendEmailToAdministrators(subdomain, req, res, host) {
         try {
             const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-            const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+            const { albumHash, imgurClientID } = subdomainConfig.imgur
 
             return biketag.getTagInformation(
                 imgurClientID,
                 'latest',
-                imgurAlbumHash,
+                albumHash,
                 (latestTagInfo) => {
                     const latestTagNumber = (subdomainConfig.latestTagNumber =
                         latestTagInfo.latestTagNumber)
@@ -169,11 +169,11 @@ class bikeTagController {
     getRedditPost(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-        const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
 
-        return biketag.getTagInformation(imgurClientID, tagnumber, imgurAlbumHash, (data) => {
+        return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
             data = data || {
                 error: {
                     message: 'tagnumber: Not Found',
@@ -218,11 +218,11 @@ class bikeTagController {
     getBikeTag(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-        const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
 
-        return biketag.getTagInformation(imgurClientID, tagnumber, imgurAlbumHash, (data) => {
+        return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
             data.host = host
             data.region = subdomainConfig.region
 

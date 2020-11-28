@@ -40,11 +40,11 @@
         "imgur": "^0.3.1",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "^0.6.12",
+        "sexpress": "^0.6.13",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
-        "prettier": "^2.2.0"
+        "prettier": "^2.2.1"
     },
     "license": "Unlicense"
 }

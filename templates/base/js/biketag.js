@@ -6,7 +6,7 @@ class BikeTag {
 		this.target = null
 		this.targetSelector = 'form #submit'
 		this.formID = "biketagUploadForm"
-		this.imgurAlbumHash = window.pageData && window.pageData.imgur ? window.pageData.imgur.imgurAlbumHash : null
+		this.albumHash = window.pageData && window.pageData.imgur ? window.pageData.imgur.albumHash : null
 	}
 
 	closeNotification() {
@@ -541,7 +541,7 @@ class BikeTag {
 
 	setCurrentTagInformation(cb) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, !!cb ? cb : this.setCurrentTagInformation.bind(this))
+			return imgur.getImgurAlbumPictures(this.albumHash, !!cb ? cb : this.setCurrentTagInformation.bind(this))
 		}
 
 		if (!this.latestTagInformationHasBeenSet) {
@@ -588,7 +588,7 @@ class BikeTag {
 	showLatestTagImages(count = -1) {
 		if (!imgur.imgurAlbumPictures) {
 			this.tempCount = count
-			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, this.showLatestTagImages.bind(this))
+			return imgur.getImgurAlbumPictures(this.albumHash, this.showLatestTagImages.bind(this))
 		}
 
 		var currentTagInfo = this.setCurrentTagInformation()
@@ -621,7 +621,7 @@ class BikeTag {
 
 	showArchiveTags(count) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, this.showArchiveTags)
+			return imgur.getImgurAlbumPictures(this.albumHash, this.showArchiveTags)
 		}
 		document.body.classList.add('archive')
 		$('#header .content .inner').empty()
@@ -641,7 +641,7 @@ class BikeTag {
 
 	showBikeTagNumber(tagNumber) {
 		if (!imgur.imgurAlbumPictures) {
-			return imgur.getImgurAlbumPictures(this.imgurAlbumHash, this.showBikeTagNumber);
+			return imgur.getImgurAlbumPictures(this.albumHash, this.showBikeTagNumber);
 		}
 
 		document.body.classList.add('single')

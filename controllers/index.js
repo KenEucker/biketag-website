@@ -25,15 +25,15 @@ class IndexController {
 
     indexHandler(subdomain, req, res, host) {
         const template = this.app.getTemplateNameFromSubdomain(subdomain)
-        const pageData = this.app.getPublicData(subdomain, host)
+        const pageData = this.app.getPublicData(subdomain, host, undefined, res)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-        const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         if (subdomain === 'index') {
             return this.app.renderTemplate(template, pageData, res)
         }
 
-        return biketag.getTagInformation(imgurClientID, 'latest', imgurAlbumHash, (data) => {
+        return biketag.getTagInformation(imgurClientID, 'latest', albumHash, (data) => {
             const bikeTagPageData = { ...pageData, latestBikeTag: data || {} }
 
             return this.app.renderTemplate(template, bikeTagPageData, res)
@@ -50,15 +50,15 @@ class IndexController {
             return res.send('no image data set')
         }
 
-        const { imgurAlbumHash, imgurClientID } = subdomainConfig.imgur
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
 
-        return biketag.getTagInformation(imgurClientID, tagnumber, imgurAlbumHash, (data) => {
+        return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
             if (!data) {
                 return res.json({
                     tagNumberNotFound: tagnumber,
-                    imgurAlbumHash,
+                    albumHash,
                 })
             }
 

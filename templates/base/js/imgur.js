@@ -9,7 +9,7 @@
 			this.imgurPostComponent = 'ImgurPost'
 
 			if (window.pageData && window.pageData.imgur) {
-				this.imgurAlbumHash = window.pageData.imgur.imgurAlbumHash
+				this.albumHash = window.pageData.imgur.albumHash
 				this.imgurClientID = window.pageData.imgur.imgurClientID
 				this.imgurAuthorization = !window.pageData.imgur.imgurAuthorization ? 'Client-ID ' + this.imgurClientID : window.pageData.imgur.imgurAuthorization
 			}
@@ -19,7 +19,7 @@
 		
 		getImgurAlbumInfo(albumHash, callback) {
 			if (!albumHash) {
-				albumHash = this.imgurAlbumHash;
+				albumHash = this.albumHash;
 			}
 
 			if (!albumHash) {
@@ -89,7 +89,7 @@
 
 		getImgurAlbumPictures(albumHash, callback) {
 			if (!albumHash) {
-				albumHash = this.imgurAlbumHash
+				albumHash = this.albumHash
 			}
 
 			if (!albumHash) {
@@ -127,7 +127,7 @@
 
 			var formData = new FormData();
 			formData.append("image", image);
-			formData.append("album", this.imgurAlbumHash);
+			formData.append("album", this.albumHash);
 			formData.append("description", description);
 
 			var settings = {
@@ -167,7 +167,7 @@
 				// })
 				.then((response) => {
 					if (!!response && typeof response == 'object') {
-						this.imgurAlbumHash = response.imgurAlbumHash || this.imgurAlbumHash
+						this.albumHash = response.albumHash || this.albumHash
 						this.imgurAccessToken = response.imgurAccessToken ? 'Bearer ' + response.imgurAccessToken : this.imgurAccessToken
 						this.imgurAuthorization = response.imgurAuthorization ? 'Client-ID ' + response.imgurAuthorization : this.imgurAuthorization
 					} else {
@@ -198,10 +198,10 @@
 				var isArchive = biketag.getLastOfUrlPath().toLowerCase().indexOf('archive') !== -1
 
 				// console.log({getImgurTokens: response})
-				this.imgurAlbumHash = response.imgurAlbumHash || this.imgurAlbumHash
+				this.albumHash = response.albumHash || this.albumHash
 				this.imgurAuthorization = response.imgurAuthorization || this.imgurAuthorization
 
-				// if (!this.imgurAlbumHash || !this.imgurAuthorization) return
+				// if (!this.albumHash || !this.imgurAuthorization) return
 				
 				// If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
 				if (this.getUrlParam('uploadSuccess') == 'true') {
@@ -238,7 +238,7 @@
 						logo.offsetHeight; /* trigger reflow */
 						logo.style.animation = null;
 
-						this.getImgurAlbumInfo(this.imgurAlbumHash, this.refreshImgurAlbumInfo);
+						this.getImgurAlbumInfo(this.albumHash, this.refreshImgurAlbumInfo);
 					}, this.imgurAlbumPicturesRefreshFrequency);
 				}
 

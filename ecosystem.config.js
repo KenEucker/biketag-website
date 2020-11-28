@@ -6,6 +6,7 @@ module.exports = {
     apps: [
         {
             name: 'BikeTag',
+			// interpreter : 'node@14.15.0',
             script: 'app.js',
             env: {
                 PORT: 80,
@@ -29,17 +30,6 @@ module.exports = {
             path: '~/biketag-website',
             env: {
                 NODE_ENV: 'production',
-            },
-        },
-        dev: {
-            user: 'node',
-            host: '212.83.163.1',
-            ref: 'origin/develop',
-            repo: 'git@github.com:keneucker/biketag-website.git',
-            path: '~/biketag-website-dev',
-            'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env dev',
-            env: {
-                NODE_ENV: 'dev',
             },
         },
     },
