@@ -83,8 +83,10 @@ class bikeTagController {
                         region: subdomainConfig.region,
                         subdomainIcon: subdomainConfig.meta.image,
                         host,
-                        latestTagInfo,
-                    }
+						latestTagInfo,
+						subreddit: subdomainConfig.reddit.subreddit,
+					}
+					console.log('sending biketag email', renderOpts)
                     const text = this.app.renderSync('mail/newBikeTagText', renderOpts)
                     const html = this.app.renderSync('mail/newBikeTag', renderOpts)
 

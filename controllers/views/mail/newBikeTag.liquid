@@ -51,8 +51,8 @@
 			{% endif %}
 			<tr>
 				<td align="center" width="50%" valign="bottom" class="middleColumnContent">
-					<h4>Hello BikeTag Admin, A new BikeTag has been posted by [{{ latestTagInfo.credit }}] in {{ region }}!</h4>
-					<p>You are getting this email because you are listed as an admin on the site ({{ host }}).</p>
+					<h4>Hello BikeTag Admin, A new BikeTag has been posted by <strong>{{ latestTagInfo.credit }}</strong> in {{ region }}!</h4>
+					<p>You are getting this email because you are listed as an admin on the site (<a href="https://{{ host }}">{{ host }}</a>).</p>
 				</td>
 			</tr>
 		</table>
@@ -97,7 +97,7 @@
 				<td align="center" width="50%" valign="top" class="middleColumnContent">
 					<h1>Tag #{{ latestTagInfo.mysteryTagNumber }}</h1>
 					<span>New Mystery Tag</span>
-					<p>Keep the game up to date by posting this tag to Reddit manually, go to <a href="{{ host }}/get/reddit">{{ host }}/get/reddit</a> to get the reddit post template.
+					<p>Keep the game up to date by posting this tag to Reddit manually, go to <a href="https://{{ host }}/get/reddit">{{ host }}/get/reddit</a> to get the reddit post template.
 						The subreddit for this game is <a href="https://reddit.com/r/{{reddit.subreddit}}">r/{{reddit.subreddit}}</a>
 					</p>
 				</td>
