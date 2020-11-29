@@ -1,5 +1,5 @@
 {{ "js/utils.js" | javascript_tag: nonce }}
-<script nonce={{nonce}}>
+<script nonce="{{nonce}}">
 	/// TODO: turn this pattern into a frontend package using {{ "utils" | javascript_package }}
 	/// TODO: accompanying the above: {{ "biketag" | javascript_package: "window.imgur.init()" }}
 	((utils) => {
@@ -22,6 +22,6 @@
 {% endif %}
 
 
-<script nonce={{nonce}}>
+<script nonce="{{nonce}}">
 	console.log('Whoami', {{ credentials | json }} )
 </script>

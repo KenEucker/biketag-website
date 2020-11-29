@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Error! <%= vars.code %> - <%= vars.title %></title>
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
-	<style>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet" nonce="<%= nonce %>">
+	<style type="text/css" nonce="<%= nonce %>">
 		* {
 			-webkit-box-sizing: border-box;
 			box-sizing: border-box;
@@ -130,7 +130,7 @@
 			<p class="tail"><%- vars.footer %></p>
 		</div>
 	</div>
-	<script>
+	<script type="text/javascript"  nonce="<%= nonce %>">
 		(function() {
 			window.setTimeout(() => {
 				const error = <%- JSON.stringify(vars) %>

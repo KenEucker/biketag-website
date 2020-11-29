@@ -83,10 +83,10 @@ class bikeTagController {
                         region: subdomainConfig.region,
                         subdomainIcon: subdomainConfig.meta.image,
                         host,
-						latestTagInfo,
-						subreddit: subdomainConfig.reddit.subreddit,
-					}
-					console.log('sending biketag email', renderOpts)
+                        latestTagInfo,
+                        subreddit: subdomainConfig.reddit.subreddit,
+                    }
+
                     const text = this.app.renderSync('mail/newBikeTagText', renderOpts)
                     const html = this.app.renderSync('mail/newBikeTag', renderOpts)
 
@@ -218,12 +218,14 @@ class bikeTagController {
      * @return {object} 200 - success response - application/json
      */
     getBikeTag(subdomain, req, res, host) {
-		const tagnumber = biketag.getTagNumberFromRequest(req)
-		/// TODO: put this into sexpress
-		const subdomainIsApi = subdomain === 'api'
-		const requestSubdomain = subdomainIsApi ? req.path.match(/^\/[^\/]+/)[0].substr(1) : subdomain
-		
-		const subdomainConfig = this.app.getSubdomainOpts(requestSubdomain)
+        const tagnumber = biketag.getTagNumberFromRequest(req)
+        /// TODO: put this into sexpress
+        const subdomainIsApi = subdomain === 'api'
+        const requestSubdomain = subdomainIsApi
+            ? req.path.match(/^\/[^\/]+/)[0].substr(1)
+            : subdomain
+
+        const subdomainConfig = this.app.getSubdomainOpts(requestSubdomain)
         const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)

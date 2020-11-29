@@ -5,6 +5,6 @@
     "notifications": true,
     "content": true,
 
-	"imgur": ["albumHash", "imgurClientID"],
-	"reddit": ["subreddit"]
+    "imgur": ["albumHash", "imgurClientID"],
+    "reddit": ["subreddit"]
 }

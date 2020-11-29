@@ -1,5 +1,5 @@
 {
-    "index": {
+    "index2": {
         "template": "home",
         "aliases": ["www"],
         "imgur": {
@@ -35,7 +35,7 @@
             "logo": ""
         }
     },
-    "portland": {
+    "index": {
         "template": "biketag1",
         "aliases": ["pdx", "oregon"],
         "meta": {
