@@ -333,15 +333,15 @@ class BikeTag {
 		return tagNumberIndex
 	}
 
-	renderBikeTag(tag, heading, targetSelector, eraseContent = false) {
-		var targetContainer = document.querySelector(targetSelector || '.content .inner');
+	renderBikeTag(tag, heading, targetSelector, eraseContent = false, className = '') {
+		var targetContainer = typeof targetSelector !== 'object' ? document.querySelector(targetSelector || '.content .inner') : targetSelector
 
 		if (targetContainer) {
 			if (eraseContent) {
 				targetContainer.innerHTML = ""
 			}
 			var tagContainer = document.createElement('div')
-			tagContainer.className = "m-imgur-post fadeIn"
+			tagContainer.className = `m-imgur-post fadeIn ${className}`
 			var tagTemplate = this.biketagImageTemplate(tag, heading || "Tag")
 			tagContainer.innerHTML = tagTemplate
 
@@ -358,17 +358,19 @@ class BikeTag {
 				e.preventDefault()
 				e.stopPropagation()
 
-				if (window.uglipop && (isArchive || popDialogue || isSingle)) {
-					window.uglipop({
-						source: 'html',
-						class: 'm-imgur-post s--popup fadeInSlow',
-						content,
-					});
-				}
+				// if (isArchive || popDialogue || isSingle) {
+					// window.uglipop({
+					// 	source: 'html',
+					// 	class: 'm-imgur-post s--popup fadeInSlow',
+					// 	content,
+					// });
+				// }
 
 			});
 			targetContainer.appendChild(tagContainer);
 		}
+
+		return targetContainer
 	}
 
 	getBikeTagNumberFromImage(image) {
@@ -630,11 +632,23 @@ class BikeTag {
 		var images = imgur.imgurAlbumPictures;
 		count = Number.isInteger(count) ? count : this.getUrlParam('count')
 		count = Number.isInteger(count) ? count : !count || (count.toUpperCase() === "ALL") ? images.length : Number(count)
+		
+		const atEnd = (i) => (i <= (count * 2)) && (i < images.length)
+		const columnClass = `col-md-4`
 
-		for (var i = 1;
-			(i <= (count * 2)) && (i < images.length); ++i) {
-			var image = images[i]
-			this.renderBikeTag(image, image.description)
+		for (var i = 1; atEnd(i); ++i) {
+			var image1 = images[i], image2
+			image2 = atEnd(i + 1) ? images[++i] : null
+			let row = document.createElement('div')
+			row.className = "row"
+
+			row = this.renderBikeTag(image1, image1.description, row, false, columnClass)
+			
+			if (image2) {
+				row = this.renderBikeTag(image2, image2.description, row, false, columnClass)
+			}
+
+			$('#header .content .inner').append(row)
 		}
 		window.lazyLoadInstance.update()
 	}

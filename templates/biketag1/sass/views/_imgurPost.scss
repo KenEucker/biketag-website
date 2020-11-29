@@ -71,7 +71,7 @@
 		border: 1px _palette(postcard-white) solid;
 		border-bottom: 0;
 		border-top: 0;
-		background-color: rgba(0, 0, 0, 0.7);
+		background-color: rgba(0, 0, 0, 0.9);
 		padding: 0.5em;
 		padding-top: 0.1em;
 		max-width: 30vw;
@@ -95,7 +95,7 @@ body.archive {
 	#header {
 		nav {
 			&#foot {
-				margin-top: 40%;
+				margin-top: 100%;
 			}
 		}
 		.content {
@@ -111,73 +111,59 @@ body.archive {
 		}
 	}
 
-	.m-imgur-post {
-		backface-visibility: hidden;
-		position: relative;
+	.inner {
+		margin-top: 10em;
 
-		&:nth-child(even) {
-			transform: translate(15%, -50%) rotate(5deg) scale(0.8);
-			// margin-left: 20vw;
-			// margin-top: -50vh;
-		}
-
-		&:nth-child(odd) {
-			transform: translateX(-10%) rotate(-5deg) scale(0.8);
-			margin-top: -100%;
-			z-index: 100;
-		}
-
-		&:first-child {
-			margin-top: 25%;
-		}
-
-		@include breakpoint('<medium') {
-			.description {
-				font-size: 1em;
+		.row {
+			.m-imgur-post {
+				margin-top: 1%;
+				backface-visibility: hidden;
+				position: relative;
+				width: 50%;
+				
+				.description {
+					font-size: 0.85em;
+				}
 			}
-		}
-	}
-
-	@include breakpoint('>large') {
-		nav {
-			&#foot {
-				margin-top: 5% !important;
-			}
-		}
-	}
-
-	@include breakpoint('>=medium') {
-		.m-imgur-post {
-			max-width: 80vw;
-			margin-bottom: 5%;
-
-			// img {
-			// 	max-width: 80vw;
-			// }
 
 			&:first-child {
-				margin-top: 50%;
-			}
-
-			&:nth-child(even) {
-				transform: translate(15%, -85%) rotate(5deg) scale(0.8);
+				margin-top: 25%;
 			}
 		}
-	}
 
-	#biketagUploadForm .m-imgur-post,
-	.m-imgur-post.s--popup {
-		transform: unset;
-		margin-left: unset;
-		margin-top: unset;
-		margin-right: unset;
-		z-index: unset;
-		width: 75vw;
+		// 	&:nth-child(even) {
+		// 		transform: translate(15%, -50%) rotate(5deg) scale(0.8);
+		// 		// margin-left: 20vw;
+		// 		// margin-top: -50vh;
+		// 	}
 
-		.description {
-			width: unset;
-			height: unset;
+		// 	&:nth-child(odd) {
+		// 		transform: translateX(-10%) rotate(-5deg) scale(0.8);
+		// 		margin-top: -100%;
+		// 		z-index: 100;
+		// 	}
+		// }
+
+		@include breakpoint('>small') {
+			.m-imgur-post {
+				font-size: 1.5em;
+			}
 		}
+
+		// #biketagUploadForm .m-imgur-post,
+		// .m-imgur-post.s--popup {
+		// 	transform: unset;
+		// 	margin-left: unset;
+		// 	margin-top: unset;
+		// 	margin-right: unset;
+		// 	z-index: unset;
+		// 	width: 75vw;
+
+		// 	.description {
+		// 		width: unset;
+		// 		height: unset;
+		// 	}
+		// }
 	}
 }
 

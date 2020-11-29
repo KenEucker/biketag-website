@@ -49,7 +49,12 @@ module.exports = {
                     `'unsafe-inline' uglipop.min.js`,
                 ],
                 scriptSrc: [`'unsafe-inline' https://www.googletagmanager.com`],
-                connectSrc: [`'self'`, `https://api.imgur.com`, `https://www.google-analytics.com`],
+                connectSrc: [
+                    `'self'`,
+                    `https://api.imgur.com`,
+                    `https://www.google-analytics.com`,
+                    `https://mdbootstrap.com`,
+                ],
                 imgSrc: [
                     `'self'`,
                     `https://i.imgur.com`,

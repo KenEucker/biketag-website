@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 const biketag = require('../../lib/biketag')
+const { sleep } = require('../../lib/util')
 
 class bikeTagController {
     /********		api documented methods		**********/
@@ -63,10 +64,17 @@ class bikeTagController {
      * @tags email
      * @return {object} 200 - success response - application/json
      */
-    sendEmailToAdministrators(subdomain, req, res, host) {
+    async sendEmailToAdministrators(subdomain, req, res, host) {
         try {
             const subdomainConfig = this.app.getSubdomainOpts(subdomain)
             const { albumHash, imgurClientID } = subdomainConfig.imgur
+
+            /// Wait for the data to hit reddit
+            const getTagInformationSleep = 5000
+            this.app.log.status(
+                `waiting for ${getTagInformationSleep}ms until getting new tag information for recent post`,
+            )
+            await sleep(getTagInformationSleep)
 
             return biketag.getTagInformation(
                 imgurClientID,

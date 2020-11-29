@@ -10,6 +10,9 @@
 	{% include "page/gtm" %}
 	{% include "page/meta" %}
 	{% include "page/css" %}
+	
+	<!-- MDB -->
+	{{ "css/mdb.min.css" | stylesheet_tag }}
 </head>
 
 <body class="is-preload {{ thisSubdomain }}">
@@ -45,7 +48,7 @@
 				</ul>
 			</nav>
 			<div class="content">
-				<div class="inner">
+				<div class="inner container">
 					{% if latestBikeTag %}
 
 					<div class="m-imgur-post">
@@ -60,6 +63,7 @@
 					</div>
 
 					{% endif %}
+					
 				</div>
 			</div>
 			<nav id="foot">
@@ -152,7 +156,9 @@
 
 	<!-- Scripts -->
 	{{ "js/jquery.min.js" | javascript_tag }}
-	{{ "js/uglipop.min.js" | javascript_tag: nonce }}
+	<!-- MDB -->
+	{{ "js/mdb.min.js" | javascript_tag }}
+	<!-- {{ "js/uglipop.min.js" | javascript_tag: nonce }} -->
 	{{ "js/browser.min.js" | javascript_tag }}
 	{{ "js/breakpoints.min.js" | javascript_tag }}
 	{{ "js/util.js" | javascript_tag }}
