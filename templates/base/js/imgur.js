@@ -55,8 +55,8 @@
 
 			if (albumInfo.images_count != window.imgur.imgurAlbumPictures.length) {
 				console.log('image count has changed, updating most recent tags');
-			/// TODO: Fix a bug at this line
-			this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
+				/// TODO: Fix a bug at this line
+				this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
 				biketag.showLatestTagImages()
 			}
 		}
@@ -238,7 +238,7 @@
 						logo.offsetHeight; /* trigger reflow */
 						logo.style.animation = null;
 
-						this.getImgurAlbumInfo(this.albumHash, this.refreshImgurAlbumInfo);
+						this.getImgurAlbumInfo(this.albumHash, this.refreshImgurAlbumInfo.bind(this));
 					}, this.imgurAlbumPicturesRefreshFrequency);
 				}
 

@@ -114,6 +114,7 @@ class bikeTagController {
                         })
                     })
                 },
+                true,
             )
         } catch (error) {
             this.app.log.error('email api error', {
