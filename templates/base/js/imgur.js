@@ -189,7 +189,6 @@
 		}
 
 		init() {
-			$('#main').hide();
 			const self = this
 
 			this.getImgurTokens((response) => {

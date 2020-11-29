@@ -11,19 +11,16 @@
 		border-color: _palette(postcard-white);
 		border-width: 1px;
 		border-top-width: 0px;
-		// margin: 0;
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
 		margin-top: -0.6em;
 		background-color: _palette(postcard-white);
 		color: black;
 		padding: 1rem;
-		// min-width: 100%;
 	}
 
 	img,
 	.descrtipion {
-		// min-width: 30em;
 		max-width: 80vw;
 	}
 
@@ -127,19 +124,6 @@ body.archive {
 			}
 		}
 
-		// 	&:nth-child(even) {
-		// 		transform: translate(15%, -50%) rotate(5deg) scale(0.8);
-		// 		// margin-left: 20vw;
-		// 		// margin-top: -50vh;
-		// 	}
-
-		// 	&:nth-child(odd) {
-		// 		transform: translateX(-10%) rotate(-5deg) scale(0.8);
-		// 		margin-top: -100%;
-		// 		z-index: 100;
-		// 	}
-		// }
-
 		@include breakpoint('>small') {
 			.m-imgur-post {
 				margin-top: 1%;
@@ -208,9 +192,7 @@ body.archive {
 			}
 
 			.description {
-				// max-width: 14.2em;
 				font-size: 1.2em;
-				// margin: auto;
 				margin-top: -0.5em;
 			}
 
