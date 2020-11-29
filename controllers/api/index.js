@@ -66,6 +66,7 @@ class bikeTagController {
      */
     async sendEmailToAdministrators(subdomain, req, res, host) {
         try {
+			const tagnumber = biketag.getTagNumberFromRequest(req)
             const subdomainConfig = this.app.getSubdomainOpts(subdomain)
             const { albumHash, imgurClientID } = subdomainConfig.imgur
 
@@ -78,7 +79,7 @@ class bikeTagController {
 
             return biketag.getTagInformation(
                 imgurClientID,
-                'latest',
+                tagnumber || 'latest',
                 albumHash,
                 (latestTagInfo) => {
                     console.log({ latestTagInfo })
@@ -91,14 +92,14 @@ class bikeTagController {
                     const renderOpts = {
                         region: subdomainConfig.region,
                         subdomainIcon: subdomainConfig.meta.image,
-                        host,
-                        latestTagInfo,
+                        host: `${subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''}${subdomainConfig.requestHost || host}`,
+						latestTagInfo,
                         subreddit: subdomainConfig.reddit.subreddit,
                     }
 
                     const text = this.app.renderSync('mail/newBikeTagText', renderOpts)
                     const html = this.app.renderSync('mail/newBikeTag', renderOpts)
-
+					return res.json({text, html})
                     const emailPromises = []
                     const emailResponses = []
 
@@ -258,7 +259,7 @@ class bikeTagController {
 
     routes(app) {
         /// How to create an insecure api route from the api controller {host}/api/post/email
-        app.route('/post/email', this.sendEmailToAdministrators, 'post', false)
+        app.route('/post/email/:tagnumber?', this.sendEmailToAdministrators, 'post', false)
 
         /// Generates the default api routes on both internal and external api servers
         app.apiRoute('/post/reddit/:tagnumber?', this.postToReddit)

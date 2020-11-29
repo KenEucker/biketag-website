@@ -191,12 +191,15 @@ class BikeTag {
 		target.appendChild(form)
 	}
 
-	sendNotificationEmail() {
+	sendNotificationEmail(tagNumber = 'latest') {
 		return fetch('/api/post/email', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
+				body: JSON.stringify({
+					tagNumber,
+				}),
 				credentials: 'include',
 			}).then(function (res) {
 				return res.json()
@@ -273,7 +276,7 @@ class BikeTag {
 			imgur.uploadImageToImgur(files[0], image1Description, () => {
 				imgur.uploadImageToImgur(files[1], image2Description, () => {
 					/// TODO: Send message to the server that a new tag has been queued
-					this.sendNotificationEmail().then(function () {
+					this.sendNotificationEmail(currentTagInfo.mysteryTagNumber).then(function () {
 						window.location.href = window.location.pathname + '?uploadSuccess=true'
 					})
 				})

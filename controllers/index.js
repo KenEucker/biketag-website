@@ -62,7 +62,8 @@ class IndexController {
                 })
             }
 
-            data.host = host
+			console.log({data, subdomainConfig})
+            data.host = `${subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''}${subdomainConfig.requestHost || host}`
             data.region = subdomainConfig.region
 
             return res.render(redditTemplatePath, data)
