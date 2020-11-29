@@ -191,14 +191,14 @@ class BikeTag {
 		target.appendChild(form)
 	}
 
-	sendNotificationEmail(tagNumber = 'latest') {
+	sendNotificationEmail(tagnumber = 'latest') {
 		return fetch('/api/post/email', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					tagNumber,
+					tagnumber,
 				}),
 				credentials: 'include',
 			}).then(function (res) {

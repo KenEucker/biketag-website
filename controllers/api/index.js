@@ -99,8 +99,8 @@ class bikeTagController {
 
                     const text = this.app.renderSync('mail/newBikeTagText', renderOpts)
                     const html = this.app.renderSync('mail/newBikeTag', renderOpts)
-					return res.json({text, html})
-                    const emailPromises = []
+
+					const emailPromises = []
                     const emailResponses = []
 
                     subdomainConfig.adminEmailAddresses.forEach((emailAddress) => {
