@@ -634,7 +634,7 @@ class BikeTag {
 		count = Number.isInteger(count) ? count : !count || (count.toUpperCase() === "ALL") ? images.length : Number(count)
 		
 		const atEnd = (i) => (i <= (count * 2)) && (i < images.length)
-		const columnClass = `col-md-4`
+		const columnClass = `col-md-6`
 
 		for (var i = 1; atEnd(i); ++i) {
 			var image1 = images[i], image2
