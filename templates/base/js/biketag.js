@@ -61,7 +61,6 @@ class BikeTag {
 		} else {
 			tagNumber = Number.parseInt(tagNumber)
 		}
-		console.log({tagNumber})
 
 		return tagNumber
 	}

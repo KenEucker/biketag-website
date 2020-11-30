@@ -49,7 +49,6 @@ class bikeTagController {
                 tagnumber || 'latest',
                 albumHash,
                 (latestTagInfo) => {
-                    console.log({ latestTagInfo })
                     const latestTagNumber = (subdomainConfig.latestTagNumber =
                         latestTagInfo.latestTagNumber)
                     const subject = this.app.renderSync('mail/newBikeTagSubject', {

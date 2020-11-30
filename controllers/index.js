@@ -62,7 +62,6 @@ class IndexController {
                 })
             }
 
-            console.log({ data, subdomainConfig })
             data.host = `${
                 subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''
             }${subdomainConfig.requestHost || host}`
@@ -87,7 +86,6 @@ class IndexController {
             const template = 'user'
             const pageData = this.app.getPublicData(requestSubdomain, host, undefined, res)
             const bikeTagUserPageData = { ...pageData, images, username }
-            console.log({ bikeTagUserPageData })
 
             return this.app.renderTemplate(template, bikeTagUserPageData, res)
         })
