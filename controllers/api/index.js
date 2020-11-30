@@ -407,9 +407,9 @@ class bikeTagController {
          */
         app.apiRoute(
             '/u/:username?',
-            (s, r, q, h) => {
-                const username = getFromQueryOrPathOrBody(req, 'username')
-                return this.getBikeTagsByUser(s, r, q, h, username)
+            (s, r, q, h, n) => {
+                const username = getFromQueryOrPathOrBody(r, 'username')
+                return this.getBikeTagsByUser(s, r, q, h, n, username)
             },
             ['get', 'post'],
         )
