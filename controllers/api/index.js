@@ -106,38 +106,6 @@ class bikeTagController {
         }
     }
 
-    getRedditPostTemplate(subdomain, req, res, host) {
-        const tagnumber = biketag.getTagNumberFromRequest(req)
-        const redditTemplatePath = 'reddit/post'
-        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-
-        if (!subdomainConfig.imgur) {
-            this.app.log.status(`imgur not set for host on subdomain [${subdomain}]`, host)
-            return res.send('no image data set')
-        }
-
-        const { albumHash, imgurClientID } = subdomainConfig.imgur
-
-        this.app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
-
-        return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
-            if (!data) {
-                return res.json({
-                    tagNumberNotFound: tagnumber,
-                    albumHash,
-                })
-            }
-
-            console.log({ data, subdomainConfig })
-            data.host = `${
-                subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''
-            }${subdomainConfig.requestHost || host}`
-            data.region = subdomainConfig.region
-
-            return res.render(redditTemplatePath, data)
-        })
-    }
-
     getRedditPost(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
@@ -258,51 +226,6 @@ class bikeTagController {
          * @return {object} 200 - success response - application/json
          */
         app.apiRoute('/post/reddit/:tagnumber?', this.postToReddit)
-
-        /**
-         * @swagger
-         * /get/reddit/{tagnumber}:
-         *   get:
-         *     tags:
-         *       - biketag
-         *     produces:
-         *       - application/json
-         *     parameters:
-         *       - in: path
-         *         name: tagnumber
-         *         description: the tag nunber to retrieve
-         *         schema:
-         *           type: integer
-         *     responses:
-         *       200:
-         *         description: reddit post information for generated posts
-         *       401:
-         *         $ref: '#/components/responses/UnauthorizedError'
-         *       500:
-         *         $ref: '#/components/responses/UnauthorizedError'
-         *   post:
-         *     tags:
-         *       - biketag
-         *     produces:
-         *       - application/json
-         *     parameters:
-         *       - in: formData
-         *         name: tagnumber
-         *         description: the tag nunber to retrieve
-         *         schema:
-         *           type: integer
-         *     responses:
-         *       200:
-         *         description: reddit post information for generated posts
-         *       401:
-         *         $ref: '#/components/responses/UnauthorizedError'
-         *       500:
-         *         $ref: '#/components/responses/UnauthorizedError'
-         * @summary Retrieves the reddit post template for the given tag number, or latest
-         * @tags reddit
-         * @return {string} 200 - success response - application/text
-         */
-        app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPostTemplate, ['get', 'post'])
 
         /**
          * @swagger

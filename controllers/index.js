@@ -129,9 +129,46 @@ class IndexController {
 
             return res.json(data)
         })
+	}
+	
+
+
+    getRedditPostTemplate(subdomain, req, res, host) {
+        const tagnumber = biketag.getTagNumberFromRequest(req)
+        const redditTemplatePath = 'reddit/post'
+        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+
+        if (!subdomainConfig.imgur) {
+            this.app.log.status(`imgur not set for host on subdomain [${subdomain}]`, host)
+            return res.send('no image data set')
+        }
+
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
+
+        this.app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
+
+        return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
+            if (!data) {
+                return res.json({
+                    tagNumberNotFound: tagnumber,
+                    albumHash,
+                })
+            }
+
+            console.log({ data, subdomainConfig })
+            data.host = `${
+                subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''
+            }${subdomainConfig.requestHost || host}`
+            data.region = subdomainConfig.region
+
+			console.log({redditTemplatePath})
+            return res.render(redditTemplatePath, data)
+        })
     }
 
     routes(app) {
+        app.route('/get/reddit/:tagnumber?', this.getRedditPostTemplate)
+
         app.route('/user', this.getUserTags)
         app.route('/user/:username', this.getUserTags)
 
