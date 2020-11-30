@@ -86,7 +86,7 @@ class IndexController {
         return biketag.getBikeTagsByUser(imgurClientID, albumHash, username, (images) => {
             const template = 'user'
             const pageData = this.app.getPublicData(requestSubdomain, host, undefined, res)
-            const bikeTagUserPageData = { ...pageData, images }
+            const bikeTagUserPageData = { ...pageData, images, username }
             console.log({ bikeTagUserPageData })
 
             return this.app.renderTemplate(template, bikeTagUserPageData, res)
