@@ -6,5 +6,5 @@
     "content": true,
 
     "imgur": ["albumHash", "imgurClientID"],
-    "reddit": ["subreddit"]
+    "reddit": ["subreddit", "includeLeaderboardInRedditPost"]
 }

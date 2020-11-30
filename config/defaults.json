@@ -1,11 +1,14 @@
 {
     "imgur": {
         "imgurClientID": "79ea70333c45883"
-    },
+	},
+	"reddit": {
+		"includeLeaderboardInRedditPost": true
+	},
     "template": "biketag1",
     "page": {
         "newGameImage": "https://i.imgur.com/CtJVstG.png",
-        "loginImage": "https://i.imgur.com/CtJVstG.png"
+		"loginImage": "https://i.imgur.com/CtJVstG.png"
     },
 
     "meta": {
