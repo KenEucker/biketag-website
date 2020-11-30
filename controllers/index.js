@@ -77,7 +77,8 @@ class IndexController {
         const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         return biketag.getBikeTagsByUser(imgurClientID, albumHash, undefined, (images) => {
-            const usernames = Object.keys(images)
+			const usernames = Object.keys(images)
+			const imagesLength = usernames.reduce((o, u) => o + images[u].length, 0)
             const sortedUsernames = usernames.sort((a, b) => {
                 const aLen = images[a].length
                 const bLen = images[b].length
@@ -100,9 +101,10 @@ class IndexController {
             const pageData = this.app.getPublicData(requestSubdomain, host, undefined, res)
             const bikeTagUserPageData = {
                 ...pageData,
-                images: sortedImagesByLeader,
+				images: sortedImagesByLeader,
+				imagesTotal: Math.round((imagesLength / 2) - (imagesLength % 2)),
                 usernames: sortedUsernames,
-            }
+			}
 
             return this.app.renderTemplate(template, bikeTagUserPageData, res)
         })

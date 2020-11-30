@@ -13,13 +13,13 @@
 
 	{% assign imagesPerSlide = 3 %}
 	{% assign imagesLength = images.length %}
-	{% assign numSlides = images.length | divided_by:imagesPerSlide | minus:1 %}
+	{% assign numSlides = imagesLength | divided_by:imagesPerSlide | minus:1 %}
 	{% assign cardColClass = 'col-md-4'%}
 </head>
 <body>
 
 	<div class="container">
-		<h1>({{ images.length }}) Tags by {{ username }}</h1>
+		<h1>({{ imagesLength }}) Tags by {{ username }}</h1>
 
 <!--Carousel Wrapper-->
 	<div id="image-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">

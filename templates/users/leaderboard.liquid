@@ -12,14 +12,13 @@
 	</head>
 
 	<body>
-		<h1>BikeTag Player Leaderboard [{{ region }}]</h1>
+		<h1>BikeTag Leaderboard ({{ page.region }}) Total: [{{ imagesTotal | minus: 1}} + first]</h1>
 
 		<section>
 			<ul class="list-group">
 			{% for username in usernames %}
-				<li>
-					<a href="/user/?username={{ username }}">{{ username }}</a>
-					<span>({{ images[username].length }})</span>
+				<li class="list-group-item">
+					<a href="/user/?username={{ username }}">{{ username }} ({{ images[username].length }})</a>
 				</li>
 			{% endfor %}
 			</ul>
