@@ -2,28 +2,9 @@
  * Module dependencies.
  */
 const biketag = require('../../lib/biketag')
-const { sleep } = require('../../lib/util')
-
+const { sleep, getParamFromPathOrBody } = require('../../lib/util')
+const request = require('request')
 class bikeTagController {
-    /********		api documented methods		**********/
-    /**
-     * @swagger
-     * /post/reddit/:
-     *   post:
-     *     security:
-     *       - basic: []
-     *     tags:
-     *       - biketag
-     *     description: Posts the current biketag to the configured subreddit
-     *     responses:
-     *       200:
-     *         description: reddit post information for generated posts
-     *       401:
-     *         $ref: '#/components/responses/UnauthorizedError'
-     * @summary Posts the current biketag to the configured subreddit
-     * @tags reddit
-     * @return {object} 200 - success response - application/json
-     */
     postToReddit(subdomain, req, res, host) {
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
         subdomainConfig.requestSubdomain = subdomain
@@ -50,20 +31,6 @@ class bikeTagController {
         })
     }
 
-    /**
-     * @swagger
-     * /post/email:
-     *   post:
-     *     tags:
-     *       - biketag
-     *     description: Sends notification emails to BikeTag Ambassadors
-     *     responses:
-     *       200:
-     *         description: email success response
-     * @summary Sends notification emails to BikeTag Ambassadors
-     * @tags email
-     * @return {object} 200 - success response - application/json
-     */
     async sendEmailToAdministrators(subdomain, req, res, host) {
         try {
 			const tagnumber = biketag.getTagNumberFromRequest(req)
@@ -136,49 +103,6 @@ class bikeTagController {
         }
     }
 
-    /**
-     * @swagger
-     * /get/reddit/{tagnumber}:
-     *   get:
-     *     tags:
-     *       - biketag
-     *     produces:
-     *       - application/json
-     *     parameters:
-     *       - in: path
-     *         name: tagnumber
-     *         description: the tag nunber to retrieve
-     *         schema:
-     *           type: integer
-     *     responses:
-     *       200:
-     *         description: reddit post information for generated posts
-     *       401:
-     *         $ref: '#/components/responses/UnauthorizedError'
-     *       500:
-     *         $ref: '#/components/responses/UnauthorizedError'
-     *   post:
-     *     tags:
-     *       - biketag
-     *     produces:
-     *       - application/json
-     *     parameters:
-     *       - in: formData
-     *         name: tagnumber
-     *         description: the tag nunber to retrieve
-     *         schema:
-     *           type: integer
-     *     responses:
-     *       200:
-     *         description: reddit post information for generated posts
-     *       401:
-     *         $ref: '#/components/responses/UnauthorizedError'
-     *       500:
-     *         $ref: '#/components/responses/UnauthorizedError'
-     * @summary Retrieves the reddit post template for the given tag number, or latest
-     * @tags reddit
-     * @return {string} 200 - success response - application/text
-     */
     getRedditPost(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
         const subdomainConfig = this.app.getSubdomainOpts(subdomain)
@@ -200,34 +124,6 @@ class bikeTagController {
         })
     }
 
-    /**
-     * @swagger
-     * /get/biketag/{tagnumber}:
-     *   post:
-     *     produces:
-     *       - application/json
-     *     parameters:
-     *       - in: formData
-     *         name: tagnumber
-     *         description: the tag number to retrieve
-     *         schema:
-     *           type: integer
-     *       - in: path
-     *         name: tagnumber
-     *         description: the tag number to retrieve
-     *         required: false
-     *         schema:
-     *           type: integer
-     *     description: Retrieves the current biketag information
-     *     tags:
-     *       - biketag
-     *     responses:
-     *       200:
-     *         description: biketag information including images
-     * @summary Posts the current biketag to the configured subreddit
-     * @tags biketag
-     * @return {object} 200 - success response - application/json
-     */
     getBikeTag(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
         /// TODO: put this into sexpress
@@ -247,6 +143,49 @@ class bikeTagController {
 
             return res.json(data)
         })
+	}
+
+    getBikeTagImage(subdomain, req, res, host, getProof = false) {
+        const tagnumber = biketag.getTagNumberFromRequest(req)
+        /// TODO: put this into sexpress
+        const subdomainIsApi = subdomain === 'api'
+        const requestSubdomain = subdomainIsApi
+            ? req.path.match(/^\/[^\/]+/)[0].substr(1)
+            : subdomain
+
+        const subdomainConfig = this.app.getSubdomainOpts(requestSubdomain)
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
+
+
+        return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
+			const imageUrl = getProof ? data.proofTagURLDirect : data.previousMysteryTagURL
+			this.app.log.status(`sending the reponse from imgur direct ${imageUrl}`, imageUrl)
+			return req.pipe(request(imageUrl)).pipe(res)
+        })
+    }
+
+    getBikeTagsByUser(subdomain, req, res, host) {
+		const username = getParamFromPathOrBody(req, 'username')
+        /// TODO: put this into sexpress
+        const subdomainIsApi = subdomain === 'api'
+        const requestSubdomain = subdomainIsApi
+            ? req.path.match(/^\/[^\/]+/)[0].substr(1)
+            : subdomain
+
+        const subdomainConfig = this.app.getSubdomainOpts(requestSubdomain)
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
+
+		return biketag.getBikeTagImages(
+			imgurClientID,
+			albumHash, 
+			(images) => {
+				const usersImages = images.filter(i => {
+					return i.description.indexOf(username) !== -1
+				})
+				console.log({username, usersImages})
+				return res.json({username, images: usersImages})
+			},
+		)
     }
 
     /********		controller methods			**********/
@@ -258,17 +197,213 @@ class bikeTagController {
     }
 
     routes(app) {
-        /// How to create an insecure api route from the api controller {host}/api/post/email
+		/********	api documented endpoints	**********/
+		/**
+		 * @swagger
+		 * /post/email:
+		 *   post:
+		 *     tags:
+		 *       - biketag
+		 *     description: Sends notification emails to BikeTag Ambassadors
+		 *     responses:
+		 *       200:
+		 *         description: email success response
+		 * @summary Sends notification emails to BikeTag Ambassadors
+		 * @tags email
+		 * @return {object} 200 - success response - application/json
+		 */
         app.route('/post/email/:tagnumber?', this.sendEmailToAdministrators, 'post', false)
+        /// How to create an insecure api route from the api controller {host}/api/post/email
 
-        /// Generates the default api routes on both internal and external api servers
+		/**
+		 * @swagger
+		 * /post/reddit/:
+		 *   post:
+		 *     security:
+		 *       - basic: []
+		 *     tags:
+		 *       - biketag
+		 *     description: Posts the current biketag to the configured subreddit
+		 *     responses:
+		 *       200:
+		 *         description: reddit post information for generated posts
+		 *       401:
+		 *         $ref: '#/components/responses/UnauthorizedError'
+		 * @summary Posts the current biketag to the configured subreddit
+		 * @tags reddit
+		 * @return {object} 200 - success response - application/json
+		 */
         app.apiRoute('/post/reddit/:tagnumber?', this.postToReddit)
 
+		/**
+		 * @swagger
+		 * /get/reddit/{tagnumber}:
+		 *   get:
+		 *     tags:
+		 *       - biketag
+		 *     produces:
+		 *       - application/json
+		 *     parameters:
+		 *       - in: path
+		 *         name: tagnumber
+		 *         description: the tag nunber to retrieve
+		 *         schema:
+		 *           type: integer
+		 *     responses:
+		 *       200:
+		 *         description: reddit post information for generated posts
+		 *       401:
+		 *         $ref: '#/components/responses/UnauthorizedError'
+		 *       500:
+		 *         $ref: '#/components/responses/UnauthorizedError'
+		 *   post:
+		 *     tags:
+		 *       - biketag
+		 *     produces:
+		 *       - application/json
+		 *     parameters:
+		 *       - in: formData
+		 *         name: tagnumber
+		 *         description: the tag nunber to retrieve
+		 *         schema:
+		 *           type: integer
+		 *     responses:
+		 *       200:
+		 *         description: reddit post information for generated posts
+		 *       401:
+		 *         $ref: '#/components/responses/UnauthorizedError'
+		 *       500:
+		 *         $ref: '#/components/responses/UnauthorizedError'
+		 * @summary Retrieves the reddit post template for the given tag number, or latest
+		 * @tags reddit
+		 * @return {string} 200 - success response - application/text
+		 */
         app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPost)
 
-        /// Generates the default api routes and adds an insecure get method on the root {host}/get/biketag/:number?
-        app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
-    }
+		/**
+		 * @swagger
+		 * /get/biketag/{tagnumber}:
+		 *   post:
+		 *     produces:
+		 *       - application/json
+		 *     parameters:
+		 *       - in: formData
+		 *         name: tagnumber
+		 *         description: the tag number to retrieve
+		 *         schema:
+		 *           type: integer
+		 *       - in: path
+		 *         name: tagnumber
+		 *         description: the tag number to retrieve
+		 *         required: false
+		 *         schema:
+		 *           type: integer
+		 *     description: Retrieves the current biketag information
+		 *     tags:
+		 *       - biketag
+		 *     responses:
+		 *       200:
+		 *         description: biketag information including images
+		 * @summary Posts the current biketag to the configured subreddit
+		 * @tags biketag
+		 * @return {object} 200 - success response - application/json
+		 */
+		app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
+		
+		/**
+		 * @swagger
+		 * /t/{tagnumber}:
+		 *   post:
+		 *     produces:
+		 *       - application/json
+		 *     parameters:
+		 *       - in: formData
+		 *         name: tagnumber
+		 *         description: the tag number image to retrieve
+		 *         schema:
+		 *           type: integer
+		 *       - in: path
+		 *         name: tagnumber
+		 *         description: the tag number image to retrieve
+		 *         required: false
+		 *         schema:
+		 *           type: integer
+		 *     description: Retrieves the biketag image
+		 *     tags:
+		 *       - biketag
+		 *     responses:
+		 *       200:
+		 *         description: biketag  image
+		 * @summary Returns the mystery tag image from imgur for the given tagnumber directly from imgur
+		 * @tags biketag
+		 * @return {object} 200 - success response - application/json
+		 */
+		app.apiRoute('/t/:tagnumber?', (s, r, q, h) => {
+			return this.getBikeTagImage(s, r, q, h)
+		}, ['get', 'post'])
+
+        /**
+		 * @swagger
+		 * /p/{tagnumber}:
+		 *   post:
+		 *     produces:
+		 *       - application/json
+		 *     parameters:
+		 *       - in: formData
+		 *         name: tagnumber
+		 *         description: the proof tag number image to retrieve
+		 *         schema:
+		 *           type: integer
+		 *       - in: path
+		 *         name: tagnumber
+		 *         description: the proof tag number image to retrieve
+		 *         required: false
+		 *         schema:
+		 *           type: integer
+		 *     description: Retrieves proof the biketag image
+		 *     tags:
+		 *       - biketag
+		 *     responses:
+		 *       200:
+		 *         description: biketag  image
+		 * @summary Returns the proof image from imgur for the given tagnumber directly from imgur
+		 * @tags biketag
+		 * @return {object} 200 - success response - application/json
+		 */
+        app.apiRoute('/p/:tagnumber?', (s, r, q, h) => {
+			return this.getBikeTagImage(s, r, q, h, true)
+		}, ['get', 'post'])
+	
+		/**
+		 * @swagger
+		 * /u/{username}:
+		 *   post:
+		 *     produces:
+		 *       - application/json
+		 *     parameters:
+		 *       - in: formData
+		 *         name: username
+		 *         description: the tag number to retrieve
+		 *         schema:
+		 *           type: integer
+		 *       - in: path
+		 *         name: username
+		 *         description: the tag number to retrieve
+		 *         required: false
+		 *         schema:
+		 *           type: integer
+		 *     description: Retrieves the current biketag information
+		 *     tags:
+		 *       - biketag
+		 *     responses:
+		 *       200:
+		 *         description: biketag information including images
+		 * @summary Posts the current biketag to the configured subreddit
+		 * @tags biketag
+		 * @return {object} 200 - success response - application/json
+		 */
+		app.apiRoute('/u/:username?', this.getBikeTagsByUser, ['get', 'post'])
+	}
 }
 
 module.exports = new bikeTagController()

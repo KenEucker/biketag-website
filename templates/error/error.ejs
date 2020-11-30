@@ -6,8 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Error! <%= vars.code %> - <%= vars.title %></title>
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet" nonce="<%= nonce %>">
-	<style type="text/css" nonce="<%= nonce %>">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet" nonce="<%= vars.nonce %>">
+	<script type="text/javascript" nonce="<%= vars.nonce %>">window.error = <%- JSON.stringify(vars) %></script>
+	<style type="text/css" nonce="<%= vars.nonce %>">
 		* {
 			-webkit-box-sizing: border-box;
 			box-sizing: border-box;
@@ -115,7 +116,6 @@
 		}
 	</style>
 </head>
-
 <body>
 	<div id="error">
 		<div class="error cover">
@@ -126,29 +126,10 @@
 			<p class="lead"><%= vars.message %></p>
 			<% if (vars.redirectTo) { %>
 				<a href="<%= vars.redirectTo %>">Go Home</a>
-		  	<% } %>
+				<% } %>
 			<p class="tail"><%- vars.footer %></p>
 		</div>
 	</div>
-	<script type="text/javascript"  nonce="<%= nonce %>">
-		(function() {
-			window.setTimeout(() => {
-				const error = <%- JSON.stringify(vars) %>
-				if (!!error.debug) {
-					const errorMessageHeaderElement = document.querySelector('.error .lead')
-					errorMessageHeaderElement.classList.add('debug')
-					errorMessageHeaderElement.innerText = error.debug
-				}
-				console.log('sexpress error', error)
-
-				const errorCodeHeaderElement = document.querySelector('.error h1')
-				if (errorCodeHeaderElement) {
-					const code = error.code.toString()
-					const codeHtml = code[1] === '0' ? `${code[0]}<span>${code[1]}</span>${code[2]}` : `<span>${code}</span>`
-					errorCodeHeaderElement.innerHTML = codeHtml
-				}
-			}, 500)
-		})()
-	</script>
+	<script type="text/javascript" src="js/error.js"></script>
 </body>
 </html>

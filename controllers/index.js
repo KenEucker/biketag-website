@@ -68,12 +68,12 @@ class IndexController {
 
             return res.render(redditTemplatePath, data)
         })
-    }
+	}
 
     routes(app) {
         app.route('/:tagnumber?', this.indexHandler)
 
-        app.route('/get/reddit/:tagnumber?', this.getRedditPost)
+		app.route('/get/reddit/:tagnumber?', this.getRedditPost)
     }
 }
 
