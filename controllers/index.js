@@ -3,6 +3,8 @@
  */
 const biketag = require('../lib/biketag')
 const { getFromQueryOrPathOrBody } = require('../lib/util')
+const request = require('request')
+
 class IndexController {
     init(app) {
         this.app = app
@@ -33,8 +35,8 @@ class IndexController {
             return this.app.renderTemplate(template, pageData, res)
         }
 
-        return biketag.getTagInformation(imgurClientID, 'latest', albumHash, (data) => {
-            const bikeTagPageData = { ...pageData, latestBikeTag: data || {} }
+        return biketag.getTagInformation(imgurClientID, 'current', albumHash, (data) => {
+            const bikeTagPageData = { ...pageData, currentBikeTag: data || {} }
 
             return this.app.renderTemplate(template, bikeTagPageData, res)
         })
@@ -77,8 +79,8 @@ class IndexController {
         const { albumHash, imgurClientID } = subdomainConfig.imgur
 
         return biketag.getBikeTagsByUser(imgurClientID, albumHash, undefined, (images) => {
-			const usernames = Object.keys(images)
-			const imagesLength = usernames.reduce((o, u) => o + images[u].length, 0)
+            const usernames = Object.keys(images)
+            const imagesLength = usernames.reduce((o, u) => o + images[u].length, 0)
             const sortedUsernames = usernames.sort((a, b) => {
                 const aLen = images[a].length
                 const bLen = images[b].length
@@ -101,17 +103,17 @@ class IndexController {
             const pageData = this.app.getPublicData(requestSubdomain, host, undefined, res)
             const bikeTagUserPageData = {
                 ...pageData,
-				images: sortedImagesByLeader,
-				imagesTotal: Math.round((imagesLength / 2) - (imagesLength % 2)),
+                images: sortedImagesByLeader,
+                imagesTotal: Math.round(imagesLength / 2 - (imagesLength % 2)),
                 usernames: sortedUsernames,
-			}
+            }
 
             return this.app.renderTemplate(template, bikeTagUserPageData, res)
         })
     }
 
-    getLatest(subdomain, req, res, host) {
-        const tagnumber = 'latest'
+    getCurrent(subdomain, req, res, host) {
+        const tagnumber = 'current'
         /// TODO: put this into sexpress
         const subdomainIsApi = subdomain === 'api'
         const requestSubdomain = subdomainIsApi
@@ -124,12 +126,13 @@ class IndexController {
         this.app.log.status(`reddit endpoint request for tag #${tagnumber}`)
 
         return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
-            data.host = host
-            data.region = subdomainConfig.region
+            // data.host = host
+            // data.region = subdomainConfig.region
+            console.log({ data })
 
-            return res.json(data)
+            return req.pipe(request(data.nextTagURL)).pipe(res)
         })
-	}
+    }
 
     getRedditPostTemplate(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
@@ -159,7 +162,7 @@ class IndexController {
             }${subdomainConfig.requestHost || host}`
             data.region = subdomainConfig.region
 
-			console.log({redditTemplatePath})
+            console.log({ redditTemplatePath })
             return res.render(redditTemplatePath, data)
         })
     }
@@ -172,7 +175,7 @@ class IndexController {
 
         app.route('/leaderboard', this.getLeaderboard)
 
-        app.route('/latest', this.getLatest)
+        app.route('/current', this.getCurrent)
 
         app.route('/:tagnumber?', this.indexHandler)
     }

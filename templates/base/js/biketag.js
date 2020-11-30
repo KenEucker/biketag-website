@@ -192,7 +192,7 @@ class BikeTag {
 		target.appendChild(form)
 	}
 
-	sendNotificationEmail(tagnumber = 'latest') {
+	sendNotificationEmail(tagnumber = 'current') {
 		return fetch('/api/post/email', {
 				method: 'POST',
 				headers: {
@@ -231,7 +231,7 @@ class BikeTag {
 			window.pageData = !!window.pageData ? window.pageData : {}
 
 
-			// get the latest tag number
+			// get the current tag number
 			const currentTagInfo = this.getCurrentTagInformation()
 			const user = this.formatUserName(form.find('input[name="name"]').val())
 			const proofLocation = form.find('input[name="location"]').val()
@@ -438,8 +438,8 @@ class BikeTag {
 
 		if (imgur.imgurAlbumPictures.length) {
 			tagInformation.currentTag = !!imgur.imgurAlbumPictures[0].description ? imgur.imgurAlbumPictures[0] : (imgur.imgurAlbumPictures.length > 1 ? imgur.imgurAlbumPictures[1] : 0)
-		} else if (window.latestBikeTag) {
-			tagInformation.currentTag = window.latestBikeTag.image
+		} else if (window.currentBikeTag) {
+			tagInformation.currentTag = window.currentBikeTag.image
 		}
 
 		if (tagInformation.currentTag) {
@@ -550,8 +550,8 @@ class BikeTag {
 			return imgur.getImgurAlbumPictures(this.albumHash, !!cb ? cb : this.setCurrentTagInformation.bind(this))
 		}
 
-		if (!this.latestTagInformationHasBeenSet) {
-			this.latestTagInformationHasBeenSet = true
+		if (!this.currentTagInformationHasBeenSet) {
+			this.currentTagInformationHasBeenSet = true
 		} else {
 			return this.getCurrentTagInformation()
 		}
@@ -769,10 +769,10 @@ class BikeTag {
 		this.targetSelector = targetSelector
 		this.target = document.querySelector(this.targetSelector)
 
-		if (window.latestBikeTag) {
-			console.log('page loaded with latest biketag', window.latestBikeTag)
+		if (window.currentBikeTag) {
+			console.log('page loaded with current biketag', window.currentBikeTag)
 
-			this.renderBikeTag(window.latestBikeTag.image, "Current mystery location to find", '.content .inner', true)
+			this.renderBikeTag(window.currentBikeTag.image, "Current mystery location to find", '.content .inner', true)
 		}
 
 		if (!this.readonly) {

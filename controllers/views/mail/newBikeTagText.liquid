@@ -3,12 +3,12 @@ To post this tag to Reddit manually, go to {{ host }}/get/reddit to get the redd
 
 You are getting this email because you are listed as an admin on the site ({{ host }}).
 
-Does this image just posted as the proof for #{{ latestTagInfo.previousMysteryTagNumber }} look as the mystery tag for #{{ latestTagInfo.previousMysteryTagNumber }}?
-{{ latestTagInfo.proofTagURLDirect }}
-{{ latestTagInfo.previousMysteryTagURL }}
+Does this image just posted as the proof for #{{ currentTagInfo.previousMysteryTagNumber }} look as the mystery tag for #{{ currentTagInfo.previousMysteryTagNumber }}?
+{{ currentTagInfo.proofTagURLDirect }}
+{{ currentTagInfo.previousMysteryTagURL }}
 
 If so, this is the new mystery tag ready to be posted:
-{{ latestTagInfo.nextTagURL }}
+{{ currentTagInfo.nextTagURL }}
 
 
 Reply to this email to request to be removed from this admin list.

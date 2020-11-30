@@ -49,14 +49,14 @@
 			</nav>
 			<div class="content">
 				<div class="inner container">
-					{% if latestBikeTag %}
+					{% if currentBikeTag %}
 
 					<div class="m-imgur-post">
-						<a href="{{ latestBikeTag.nextTagURL }}" target="_blank">
+						<a href="{{ currentBikeTag.nextTagURL }}" target="_blank">
 							<div>
-								<span><div class="normal-text">#</div>{{ latestBikeTag.latestTagNumber }}</span>
-								<span> {{ latestBikeTag.credit }} </span>
-								<img alt="{{ latestBikeTag.description }}" class="" src="{{ latestBikeTag.nextTagURL }}">
+								<span><div class="normal-text">#</div>{{ currentBikeTag.currentTagNumber }}</span>
+								<span> {{ currentBikeTag.credit }} </span>
+								<img alt="{{ currentBikeTag.description }}" class="" src="{{ currentBikeTag.nextTagURL }}">
 							</div>
 							<h2 class="description">Current mystery location to find</h2>
 						</a>

@@ -13,8 +13,8 @@ class bikeTagController {
         subdomainConfig.version = this.app.config.version
         const { albumHash, imgurClientID } = subdomainConfig.imgur
 
-        return getTagInformation(imgurClientID, 'latest', albumHash, (latestTagInfo) => {
-            subdomainConfig.latestTagNumber = latestTagInfo.latestTagNumber
+        return getTagInformation(imgurClientID, 'current', albumHash, (currentTagInfo) => {
+            subdomainConfig.currentTagNumber = currentTagInfo.currentTagNumber
 
             return postLatestBikeTagToReddit(subdomainConfig, (response) => {
                 if (!!response.error) {
@@ -46,13 +46,13 @@ class bikeTagController {
 
             return biketag.getTagInformation(
                 imgurClientID,
-                tagnumber || 'latest',
+                tagnumber || 'current',
                 albumHash,
-                (latestTagInfo) => {
-                    const latestTagNumber = (subdomainConfig.latestTagNumber =
-                        latestTagInfo.latestTagNumber)
+                (currentTagInfo) => {
+                    const currentTagNumber = (subdomainConfig.currentTagNumber =
+                        currentTagInfo.currentTagNumber)
                     const subject = this.app.renderSync('mail/newBikeTagSubject', {
-                        latestTagNumber,
+                        currentTagNumber,
                         subdomain,
                     })
                     const renderOpts = {
@@ -63,7 +63,7 @@ class bikeTagController {
                                 ? `${subdomainConfig.requestSubdomain}.`
                                 : ''
                         }${subdomainConfig.requestHost || host}`,
-                        latestTagInfo,
+                        currentTagInfo,
                         subreddit: subdomainConfig.reddit.subreddit,
                     }
 
@@ -285,7 +285,7 @@ class bikeTagController {
          * @tags biketag
          * @return {object} 200 - success response - application/json
          */
-        app.apiRoute('/get/latest', this.getBikeTag, ['get', 'post'])
+        app.apiRoute('/get/current', this.getBikeTag, ['get', 'post'])
 
         /**
          * @swagger
