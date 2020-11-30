@@ -104,6 +104,38 @@ class bikeTagController {
                 error,
             })
         }
+	}
+
+    getRedditPostTemplate(subdomain, req, res, host) {
+        const tagnumber = biketag.getTagNumberFromRequest(req)
+        const redditTemplatePath = 'reddit/post'
+        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+
+        if (!subdomainConfig.imgur) {
+            this.app.log.status(`imgur not set for host on subdomain [${subdomain}]`, host)
+            return res.send('no image data set')
+        }
+
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
+
+        this.app.log.status(`reddit endpoint request for tag #${tagnumber}`, { redditTemplatePath })
+
+        return biketag.getTagInformation(imgurClientID, tagnumber, albumHash, (data) => {
+            if (!data) {
+                return res.json({
+                    tagNumberNotFound: tagnumber,
+                    albumHash,
+                })
+            }
+
+            console.log({ data, subdomainConfig })
+            data.host = `${
+                subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''
+            }${subdomainConfig.requestHost || host}`
+            data.region = subdomainConfig.region
+
+            return res.render(redditTemplatePath, data)
+        })
     }
 
     getRedditPost(subdomain, req, res, host) {
@@ -166,8 +198,7 @@ class bikeTagController {
         })
     }
 
-    getBikeTagsByUser(subdomain, req, res, host) {
-        const username = getParamFromPathOrBody(req, 'username')
+    getBikeTagsByUser(subdomain, req, res, host, next, username) {
         /// TODO: put this into sexpress
         const subdomainIsApi = subdomain === 'api'
         const requestSubdomain = subdomainIsApi
@@ -179,7 +210,7 @@ class bikeTagController {
         return biketag.getBikeTagsByUser(imgurClientID, albumHash, username, (images) => {
             return res.json({ username, images })
         })
-    }
+	}
 
     /********		controller methods			**********/
     init(app) {
@@ -271,7 +302,7 @@ class bikeTagController {
          * @tags reddit
          * @return {string} 200 - success response - application/text
          */
-        app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPost)
+        app.apiRoute('/get/reddit/:tagnumber?', this.getRedditPostTemplate, ['get', 'post'])
 
         /**
          * @swagger
@@ -301,7 +332,55 @@ class bikeTagController {
          * @tags biketag
          * @return {object} 200 - success response - application/json
          */
-        app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
+		app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
+
+        /**
+         * @swagger
+         * /get/biketag/{tagnumber}:
+         *   post:
+         *     produces:
+         *       - application/json
+         *     parameters:
+         *       - in: formData
+         *         name: tagnumber
+         *         description: the tag number to retrieve
+         *         schema:
+         *           type: integer
+         *       - in: path
+         *         name: tagnumber
+         *         description: the tag number to retrieve
+         *         required: false
+         *         schema:
+         *           type: integer
+         *     description: Retrieves the current biketag information
+         *     tags:
+         *       - biketag
+         *     responses:
+         *       200:
+         *         description: biketag information including images
+         * @summary Posts the current biketag to the configured subreddit
+         * @tags biketag
+         * @return {object} 200 - success response - application/json
+         */
+		app.apiRoute('/get/latest', this.getBikeTag, ['get', 'post'])
+		
+		/**
+         * @swagger
+         * /get/users
+         *   post:
+         *     produces:
+         *       - application/json
+         *     description: Retrieves all users for a given BikeTag game
+         *     tags:
+         *       - biketag
+         *     responses:
+         *       200:
+         *         description: usernames and images
+         * @summary Retrieves all users for a given BikeTag game
+         * @tags biketag
+         * @return {object} 200 - success response - application/json
+         */
+        app.apiRoute('/get/users', this.getBikeTagsByUser, ['get', 'post'])
 
         /**
          * @swagger
@@ -369,8 +448,8 @@ class bikeTagController {
          */
         app.apiRoute(
             '/p/:tagnumber?',
-            (s, r, q, h) => {
-                return this.getBikeTagImage(s, r, q, h, true)
+            (s, r, q, h, n) => {
+                return this.getBikeTagImage(s, r, q, h, n, true)
             },
             ['get', 'post'],
         )
@@ -403,7 +482,13 @@ class bikeTagController {
          * @tags biketag
          * @return {object} 200 - success response - application/json
          */
-        app.apiRoute('/u/:username?', this.getBikeTagsByUser, ['get', 'post'])
+        app.apiRoute('/u/:username?', 
+			(s, r, q, h) => {
+				const username = getParamFromPathOrBody(req, 'username')
+				return this.getBikeTagsByUser(s, r, q, h, username)
+			},
+			['get', 'post'],
+		)
     }
 }
 

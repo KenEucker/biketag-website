@@ -1,0 +1,10 @@
+{{ images | json | console_log: nonce }}
+
+<div class="list-group">
+	<ol>
+	{% for username in usernames %}
+		<a href="/user/{{ username }}"><li>{{ username }} <span>({{ images[username].length }})</span></li></a>
+	{% endfor %}
+	</ol>
+</div>
+	

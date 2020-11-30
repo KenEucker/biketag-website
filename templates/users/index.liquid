@@ -1,0 +1,9 @@
+Pick a user from the list below!
+
+<div class="list-group">
+{% for username in usernames %}
+	<div>
+		<a href="/user/{{ username }}">{{ username }}</a>
+	</div>
+{% endfor %}
+</div>
