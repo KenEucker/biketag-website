@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const biketag = require('../lib/biketag')
-
+const { getParamFromPathOrBody } = require('../lib/util')
 class IndexController {
     init(app) {
         this.app = app
@@ -62,18 +62,43 @@ class IndexController {
                 })
             }
 
-			console.log({data, subdomainConfig})
-            data.host = `${subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''}${subdomainConfig.requestHost || host}`
+            console.log({ data, subdomainConfig })
+            data.host = `${
+                subdomainConfig.requestSubdomain ? `${subdomainConfig.requestSubdomain}.` : ''
+            }${subdomainConfig.requestHost || host}`
             data.region = subdomainConfig.region
 
             return res.render(redditTemplatePath, data)
         })
-	}
+    }
+
+    getUserTags(subdomain, req, res, host) {
+        const username = getParamFromPathOrBody(req, 'username')
+        /// TODO: put this into sexpress
+        const subdomainIsApi = subdomain === 'api'
+        const requestSubdomain = subdomainIsApi
+            ? req.path.match(/^\/[^\/]+/)[0].substr(1)
+            : subdomain
+
+        const subdomainConfig = this.app.getSubdomainOpts(requestSubdomain)
+        const { albumHash, imgurClientID } = subdomainConfig.imgur
+
+        return biketag.getBikeTagsByUser(imgurClientID, albumHash, username, (images) => {
+            const template = 'user'
+            const pageData = this.app.getPublicData(requestSubdomain, host, undefined, res)
+            const bikeTagUserPageData = { ...pageData, images }
+            console.log({ bikeTagUserPageData })
+
+            return this.app.renderTemplate(template, bikeTagUserPageData, res)
+        })
+    }
 
     routes(app) {
         app.route('/:tagnumber?', this.indexHandler)
 
-		app.route('/get/reddit/:tagnumber?', this.getRedditPost)
+        app.route('/get/reddit/:tagnumber?', this.getRedditPost)
+
+        app.route('/user/:username', this.getUserTags)
     }
 }
 

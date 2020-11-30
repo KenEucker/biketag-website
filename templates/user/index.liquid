@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	{% include "page/gtm" %}
+	{% include "page/meta" %}
+	{% include "page/css" %}
+	
+	<!-- MDB -->
+	{{ "/css/mdb.min.css" | stylesheet_tag }}
+	{{ "/css/fa-all.min.css" | stylesheet_tag }}
+	{{ images | json | console_log: nonce }}
+</head>
+<body>
+
+	<div class="container">
+
+<!--Carousel Wrapper-->
+	<div id="image-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+		<!--Controls-->
+		<div class="controls-top">
+			<a class="btn-floating" href="#image-carousel" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+			<a class="btn-floating" href="#image-carousel" data-slide="next"><i
+				class="fas fa-chevron-right"></i></a>
+		  </div>
+		  <!--/.Controls-->
+
+	{% assign imagesPerSlide = 6 %}
+	{% assign numSlides = images.length | divided_by:imagesPerSlide | minus:1 %}
+  
+	<!--Slides-->
+	<div class="carousel-inner" role="listbox">
+  
+	   {% assign firstClassActive = 'active' %}
+	   {% assign cardColClass = 'col-md-4'%}
+	   {% for slideNum in (0..numSlides) %}
+	  <!--slide {{slideNum}}-->
+		{% assign count = 1 %}
+		<div class="carousel-item {{firstClassActive}}">
+			{% assign imagesOffest = slideNum | times:imagesPerSlide %}
+			{% for image in images offset: imagesOffest limit: imagesPerSlide %}
+			{% assign evenOrOdd = count | modulo:2 %}
+			{% if evenOrOdd == 1 %}
+			<!-- <div class="row"> -->
+			{% endif %}
+				<div class="{{cardColClass}}">
+					<div class="card mb-2">
+						<img src="{{ image.link }}" class="card-img-top" alt="{{ image.description }}">
+						<div class="card-body">
+							<h4 class="card-title">#{{image.title}}</h4>
+							<p class="card-text">{{ image.description }}</p>
+						</div>
+					</div>
+				</div>
+			{% if evenOrOdd == 0 %}
+			<!-- </div> -->
+			{% endif %}
+			{% assign count = count | plus:1 %}
+			{% endfor %}
+		</div>
+		{% assign firstClassActive = '' %}
+	  	<!--/slide {{slideNum}}-->
+		{% endfor %}
+  
+	  </div>
+
+	  <!--Indicators-->
+	  <ol class="carousel-indicators">
+	   {% assign firstClassActive = 'active' %}
+	   {% for slideNum in (0..numSlides) %}
+		<li data-target="#image-carousel" data-slide-to="{{ slideNum }}" class="secondary-color {{firstClassActive}}"></li>
+	   {% assign firstClassActive = '' %}
+	   {% endfor %}
+	</ol>
+	<!--/.Indicators-->
+	</div>
+	<!--/.Slides-->
+  
+  <!--/.Carousel Wrapper-->
+</div>
+
+	{{ "/js/jquery.min.js" | javascript_tag }}
+	<!-- MDB -->
+	{{ "/js/mdb.min.js" | javascript_tag }}
+</body>
+</html>

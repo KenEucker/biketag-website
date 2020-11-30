@@ -60,6 +60,7 @@ module.exports = {
                     `https://i.imgur.com`,
                     `https://www.googletagmanager.com`,
                     `https://www.google-analytics.com`,
+                    `https://mdbootstrap.com`,
                     `data:`,
                 ],
             },

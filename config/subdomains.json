@@ -2,6 +2,7 @@
     "index": {
         "template": "home",
         "aliases": ["www"],
+        "tagline": "BikeTag! The mystery photo tag game on bicycles.",
         "imgur": {
             "albumHash": "JABitEa"
         },
