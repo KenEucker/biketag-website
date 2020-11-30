@@ -1,9 +1,31 @@
-Pick a user from the list below!
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% include "page/gtm" %}
+		{% include "page/meta" %}
+		{% include "page/css" %}
+		
+		<!-- MDB -->
+		{{ "/css/mdb.min.css" | stylesheet_tag }}
+		{{ "/css/fa-all.min.css" | stylesheet_tag }}
+		{{ images | json | console_log: nonce }}
+	</head>
 
-<div class="list-group">
-{% for username in usernames %}
-	<div>
-		<a href="/user/{{ username }}">{{ username }}</a>
-	</div>
-{% endfor %}
-</div>
+	<body>
+		<h1>Pick a user from the list below!</h1>
+
+		<section>
+			<ul class="list-group">
+			{% for username in usernames %}
+				<li class="list-group-item">
+					<a href="/user/?username={{ username }}">{{ username }}</a>
+				</li>
+			{% endfor %}
+			</ul>
+		</section>
+
+		{{ "/js/jquery.min.js" | javascript_tag }}
+		<!-- MDB -->
+		{{ "/js/mdb.min.js" | javascript_tag }}
+	</body>
+</html>

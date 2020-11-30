@@ -1,10 +1,32 @@
-{{ images | json | console_log: nonce }}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% include "page/gtm" %}
+		{% include "page/meta" %}
+		{% include "page/css" %}
+		
+		<!-- MDB -->
+		{{ "/css/mdb.min.css" | stylesheet_tag }}
+		{{ "/css/fa-all.min.css" | stylesheet_tag }}
+		{{ images | json | console_log: nonce }}
+	</head>
 
-<div class="list-group">
-	<ol>
-	{% for username in usernames %}
-		<a href="/user/{{ username }}"><li>{{ username }} <span>({{ images[username].length }})</span></li></a>
-	{% endfor %}
-	</ol>
-</div>
-	
+	<body>
+		<h1>BikeTag Player Leaderboard [{{ region }}]</h1>
+
+		<section>
+			<ul class="list-group">
+			{% for username in usernames %}
+				<li>
+					<a href="/user/?username={{ username }}">{{ username }}</a>
+					<span>({{ images[username].length }})</span>
+				</li>
+			{% endfor %}
+			</ul>
+		</section>
+
+		{{ "/js/jquery.min.js" | javascript_tag }}
+		<!-- MDB -->
+		{{ "/js/mdb.min.js" | javascript_tag }}
+	</body>
+</html>

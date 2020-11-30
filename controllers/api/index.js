@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const biketag = require('../../lib/biketag')
-const { sleep, getParamFromPathOrBody } = require('../../lib/util')
+const { sleep, getFromQueryOrPathOrBody } = require('../../lib/util')
 const request = require('request')
 class bikeTagController {
     postToReddit(subdomain, req, res, host) {
@@ -104,7 +104,7 @@ class bikeTagController {
                 error,
             })
         }
-	}
+    }
 
     getRedditPostTemplate(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
@@ -210,7 +210,7 @@ class bikeTagController {
         return biketag.getBikeTagsByUser(imgurClientID, albumHash, username, (images) => {
             return res.json({ username, images })
         })
-	}
+    }
 
     /********		controller methods			**********/
     init(app) {
@@ -332,7 +332,7 @@ class bikeTagController {
          * @tags biketag
          * @return {object} 200 - success response - application/json
          */
-		app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
+        app.apiRoute('/get/biketag/:tagnumber?', this.getBikeTag, ['get', 'post'])
 
         /**
          * @swagger
@@ -362,9 +362,9 @@ class bikeTagController {
          * @tags biketag
          * @return {object} 200 - success response - application/json
          */
-		app.apiRoute('/get/latest', this.getBikeTag, ['get', 'post'])
-		
-		/**
+        app.apiRoute('/get/latest', this.getBikeTag, ['get', 'post'])
+
+        /**
          * @swagger
          * /get/users
          *   post:
@@ -482,13 +482,14 @@ class bikeTagController {
          * @tags biketag
          * @return {object} 200 - success response - application/json
          */
-        app.apiRoute('/u/:username?', 
-			(s, r, q, h) => {
-				const username = getParamFromPathOrBody(req, 'username')
-				return this.getBikeTagsByUser(s, r, q, h, username)
-			},
-			['get', 'post'],
-		)
+        app.apiRoute(
+            '/u/:username?',
+            (s, r, q, h) => {
+                const username = getFromQueryOrPathOrBody(req, 'username')
+                return this.getBikeTagsByUser(s, r, q, h, username)
+            },
+            ['get', 'post'],
+        )
     }
 }
 

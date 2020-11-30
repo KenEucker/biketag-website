@@ -10,11 +10,16 @@
 	{{ "/css/mdb.min.css" | stylesheet_tag }}
 	{{ "/css/fa-all.min.css" | stylesheet_tag }}
 	{{ images | json | console_log: nonce }}
+
+	{% assign imagesPerSlide = 3 %}
+	{% assign imagesLength = images.length %}
+	{% assign numSlides = images.length | divided_by:imagesPerSlide | minus:1 %}
+	{% assign cardColClass = 'col-md-4'%}
 </head>
 <body>
 
 	<div class="container">
-		<h1>Tags by {{ username }}</h1>
+		<h1>({{ images.length }}) Tags by {{ username }}</h1>
 
 <!--Carousel Wrapper-->
 	<div id="image-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -25,15 +30,11 @@
 				class="fas fa-chevron-right"></i></a>
 		  </div>
 		  <!--/.Controls-->
-
-	{% assign imagesPerSlide = 6 %}
-	{% assign numSlides = images.length | divided_by:imagesPerSlide | minus:1 %}
   
 	<!--Slides-->
 	<div class="carousel-inner" role="listbox">
   
 	   {% assign firstClassActive = 'active' %}
-	   {% assign cardColClass = 'col-md-4'%}
 	   {% for slideNum in (0..numSlides) %}
 	  <!--slide {{slideNum}}-->
 		{% assign count = 1 %}
