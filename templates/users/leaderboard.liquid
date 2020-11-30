@@ -17,8 +17,11 @@
 		<section>
 			<ul class="list-group">
 			{% for username in usernames %}
+				{% assign numTagsDivide2 = images[username].length | divided_by: 2 %}
+				{% assign numTagsMod2 = images[username].length | modulus: 2 %}
+				{% assign numTags = numTagsDivide2 | minus: numTagsMod2 | abs %}
 				<li class="list-group-item">
-					<a href="/user/?username={{ username }}">{{ username }} ({{ images[username].length }})</a>
+					<a href="/user/?username={{ username }}">{{ username }} ({{ numTags }})</a>
 				</li>
 			{% endfor %}
 			</ul>

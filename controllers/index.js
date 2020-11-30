@@ -130,8 +130,6 @@ class IndexController {
             return res.json(data)
         })
 	}
-	
-
 
     getRedditPostTemplate(subdomain, req, res, host) {
         const tagnumber = biketag.getTagNumberFromRequest(req)
