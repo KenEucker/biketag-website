@@ -186,7 +186,9 @@
 	</audio>
 
 	<script nonce="{{nonce}}">
-		(function () {
+		(function (isSet) {
+			if (isSet) return
+
 			const mute = document.getElementById('mute')
 			mute.addEventListener('click', function () {
 				const jingle = document.getElementsByTagName('audio')[0]
@@ -208,7 +210,19 @@
 			// 	mute.className = "fas fa-volume-mute"
 			// })
 
-		})()
+			const refreshCurrentBikeTagImages = () => {
+				const subdomainLinks = document.querySelectorAll('#main > a')
+				subdomainLinks.forEach((link) => {
+					const subdomainImage = link.querySelectorAll('img')
+					subdomainImage[0].src = `${link.href}current`
+				})
+			}
+
+			window.refreshCurrentBikeTagImages = refreshCurrentBikeTagImages
+			window.setInterval(window.refreshCurrentBikeTagImages, 60000)
+			window.setTimeout(window.refreshCurrentBikeTagImages, 5000)
+
+		})(window.refreshCurrentBikeTagImages)
 	</script>
 	{{ "js/jquery.min.js" | javascript_tag }}
 	{{ "js/webflow.js" | javascript_tag }}
