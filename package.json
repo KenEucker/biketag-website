@@ -41,11 +41,19 @@
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.6.35",
+        "sexpress": "^0.6.36",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
         "prettier": "^2.2.1"
     },
-    "license": "Unlicense"
+    "license": "Unlicense",
+    "generate": {
+        "enabled": true,
+        "copyServerFile": true,
+        "copyControllers": true,
+        "copyLib": true,
+        "source": "https://github.com/KenEucker/biketag-app/archive/production.zip",
+        "templatesSource": "https://github.com/KenEucker/biketag-website/archive/production.zip"
+    }
 }
