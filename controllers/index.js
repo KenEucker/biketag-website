@@ -26,21 +26,21 @@ class IndexController {
     }
 
     indexHandler(subdomain, req, res, host) {
-        const template = this.app.getTemplateNameFromSubdomain(subdomain)
+		const template = this.app.getTemplateNameFromSubdomain(subdomain)
         const pageData = this.app.getPublicData(subdomain, host, undefined, res)
-        const subdomainConfig = this.app.getSubdomainOpts(subdomain)
-        const { albumHash, imgurClientID } = subdomainConfig.imgur
+		const subdomainConfig = this.app.getSubdomainOpts(subdomain)
+		
+		if (subdomainConfig.imgur && subdomain !== 'index') {
+			const { albumHash, imgurClientID } = subdomainConfig.imgur
+			return biketag.getTagInformation(imgurClientID, 'current', albumHash, (data) => {
+				const bikeTagPageData = { ...pageData, currentBikeTag: data || {} }
 
-        if (subdomain === 'index') {
-            return this.app.renderTemplate(template, pageData, res)
-        }
+				return this.app.renderTemplate(template, bikeTagPageData, res)
+			})
+		}
 
-        return biketag.getTagInformation(imgurClientID, 'current', albumHash, (data) => {
-            const bikeTagPageData = { ...pageData, currentBikeTag: data || {} }
-
-            return this.app.renderTemplate(template, bikeTagPageData, res)
-        })
-    }
+		return this.app.renderTemplate(template, pageData, res)
+	}
 
     getUserTags(subdomain, req, res, host) {
         const username = getFromQueryOrPathOrBody(req, 'username')

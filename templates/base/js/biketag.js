@@ -122,7 +122,7 @@ class BikeTag {
 		// </div>`
 
 		var uploadBox = `<div class="upload-box" data-message="(MESSAGE)">
-			<img src="../../../public/img//blank-tag.png"></img>
+			<img src="../../../public/img/blank-tag.png"></img>
 			<span>(MESSAGE)</span>
 		</div>`
 
