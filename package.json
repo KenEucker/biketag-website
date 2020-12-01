@@ -7,6 +7,7 @@
     "contributors": [],
     "bin": {},
     "scripts": {
+        "clean": "yarn prettier . --write",
         "dev": "node app.js -- --debug=true",
         "start": "node app.js",
         "staging": "cp config.sample.json config/config.json",
@@ -23,8 +24,7 @@
         "server-run": "sudo pm2 start ecosystem.config.js --env production",
         "server-stop": "sudo pm2 stop BikeTag",
         "server-rerun": "sudo pm2 delete BikeTag && sudo pm2 start ecosystem.config.js --env production",
-        "server-deploy": "npm run server-update && npm run server-restart && npm run server-logs",
-        "prettier-all": "yarn prettier . --write"
+        "server-deploy": "npm run server-update && npm run server-restart && npm run server-logs"
     },
     "main": "index.js",
     "repository": {
