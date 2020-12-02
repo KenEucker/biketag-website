@@ -42,7 +42,7 @@ class bikeTagController {
             this.app.log.status(
                 `waiting for ${getTagInformationSleep}ms until getting new tag information for recent post`,
             )
-			// await sleep(getTagInformationSleep)
+			await sleep(getTagInformationSleep)
 
             return biketag.getTagInformation(
                 imgurClientID,
