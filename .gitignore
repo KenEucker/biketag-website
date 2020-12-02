@@ -59,11 +59,13 @@ typings/
 
 # not going to track changes for these files that come from the biketag-app project
 app.js
+controllers
+lib
 temp
 private.config.json
 config.json
-
 config.json.bak
+
 uploads
 .DS_Store
 yarn.lock
