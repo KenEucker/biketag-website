@@ -48,7 +48,6 @@ class BikeTag {
 	}
 
 	getTagNumberFromURL(tagNumber) {
-		console.trace({tagNumber})
 		if (!!tagNumber && Number.isInteger(tagNumber)) {
 			return tagNumber
 		}

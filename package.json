@@ -1,6 +1,6 @@
 {
     "name": "biketag-website",
-    "version": "0.7.8",
+    "version": "0.8.0",
     "title": "The BikeTag Game",
     "description": "A website for biketag.org",
     "author": "Ken Eucker <keneucker@gmail.com>",
@@ -41,7 +41,7 @@
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.6.36",
+        "sexpress": "^0.6.40",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {

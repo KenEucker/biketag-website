@@ -57,11 +57,14 @@ typings/
 # dotenv environment variables file
 .env
 
+temp
 config.json
 config.json.bak
 uploads
 .DS_Store
 yarn.lock
+config/greenlock.d
+.greenlockrc
 
 *.pem
 
