@@ -57,7 +57,7 @@
 				console.log('image count has changed, updating most recent tags');
 				/// TODO: Fix a bug at this line
 				this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
-				biketag.showLatestTagImages()
+				biketag.showCurrentBikeTag()
 			}
 		}
 
@@ -220,14 +220,14 @@
 
 				if (count) {
 					this.imgurAlbumPicturesRefreshFrequency = false
-					biketag.showLatestTagImages(count)
+					biketag.showCurrentBikeTag(count)
 				} else if (isArchive) {
-					biketag.showLatestTagImages(count || 10)
+					biketag.showCurrentBikeTag(count || 10)
 				} else if (tagnumber) {
 					this.imgurAlbumPicturesRefreshFrequency = false
 					biketag.showBikeTagNumber(tagnumber)
 				} else {
-					biketag.showLatestTagImages()
+					biketag.showCurrentBikeTag()
 				}
 
 				if (this.imgurAlbumPicturesRefreshFrequency) {

@@ -48,7 +48,6 @@ class BikeTag {
 	}
 
 	getTagNumberFromURL(tagNumber) {
-		console.trace({tagNumber})
 		if (!!tagNumber && Number.isInteger(tagNumber)) {
 			return tagNumber
 		}
@@ -591,10 +590,10 @@ class BikeTag {
 		return currentTagInfo
 	}
 
-	showLatestTagImages(count = -1) {
+	showCurrentBikeTag(count = -1) {
 		if (!imgur.imgurAlbumPictures) {
 			this.tempCount = count
-			return imgur.getImgurAlbumPictures(this.albumHash, this.showLatestTagImages.bind(this))
+			return imgur.getImgurAlbumPictures(this.albumHash, this.showCurrentBikeTag.bind(this))
 		}
 
 		var currentTagInfo = this.setCurrentTagInformation()
@@ -760,7 +759,7 @@ class BikeTag {
 
 		// var tagItButton = document.getElementById('tagItButton')
 		// tagItButton.addEventListener('click', function(){
-		// 	self.showLatestTagImages()
+		// 	self.showCurrentBikeTag()
 		// })
 	}
 
@@ -787,7 +786,7 @@ class BikeTag {
 		var headerLogo = document.querySelector('#header .header--logo')
 		headerLogo.addEventListener('click', () => {
 			window.history.pushState({}, '/', '/');
-			this.showLatestTagImages()
+			this.showCurrentBikeTag()
 		})
 
 		var archiveButtonEl = document.getElementById('archiveButton')
@@ -797,7 +796,7 @@ class BikeTag {
 
 		var tagItButton = document.getElementById('tagItButton')
 		tagItButton.addEventListener('click', () => {
-			this.showLatestTagImages()
+			this.showCurrentBikeTag()
 		})
 	}
 }
