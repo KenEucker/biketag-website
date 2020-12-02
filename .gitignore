@@ -58,6 +58,7 @@ typings/
 .env
 
 temp
+private.config.json
 config.json
 config.json.bak
 uploads

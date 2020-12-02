@@ -41,7 +41,7 @@
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.6.40",
+        "sexpress": "^0.6.41",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
@@ -53,6 +53,7 @@
         "copyServerFile": true,
         "copyControllers": true,
         "copyLib": true,
+        "copyConfigJs": false,
         "source": "https://github.com/KenEucker/biketag-app/archive/production.zip",
         "templatesSource": "https://github.com/KenEucker/biketag-website/archive/production.zip"
     }
