@@ -57,9 +57,12 @@ typings/
 # dotenv environment variables file
 .env
 
+# not going to track changes for these files that come from the biketag-app project
+app.js
 temp
 private.config.json
 config.json
+
 config.json.bak
 uploads
 .DS_Store
