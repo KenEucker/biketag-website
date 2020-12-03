@@ -62,6 +62,7 @@ app.js
 controllers
 lib
 temp
+src
 private.config.json
 config.json
 config.json.bak
@@ -76,3 +77,5 @@ config/greenlock.d
 
 public/js/biketag-website-api.js
 public/js/biketag-website-api.js.map
+public/js/biketag-website.js
+public/js/swagger-client.browser.min.js.map
