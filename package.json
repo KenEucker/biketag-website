@@ -1,14 +1,17 @@
 {
     "name": "biketag-website",
-    "version": "0.7.9",
+    "version": "0.8.0",
     "title": "The BikeTag Game",
     "description": "A website for biketag.org",
     "author": "Ken Eucker <keneucker@gmail.com>",
     "contributors": [],
     "bin": {},
     "scripts": {
+        "clean": "yarn prettier . --write",
         "dev": "node app.js -- --debug=true",
         "start": "node app.js",
+        "wipe": "rm config/config.json",
+        "wipe-all": "npm run wipe && rm -rf temp && rm -rf lib && rm -rf src && rm -rf controllers",
         "staging": "cp config.sample.json config/config.json",
         "docker-build": "docker build -t biketag-website .",
         "docker": "docker run -p 8080:80 -d biketag-website",
@@ -23,8 +26,7 @@
         "server-run": "sudo pm2 start ecosystem.config.js --env production",
         "server-stop": "sudo pm2 stop BikeTag",
         "server-rerun": "sudo pm2 delete BikeTag && sudo pm2 start ecosystem.config.js --env production",
-        "server-deploy": "npm run server-update && npm run server-restart && npm run server-logs",
-        "prettier-all": "yarn prettier . --write"
+        "server-deploy": "npm run server-update && npm run server-restart && npm run server-logs"
     },
     "main": "index.js",
     "repository": {
@@ -41,11 +43,21 @@
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.6.35",
+        "sexpress": "^0.6.47",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
         "prettier": "^2.2.1"
     },
-    "license": "Unlicense"
+    "license": "Unlicense",
+    "generate": {
+        "enabled": true,
+        "copyServerFile": true,
+        "copyControllers": true,
+        "copyLib": true,
+        "copySrc": true,
+        "copyConfigJs": false,
+        "source": "https://github.com/KenEucker/biketag-app/archive/production.zip",
+        "templatesSource": "https://github.com/KenEucker/biketag-website/archive/production.zip"
+    }
 }

@@ -57,15 +57,26 @@ typings/
 # dotenv environment variables file
 .env
 
+# not going to track changes for these files that come from the biketag-app project
+app.js
+controllers
+lib
+temp
+src
+private.config.json
 config.json
 private.config.json
 config.json.bak
+
 uploads
 .DS_Store
 yarn.lock
-temp
+config/greenlock.d
+.greenlockrc
 
 *.pem
 
 public/js/biketag-website-api.js
 public/js/biketag-website-api.js.map
+public/js/biketag-website.js
+public/js/swagger-client.browser.min.js.map
