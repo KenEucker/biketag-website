@@ -67,6 +67,7 @@ private.config.json
 config.json
 private.config.json
 config.json.bak
+#config/subdomains.json
 
 uploads
 .DS_Store
