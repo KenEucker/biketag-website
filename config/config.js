@@ -1,8 +1,8 @@
-let biketagImage = s=>s
+let biketagImage = (s) => s
 try {
-	biketagImage = require('../lib/biketag').getBiketagImageUrl
+    biketagImage = require('../lib/biketag').getBiketagImageUrl
 } catch (e) {
-	//swallow
+    //swallow
 }
 
 module.exports = {

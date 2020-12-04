@@ -1,3 +1,4 @@
 node_modules/
 templates/
+public/js
 package-lock.json

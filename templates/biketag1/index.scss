@@ -15,6 +15,32 @@ footer {
 	}
 }
 
+#header {
+	.headingText {
+		display: inline;
+
+		> * {
+			display: inline-block;
+		}
+
+		span {
+			font-size: 4rem;
+			font-family: _font(family);
+			margin-top: -3rem;
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+			margin-left: -0.75rem;
+		}
+	}
+
+	.bt-bicycle {
+		background-image: url('../../public/img/SpinningBikeV1.svg');
+		background-size: cover;
+		background-position: center;
+		filter: brightness(0.5) invert(1) drop-shadow(2px 1px 2px black);
+	}
+}
+
 #easter {
 	font-style: italic;
 }

@@ -87,11 +87,8 @@
 			max-height: 90px;
 			
 			.logo {
-				width: 4.5rem;
-				height: 4.5rem;
-				line-height: 4.5rem;
-				border: solid _size(border-width) _palette(border);
-				border-radius: 100%;
+				width: 5rem;
+				height: 5rem;
 				margin: auto;
 
 				&.spin, &:hover {
@@ -179,6 +176,7 @@
 						letter-spacing: 0.2rem;
 						font-size: 2rem;
 						border-bottom: 0;
+						filter: brightness(0.1) invert(1) drop-shadow(2px 1px 2px black);
 
 						&:hover {
 							background-color: _palette(border-bg);
