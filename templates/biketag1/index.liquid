@@ -101,12 +101,17 @@
 			<!-- About -->
 			<article id="about">
 				<h2 class="major">Bike Tag Game</h2>
-
+				{% assign logo = page.images.logo %}
+				{% if logo contains "." %}
+				{% else %}
+					{% assign logo = page.images.logo | append: '.png' %}
+				{% endif %}
+				<p class="center">{{ "img/" | append: logo | replace: '.png', '-small.png' | asset_url | img_tag }}</p>
 				{{ content.about }}
 
 				<p>
 					{% for region in supportedRegions %}
-					<a href="https://{{ region }}.biketag.org">BikeTag in {{ subdomains[region].region }}</a><br>
+					<a href="https://{{ region }}.{{host}}">BikeTag in {{ subdomains[region].region }}</a><br>
 					{% endfor %}
 				</p>
 

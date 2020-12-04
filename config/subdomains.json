@@ -52,10 +52,10 @@
             "subreddit": "CyclePDX"
         },
         "easter": {
-            "jingle": "public/media/biketag-pdx-jingle-1.mp3"
+            "jingle": "media/biketag-pdx-jingle-1.mp3"
         },
         "images": {
-            "header": "../../public/img/biketag-logo-1.png",
+            "header": "img/biketag-logo-1.png",
             "logo": "pdx-bike-tag"
         }
     },
