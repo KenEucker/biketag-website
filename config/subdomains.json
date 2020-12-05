@@ -156,6 +156,7 @@
         }
     },
     "stlouis": {
+		"readonly": true,
         "aliases": ["missouri"],
         "meta": {
             "title": "St Louis BikeTag!",
