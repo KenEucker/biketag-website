@@ -277,7 +277,7 @@ class BikeTag {
 				imgur.uploadImageToImgur(files[1], image2Description, () => {
 					/// TODO: Send message to the server that a new tag has been queued
 					this.sendNotificationEmail(currentTagInfo.mysteryTagNumber).then(function () {
-						window.location.href = window.location.pathname + '?uploadSuccess=true'
+						window.location.href = window.location.pathname + '?uploadSuccess=true&flushcache=true'
 					})
 				})
 			})
