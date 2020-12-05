@@ -171,7 +171,7 @@ class BikeTag {
 		submit.innerHTML = `<li><button id="submit">${playButtonText}</button></li>`
 
 		heading.id = "heading"
-		first.id = "previousTag"
+		first.id = "proofTag"
 		second.id = "location"
 		third.id = "nextTag"
 		fourth.id = "hint"
@@ -571,7 +571,7 @@ class BikeTag {
 
 			// Set the form with the tag information
 			$(`#${this.form} h1`).html($(`#${this.form} h1`).text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
-			$('#previousTag h3').html($('#previousTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
+			$('#proofTag h3').html($('#proofTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
 			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.mysteryTagNumber)
 			$('.s--tagNumber').html(poundSymbol + currentTagInfo.mysteryTagNumber)
 			$('.s--proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)

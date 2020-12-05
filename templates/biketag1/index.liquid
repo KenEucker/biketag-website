@@ -52,11 +52,11 @@
 					{% if currentBikeTag %}
 
 					<div class="m-imgur-post">
-						<a rel="{{ currentBikeTag.nextTagURL }}" target="_blank">
+						<a rel="{{ currentBikeTag.currentTagURL }}" target="_blank">
 							<div>
 								<span><div class="normal-text">#</div>{{ currentBikeTag.currentTagNumber }}</span>
 								<span> {{ currentBikeTag.credit }} </span>
-								<img alt="{{ currentBikeTag.description }}" class="lazy" src="{{ currentBikeTag.nextTagURLThumb }}" data-src="{{ currentBikeTag.nextTagURL }}">
+								<img alt="{{ currentBikeTag.description }}" class="lazy" src="{{ currentBikeTag.currentTagURLThumb }}" data-src="{{ currentBikeTag.currentTagURL }}">
 							</div>
 							<h2 class="description">Current mystery location to find</h2>
 						</a>
