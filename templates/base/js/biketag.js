@@ -87,8 +87,8 @@ class BikeTag {
 			newBikeTagMessage: 'Did you find the Mystery Location played in round',
 			proofTagMessage: 'BikeTag @ matching Mystery Location',
 			proofTagTitle: 'Play a BikeTag that matches the Biketag in round',
-			nextTagMessage: 'BikeTag @ new Mystery Location',
-			nextTagTitle: 'Play a new BikeTag at a new Mystery Location to begin round',
+			currentTagMessage: 'BikeTag @ new Mystery Location',
+			currentTagTitle: 'Play a new BikeTag at a new Mystery Location to begin round',
 			locationMessage: 'Describe where the Mystery Location was found',
 			locationPlaceholder: 'e.g. Cathedral Park, NE 42nd and Shaver, etc.',
 			hintMessage: 'Provide a hint for the new Mystery Location',
@@ -103,8 +103,8 @@ class BikeTag {
 		var newBikeTagMessage = pageData.newBikeTagMessage
 		var proofTagMessage = pageData.proofTagMessage
 		var proofTagTitle = pageData.proofTagTitle
-		var nextTagMessage = pageData.nextTagMessage
-		var nextTagTitle = pageData.nextTagTitle
+		var currentTagMessage = pageData.currentTagMessage
+		var currentTagTitle = pageData.currentTagTitle
 		var locationMessage = pageData.locationMessage
 		var locationPlaceholder = pageData.locationPlaceholder
 		var hintMessage = pageData.hintMessage
@@ -156,10 +156,10 @@ class BikeTag {
 		second.innerHTML = `<label for="location">${locationMessage}</label>
 		<input type="text" name="location" id="location" placeholder="${locationPlaceholder}" required />`
 
-		third.innerHTML = `<h3>${nextTagTitle}</h3>
-		<label for="nextTag"></label>
-		<input type="file" name="nextTag" class="hidden" required />
-		${uploadBox.replace(/MESSAGE/g, nextTagMessage)}
+		third.innerHTML = `<h3>${currentTagTitle}</h3>
+		<label for="currentTag"></label>
+		<input type="file" name="currentTag" class="hidden" required />
+		${uploadBox.replace(/MESSAGE/g, currentTagMessage)}
 		${nextPreview}`
 
 		fourth.innerHTML = `<label for="hint">${hintMessage}</label>
@@ -173,7 +173,7 @@ class BikeTag {
 		heading.id = "heading"
 		first.id = "proofTag"
 		second.id = "location"
-		third.id = "nextTag"
+		third.id = "currentTag"
 		fourth.id = "hint"
 		jameson.id = "name"
 
@@ -572,7 +572,7 @@ class BikeTag {
 			// Set the form with the tag information
 			$(`#${this.form} h1`).html($(`#${this.form} h1`).text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber + '?')
 			$('#proofTag h3').html($('#proofTag h3').text() + ' ' + poundSymbol + currentTagInfo.currentTagNumber)
-			$('#nextTag h3').html($('#nextTag h3').text() + ' ' + poundSymbol + currentTagInfo.mysteryTagNumber)
+			$('#currentTag h3').html($('#currentTag h3').text() + ' ' + poundSymbol + currentTagInfo.mysteryTagNumber)
 			$('.s--tagNumber').html(poundSymbol + currentTagInfo.mysteryTagNumber)
 			$('.s--proofNumber').html(poundSymbol + currentTagInfo.currentTagNumber)
 

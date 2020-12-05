@@ -79,7 +79,7 @@
 				}
 			}
 
-			#nextTag {
+			#currentTag {
 				h3, .upload-box {
 					color: _palette(green);
 				}
@@ -165,7 +165,7 @@
 					color: _palett(yellow);
 				}
 
-				&[name="nextTag"] {
+				&[name="currentTag"] {
 					color: _palett(green);
 				}
 			}
