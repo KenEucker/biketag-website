@@ -699,7 +699,7 @@ class BikeTag {
 		var images = imgur.imgurAlbumPictures
 		var imageCount = Math.round((images.length / 2) + ((images.length - 1) % 2))
 
-		const innerContainerElement = this.activateInnerContainer('single', emptyContainer)
+		const innerContainerElement = this.activateInnerContainer('post', emptyContainer)
 
 		if (tagNumber && tagNumber < imageCount) {
 			var theTag = images[this.getTagNumberIndex(tagNumber)];
