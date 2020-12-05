@@ -5,7 +5,7 @@
 		constructor() {
 			this.imgurAccessToken = null
 			this.imgurAlbumPictures = null
-			this.imgurAlbumPicturesRefreshFrequency = 60000
+			// this.imgurAlbumPicturesRefreshFrequency = 60000
 			this.imgurPostComponent = 'ImgurPost'
 
 			if (window.pageData && window.pageData.imgur) {
@@ -57,7 +57,7 @@
 				console.log('image count has changed, updating most recent tags');
 				/// TODO: Fix a bug at this line
 				this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images);
-				biketag.showCurrentBikeTag()
+				// biketag.showCurrentBikeTag()
 			}
 		}
 
@@ -215,7 +215,7 @@
 						var notification = document.getElementById("notification");
 						notification.style.display = 'none';
 					});
-					this.imgurAlbumPicturesRefreshFrequency = 5000;
+					// this.imgurAlbumPicturesRefreshFrequency = 5000;
 				}
 
 				if (count) {
@@ -227,7 +227,7 @@
 					this.imgurAlbumPicturesRefreshFrequency = false
 					biketag.showBikeTagNumber(tagnumber)
 				} else {
-					biketag.showCurrentBikeTag()
+					// biketag.showCurrentBikeTag()
 				}
 
 				if (this.imgurAlbumPicturesRefreshFrequency) {
@@ -243,12 +243,11 @@
 
 				console.log('imgur integration initialized.')
 				console.log('loading lazy load images')
-				window.lazyLoadInstance = new LazyLoad()
-			});
+			})
 
 			return this
 		}
-	};
+	}
 
 	window.imgur = new imgur()
 })(jQuery);

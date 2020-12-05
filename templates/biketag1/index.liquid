@@ -41,20 +41,20 @@
 			<nav id="head">
 				<ul>
 					<li><a id="archiveButton" href="javascript:();">Archive</a></li>
-					<li><a id="tagItButton" href="#tagit">Play <span class="longer-text hidden">The Next </span><span class="connecting-text hidden">Round </span>(<span class="s--tagNumber"></span>)</a></li>
+					<li><a id="tagItButton" href="#tagit">Play <span class="longer-text hidden">The Next </span><span class="connecting-text hidden">Round </span>(<span class="s--tagNumber">{{ currentBikeTag.currentTagNumber }}</span>)</a></li>
 					<li><a href="#howto">How<span class="connecting-text hidden"> To</span></a></li>
 				</ul>
 			</nav>
 			<div class="content">
-				<div class="inner container">
+				<div class="inner container active single">
 					{% if currentBikeTag %}
 
 					<div class="m-imgur-post">
-						<a href="{{ currentBikeTag.nextTagURLThumb }}" target="_blank">
+						<a rel="{{ currentBikeTag.nextTagURL }}" target="_blank">
 							<div>
 								<span><div class="normal-text">#</div>{{ currentBikeTag.currentTagNumber }}</span>
 								<span> {{ currentBikeTag.credit }} </span>
-								<img alt="{{ currentBikeTag.description }}" class="" src="{{ currentBikeTag.nextTagURL }}">
+								<img alt="{{ currentBikeTag.description }}" class="lazy" src="{{ currentBikeTag.nextTagURLThumb }}" data-src="{{ currentBikeTag.nextTagURL }}">
 							</div>
 							<h2 class="description">Current mystery location to find</h2>
 						</a>
@@ -62,6 +62,8 @@
 
 					{% endif %}
 					
+				</div>
+				<div class="inner container archive">
 				</div>
 			</div>
 			<nav id="foot">
@@ -130,6 +132,8 @@
 			</article>
 		</div>
 
+		{% include "biketag/back-to-home" %}
+
 		{% include "page/footer" %}
 
 	</div>
@@ -149,6 +153,8 @@
 
 	{{ "js/biketag.js" | javascript_tag }}
 	<script nonce="{{ nonce }}">
+		window.lazyLoadInstance = new LazyLoad()
+
 		var biketagUploadContainerSelector = '#tagit'
 		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
 		window.biketag.config = {

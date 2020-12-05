@@ -6,6 +6,24 @@
 
 /* Footer */
 
+	.back-to-home {
+		margin: auto 0;
+		width: 100%;
+		text-align: center;
+		margin-top: 2%;
+
+		a {
+			border: none;
+			span {
+				text-align: center
+			}
+
+			i {
+				font-size: 5em;
+			}
+		}
+	}
+
 	#footer {
 		@include vendor('transition', (
 			'transform #{_duration(article)} ease-in-out',

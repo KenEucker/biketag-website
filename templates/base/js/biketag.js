@@ -369,8 +369,10 @@ class BikeTag {
 					// });
 				// }
 
-			});
-			targetContainer.appendChild(tagContainer);
+			})
+
+			if (targetContainer.appendChild) targetContainer.appendChild(tagContainer)
+			else if (targetContainer.append) targetContainer.append(tagContainer)
 		}
 
 		return targetContainer
@@ -564,6 +566,7 @@ class BikeTag {
 			}
 
 			this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find", `#${this.formID} #heading`, true)
+			console.log('updating lazy load after setting current tag information')
 			window.lazyLoadInstance.update()
 
 			// Set the form with the tag information
@@ -606,37 +609,62 @@ class BikeTag {
 			this.showArchiveTags(count)
 		} else {
 
-			document.body.classList.remove('single')
-			document.body.classList.remove('archive')
-			const containerSelector = '#header .content .inner'
-			$(containerSelector).empty()
+			// const containerSelector = '#header .content .inner.single'
+			this.activateInnerContainer('single')
 
-			if (currentTagInfo.currentTag) {
-				this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find", containerSelector)
-				window.lazyLoadInstance.update()
-			} else {
-				this.showNewGameImage()
-			}
+			// if (currentTagInfo.currentTag) {
+			// 	this.renderBikeTag(currentTagInfo.currentTag, "Current mystery location to find", containerSelector)
+			// } else {
+			// 	this.showNewGameImage()
+			// }
 		}
+	}
+
+	activateInnerContainer(to, emptyContainer = false, remove = ['archive', 'single']) {
+		document.body.classList.add(to)
+
+		if (emptyContainer) innerContainerElement.empty()
+
+		const containerSelector = '#header .content'
+		const innerContainerSelector = '.inner'
+		const containerElement = $(containerSelector)
+		const activeContainerElement = containerElement.find(`${innerContainerSelector}.active`)
+
+		if (remove && remove.length) {
+			remove.forEach(removeClass => {
+				document.body.classList.remove(removeClass)
+				// activeContainerElement.removeClass(removeClass)
+			})
+		}
+		activeContainerElement.fadeOut()
+
+		const innerContainerElement = containerElement.find(`${innerContainerSelector}.${to}`)
+		innerContainerElement.addClass('active')
+		innerContainerElement.fadeIn()
+
+		return innerContainerElement
 	}
 
 	showNewGameImage() {
 		this.renderBikeTag(this.config.newGameImage, "New BikeTag game coming soon!", true)
-		window.lazyLoadInstance.update()
 	}
 
-	showArchiveTags(count) {
+	showArchiveTags(count, emptyContainer = false) {
 		if (!imgur.imgurAlbumPictures) {
 			return imgur.getImgurAlbumPictures(this.albumHash, this.showArchiveTags.bind(this))
 		}
-		document.body.classList.add('archive')
-		const containerSelector = '#header .content .inner'
-		$(containerSelector).empty()
+		
+		const innerContainerElement = this.activateInnerContainer('archive', emptyContainer)
 		window.history.pushState({}, '/#archive', '/#archive')
+		
+		if (this.archiveLoaded) {
+			$('#header .content .inner.single').show()
+			return
+		}
 
 		var images = imgur.imgurAlbumPictures;
 		count = Number.isInteger(count) ? count : this.getUrlParam('count')
-		count = Number.isInteger(count) ? count : !count || (count.toUpperCase() === "ALL") ? images.length : Number(count)
+		count = Number.isInteger(count) ? count : (typeof count === 'string' && count.toUpperCase() === "ALL" ? images.length : 10)
 		
 		const atEnd = (i) => (i <= (count * 2)) && (i < images.length)
 		const columnClass = `col-md-6`
@@ -653,12 +681,15 @@ class BikeTag {
 				row = this.renderBikeTag(image2, image2.description, row, false, columnClass)
 			}
 
-			$('#header .content .inner').append(row)
+			innerContainerElement.append(row)
 		}
+
+		this.archiveLoaded = true
+		console.log('updating lazy load after creating archive images')
 		window.lazyLoadInstance.update()
 	}
 
-	showBikeTagNumber(tagNumber) {
+	showBikeTagNumber(tagNumber, emptyContainer = false) {
 		if (!imgur.imgurAlbumPictures) {
 			return imgur.getImgurAlbumPictures(this.albumHash, this.showBikeTagNumber.bind(this));
 		}
@@ -667,24 +698,27 @@ class BikeTag {
 		tagNumber = Number.isInteger(tagNumber) ? tagNumber : this.getTagNumberFromURL()
 		var images = imgur.imgurAlbumPictures
 		var imageCount = Math.round((images.length / 2) + ((images.length - 1) % 2))
-		const containerSelector = '#header .content .inner'
-		$(containerSelector).empty()
+
+		const innerContainerElement = this.activateInnerContainer('single', emptyContainer)
 
 		if (tagNumber && tagNumber < imageCount) {
 			var theTag = images[this.getTagNumberIndex(tagNumber)];
 			var proofTag = images[this.getProofTagNumberIndex(tagNumber)];
 
 			if (proofTag) {
-				this.renderBikeTag(proofTag, "Found It Tag", containerSelector);
+				this.renderBikeTag(proofTag, "Found It Tag", innerContainerElement);
 			}
 			if (theTag) {
-				this.renderBikeTag(theTag, "Original Tag", containerSelector);
+				this.renderBikeTag(theTag, "Original Tag", innerContainerElement);
 			}
+			window.history.pushState({}, `/${tagNumber}`, `/${tagNumber}`)
 		} else if (tagNumber == imageCount) {
-			var newTag = images[this.getTagNumberIndex(tagNumber)];
+				var newTag = images[this.getTagNumberIndex(tagNumber)];
 
-			this.renderBikeTag(newTag, "Current Tag");
+				this.renderBikeTag(newTag, "Current Tag");
+			window.history.pushState({}, '/', '/')
 		}
+		console.log('updating lazy load after showing the biketag number', tagNumber)
 		window.lazyLoadInstance.update()
 	}
 
