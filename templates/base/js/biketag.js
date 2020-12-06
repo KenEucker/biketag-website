@@ -621,7 +621,6 @@ class BikeTag {
 	}
 
 	activateInnerContainer(to, emptyContainer = false, remove = ['archive', 'single']) {
-		document.body.classList.add(to)
 
 		if (emptyContainer) innerContainerElement.empty()
 
@@ -637,6 +636,7 @@ class BikeTag {
 			})
 		}
 		activeContainerElement.fadeOut()
+		document.body.classList.add(to)
 
 		const innerContainerElement = containerElement.find(`${innerContainerSelector}.${to}`)
 		innerContainerElement.addClass('active')
@@ -828,7 +828,11 @@ class BikeTag {
 
 		var archiveButtonEl = document.getElementById('archiveButton')
 		archiveButtonEl.addEventListener('click', () => {
-			this.showArchiveTags(10)
+			if (document.body.classList.contains('archive')) {
+				this.showCurrentBikeTag()
+			} else {
+				this.showArchiveTags(10)
+			}
 		})
 
 		var tagItButton = document.getElementById('tagItButton')

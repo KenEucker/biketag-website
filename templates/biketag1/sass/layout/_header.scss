@@ -84,7 +84,11 @@
 		.header--logo {
 			cursor: pointer;
 			z-index: 100;
-			max-height: 90px;
+			max-height: 105px;
+
+			.headingText h1 {
+				font-size: 1.5rem;
+			}
 			
 			.logo {
 				width: 5rem;
@@ -135,9 +139,10 @@
 		nav {
 			&#head {
 				z-index: 100;
+				margin-left: -10px;
+
 				ul {
 					margin-bottom: 0;
-					margin-left: 0;
 
 					li {
 						align-self: flex-end;
@@ -271,6 +276,10 @@
 			.header--logo {
 				max-height: unset;
 
+				.headingText h1 {
+					font-size: 1.75rem;
+				}
+
 				.logo {
 					width: 5.5rem;
 					height: 5.5rem;
@@ -302,6 +311,7 @@
 		}
 
 		@include breakpoint('>=small') {
+
 			nav {
 				&#head {
 					ul {

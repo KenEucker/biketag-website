@@ -9,7 +9,10 @@
 body.archive {
 	#wrapper {
 		#countChanger {
-			display: inline;
+			display: block !important;
+			height: 5rem;
+			z-index: 100;
+			width: unset;
 		}
 	}
 }
@@ -62,29 +65,16 @@ body.archive {
 	}
 
 	#countChanger {
-		display: none;
+		display: none !important;
 
 		nav {
-			position: fixed;
-			left: 1vw;
-			top: 2vh;
-			z-index: 100;
-
 			ul {
-				display: list-item;
-				margin-bottom: 0;
-				list-style: none;
-				padding-left: 0;
-				border: solid _size(border-width) _palette(border);
-				border-radius: _size(border-radius);
 
 				li {
 					padding-left: 0;
-					// border-left: solid _size(border-width) _palette(border);
-
-					&:first-child {
-						border-left: 0;
-					}
+					min-width: 3em;
+					max-height: 2em;
+					line-height: 2rem;
 
 					a {
 						display: block;
