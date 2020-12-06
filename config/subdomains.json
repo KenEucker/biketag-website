@@ -299,7 +299,6 @@
         }
     },
     "glasgow": {
-        "aliases": ["scotland"],
         "meta": {
             "title": "Glasgow BikeTag!",
             "url": "https://glasgow.biketag.org"
@@ -308,6 +307,29 @@
         "tagline": "The BikeTag game in Glasgow, Scotland",
         "imgur": {
             "albumHash": "4NYhkhF",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "inverness"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "inverness": {
+        "aliases": ["scotland"],
+        "meta": {
+            "title": "Inverness BikeTag!",
+            "url": "https://inverness.biketag.org"
+        },
+        "region": "Inverness, Scotland",
+        "tagline": "The BikeTag game in Inverness, Scotland",
+        "imgur": {
+            "albumHash": "NG23Of8",
             "queueAlbumHash": ""
         },
         "reddit": {
