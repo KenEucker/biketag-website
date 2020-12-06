@@ -839,6 +839,8 @@ class BikeTag {
 		tagItButton.addEventListener('click', () => {
 			this.showCurrentBikeTag()
 		})
+
+		setTimeout(() => { imgur.getImgurAlbumPictures(this.albumHash) }, 2000)
 	}
 }
 
