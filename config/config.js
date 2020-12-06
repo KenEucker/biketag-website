@@ -6,6 +6,7 @@ try {
 }
 
 module.exports = {
+	ui: true,
     middlewares: { email: true },
     rendering: {
         liquid: {
@@ -15,6 +16,7 @@ module.exports = {
         },
     },
     ssl: {
+		enabled: true,
         contentSecurityPolicy: {
             directives: {
                 fontSrc: [`'self'`, `https://fonts.googleapis.com`, `https://weloveiconfonts.com`],

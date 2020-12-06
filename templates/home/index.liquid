@@ -215,7 +215,7 @@
 				subdomainLinks.forEach((link) => {
 					const subdomainImage = link.querySelectorAll('img')
 					const logoImageSrc = subdomainImage[0].src
-					subdomainImage[0].src = `${link.href}current?size=s`
+					subdomainImage[0].src = `${link.href}current?size=s&t=${new Date().getTime()}`
 					subdomainImage[0].onerror = `this.onerror=null ; this.src='${logoImageSrc}'`
 				})
 			}

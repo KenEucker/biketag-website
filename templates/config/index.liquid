@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Login to {{ name }}</title>
+	<!-- Google Fonts Roboto -->
+	{{ "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" | stylesheet_tag: nonce }}
+    <!-- MDB -->
+	{{ "css/mdb.min.css" | stylesheet_tag: nonce }}
+    <!-- Font Awesome -->
+	{{ "css/fa-all.min.css" | stylesheet_tag: nonce }}
+  </head>
+
+  <body>
+		{% include "page/header" %}
+    	<section class="view">
+			<div class="rgba-stylish-strong d-flex justify-content-center">
+			  <div class="container">
+				{% include "config/index" %}
+				</div>
+			</div>
+		</section>
+
+		<!-- MDB -->
+		{{ "js/mdb.min.js" | javascript_tag: nonce }}
+	  </body>
+	</html>

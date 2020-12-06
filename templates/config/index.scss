@@ -1,0 +1,109 @@
+body {
+	padding-top: 7%;
+}
+
+header,
+.view {
+	height: 4%;
+}
+body {
+	background: url("public/img/tree-background.jpg")no-repeat center center;
+	background-size: cover;
+}
+
+.tab-pane > div {
+	backdrop-filter: blur(10px) brightness(1) grayscale(1);
+    background-color: rgba(255,255,255,0.5);
+}
+
+header {
+	nav {
+		backdrop-filter: blur(5px) brightness(1) opacity(0.9);
+		padding: 0;
+	}
+
+	.navbar-brand img {
+		max-height: 3.5em;
+	}
+	.navbar-nav .nav-item {
+		a.nav-link {
+			color: black;
+
+			&:hover {
+				color:#1266f1;
+			}
+		}
+	}
+	.top-nav-collapse {
+		background-color: #3f51b5 !important;
+	}
+	.navbar:not(.top-nav-collapse) {
+		background: transparent !important;
+	}
+	@media (max-width: 768px) {
+		.navbar:not(.top-nav-collapse) {
+			background: #3f51b5 !important;
+		}
+	}
+	@media (min-width: 800px) and (max-width: 850px) {
+		.navbar:not(.top-nav-collapse) {
+			background: #3f51b5!important;
+		}
+	}
+}
+
+.view {
+	.card {
+		background-color: rgba(229, 228, 255, 0.2);
+		margin-top: 30px;
+
+		.md-form label {
+			color: #ffffff;
+		}
+		h6 {
+			line-height: 1.7;
+		}
+
+		&.wow {
+			background-color: rgba(190, 190, 190, 0.5);
+		}
+	}
+
+	.md-form input[type=text]:focus:not([readonly]),
+	.md-form input[type=password]:focus:not([readonly]) {
+		border-bottom: 1px solid #8EDEF8;
+		box-shadow: 0 1px 0 0 #8EDEF8;
+	}
+	.md-form input[type=text]:focus:not([readonly])+label,
+	.md-form input[type=password]:focus:not([readonly])+label {
+		color: #8EDEF8;
+	}
+
+	.md-form .form-control {
+		color: #fff;
+	}
+	
+	.sso-buttons {
+		button {
+			font-weight: 100;
+			color: black;
+			background-color: white;
+		
+			&:hover {
+				color: black;
+				background-color: #1266f1;
+			}
+
+			&.imgur {
+				background-image: url("/public/img/imgur-icon.svg");
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: cover;
+			}
+	
+			i {
+				font-size: 3em;
+			}
+		}
+	}
+}

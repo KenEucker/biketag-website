@@ -1,6 +1,5 @@
 {
     "imgur": {
-        "imgurClientID": "79ea70333c45883"
     },
     "reddit": {
         "includeLeaderboardInRedditPost": true
