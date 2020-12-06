@@ -1,6 +1,4 @@
 {
-    "imgur": {
-    },
     "reddit": {
         "includeLeaderboardInRedditPost": true
     },

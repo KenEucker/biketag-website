@@ -655,7 +655,6 @@ class BikeTag {
 		}
 		
 		const innerContainerElement = this.activateInnerContainer('archive', emptyContainer)
-		window.history.pushState({}, '/#archive', '/#archive')
 		
 		if (this.archiveLoaded) {
 			$('#header .content .inner.single').show()
@@ -664,6 +663,8 @@ class BikeTag {
 
 		var images = imgur.imgurAlbumPictures;
 		count = Number.isInteger(count) ? count : this.getUrlParam('count')
+		const countWasSet = !!count
+		const countWasAll = countWasSet && count == 'all'
 		count = Number.isInteger(count) ? count : (typeof count === 'string' && count.toUpperCase() === "ALL" ? images.length : 10)
 		
 		const atEnd = (i) => (i <= (count * 2)) && (i < images.length)
@@ -684,6 +685,8 @@ class BikeTag {
 			innerContainerElement.append(row)
 		}
 
+		const archiveUrlPath = `/archive${countWasSet ? `?count=${countWasAll ? 'all' : count}` : ''}`
+		window.history.pushState({}, archiveUrlPath, archiveUrlPath)
 		this.archiveLoaded = true
 		console.log('updating lazy load after creating archive images')
 		window.lazyLoadInstance.update()
