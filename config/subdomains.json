@@ -17,6 +17,17 @@
             "logo": ""
         }
     },
+    "history": {
+		"tagline": "BikeTag! A timeline as we know it",
+		"template": "history",
+        "imgur": {
+            "albumHash": "JABitEa"
+        },
+        "images": {
+            "header": "../../public/img/Tag-Logo-Stacked-V2.svg",
+            "logo": ""
+        }
+	},
     "tag": {
         "template": "tag",
         "aliases": ["new", "post"],

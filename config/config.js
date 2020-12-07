@@ -23,7 +23,6 @@ module.exports = {
                 styleSrc: [
                     `'self'`,
                     `'unsafe-inline' https://fonts.googleapis.com`,
-                    `'unsafe-inline' uglipop.min.js`,
                 ],
                 scriptSrc: [`'unsafe-inline' https://www.googletagmanager.com`],
                 connectSrc: [

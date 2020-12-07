@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+
+<head>
+	{% include "page/gtm" %}
+	{% include "page/meta" %}
+	{% include "page/css" %}
+	
+	<!-- MDB -->
+	{{ "css/mdb.min.css" | stylesheet_tag }}
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <h2>The game of BikeTag!</h2>
+    </div>
+    <!-- /Page header -->
+
+    <!-- Timeline -->
+    <div class="timeline">
+    
+        <!-- Line component -->
+        <div class="line text-muted"></div>
+
+        <!-- Separator -->
+        <div class="separator text-muted">
+            <time>25. 3. 2015</time>
+        </div>
+        <!-- /Separator -->
+    
+        <!-- Panel -->
+        <article class="panel panel-primary">
+    
+            <!-- Icon -->
+            <div class="panel-heading icon">
+                <i class="glyphicon glyphicon-plus"></i>
+            </div>
+            <!-- /Icon -->
+    
+            <!-- Heading -->
+            <div class="panel-heading">
+                <h2 class="panel-title"></h2>
+            </div>
+            <!-- /Heading -->
+    
+            <!-- Body -->
+            <div class="panel-body">
+            </div>
+            <!-- /Body -->
+    
+            <!-- Footer -->
+            <div class="panel-footer">
+                <small></small>
+            </div>
+            <!-- /Footer -->
+    
+        </article>
+        <!-- /Panel -->	
+    
+    </div>
+    <!-- /Timeline -->
+
+</div>
+</div>
+
+<!-- MDB -->
+{{ "js/mdb.min.js" | javascript_tag }}
+
+</body>
+
+</html>
