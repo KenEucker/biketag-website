@@ -1,4 +1,6 @@
 node_modules/
-templates/
 public/js
+src
+temp
+lib
 package-lock.json

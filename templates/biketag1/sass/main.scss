@@ -13,43 +13,63 @@
 
 // Breakpoints.
 
-	@include breakpoints((
-		xlarge:   ( 1281px,  1680px ),
-		large:    ( 981px,   1280px ),
-		medium:   ( 737px,   980px  ),
-		small:    ( 481px,   736px  ),
-		xsmall:   ( 361px,   480px  ),
-		xxsmall:  ( null,    360px  )
-	));
+@include breakpoints(
+    (
+        xlarge: (
+            1281px,
+            1680px,
+        ),
+        large: (
+            981px,
+            1280px,
+        ),
+        medium: (
+            737px,
+            980px,
+        ),
+        small: (
+            481px,
+            736px,
+        ),
+        xsmall: (
+            361px,
+            480px,
+        ),
+        xxsmall: (
+            null,
+            360px,
+        ),
+    )
+);
 
 // Base.
 
-	@import 'base/reset';
-	@import 'base/page';
-	@import 'base/typography';
-	@import 'base/animations';
+@import 'base/reset';
+@import 'base/page';
+@import 'base/typography';
+@import 'base/animations';
 
 // Component.
 
-	@import 'components/form';
-	@import 'components/box';
-	@import 'components/icon';
-	@import 'components/image';
-	@import 'components/list';
-	@import 'components/actions';
-	@import 'components/icons';
-	@import 'components/table';
-	@import 'components/button';
+@import 'components/form';
+@import 'components/box';
+@import 'components/icon';
+@import 'components/image';
+@import 'components/list';
+@import 'components/actions';
+@import 'components/icons';
+@import 'components/table';
+@import 'components/button';
 
 // Layout.
 
-	@import 'layout/bg';
-	@import 'layout/loader';
-	@import 'layout/wrapper';
-	@import 'layout/header';
-	@import 'layout/main';
-	@import 'layout/footer';
+@import 'layout/bg';
+@import 'layout/loader';
+@import 'layout/wrapper';
+@import 'layout/header';
+@import 'layout/main';
+@import 'layout/footer';
 
 // View.
-	@import 'views/imgurPost';
-	@import 'views/redditPost';
+@import 'views/imgurPost';
+@import 'views/redditPost';

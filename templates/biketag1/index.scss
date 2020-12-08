@@ -4,53 +4,53 @@
 @import 'css/uglipop.css';
 
 footer {
-	margin-top: 2em;
+    margin-top: 2em;
 
-	p.copyright {
-		letter-spacing: 0.2rem;
-		font-size: 0.6rem;
-		opacity: 0.75;
-		margin-bottom: 0;
-		text-transform: uppercase;
-	}
+    p.copyright {
+        letter-spacing: 0.2rem;
+        font-size: 0.6rem;
+        opacity: 0.75;
+        margin-bottom: 0;
+        text-transform: uppercase;
+    }
 }
 
 #about {
-	text-align: center;
+    text-align: center;
 
-	img {
-		filter: invert(1) brightness(0.95) drop-shadow(2px 4px 6px black);
-		max-width: 20vw;
-	}
+    img {
+        filter: invert(1) brightness(0.95) drop-shadow(2px 4px 6px black);
+        max-width: 20vw;
+    }
 }
 
 #header {
-	.headingText {
-		display: inline;
-		filter: brightness(2) invert(0.01) drop-shadow(2px 1px 2px black);
+    .headingText {
+        display: inline;
+        filter: brightness(2) invert(0.01) drop-shadow(2px 1px 2px black);
 
-		> * {
-			display: inline-block;
-		}
+        > * {
+            display: inline-block;
+        }
 
-		span {
-			font-size: 4rem;
-			font-family: _font(family);
-			margin-top: -3rem;
-			padding-left: 0.5rem;
-			padding-right: 0.5rem;
-			margin-left: -0.75rem;
-		}
-	}
+        span {
+            font-size: 4rem;
+            font-family: _font(family);
+            margin-top: -3rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            margin-left: -0.75rem;
+        }
+    }
 
-	.bt-bicycle {
-		background-image: url('../../public/img/SpinningBikeV1.svg');
-		background-size: cover;
-		background-position: center;
-		filter: brightness(0.5) invert(1) drop-shadow(2px 1px 2px black);
-	}
+    .bt-bicycle {
+        background-image: url('../../public/img/SpinningBikeV1.svg');
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.5) invert(1) drop-shadow(2px 1px 2px black);
+    }
 }
 
 #easter {
-	font-style: italic;
+    font-style: italic;
 }

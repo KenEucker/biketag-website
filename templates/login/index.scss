@@ -2,13 +2,13 @@ html,
 body,
 header,
 .view {
-	height: 100vh;
-	overflow: hidden;
+    height: 100vh;
+    overflow: hidden;
 }
 
 body {
-	background: url("public/img/tree-background.jpg")no-repeat center center;
-	background-size: cover;
+    background: url('public/img/tree-background.jpg') no-repeat center center;
+    background-size: cover;
 }
 // @media (max-width: 740px) {
 // 	html,
@@ -29,88 +29,88 @@ body {
 // }
 
 header {
-	.navbar-brand img {
-		max-height: 3.5em;
-	}
-	.navbar-nav .nav-item {
-		a.nav-link {
-			color: black;
+    .navbar-brand img {
+        max-height: 3.5em;
+    }
+    .navbar-nav .nav-item {
+        a.nav-link {
+            color: black;
 
-			&:hover {
-				color:#1266f1;
-			}
-		}
-	}
-	.top-nav-collapse {
-		background-color: #3f51b5 !important;
-	}
-	.navbar:not(.top-nav-collapse) {
-		background: transparent !important;
-	}
-	@media (max-width: 768px) {
-		.navbar:not(.top-nav-collapse) {
-			background: #3f51b5 !important;
-		}
-	}
-	@media (min-width: 800px) and (max-width: 850px) {
-		.navbar:not(.top-nav-collapse) {
-			background: #3f51b5!important;
-		}
-	}
+            &:hover {
+                color: #1266f1;
+            }
+        }
+    }
+    .top-nav-collapse {
+        background-color: #3f51b5 !important;
+    }
+    .navbar:not(.top-nav-collapse) {
+        background: transparent !important;
+    }
+    @media (max-width: 768px) {
+        .navbar:not(.top-nav-collapse) {
+            background: #3f51b5 !important;
+        }
+    }
+    @media (min-width: 800px) and (max-width: 850px) {
+        .navbar:not(.top-nav-collapse) {
+            background: #3f51b5 !important;
+        }
+    }
 }
 
 .view {
-	.card {
-		background-color: rgba(229, 228, 255, 0.2);
-		margin-top: 30px;
+    .card {
+        background-color: rgba(229, 228, 255, 0.2);
+        margin-top: 30px;
 
-		.md-form label {
-			color: #ffffff;
-		}
-		h6 {
-			line-height: 1.7;
-		}
+        .md-form label {
+            color: #ffffff;
+        }
+        h6 {
+            line-height: 1.7;
+        }
 
-		&.wow {
-			background-color: rgba(190, 190, 190, 0.5);
-		}
-	}
+        &.wow {
+            background-color: rgba(190, 190, 190, 0.5);
+        }
+    }
 
-	.md-form input[type=text]:focus:not([readonly]),
-	.md-form input[type=password]:focus:not([readonly]) {
-		border-bottom: 1px solid #8EDEF8;
-		box-shadow: 0 1px 0 0 #8EDEF8;
-	}
-	.md-form input[type=text]:focus:not([readonly])+label,
-	.md-form input[type=password]:focus:not([readonly])+label {
-		color: #8EDEF8;
-	}
+    .md-form input[type='text']:focus:not([readonly]),
+    .md-form input[type='password']:focus:not([readonly]) {
+        border-bottom: 1px solid #8edef8;
+        box-shadow: 0 1px 0 0 #8edef8;
+    }
+    .md-form input[type='text']:focus:not([readonly]) + label,
+    .md-form input[type='password']:focus:not([readonly]) + label {
+        color: #8edef8;
+    }
 
-	.md-form .form-control {
-		color: #fff;
-	}
-	
-	.sso-buttons {
-		button {
-			font-weight: 100;
-			color: black;
-			background-color: white;
-		
-			&:hover {
-				color: black;
-				background-color: #1266f1;
-			}
+    .md-form .form-control {
+        color: #fff;
+    }
 
-			&.imgur {
-				background-image: url("/public/img/imgur-icon.svg");
-				background-repeat: no-repeat;
-				background-position: center;
-				background-size: cover;
-			}
-	
-			i {
-				font-size: 3em;
-			}
-		}
-	}
+    .sso-buttons {
+        button {
+            font-weight: 100;
+            color: black;
+            background-color: white;
+
+            &:hover {
+                color: black;
+                background-color: #1266f1;
+            }
+
+            &.imgur {
+                background-image: url('/public/img/imgur-icon.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+
+            i {
+                font-size: 3em;
+            }
+        }
+    }
 }

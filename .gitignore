@@ -65,7 +65,6 @@ temp
 src
 private.config.json
 config.json
-private.config.json
 config.json.bak
 #config/subdomains.json
 

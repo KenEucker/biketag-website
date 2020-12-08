@@ -6,8 +6,8 @@ try {
 }
 
 module.exports = {
-	ui: true,
-    middlewares: { email: true },
+    ui: true,
+    // middlewares: { email: true },
     rendering: {
         liquid: {
             customFilters: {
@@ -16,14 +16,11 @@ module.exports = {
         },
     },
     ssl: {
-		enabled: true,
+        enabled: true,
         contentSecurityPolicy: {
             directives: {
                 fontSrc: [`'self'`, `https://fonts.googleapis.com`, `https://weloveiconfonts.com`],
-                styleSrc: [
-                    `'self'`,
-                    `'unsafe-inline' https://fonts.googleapis.com`,
-                ],
+                styleSrc: [`'self'`, `'unsafe-inline' https://fonts.googleapis.com`],
                 scriptSrc: [`'unsafe-inline' https://www.googletagmanager.com`],
                 connectSrc: [
                     `'self'`,

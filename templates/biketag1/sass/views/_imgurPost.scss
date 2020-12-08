@@ -1,210 +1,207 @@
 .m-imgur-post {
-	margin-bottom: -50%;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	max-width: 90vw;
-	margin: auto;
+    margin-bottom: -50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    max-width: 90vw;
+    margin: auto;
 
-	.description {
-		border-style: solid;
-		border-radius: 5px;
-		border-color: _palette(postcard-white);
-		border-width: 1px;
-		border-top-width: 0px;
-		border-top-right-radius: 0;
-		border-top-left-radius: 0;
-		margin-top: -0.6em;
-		background-color: _palette(postcard-white);
-		color: black;
-		padding: 1rem;
-	}
+    .description {
+        border-style: solid;
+        border-radius: 5px;
+        border-color: _palette(postcard-white);
+        border-width: 1px;
+        border-top-width: 0px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        margin-top: -0.6em;
+        background-color: _palette(postcard-white);
+        color: black;
+        padding: 1rem;
+    }
 
-	img,
-	.descrtipion {
-		max-width: 80vw;
-	}
+    img,
+    .descrtipion {
+        max-width: 80vw;
+    }
 
-	a {
-		position: relative;
-		border: none;
-		cursor: pointer;
-		display: inline-block;
-		width: 100%;
-		background-color: _palette(postcard-white);
+    a {
+        position: relative;
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        width: 100%;
+        background-color: _palette(postcard-white);
 
-		&:hover {
-			color: black;
-		}
+        &:hover {
+            color: black;
+        }
 
-		div {
-			display: inline;
-			position: relative;
-		}
+        div {
+            display: inline;
+            position: relative;
+        }
 
-		span {
-			position: absolute;
+        span {
+            position: absolute;
 
-			&:nth-child(1) {
-				font-size: 40px;
-				font-weight: 500;
-				text-shadow: 2px 2px #292828e6;
-				background-color: rgba(0, 0, 0, 0.75);
-				padding: 0 0.5rem;
-				border-radius: 10px;
-			}
+            &:nth-child(1) {
+                font-size: 40px;
+                font-weight: 500;
+                text-shadow: 2px 2px #292828e6;
+                background-color: rgba(0, 0, 0, 0.75);
+                padding: 0 0.5rem;
+                border-radius: 10px;
+            }
 
-			&:nth-child(2) {
-				bottom: 0;
-				right: 2%;
-				font-size: 32px;
-				text-shadow: 2px 2px #292828e6;
-			}
-		}
-	}
+            &:nth-child(2) {
+                bottom: 0;
+                right: 2%;
+                font-size: 32px;
+                text-shadow: 2px 2px #292828e6;
+            }
+        }
+    }
 
-	a,
-	img {
-		border-top-right-radius: 10px;
-		border-top-left-radius: 10px;
-	}
+    a,
+    img {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
 
-	img {
-		border: 1px _palette(postcard-white) solid;
-		border-bottom: 0;
-		border-top: 0;
-		background-color: rgba(0, 0, 0, 0.9);
-		padding: 0.5em;
-		padding-top: 0.1em;
-		max-width: 30vw;
-		min-height: 100%;
-		min-width: 100%;
-	}
+    img {
+        border: 1px _palette(postcard-white) solid;
+        border-bottom: 0;
+        border-top: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 0.5em;
+        padding-top: 0.1em;
+        max-width: 30vw;
+        min-height: 100%;
+        min-width: 100%;
+    }
 
-	@include breakpoint('>=large') {
-		max-width: 80vw;
-	}
+    @include breakpoint('>=large') {
+        max-width: 80vw;
+    }
 
-	@include breakpoint('>=medium') {
-		.description {
-			margin-top: -0.4em;
-		}
-	}
+    @include breakpoint('>=medium') {
+        .description {
+            margin-top: -0.4em;
+        }
+    }
 }
 
 body.archive {
+    #header {
+        nav {
+            &#foot {
+                margin-top: 100%;
+            }
+        }
+        .content {
+            margin-top: -30%;
 
-	#header {
-		nav {
-			&#foot {
-				margin-top: 100%;
-			}
-		}
-		.content {
-			margin-top: -30%;
+            .inner {
+                overflow: visible !important;
 
-			.inner {
-				overflow: visible !important;
+                > :last-child {
+                    margin-bottom: -100%;
+                }
+            }
+        }
+    }
 
-				> :last-child {
-					margin-bottom: -100%;
-				}
-			}
-		}
-	}
+    .inner {
+        .row {
+            .m-imgur-post {
+                margin-top: 5%;
+                backface-visibility: hidden;
+                position: relative;
+                min-width: 50%;
+            }
 
-	.inner {
-		.row {
-			.m-imgur-post {
-				margin-top: 5%;
-				backface-visibility: hidden;
-				position: relative;
-				min-width: 50%;
-			}
+            &:first-child {
+                margin-top: 25%;
+            }
+        }
 
-			&:first-child {
-				margin-top: 25%;
-			}
-		}
+        @include breakpoint('>small') {
+            .m-imgur-post {
+                margin-top: 1%;
+                font-size: 1.5em;
+            }
+        }
 
-		@include breakpoint('>small') {
-			.m-imgur-post {
-				margin-top: 1%;
-				font-size: 1.5em;
-			}
-		}
+        @include breakpoint('>large') {
+            max-width: unset;
+        }
 
-		@include breakpoint('>large') {
-			max-width: unset;
-		}
+        // #biketagUploadForm .m-imgur-post,
+        // .m-imgur-post.s--popup {
+        // 	transform: unset;
+        // 	margin-left: unset;
+        // 	margin-top: unset;
+        // 	margin-right: unset;
+        // 	z-index: unset;
+        // 	width: 75vw;
 
-		// #biketagUploadForm .m-imgur-post,
-		// .m-imgur-post.s--popup {
-		// 	transform: unset;
-		// 	margin-left: unset;
-		// 	margin-top: unset;
-		// 	margin-right: unset;
-		// 	z-index: unset;
-		// 	width: 75vw;
-
-		// 	.description {
-		// 		width: unset;
-		// 		height: unset;
-		// 	}
-		// }
-	}
+        // 	.description {
+        // 		width: unset;
+        // 		height: unset;
+        // 	}
+        // }
+    }
 }
 
 .single {
+    .m-imgur-post {
+        backface-visibility: hidden;
+        position: relative;
 
-	.m-imgur-post {
-		backface-visibility: hidden;
-		position: relative;
-
-		margin-bottom: 4em;
-	}
+        margin-bottom: 4em;
+    }
 }
 
 #tagit {
-	#biketagUploadForm {
+    #biketagUploadForm {
+        #heading span {
+            display: none;
+        }
 
-		#heading span {
-			display: none;
-		}
+        .m-imgur-post {
+            margin: auto;
+            position: relative;
+            max-width: 85%;
 
-		.m-imgur-post {
-			margin: auto;
-			position: relative;
-			max-width: 85%;
+            .close {
+                top: -20px;
+                width: 4rem;
+                height: 4rem;
+                transform: scale(0.75);
+                right: -30px;
+            }
 
-			.close {
-				top: -20px;
-				width: 4rem;
-				height: 4rem;
-				transform: scale(0.75);
-				right: -30px;
-			}
+            img {
+                width: 100%;
+                border-radius: 10px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-top: 1px _palette(postcard-white) solid;
+                max-height: 25em;
+            }
 
-			img {
-				width: 100%;
-				border-radius: 10px;
-				border-bottom-left-radius: 0;
-				border-bottom-right-radius: 0;
-				border-top: 1px _palette(postcard-white) solid;
-				max-height: 25em;
-			}
+            .description {
+                font-size: 1.2em;
+                margin-top: -0.5em;
+            }
 
-			.description {
-				font-size: 1.2em;
-				margin-top: -0.5em;
-			}
+            @include breakpoint('>=medium') {
+                margin-bottom: unset;
 
-			@include breakpoint('>=medium') {
-				margin-bottom: unset;
-
-				&:nth-child(even) {
-					transform: unset;
-				}
-			}
-		}
-	}
+                &:nth-child(even) {
+                    transform: unset;
+                }
+            }
+        }
+    }
 }

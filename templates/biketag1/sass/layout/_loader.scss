@@ -3,26 +3,26 @@
     height: 100%;
     width: 100%;
     background-color: black;
-	z-index: 10;
+    z-index: 10;
 
-	.spin {
-		animation: spin 2s infinite linear;
-		transform-origin: center;
-	}
-	
-	.logo{
-		position: relative;
-		width: 100%;
+    .spin {
+        animation: spin 2s infinite linear;
+        transform-origin: center;
+    }
 
-		.icon.fa-bicycle {
-			padding-left: 18%;
-			font-size: 50vw;
-		}
-	}
+    .logo {
+        position: relative;
+        width: 100%;
 
-	@include breakpoint('<=medium') {
-		.logo {
-			top: 25vh;
-		}
-	}
+        .icon.fa-bicycle {
+            padding-left: 18%;
+            font-size: 50vw;
+        }
+    }
+
+    @include breakpoint('<=medium') {
+        .logo {
+            top: 25vh;
+        }
+    }
 }

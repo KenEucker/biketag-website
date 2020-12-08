@@ -7,270 +7,281 @@
 /* Main */
 
 .insivible {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .bg-green {
-	background-color: _palette(green);
+    background-color: _palette(green);
 }
 
 .bg-grey {
-	background-color: #747474;
+    background-color: #747474;
 }
 
 .bg-yellow {
-	background-color: #FFE400;
+    background-color: #ffe400;
 }
 
 .bg-black {
-	background-color: #272727;
+    background-color: #272727;
 }
 
 .bg-orange {
-	background-color: _palette(orange) !important;
+    background-color: _palette(orange) !important;
 }
 
 .green {
-	color: #14A76C;
+    color: #14a76c;
 }
 
 .grey {
-	color: #747474;
+    color: #747474;
 }
 
 .yellow {
-	color: #FFE400;
+    color: #ffe400;
 }
 
 .black {
-	color: #272727;
+    color: #272727;
 }
 
 .orange {
-	color: _palette(orange);
+    color: _palette(orange);
 }
 
 #main {
-	@include vendor('flex-grow', '1');
-	@include vendor('flex-shrink', '1');
-	@include vendor('display', 'flex');
-	@include vendor('align-items', 'center');
-	@include vendor('justify-content', 'center');
-	@include vendor('flex-direction', 'column');
-	position: relative;
-	max-width: 100%;
-	z-index: 3;
+    @include vendor('flex-grow', '1');
+    @include vendor('flex-shrink', '1');
+    @include vendor('display', 'flex');
+    @include vendor('align-items', 'center');
+    @include vendor('justify-content', 'center');
+    @include vendor('flex-direction', 'column');
+    position: relative;
+    max-width: 100%;
+    z-index: 3;
 
-	#tagit {
-		#biketagUploadForm {
-			>div {
-				padding-bottom: 15px;
-			}
+    #tagit {
+        #biketagUploadForm {
+            > div {
+                padding-bottom: 15px;
+            }
 
-			#proofTag {
-				h3, .upload-box {
-					color: _palette(orange);
-				}
+            #proofTag {
+                h3,
+                .upload-box {
+                    color: _palette(orange);
+                }
 
-				.close {
-					&:before {
-						background-color: _palette(orange) !important;
-					}
-				}
-			}
+                .close {
+                    &:before {
+                        background-color: _palette(orange) !important;
+                    }
+                }
+            }
 
-			#currentTag {
-				h3, .upload-box {
-					color: _palette(green);
-				}
-				.close {
-					&:before {
-						background-color: _palette(green) !important;
-					}
-				}
-			}
+            #currentTag {
+                h3,
+                .upload-box {
+                    color: _palette(green);
+                }
+                .close {
+                    &:before {
+                        background-color: _palette(green) !important;
+                    }
+                }
+            }
 
-			#name {
-				h3, .upload-box {
-					color: _palette(yellow);
-				}
-			}
+            #name {
+                h3,
+                .upload-box {
+                    color: _palette(yellow);
+                }
+            }
 
-			.upload-box {
-				// border: 1px floralwhite dotted;
-				border-radius: 10px;
-				margin: auto;
-				margin-bottom: 2em;
-				min-width: 15vw;
-				min-height: 12vh;
-				padding: 0.5em;
-				cursor: pointer;
-				width: 50%;
-				position: relative;
-				border-bottom: inset;
-				border-top-width: thin;
-				border: dashed;
-				border-right-width: thin;
-				border-left-width: thin;
+            .upload-box {
+                // border: 1px floralwhite dotted;
+                border-radius: 10px;
+                margin: auto;
+                margin-bottom: 2em;
+                min-width: 15vw;
+                min-height: 12vh;
+                padding: 0.5em;
+                cursor: pointer;
+                width: 50%;
+                position: relative;
+                border-bottom: inset;
+                border-top-width: thin;
+                border: dashed;
+                border-right-width: thin;
+                border-left-width: thin;
 
-				&::before {
-					content: "";
-				}
+                &::before {
+                    content: '';
+                }
 
-				img {
-					max-width: 18vh;
-					margin-top: -5px;
-				}
+                img {
+                    max-width: 18vh;
+                    margin-top: -5px;
+                }
 
-				i {
-					font-size: 3.5rem;
-					border-radius: 10px;
-					padding: 16px;
-				}
+                i {
+                    font-size: 3.5rem;
+                    border-radius: 10px;
+                    padding: 16px;
+                }
 
-				&::after {
-					content: "upload your image of";
-					// font-size: 0.9em;
-					display: block;
-					margin-top: -20px;
-				}
+                &::after {
+                    content: 'upload your image of';
+                    // font-size: 0.9em;
+                    display: block;
+                    margin-top: -20px;
+                }
 
-				&.s--uploaded::after {
-					content: "image uploaded";
-				}
+                &.s--uploaded::after {
+                    content: 'image uploaded';
+                }
 
-				span {
-					position: absolute;
-					bottom: 1px;
-					width: 100%;
-					display: block;
-					font-family: Lota;
-					word-break: break-word;
-					font-size: 0.7em;
-				}
+                span {
+                    position: absolute;
+                    bottom: 1px;
+                    width: 100%;
+                    display: block;
+                    font-family: Lota;
+                    word-break: break-word;
+                    font-size: 0.7em;
+                }
+            }
 
-			}
+            input {
+                max-width: 100%;
+                font-variant: petite-caps;
+                font-size: 1.5em;
+                font-family: _font(family);
 
-			input {
-				max-width: 100%;
-				font-variant: petite-caps;
-				font-size: 1.5em;
-				font-family: _font(family);
+                &[type='file'] {
+                    font-family: _font(normal);
+                }
 
-				&[type="file"] {
-					font-family: _font(normal);
-				}
+                &[name='currentTag'] {
+                    color: _palett(yellow);
+                }
 
-				&[name="currentTag"] {
-					color: _palett(yellow);
-				}
+                &[name='currentTag'] {
+                    color: _palett(green);
+                }
+            }
 
-				&[name="currentTag"] {
-					color: _palett(green);
-				}
-			}
+            .actions {
+                padding-top: 25px;
+                float: right;
+                display: block;
+            }
+        }
+    }
 
-			.actions {
-				padding-top: 25px;
-				float: right;
-				display: block;
-			}
-		}
-	}
+    article {
+        @include vendor('transform', 'translateY(0.25rem)');
+        @include vendor(
+            'transition',
+            (
+                'opacity #{_duration(article)} ease-in-out',
+                'transform #{_duration(article)} ease-in-out'
+            )
+        );
+        @include padding(2.5rem, 2.5rem, (2rem, 0, 1rem, 0));
+        position: relative;
+        width: 40rem;
+        max-width: 100%;
+        background-color: transparentize(_palette(bg), 0.15);
+        border-radius: _size(border-radius) * 2;
+        opacity: 0;
 
-	article {
-		@include vendor('transform', 'translateY(0.25rem)');
-		@include vendor('transition', ('opacity #{_duration(article)} ease-in-out',
-				'transform #{_duration(article)} ease-in-out'
-			));
-		@include padding(2.5rem, 2.5rem, (2rem, 0, 1rem, 0));
-		position: relative;
-		width: 40rem;
-		max-width: 100%;
-		background-color: transparentize(_palette(bg), 0.15);
-		border-radius: _size(border-radius) * 2;
-		opacity: 0;
+        &.active {
+            @include vendor('transform', 'translateY(0)');
+            opacity: 1;
+        }
 
-		&.active {
-			@include vendor('transform', 'translateY(0)');
-			opacity: 1;
-		}
+        h2.major {
+            font-size: 3rem;
+            max-width: 100%;
+            text-align: center;
+        }
 
-		h2.major {
-			font-size: 3rem;
-			max-width: 100%;
-    		text-align: center;
-		}
+        .close {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4rem;
+            height: 4rem;
+            cursor: pointer;
+            text-indent: 4rem;
+            overflow: hidden;
+            white-space: nowrap;
 
-		.close {
-			display: block;
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 4rem;
-			height: 4rem;
-			cursor: pointer;
-			text-indent: 4rem;
-			overflow: hidden;
-			white-space: nowrap;
+            &:before {
+                @include vendor(
+                    'transition',
+                    'background-color #{_duration(transition)} ease-in-out'
+                );
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0.75rem;
+                left: 0.75rem;
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 100%;
+                background-position: center;
+                background-image: svg-url(
+                    '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="2" y1="2" x2="18" y2="18" /><line x1="18" y1="2" x2="2" y2="18" /></svg>'
+                );
+                background-size: 20px 20px;
+                background-repeat: no-repeat;
+            }
 
-			&:before {
-				@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
-				content: '';
-				display: block;
-				position: absolute;
-				top: 0.75rem;
-				left: 0.75rem;
-				width: 2.5rem;
-				height: 2.5rem;
-				border-radius: 100%;
-				background-position: center;
-				background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 1; }</style><line x1="2" y1="2" x2="18" y2="18" /><line x1="18" y1="2" x2="2" y2="18" /></svg>');
-				background-size: 20px 20px;
-				background-repeat: no-repeat;
-			}
+            &:hover {
+                &:before {
+                    background-color: _palette(border-bg);
+                }
+            }
 
-			&:hover {
-				&:before {
-					background-color: _palette(border-bg);
-				}
-			}
+            &:active {
+                &:before {
+                    background-color: _palette(border-bg-alt);
+                }
+            }
+        }
+    }
 
-			&:active {
-				&:before {
-					background-color: _palette(border-bg-alt);
-				}
-			}
-		}
-	}
+    @include breakpoint('<=small') {
+        article {
+            @include padding(2rem, 2rem, (1.5rem, 0, 0.5rem, 0));
 
-	@include breakpoint('<=small') {
-		article {
-			@include padding(2rem, 2rem, (1.5rem, 0, 0.5rem, 0));
+            .close {
+                &:before {
+                    top: 0.875rem;
+                    left: 0.875rem;
+                    width: 2.25rem;
+                    height: 2.25rem;
+                    background-size: 14px 14px;
+                }
+            }
+        }
 
-			.close {
-				&:before {
-					top: 0.875rem;
-					left: 0.875rem;
-					width: 2.25rem;
-					height: 2.25rem;
-					background-size: 14px 14px;
-				}
-			}
-		}
+        #tagit {
+            #biketagUploadForm {
+                .upload-box {
+                    min-width: 60%;
+                }
+            }
+        }
+    }
 
-		#tagit {
-			#biketagUploadForm {
-				.upload-box {
-					min-width: 60%;
-				}
-			}
-		}
-	}
-
-	@include breakpoint('<=xsmall') {
-		article {
-			@include padding(2rem, 1.5rem, (1rem, 0, 0.5rem, 0));
-		}
-	}
+    @include breakpoint('<=xsmall') {
+        article {
+            @include padding(2rem, 1.5rem, (1rem, 0, 0.5rem, 0));
+        }
+    }
 }

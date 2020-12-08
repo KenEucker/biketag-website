@@ -7,123 +7,122 @@
 /* Wrapper */
 
 body.archive {
-	#wrapper {
-		#countChanger {
-			display: block !important;
-			height: 5rem;
-			z-index: 100;
-			width: unset;
-		}
-	}
+    #wrapper {
+        #countChanger {
+            display: block !important;
+            height: 5rem;
+            z-index: 100;
+            width: unset;
+        }
+    }
 }
 
 #wrapper {
-	@include vendor('display', 'flex');
-	@include vendor('flex-direction', 'column');
-	@include vendor('align-items', 'center');
-	@include vendor('justify-content', 'space-between');
-	position: relative;
-	min-height: 100vh;
-	width: 100%;
-	padding: 4rem 2rem;
-	z-index: 3;
-	margin-top: 0;
-	overflow: hidden;
+    @include vendor('display', 'flex');
+    @include vendor('flex-direction', 'column');
+    @include vendor('align-items', 'center');
+    @include vendor('justify-content', 'space-between');
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    padding: 4rem 2rem;
+    z-index: 3;
+    margin-top: 0;
+    overflow: hidden;
 
-	.cssanimations.csstransforms #notification {
-		transform: translateY(-50px);
-		animation: slideDown 2.5s 1.0s 1 ease forwards;
-		-webkit-transform: translateY(-50px);
-		-webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
-		-moz-transform: translateY(-50px);
-		-moz-animation: slideDown 2.5s 1.0s 1 ease forwards;
-	}
+    .cssanimations.csstransforms #notification {
+        transform: translateY(-50px);
+        animation: slideDown 2.5s 1s 1 ease forwards;
+        -webkit-transform: translateY(-50px);
+        -webkit-animation: slideDown 2.5s 1s 1 ease forwards;
+        -moz-transform: translateY(-50px);
+        -moz-animation: slideDown 2.5s 1s 1 ease forwards;
+    }
 
-	#notification {
-		position: absolute;
-		z-index: 101;
-		top: 0;
-		left: 0;
-		right: 0;
-		background: #1cdd4c;
-		text-align: center;
-		line-height: 2.5;
-		overflow: hidden;
-		-webkit-box-shadow: 0 0 5px black;
-		-moz-box-shadow: 0 0 5px black;
-		box-shadow: 0 0 5px black;
+    #notification {
+        position: absolute;
+        z-index: 101;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #1cdd4c;
+        text-align: center;
+        line-height: 2.5;
+        overflow: hidden;
+        -webkit-box-shadow: 0 0 5px black;
+        -moz-box-shadow: 0 0 5px black;
+        box-shadow: 0 0 5px black;
 
-		.close {
-			position: absolute;
-			right: 5%;
-			cursor: pointer;
-		}
+        .close {
+            position: absolute;
+            right: 5%;
+            cursor: pointer;
+        }
 
-		.cssanimations.csstransforms .close {
-			display: none;
-		}
-	}
+        .cssanimations.csstransforms .close {
+            display: none;
+        }
+    }
 
-	#countChanger {
-		display: none !important;
+    #countChanger {
+        display: none !important;
 
-		nav {
-			ul {
+        nav {
+            ul {
+                li {
+                    padding-left: 0;
+                    min-width: 3em;
+                    max-height: 2em;
+                    line-height: 2rem;
 
-				li {
-					padding-left: 0;
-					min-width: 3em;
-					max-height: 2em;
-					line-height: 2rem;
+                    a {
+                        display: block;
+                        min-width: 1.5rem;
+                        height: 2rem;
+                        line-height: 2rem;
+                        padding: 0 0.45rem 0 (0.45rem + _font(letter-spacing));
+                        text-transform: uppercase;
+                        letter-spacing: _font(letter-spacing);
+                        font-size: 0.8rem;
+                        border-bottom: 0;
 
-					a {
-						display: block;
-						min-width: 1.5rem;
-						height: 2rem;
-						line-height: 2rem;
-						padding: 0 0.45rem 0 (0.45rem + _font(letter-spacing));
-						text-transform: uppercase;
-						letter-spacing: _font(letter-spacing);
-						font-size: 0.8rem;
-						border-bottom: 0;
+                        &:hover {
+                            background-color: _palette(border-bg);
+                        }
 
-						&:hover {
-							background-color: _palette(border-bg);
-						}
+                        &:active {
+                            background-color: _palette(border-bg-alt);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-						&:active {
-							background-color: _palette(border-bg-alt);
-						}
-					}
-				}
-			}
-		}
-	}
+    &:before {
+        content: '';
+        display: block;
+    }
 
-	&:before {
-		content: '';
-		display: block;
-	}
+    @include breakpoint('<=xlarge') {
+        padding: 3rem 2rem;
+    }
 
-	@include breakpoint('<=xlarge') {
-		padding: 3rem 2rem;
-	}
+    @include breakpoint('<=small') {
+        padding: 2rem 1rem;
+    }
 
-	@include breakpoint('<=small') {
-		padding: 2rem 1rem;
-	}
+    @include breakpoint('<=xsmall') {
+        padding: 1rem;
+    }
 
-	@include breakpoint('<=xsmall') {
-		padding: 1rem;
-	}
-
-	@media only screen and (min-width: 800px) {
-		#countChanger {
-			nav {
-				ul {
-					@include vendor('display', 'flex');
-				}
-			}
-		}
-	}
+    @media only screen and (min-width: 800px) {
+        #countChanger {
+            nav {
+                ul {
+                    @include vendor('display', 'flex');
+                }
+            }
+        }
+    }
 }

@@ -18,8 +18,8 @@
         }
     },
     "history": {
-		"tagline": "BikeTag! A timeline as we know it",
-		"template": "history",
+        "tagline": "BikeTag! A timeline as we know it",
+        "template": "history",
         "imgur": {
             "albumHash": "JABitEa"
         },
@@ -27,7 +27,7 @@
             "header": "../../public/img/Tag-Logo-Stacked-V2.svg",
             "logo": ""
         }
-	},
+    },
     "tag": {
         "template": "tag",
         "aliases": ["new", "post"],
@@ -57,8 +57,8 @@
         "region": "Portland, Oregon",
         "tagline": "The BikeTag game in Portland, Oregon",
         "imgur": {
-			"albumHash": "Y9PKtpI",
-			"queueAlbumHash": "KTk7JrK"
+            "albumHash": "Y9PKtpI",
+            "queueAlbumHash": "KTk7JrK"
         },
         "reddit": {
             "subreddit": "CyclePDX"
@@ -82,7 +82,7 @@
         "tagline": "The BikeTag game in Denver, Colorado",
         "imgur": {
             "albumHash": "xTnG1Io",
-			"queueAlbumHash": "qEK4ZzI"
+            "queueAlbumHash": "qEK4ZzI"
         },
         "reddit": {
             "subreddit": "CycleDenver"
@@ -106,7 +106,7 @@
         "tagline": "The BikeTag game in Indianapolis, Indiana",
         "imgur": {
             "albumHash": "dr45yWS",
-			"queueAlbumHash": "SMxBk7g"
+            "queueAlbumHash": "SMxBk7g"
         },
         "reddit": {
             "subreddit": "BikeIN"
@@ -130,7 +130,7 @@
         "tagline": "The BikeTag game in Seattle, Washington",
         "imgur": {
             "albumHash": "3CIf8hy",
-			"queueAlbumHash": "CF1FtsF"
+            "queueAlbumHash": "CF1FtsF"
         },
         "reddit": {
             "subreddit": "cycleseattle"
@@ -153,7 +153,7 @@
         "tagline": "The BikeTag game in Omaha, Nebraska",
         "imgur": {
             "albumHash": "8Da1Xfa",
-			"queueAlbumHash": "MeiXisH"
+            "queueAlbumHash": "MeiXisH"
         },
         "reddit": {
             "subreddit": "OmahaMetroCycling"
@@ -167,7 +167,7 @@
         }
     },
     "stlouis": {
-		"readonly": true,
+        "readonly": true,
         "aliases": ["missouri"],
         "meta": {
             "title": "St Louis BikeTag!",
@@ -177,7 +177,7 @@
         "tagline": "The BikeTag game in St Louis, Missouri",
         "imgur": {
             "albumHash": "Zc3wzvE",
-			"queueAlbumHash": "wdr7fhL"
+            "queueAlbumHash": "wdr7fhL"
         },
         "reddit": {
             "subreddit": "StLouisBiking"
@@ -200,7 +200,7 @@
         "tagline": "The BikeTag game in Vancouver, British Columbia",
         "imgur": {
             "albumHash": "tt9bov6",
-			"queueAlbumHash": "bYfcnQO"
+            "queueAlbumHash": "bYfcnQO"
         },
         "reddit": {
             "subreddit": "vancouvercycling"
@@ -224,7 +224,7 @@
         "tagline": "The BikeTag game in Vienna, Austria",
         "imgur": {
             "albumHash": "2nIYv2H",
-			"queueAlbumHash": "uz3YPzC"
+            "queueAlbumHash": "uz3YPzC"
         },
         "reddit": {
             "subreddit": "radwien"
@@ -248,7 +248,7 @@
         "tagline": "The BikeTag game in Miami, Florida",
         "imgur": {
             "albumHash": "mNRJSZg",
-			"queueAlbumHash": "oIw7pL0"
+            "queueAlbumHash": "oIw7pL0"
         },
         "reddit": {
             "subreddit": "miamibiking"
@@ -272,7 +272,7 @@
         "tagline": "The BikeTag game in Eugene, Oregon",
         "imgur": {
             "albumHash": "s1vwiKY",
-			"queueAlbumHash": ""
+            "queueAlbumHash": ""
         },
         "reddit": {
             "subreddit": "eugenebiketag"

@@ -1,27 +1,28 @@
 body {
-	background-color: rgba(0, 0, 0, 0.8);
-	.carousel-indicators {
-		position: relative;
-		margin-top: 5%;
-	}
-	.controls-top {
-		text-align: center;
-	}
+    background-color: rgba(0, 0, 0, 0.8);
+    .carousel-indicators {
+        position: relative;
+        margin-top: 5%;
+    }
+    .controls-top {
+        text-align: center;
+    }
 
-	#image-carousel {
-		height: 80vh;
+    #image-carousel {
+        height: 80vh;
 
-		.carousel-inner {
-			height: 100%;
-		}
-	}
+        .carousel-inner {
+            height: 100%;
+        }
+    }
 
-	.carousel-multi-item .carousel-inner .carousel-item.active, .carousel-multi-item .carousel-item-next, .carousel-multi-item .carousel-item-prev {
-		display: flex;
-		flex-flow: wrap;
-	}
+    .carousel-multi-item .carousel-inner .carousel-item.active,
+    .carousel-multi-item .carousel-item-next,
+    .carousel-multi-item .carousel-item-prev {
+        display: flex;
+        flex-flow: wrap;
+    }
 }
-
 
 // .carousel-multi-item .carousel-inner .carousel-item.active,
 // .carousel-multi-item .carousel-item-next,
