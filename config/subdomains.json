@@ -282,7 +282,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "EugeneIcon.svg"
         }
     },
     "sanjose": {
@@ -306,7 +306,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "SanJoseIcon.svg"
         }
     },
     "glasgow": {
@@ -321,14 +321,14 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "inverness"
+            "subreddit": "bikeScotland"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "GlasgowIcon.svg"
         }
     },
     "inverness": {
@@ -344,14 +344,14 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "inverness"
+            "subreddit": "bikeScotland"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "InvernessIcon.svg"
         }
     }
 }

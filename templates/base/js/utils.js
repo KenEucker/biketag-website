@@ -57,11 +57,11 @@
             return tagNumber
         }
 
-        formatUserName(userName) {
-            if (userName.startsWith('U/')) {
-                return 'u/' + userName.substr(2)
+        formatUsername(username) {
+            if (username.startsWith('U/')) {
+                return 'u/' + username.substr(2)
             } else {
-                return userName
+                return username
             }
         }
     }

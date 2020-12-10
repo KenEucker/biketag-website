@@ -95,7 +95,7 @@ class BikeTag {
                 hintPlaceholder:
                     'e.g. puns, riddles, rhymes, nearby landmarks, where historical events occurred',
                 nameTitle: 'What do you go by?',
-                nameMessage: 'Provide a Name, UserName, Alias',
+                nameMessage: 'Provide a Name, Username, Alias',
                 namePlaceholder:
                     'e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name',
                 playButtonText: 'Play BikeTag!',
@@ -215,11 +215,11 @@ class BikeTag {
             .then((message) => console.log(message))
     }
 
-    formatUserName(userName) {
-        if (userName.startsWith('U/')) {
-            return 'u/' + userName.substr(2)
+    formatUsername(username) {
+        if (username.startsWith('U/')) {
+            return 'u/' + username.substr(2)
         } else {
-            return userName
+            return username
         }
     }
 
@@ -236,7 +236,7 @@ class BikeTag {
 
             // get the current tag number
             const currentTagInfo = this.getCurrentTagInformation()
-            const user = this.formatUserName(form.find('input[name="name"]').val())
+            const user = this.formatUsername(form.find('input[name="name"]').val())
             const proofLocation = form.find('input[name="location"]').val()
             const hint = form.find('input[name="hint"]').val()
 

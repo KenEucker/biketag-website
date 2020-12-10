@@ -7,7 +7,6 @@ try {
 
 module.exports = {
     ui: true,
-    // middlewares: { email: true },
     rendering: {
         liquid: {
             customFilters: {
