@@ -134,12 +134,14 @@
                 crossDomain: true,
                 processData: false,
                 contentType: false,
-                data: formData,
+				data: formData,
+				withCredentials: true,
                 type: 'POST',
                 url: 'https://api.imgur.com/3/image',
                 headers: {
                     Authorization: this.imgurAccessToken,
-                    Accept: 'application/json',
+					Accept: 'application/json',
+					
                 },
                 mimeType: 'multipart/form-data',
             }
