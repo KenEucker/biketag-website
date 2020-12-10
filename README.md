@@ -1,5 +1,3 @@
-![Merge upstream branches](https://github.com/biketagorg/biketag-website/workflows/Merge%20upstream%20branches/badge.svg)
-
 # biketag-website
 
 [![Build Status][travis-image]](https://travis-ci.org/KenEucker/biketag-website)
