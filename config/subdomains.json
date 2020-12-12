@@ -116,7 +116,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "IndianapolisIcon.svg"
+            "logo": "indianapolis-bike-tag"
         }
     },
     "seattle": {
@@ -140,7 +140,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "SeattleIcon.svg"
+            "logo": "seattle-bike-tag"
         }
     },
     "omaha": {
@@ -234,7 +234,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "ViennaIcon.svg"
+            "logo": "vienna-bike-tag"
         }
     },
     "miami": {
@@ -258,7 +258,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "MiamiIcon.svg"
+            "logo": "miami-bike-tag"
         }
     },
     "eugene": {
