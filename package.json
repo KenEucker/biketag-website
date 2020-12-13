@@ -40,11 +40,11 @@
     },
     "keywords": [],
     "dependencies": {
-        "imgur": "https://github.com/KenEucker/node-imgur.git#keneucker/production",
+        "imgur": "git+https://github.com/KenEucker/node-imgur.git#keneucker/production",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.7.20",
+        "sexpress": "^0.7.28",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
