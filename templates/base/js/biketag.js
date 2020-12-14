@@ -476,23 +476,24 @@ class BikeTag {
             var tagNumberSplit = tagInformation.currentTag.description
                 ? tagInformation.currentTag.description.split(' ')
                 : []
-			var tagNumberString = tagNumberSplit.length ? tagNumberSplit[0].substr(1) : 0
-			
-			var tagDiscussionLinkIndex = tagInformation.currentTag.title.indexOf('{')
-			var tagDiscussionLink
-			if (tagDiscussionLinkIndex !== -1) {
-				var tagDisscussionSplit = tagInformation.currentTag.title
-					? tagInformation.currentTag.title.split('{')
-					: []
-				var tagDiscussionLinkLength = tagDisscussionSplit[1].indexOf('}') - tagDiscussionLinkIndex
-				tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength)
-			}
+            var tagNumberString = tagNumberSplit.length ? tagNumberSplit[0].substr(1) : 0
+
+            var tagDiscussionLinkIndex = tagInformation.currentTag.title.indexOf('{')
+            var tagDiscussionLink
+            if (tagDiscussionLinkIndex !== -1) {
+                var tagDisscussionSplit = tagInformation.currentTag.title
+                    ? tagInformation.currentTag.title.split('{')
+                    : []
+                var tagDiscussionLinkLength =
+                    tagDisscussionSplit[1].indexOf('}') - tagDiscussionLinkIndex
+                tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength)
+            }
 
             tagInformation.hasTag = true
             tagInformation.currentTagNumber = Number(tagNumberString)
             tagInformation.credit = tagCredit
-			tagInformation.hint = tagHint
-			tagInformation.discussionLink = tagDiscussionLink
+            tagInformation.hint = tagHint
+            tagInformation.discussionLink = tagDiscussionLink
         }
 
         tagInformation.mysteryTagNumber = tagInformation.currentTagNumber + 1
@@ -642,11 +643,11 @@ class BikeTag {
                 $('#userCredit').text(currentTagInfo.credit)
             } else {
                 $('#userCredit').text('user did not provide a name')
-			}
-			if (currentTagInfo.discussionLink && currentTagInfo.discussionLink.length) {
-				$('.discussion a').attr('href', currentTagInfo.discussionLink)
-				$('.discussion').fadeIn()
-			}
+            }
+            if (currentTagInfo.discussionLink && currentTagInfo.discussionLink.length) {
+                $('.discussion a').attr('href', currentTagInfo.discussionLink)
+                $('.discussion').fadeIn()
+            }
         }
 
         return currentTagInfo

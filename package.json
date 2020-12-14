@@ -58,7 +58,6 @@
         "copyLib": true,
         "copySrc": true,
         "copyConfigJs": false,
-        "source": "https://github.com/KenEucker/biketag-app/archive/production.zip",
-        "templatesSource": "https://github.com/KenEucker/biketag-website/archive/production.zip"
+        "source": "https://github.com/KenEucker/biketag-app/archive/production.zip"
     }
 }
