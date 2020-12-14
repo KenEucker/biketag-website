@@ -56,3 +56,15 @@
         opacity: 0;
     }
 }
+
+@include breakpoint('>=medium') {
+    #foot {
+        ul {
+            left: -3rem;
+
+            .discussion {
+                max-width: 6rem;
+            }
+        }
+    }
+}

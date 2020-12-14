@@ -51,14 +51,27 @@ footer {
     }
 
     #foot {
-        .discussion {
-            display: none;
-            border: none;
-            max-width: 6rem;
+        ul {
+            .discussion {
+                opacity: 0;
+                border: none;
+                max-width: 2rem;
+                position: absolute;
+                left: -1rem;
+                top: -3.2rem;
+                filter: invert(1);
 
-            a {
-                i {
-                    font-size: 3rem;
+                &.live {
+                    // max-width: 5rem;
+                    opacity: 1;
+                    transition: opacity 1s;
+                }
+
+                a {
+                    filter: none;
+                    i {
+                        font-size: 2rem;
+                    }
                 }
             }
         }
