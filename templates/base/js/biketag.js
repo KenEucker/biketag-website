@@ -483,9 +483,8 @@ class BikeTag {
             var tagDiscussionLink
             if (tagDiscussionLinkIndex !== -1) {
                 var tagDisscussionSplit = tagTitle ? tagTitle.split('{') : []
-                var tagDiscussionLinkLength =
-                    tagDisscussionSplit[1].indexOf('}') - tagDiscussionLinkIndex
-                tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength)
+                var tagDiscussionLinkLength = tagDisscussionSplit[1].indexOf('}')
+                tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength).trim()
             }
 
 			tagInformation.hasTag = true
