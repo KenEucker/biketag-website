@@ -487,7 +487,7 @@ class BikeTag {
                 tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength).trim()
             }
 
-			tagInformation.hasTag = true
+            tagInformation.hasTag = true
             tagInformation.currentTagNumber = Number(tagNumberString)
             tagInformation.credit = tagCredit
             tagInformation.hint = tagHint
