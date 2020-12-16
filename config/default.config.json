@@ -1,0 +1,48 @@
+{
+	"appRootPath": "/Users/keneucker/Dev/biketag-website/temp",
+	"configFilePath": "/Users/keneucker/Dev/biketag-website/temp/config",
+	"relativePath": "/Users/keneucker/Dev/biketag-website/temp",
+	"configFolderName": "config",
+	"subdomains": {
+		"index": {
+			"template": "home",
+			"imgur": {
+				"albumHash": "qpCYTPZ",
+				"queueHash": "PnLzAHj"
+			},
+			"reddit": {
+				"subreddit": "CyclePDX"
+			},
+			"adminEmailAddresses": []
+		},
+		"biketag": {
+			"template": "biketag",
+			"imgur": {
+				"albumHash": "qpCYTPZ",
+				"queueHash": "PnLzAHj"
+			},
+			"reddit": {
+				"subreddit": "CyclePDX"
+			},
+			"adminEmailAddresses": []
+		}
+	},
+	"public": {
+		"imgur": [
+			"albumHash",
+			"queueHash"
+		],
+		"reddit": [
+			"subreddit"
+		]
+	},
+	"rendering": {
+		"overrideViewEngine": [
+			"liquid",
+			"ejs"
+		]
+	},
+	"AppRoot": {
+		"path": "/Users/keneucker/Dev/biketag-website/temp"
+	}
+}
