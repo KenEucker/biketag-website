@@ -8,6 +8,10 @@ try {
 module.exports = {
     ui: true,
     rendering: {
+		overrideViewEngine: [
+			"liquid",
+			"ejs",
+		],
         liquid: {
             customFilters: {
                 biketag_image: biketagImage,

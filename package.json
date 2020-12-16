@@ -44,7 +44,7 @@
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.7.32",
+        "sexpress": "^0.7.33",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {
