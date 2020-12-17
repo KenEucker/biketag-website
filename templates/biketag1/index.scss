@@ -78,6 +78,16 @@ footer {
     }
 }
 
+body.archive {
+    #foot {
+        ul {
+            .discussion {
+				display: none;
+			}
+		}
+	}
+}
+
 #easter {
     font-style: italic;
 }

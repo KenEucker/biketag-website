@@ -299,7 +299,7 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "CycleSanJose"
+            "subreddit": "SanJose"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -310,6 +310,7 @@
         }
     },
     "glasgow": {
+        "readonly": true,
         "meta": {
             "title": "Glasgow BikeTag!",
             "url": "https://glasgow.biketag.org"
@@ -352,6 +353,197 @@
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
             "logo": "InvernessIcon.svg"
+        }
+    },
+    "chicago": {
+        "readonly": true,
+        "aliases": ["illinois"],
+        "meta": {
+            "title": "Chicago BikeTag!",
+            "url": "https://chicago.biketag.org"
+        },
+        "region": "Chicago, Illinois",
+        "tagline": "The BikeTag game in Chicago, Illinois",
+        "imgur": {
+            "albumHash": "xUflG1G",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "chibike"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "austin": {
+        "readonly": true,
+        "aliases": ["texas"],
+        "meta": {
+            "title": "Austin BikeTag!",
+            "url": "https://austin.biketag.org"
+        },
+        "region": "Austin, Texas",
+        "tagline": "The BikeTag game in Austin, Texas",
+        "imgur": {
+            "albumHash": "B6mqIUz",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "BikingATX"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "houston": {
+        "readonly": true,
+        "aliases": ["texas"],
+        "meta": {
+            "title": "Houston BikeTag!",
+            "url": "https://houston.biketag.org"
+        },
+        "region": "Houston, Texas",
+        "tagline": "The BikeTag game in Houston, Texas",
+        "imgur": {
+            "albumHash": "xxxalw9",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikehouston"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "sanfrancisco": {
+        "readonly": true,
+        "aliases": ["california", "sf", "bay"],
+        "meta": {
+            "title": "San Francisco BikeTag!",
+            "url": "https://sanfrancisco.biketag.org"
+        },
+        "region": "San Francisco, California",
+        "tagline": "The BikeTag game in San Francisco, California",
+        "imgur": {
+            "albumHash": "F4XGtcy",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "BAbike"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "madison": {
+        "readonly": true,
+        "aliases": ["wisconsin"],
+        "meta": {
+            "title": "Madison BikeTag!",
+            "url": "https://madison.biketag.org"
+        },
+        "region": "Madison, Wisconsin",
+        "tagline": "The BikeTag game in Madison, Wisconsin",
+        "imgur": {
+            "albumHash": "2rOS4cu",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "BikingMad"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "sanantonio": {
+        "readonly": true,
+        "aliases": ["texas", "satx"],
+        "meta": {
+            "title": "San Antonio BikeTag!",
+            "url": "https://austin.biketag.org"
+        },
+        "region": "San Antonio, Texas",
+        "tagline": "The BikeTag game in San Antonio, Texas",
+        "imgur": {
+            "albumHash": "ayECPfd",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikesatx"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "losangeles": {
+        "readonly": true,
+        "aliases": ["la", "california"],
+        "meta": {
+            "title": "DC BikeTag!",
+            "url": "https://losangeles.biketag.org"
+        },
+        "region": "Los Angeles, California",
+        "tagline": "The BikeTag game in Los Angeles, California",
+        "imgur": {
+            "albumHash": "YfpCQMT",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "BikeLA"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "dc": {
+        "readonly": true,
+        "meta": {
+            "title": "DC BikeTag!",
+            "url": "https://dc.biketag.org"
+        },
+        "region": "Washington, DC",
+        "tagline": "The BikeTag game in Washington, DC",
+        "imgur": {
+            "albumHash": "lsDrB9W",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikedc"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
         }
     }
 }
