@@ -8,8 +8,8 @@
     <title>Login to {{ name }}</title>
 	<!-- Google Fonts Roboto -->
 	{{ "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" | stylesheet_tag: nonce }}
-    <!-- MDB -->
-	{{ "css/mdb.min.css" | stylesheet_tag: nonce }}
+	<!-- Bootstrap -->
+	{{ "/css/bootstrap.min.css" | stylesheet_tag }}
     <!-- Font Awesome -->
 	{{ "css/fa-all.min.css" | stylesheet_tag: nonce }}
   </head>
@@ -24,7 +24,7 @@
 			</div>
 		</section>
 
-		<!-- MDB -->
-		{{ "js/mdb.min.js" | javascript_tag: nonce }}
+		<!-- Bootstrap -->
+		{{ "js/bootstrap.min.js" | javascript_tag }}
 	  </body>
 	</html>

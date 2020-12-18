@@ -5,8 +5,8 @@
 	{% include "page/meta" %}
 	{% include "page/css" %}
 	
-	<!-- MDB -->
-	{{ "/css/mdb.min.css" | stylesheet_tag }}
+	<!-- Bootstrap -->
+	{{ "css/bootstrap.min.css" | stylesheet_tag }}
 	{{ "/css/fa-all.min.css" | stylesheet_tag }}
 	{{ images | json | console_log: nonce }}
 
@@ -81,7 +81,7 @@
 </div>
 
 	{{ "/js/jquery.min.js" | javascript_tag }}
-	<!-- MDB -->
-	{{ "/js/mdb.min.js" | javascript_tag }}
+	<!-- Bootstrap -->
+	{{ "js/bootstrap.min.js" | javascript_tag }}
 </body>
 </html>
