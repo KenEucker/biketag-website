@@ -11,7 +11,7 @@
         "dev": "node app.js debug=true",
         "start": "node app.js",
         "wipe": "rm config/config.json || true",
-        "wipe-all": "rm -rf temp lib src controllers",
+        "wipe-all": "rm -rf temp lib src controllers && npm run wipe",
         "staging": "cp config.sample.json config/config.json",
         "create-new-feature": "git reset --hard HEAD && git checkout develop && git checkout -b ",
         "create-new-hotfix": "git reset --hard HEAD && git checkout production && git checkout -b ",
@@ -44,7 +44,7 @@
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.7.33",
+        "sexpress": "^0.7.39",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {

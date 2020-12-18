@@ -16,15 +16,16 @@
 
   <body>
 		{% include "page/header" %}
-    	<section class="view">
-			<div class="rgba-stylish-strong d-flex justify-content-center">
-			  <div class="container">
-				{% include "config/index" %}
+
+		<section class="view">
+			<div class="container overflow-hidden align-items-center">
+				<div class="row align-items-center justify-content-center inner-content">
+					{% include "config/index" %}
 				</div>
-			</div>
-		</section>
+            </div>
+        </section>
 
 		<!-- Bootstrap -->
-		{{ "js/bootstrap.min.js" | javascript_tag }}
+		{{ "/js/bootstrap.min.js" | javascript_tag }}
 	  </body>
 	</html>

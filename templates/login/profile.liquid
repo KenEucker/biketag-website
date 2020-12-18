@@ -28,13 +28,13 @@
 				</li>
 			</ul>
 			<div class="profile-menu">
-				<button class="btn btn-primary dropdown-toggle mr-4 scnd-font-color" type="button" data-toggle="dropdown"
+				<button class="btn btn-primary dropdown-toggle mr-4 scnd-font-color" type="button" data-bs-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false">Me</button>
 
 				<div class="dropdown-menu">
 				<!-- <a class="dropdown-item" href="#">Action</a>
-				<a class="dropdown-item" href="#">Another action</a>
-				<a class="dropdown-item" href="#">Something else here</a> -->
+				<!-- <a class="dropdown-item" href="#">Another action</a> -->
+				<a class="dropdown-item" href="{{ origin }}">My BikeTag Game</a> -->
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/logout">Logout</a>
 				</div>
@@ -49,7 +49,7 @@
 		<section>
 			<div class="row">
 				<!-- Grid column -->
-				<div class="col-lg-4 col-md-6 mb-4">
+				<div class="col-lg-4 col-md-6">
 				<!-- Panel -->
 				<div class="profile block"> <!-- PROFILE (MIDDLE-CONTAINER) -->
 					<a class="add-button" href="#28"><span class="icon entypo-plus scnd-font-color"></span></a>
@@ -71,7 +71,7 @@
 				<!-- Grid column -->
 				
 				<!-- Grid column -->
-				<div class="col-lg-4 col-md-12 mb-4">
+				<div class="col-lg-4 col-md-12">
 					<!-- Panel -->
 					<div class="">
 			
@@ -96,7 +96,7 @@
 				<!-- Grid column -->
 		
 				<!-- Grid column -->
-				<div class="col-lg-4 col-md-6 mb-4">
+				<div class="col-lg-4 col-md-6">
 					<!-- Panel -->
 					<!-- Panel -->
 				</div>
@@ -107,6 +107,7 @@
 	  
 	  </div>
 	  <!-- Bootstrap -->
+	  {{ "js/popper.min.js" | javascript_tag }}
 	  {{ "js/bootstrap.min.js" | javascript_tag }}
 	{{ "js/login.js" | javascript_tag }}
   </body>

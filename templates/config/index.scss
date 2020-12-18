@@ -1,27 +1,21 @@
-body {
-    padding-top: 7%;
-}
-
-header,
-.view {
-    height: 4%;
-}
-body {
-    background: url('public/img/tree-background.jpg') no-repeat center center;
-    background-size: cover;
-}
-
 .tab-pane > div {
     backdrop-filter: blur(10px) brightness(1) grayscale(1);
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-header {
-    nav {
-        backdrop-filter: blur(5px) brightness(1) opacity(0.9);
-        padding: 0;
-    }
+body {
+    background: url('public/img/tree-background.jpg') no-repeat center center;
+    background-size: cover;
+}
 
+.view {
+	margin-top: 8em;
+	margin-bottom: 8em;
+	overflow: auto;
+	min-height: 100vh;
+}
+
+header {
     .navbar-brand img {
         max-height: 3.5em;
     }
@@ -53,6 +47,10 @@ header {
 }
 
 .view {
+	ul.nav {
+		margin-bottom: 1em;
+	}
+
     .card {
         background-color: rgba(229, 228, 255, 0.2);
         margin-top: 30px;
@@ -83,27 +81,103 @@ header {
         color: #fff;
     }
 
+	.form-signin {
+		max-width: 35em;
+		width: 85vw;
+	}
+	
+	form.container {
+		> * {
+			margin-top: 1rem;
+		}
+		
+		.form-outline {
+			position: relative;
+
+			.form-control {
+				background-color: rgba(255, 255, 255, 0.2);
+				border-top-color: transparent;
+			}
+		
+			.form-label {
+				position: absolute;
+				top: 0;
+				left: 0.75rem;
+				padding-top: 0.37rem;
+				pointer-events: none;
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				-webkit-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				color: rgba(0, 0, 0, 0.6);
+				margin-bottom: 0;
+				font-size: 0.9rem;
+			}
+		}
+	}
+
     .sso-buttons {
         button {
             font-weight: 100;
             color: black;
-            background-color: white;
+			background-color: white;
+			padding: 0;
+			width: 2.5rem;
+			margin: .375rem;
+			height: 2.5rem;
+			border-radius: 100%;
+			border: none;
 
             &:hover {
-                color: black;
-                background-color: #1266f1;
-            }
+				filter: drop-shadow(0px 0px 5px black);
+				transition: filter 0.25s;
+			}
+			
+            i {
+				font-size: 2.5rem;
+    			border-radius: 100%;
+			}
+		
+			&.redditBot {
+				display: none;
+			}
 
-            &.imgur {
+			&.reddit {
+				i {
+					color: #FF4501;
+				}
+			}
+		
+			&.imgur {
                 background-image: url('/public/img/imgur-icon.svg');
                 background-repeat: no-repeat;
                 background-position: center;
-                background-size: cover;
-            }
-
-            i {
-                font-size: 3em;
-            }
-        }
+				background-size: cover;
+				background-color: #1CB76E;
+			}
+		
+			&.google {
+				background-color: #4284F7;
+				i {
+					filter: invert(1);
+				}
+			}
+		}
+		
+		img {
+			max-width: 240px;
+			min-height: 52 px;
+			border-radius: 7px;
+		}
+	
+		a {
+			margin-left: -30px;
+			span {
+				vertical-align: sub;
+				margin-left: -110px;
+				font-size: 1.45em;
+				color: white;
+			}
+		}
     }
 }
