@@ -28,22 +28,27 @@
 
             var url = 'https://api.imgur.com/3/album/' + albumHash + ''
 
-            $.ajax({
-                url,
-                success: (data) => {
-                    console.log(data)
+            fetch(
+                url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: this.imgurAuthorization,
+					},
+					cors: true,
+					// credentials: 'include',
+				})
+			.then(r => r.json())
+			.then((data) => {
+				console.log(data)
 
-                    if (callback) {
-                        callback(data)
-                    }
-                },
-                error: (err) => {
-                    console.log('error getting images from imgur', err)
-                },
-                beforeSend: (xhr) => {
-                    xhr.setRequestHeader('Authorization', this.imgurAuthorization)
-                },
-            })
+				if (callback) {
+					callback(data)
+				}
+			})
+			.catch((err) => {
+				console.log('error getting images from imgur', err)
+			})
         }
 
         refreshImgurAlbumInfo(albumInfo) {
@@ -100,25 +105,28 @@
 
             // console.log({imgurRequestUrl: url})
 
-            $.ajax({
-                url,
-                success: (data) => {
-                    // console.log(data)
-                    this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(data.data)
+            fetch(
+				url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: this.imgurAuthorization,
+					},
+					cors: true,
+					// credentials: 'include',
+			})
+				.then(r => r.json())
+				.then((data) => {
+					console.log(data)
+					this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(data.data)
 
-                    if (callback) {
-                        callback(data)
-                    }
-                },
-                error: (e) => {
-                    console.log('error getting images from imgur', { albumHash, imgurApiError: e })
-                },
-                beforeSend: (xhr) => {
-                    if (!!this.imgurAuthorization) {
-                        xhr.setRequestHeader('Authorization', this.imgurAuthorization)
-                    }
-                },
-            })
+					if (callback) {
+						callback(data)
+					}
+				})
+				.catch((err) => {
+					console.log('error getting images from imgur', { albumHash, imgurApiError: err })
+				})
         }
 
         uploadImageToImgur(image, description, next) {
@@ -128,28 +136,29 @@
             var formData = new FormData()
             formData.append('image', image)
             formData.append('album', this.albumHash)
-            formData.append('description', description)
-
-            var settings = {
-                crossDomain: true,
-                processData: false,
-                contentType: false,
-                data: formData,
-                withCredentials: true,
-                type: 'POST',
-                url: 'https://api.imgur.com/3/image',
-                headers: {
-                    Authorization: this.imgurAccessToken,
-                    Accept: 'application/json',
-                },
-                mimeType: 'multipart/form-data',
-            }
-
-            // Response contains stringified JSON
-            // Image URL available at response.data.link
-            $.ajax(settings).done(function (response) {
-                next()
-            })
+			formData.append('description', description)
+			
+			const headers = new Headers()
+			headers.append('Content-Type', 'application/json')
+			headers.append('Authorization', this.imgurAuthorization)
+			headers.append('Accept', 'application/json')
+			
+			fetch('https://api.imgur.com/3/image', {
+				method: 'POST',
+				headers,
+                body: formData,
+				// credentials: 'include',
+                cors: true,
+                // processData: false,
+                // contentType: false,
+                // mimeType: 'multipart/form-data',
+			})
+				.then(r => r.json())
+				.then(data => {
+					console.log({uploadResponse: data})
+					next()
+				})
+				.catch(err => console.error)
         }
 
         getImgurTokens(done) {
@@ -159,7 +168,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include',
+                // credentials: 'include',
             })
                 .then((res) => {
                     return res.json()
@@ -217,11 +226,13 @@
                         'Your upload was successful! Please wait a few moments for the internet to catch up to you. <a class="close">[close]</a>'
                     wrapper.prepend(notification)
 
-                    var close = $('#notification .close')
-                    close.on('click', function () {
-                        var notification = document.getElementById('notification')
-                        notification.style.display = 'none'
-                    })
+					var close = document.querySelector('#notification .close')
+					if (close) {
+						close.addEventListener('click', function () {
+							var notification = document.getElementById('notification')
+							notification.style.display = 'none'
+						})
+					}
                     // this.imgurAlbumPicturesRefreshFrequency = 5000;
                 }
 
@@ -239,10 +250,12 @@
 
                 if (this.imgurAlbumPicturesRefreshFrequency) {
                     setInterval(() => {
-                        var logo = $('#header > div')[0]
-                        logo.style.animation = 'none'
-                        logo.offsetHeight /* trigger reflow */
-                        logo.style.animation = null
+						var logo = document.querySelector('#header .header--logo')
+						if (logo) {
+							logo.attributes.style.animation = 'none'
+							logo.offsetHeight /* trigger reflow */
+							logo.attributes.style.animation = null
+						}
 
                         this.getImgurAlbumInfo(
                             this.albumHash,
@@ -260,4 +273,4 @@
     }
 
     window.imgur = new imgur()
-})(jQuery)
+})()

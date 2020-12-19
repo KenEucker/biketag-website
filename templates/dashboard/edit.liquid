@@ -1,0 +1,28 @@
+<div class="container">
+
+	<!-- Priority Scripts -->
+	{% include "biketag/lazy" %}
+	
+	<script nonce="{{ nonce }}">
+		try {
+			window.pageData = JSON.parse(`{{ page | json }}`)
+		} catch(e) {
+			console.log('Could not load sexy page data', { error: e })
+		}
+	</script>
+
+	{{ "/js/biketag.js" | javascript_tag: nonce }}
+	<script nonce="{{ nonce }}">
+		window.lazyLoadInstance = new LazyLoad()
+
+		var biketagUploadContainerSelector = '#tagit'
+		window.biketag = window.biketag || { init: () => { console.log('window.biketag not initialized')}}
+		window.biketag.config = {
+			newGameImage: window.pageData.newGameImage,
+		}
+		window.biketag.init(biketagUploadContainerSelector, window.pageData.readonly)
+	</script>
+
+	{{ "/js/imgur.js" | javascript_tag }}
+	
+</div>
