@@ -6,7 +6,7 @@
 	{% include "page/css" %}
 	
 	<!-- Bootstrap -->
-	{{ "css/bootstrap.min.css" | stylesheet_tag }}
+	{{ "/css/bootstrap.min.css" | stylesheet_tag }}
 	{{ "/css/fa-all.min.css" | stylesheet_tag }}
 	{{ images | json | console_log: nonce }}
 
@@ -21,11 +21,11 @@
 		<h1>({{ imagesLength }}) Tags by {{ username }}</h1>
 
 <!--Carousel Wrapper-->
-	<div id="image-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+	<div id="image-carousel" class="carousel slide carousel-multi-item" data-bs-ride="carousel">
 		<!--Controls-->
 		<div class="controls-top">
-			<a class="btn-floating" href="#image-carousel" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
-			<a class="btn-floating" href="#image-carousel" data-slide="next"><i
+			<a class="btn-floating" href="#image-carousel" data-bs-slide="prev"><i class="fas fa-chevron-left"></i></a>
+			<a class="btn-floating" href="#image-carousel" data-bs-slide="next"><i
 				class="fas fa-chevron-right"></i></a>
 		  </div>
 		  <!--/.Controls-->
@@ -69,7 +69,7 @@
 	  <ol class="carousel-indicators">
 	   {% assign firstClassActive = 'active' %}
 	   {% for slideNum in (0..numSlides) %}
-		<li data-target="#image-carousel" data-slide-to="{{ slideNum }}" class="secondary-color {{firstClassActive}}"></li>
+		<li data-target="#image-carousel" data-bs-slide-to="{{ slideNum }}" class="secondary-color {{firstClassActive}}"></li>
 	   {% assign firstClassActive = '' %}
 	   {% endfor %}
 	</ol>
@@ -82,6 +82,6 @@
 
 	{{ "/js/jquery.min.js" | javascript_tag }}
 	<!-- Bootstrap -->
-	{{ "js/bootstrap.min.js" | javascript_tag }}
+	{{ "/js/bootstrap.min.js" | javascript_tag }}
 </body>
 </html>
