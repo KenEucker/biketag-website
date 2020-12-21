@@ -62,7 +62,7 @@
         },
         "reddit": {
             "subreddit": "CyclePDX",
-            "postFlair": "6c1f976a-ab71-11ea-8943-0ef764a8816b"
+            "globalPostFlair": "6c1f976a-ab71-11ea-8943-0ef764a8816b"
         },
         "easter": {
             "jingle": "media/biketag-pdx-jingle-1.mp3"
@@ -87,7 +87,7 @@
         },
         "reddit": {
             "subreddit": "CycleDenver",
-            "postFlair": "969832ae-ab71-11ea-a493-0ee0010c70bd"
+            "globalPostFlair": "969832ae-ab71-11ea-a493-0ee0010c70bd"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -112,7 +112,7 @@
         },
         "reddit": {
             "subreddit": "BikeIN",
-            "postFlair": "8fc05cfe-ab71-11ea-a3fc-0e40389fd69f"
+            "globalPostFlair": "8fc05cfe-ab71-11ea-a3fc-0e40389fd69f"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -137,7 +137,7 @@
         },
         "reddit": {
             "subreddit": "cycleseattle",
-            "postFlair": "7a0e427c-ab71-11ea-af19-0e48af07c18b"
+            "globalPostFlair": "7a0e427c-ab71-11ea-af19-0e48af07c18b"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -185,7 +185,7 @@
         },
         "reddit": {
             "subreddit": "StLouisBiking",
-            "postFlair": "303af52a-bef7-11ea-a174-0e8b8fc0b0ff"
+            "globalPostFlair": "303af52a-bef7-11ea-a174-0e8b8fc0b0ff"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -209,7 +209,7 @@
         },
         "reddit": {
             "subreddit": "vancouvercycling",
-            "postFlair": "27ab68e0-bef7-11ea-bfc0-0e19382dc9fb"
+            "globalPostFlair": "27ab68e0-bef7-11ea-bfc0-0e19382dc9fb"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -234,7 +234,7 @@
         },
         "reddit": {
             "subreddit": "radwien",
-            "postFlair": "2111c952-bef7-11ea-bf24-0e19c4bd80a7"
+            "globalPostFlair": "2111c952-bef7-11ea-bf24-0e19c4bd80a7"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -259,7 +259,7 @@
         },
         "reddit": {
             "subreddit": "miamibiking",
-            "postFlair": "e8e83160-bef6-11ea-a379-0e31fc365d27"
+            "globalPostFlair": "e8e83160-bef6-11ea-a379-0e31fc365d27"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -284,7 +284,7 @@
         },
         "reddit": {
             "subreddit": "eugenebiketag",
-            "postFlair": "2dd44bae-3aaf-11eb-ac14-0e997f009101"
+            "globalPostFlair": "2dd44bae-3aaf-11eb-ac14-0e997f009101"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -309,7 +309,7 @@
         },
         "reddit": {
             "subreddit": "SanJose",
-            "postFlair": "b826b47c-431a-11eb-8250-0e021221f709"
+            "globalPostFlair": "b826b47c-431a-11eb-8250-0e021221f709"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -356,7 +356,7 @@
         },
         "reddit": {
             "subreddit": "bikeScotland",
-            "postFlair": "16744180-3aaf-11eb-bf15-0e0ebff4f2fb"
+            "globalPostFlair": "16744180-3aaf-11eb-bf15-0e0ebff4f2fb"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -381,7 +381,7 @@
         },
         "reddit": {
             "subreddit": "chibike",
-            "postFlair": "d2e2e934-431a-11eb-b446-0e0df0c0ac1f"
+            "globalPostFlair": "d2e2e934-431a-11eb-b446-0e0df0c0ac1f"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -406,7 +406,7 @@
         },
         "reddit": {
             "subreddit": "BikingATX",
-            "postFlair": "ece36494-431a-11eb-958f-0ec0e5fd9f4f"
+            "globalPostFlair": "ece36494-431a-11eb-958f-0ec0e5fd9f4f"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -431,7 +431,7 @@
         },
         "reddit": {
             "subreddit": "bikehouston",
-            "postFlair": "10b23404-431b-11eb-8f81-0e9f42efd33d"
+            "globalPostFlair": "10b23404-431b-11eb-8f81-0e9f42efd33d"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -456,7 +456,7 @@
         },
         "reddit": {
             "subreddit": "BAbike",
-            "postFlair": "290dd670-431b-11eb-a56f-0ea513258301"
+            "globalPostFlair": "290dd670-431b-11eb-a56f-0ea513258301"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -481,7 +481,7 @@
         },
         "reddit": {
             "subreddit": "BikingMad",
-            "postFlair": "42a92cec-431b-11eb-b84c-0edbf7639be9"
+            "globalPostFlair": "42a92cec-431b-11eb-b84c-0edbf7639be9"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -506,7 +506,7 @@
         },
         "reddit": {
             "subreddit": "bikesatx",
-            "postFlair": "5fbf9244-431b-11eb-b21f-0e6fc4b0f27d"
+            "globalPostFlair": "5fbf9244-431b-11eb-b21f-0e6fc4b0f27d"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -531,7 +531,7 @@
         },
         "reddit": {
             "subreddit": "BikeLA",
-            "postFlair": "7f70764e-431b-11eb-84d6-0e17b3b61587"
+            "globalPostFlair": "7f70764e-431b-11eb-84d6-0e17b3b61587"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -555,7 +555,7 @@
         },
         "reddit": {
             "subreddit": "bikedc",
-            "postFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
