@@ -1,4 +1,4 @@
-;(function ($) {
+;(function () {
     class imgur {
         constructor() {
             this.imgurAccessToken = null
@@ -26,17 +26,17 @@
                 return console.log('imgur album hash not set')
             }
 
-            var url = 'https://api.imgur.com/3/album/' + albumHash + ''
+            var url = 'https://api.imgur.com/3/album/' + albumHash + '/'
 
             const headers = new Headers()
-            headers.append('Content-Type', 'application/json')
-            headers.append('Authorization', this.imgurAuthorization)
+			// headers.append('Content-Type', 'application/json')
+            headers.append('Authorization', this.imgurAccessToken || this.imgurAuthorization)
             headers.append('Accept', 'application/json')
             fetch(url, {
-                method: 'POST',
+                method: 'GET',
                 headers,
-                cors: true,
-                // credentials: 'include',
+				cors: true,
+				cache: 'no-cache',
             })
                 .then((r) => r.json())
                 .then((data) => {
@@ -101,19 +101,19 @@
                 return console.log('imgur album hash not set')
             }
 
-            var url = 'https://api.imgur.com/3/album/' + albumHash + '/images'
+            var url = 'https://api.imgur.com/3/album/' + albumHash + '/images/'
 
             // console.log({imgurRequestUrl: url})
             const headers = new Headers()
-            headers.append('Content-Type', 'application/json')
-            headers.append('Authorization', this.imgurAuthorization)
+            // headers.append('Content-Type', 'application/json')
+            headers.append('Authorization', this.imgurAccessToken || this.imgurAuthorization)
             headers.append('Accept', 'application/json')
 
             fetch(url, {
-                method: 'POST',
+                method: 'GET',
                 headers,
-                cors: true,
-                // credentials: 'include',
+				cors: true,
+				cache: 'no-cache',
             })
                 .then((r) => r.json())
                 .then((data) => {
@@ -142,15 +142,15 @@
             formData.append('description', description)
 
             const headers = new Headers()
-            headers.append('Content-Type', 'application/json')
-            headers.append('Authorization', this.imgurAuthorization)
+			headers.append('Content-Type', 'multipart/form-data')
+            headers.append('Authorization', this.imgurAccessToken || this.imgurAuthorization)
             headers.append('Accept', 'application/json')
 
-            fetch('https://api.imgur.com/3/image', {
+            fetch('https://api.imgur.com/3/image/', {
                 method: 'POST',
                 headers,
-                body: formData,
-                // credentials: 'include',
+				body: formData,
+				cache: 'no-cache',
                 cors: true,
                 // processData: false,
                 // contentType: false,
@@ -165,13 +165,14 @@
         }
 
         getImgurTokens(done) {
-            var url = '/auth/imgur/getToken'
+            var url = '/auth/imgur/getToken/'
             fetch(url, {
-                method: 'POST',
+				method: 'POST',
+				cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                // credentials: 'include',
+                credentials: 'include',
             })
                 .then((res) => {
                     return res.json()
