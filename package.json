@@ -40,11 +40,12 @@
     },
     "keywords": [],
     "dependencies": {
+        "@googlemaps/google-maps-services-js": "^3.1.13",
         "imgur": "git+https://github.com/KenEucker/node-imgur.git#keneucker/production",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
         "request": "^2.88.2",
-        "sexpress": "^0.7.52",
+        "sexpress": "^0.7.53",
         "snoowrap": "^1.21.0"
     },
     "devDependencies": {

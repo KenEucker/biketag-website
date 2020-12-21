@@ -34,8 +34,8 @@
             fetch(url, {
                 method: 'GET',
                 headers,
-				cors: true,
-				cache: 'no-cache',
+                cors: true,
+                cache: 'no-cache',
             })
                 .then((r) => r.json())
                 .then((data) => {
@@ -108,8 +108,8 @@
             fetch(url, {
                 method: 'GET',
                 headers,
-				cors: true,
-				cache: 'no-cache',
+                cors: true,
+                cache: 'no-cache',
             })
                 .then((r) => r.json())
                 .then((data) => {
@@ -138,15 +138,15 @@
             formData.append('description', description)
 
             // const headers = new Headers()
-			// headers.append('Content-Type', 'multipart/form-data')
+            // headers.append('Content-Type', 'multipart/form-data')
             // headers.append('Authorization', this.imgurAccessToken)
             // headers.append('Accept', 'application/json')
 
             // fetch('https://api.imgur.com/3/image/', {
             //     method: 'POST',
             //     headers,
-			// 	body: formData,
-			// 	// credentials: 'include',
+            // 	body: formData,
+            // 	// credentials: 'include',
             //     cors: true,
             // })
             //     .then((r) => r.json())
@@ -154,8 +154,8 @@
             //         console.log({ uploadResponse: data })
             //         next()
             //     })
-			// 	.catch((err) => console.error)
-			var settings = {
+            // 	.catch((err) => console.error)
+            var settings = {
                 crossDomain: true,
                 processData: false,
                 contentType: false,
@@ -175,14 +175,13 @@
             $.ajax(settings).done(function (response) {
                 next()
             })
-
         }
 
         getImgurTokens(done) {
             var url = '/auth/imgur/getToken/'
             fetch(url, {
-				method: 'POST',
-				cache: 'no-cache',
+                method: 'POST',
+                cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json',
                 },
