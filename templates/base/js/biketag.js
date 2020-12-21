@@ -64,9 +64,9 @@ class BikeTag {
     }
 
     appendBiketagForm(target) {
-		target = target || this.target
-		
-		if (!target) return
+        target = target || this.target
+
+        if (!target) return
 
         var form = document.createElement('form')
         form.id = this.formID
@@ -799,80 +799,82 @@ class BikeTag {
     addTagPostingEventListeners() {
         this.appendBiketagForm(this.target)
 
-		var form = document.querySelector(this.targetSelector)
-		
-		if (form) {
-			form.addEventListener('submit', (e) => {
-				e.preventDefault()
-				this.onUploadFormSubmit(e.currentTarget)
-			})
+        var form = document.querySelector(this.targetSelector)
 
-			var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
-			deleteImageButtons.forEach(function (button) {
-				button.addEventListener('click', function (event) {
-					var previewContainer = event.target.parentElement
-					var uploadContainer = previewContainer.parentElement.querySelector('.upload-box')
-					var uploadSpanEl = uploadContainer.querySelector('span')
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                this.onUploadFormSubmit(e.currentTarget)
+            })
 
-					$(uploadContainer).find('input[type="file"]').val('')
+            var deleteImageButtons = form.querySelectorAll('.m-imgur-post .close')
+            deleteImageButtons.forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    var previewContainer = event.target.parentElement
+                    var uploadContainer = previewContainer.parentElement.querySelector(
+                        '.upload-box',
+                    )
+                    var uploadSpanEl = uploadContainer.querySelector('span')
 
-					uploadSpanEl.innerText = uploadContainer.dataset.message
-					uploadContainer.classList.remove('s--uploaded')
-					uploadContainer.classList.remove('hidden')
-					previewContainer.classList.add('hidden')
-				})
-			})
+                    $(uploadContainer).find('input[type="file"]').val('')
 
-			form.querySelectorAll('input[type="file"]').forEach((fileInput) => {
-				fileInput.addEventListener('change', this.showImageThumbnail)
-			})
+                    uploadSpanEl.innerText = uploadContainer.dataset.message
+                    uploadContainer.classList.remove('s--uploaded')
+                    uploadContainer.classList.remove('hidden')
+                    previewContainer.classList.add('hidden')
+                })
+            })
 
-			var uploadBoxes = form.querySelectorAll('.upload-box')
-			uploadBoxes.forEach(function (uploadBox) {
-				uploadBox.addEventListener('click', function (event) {
-					var parentElement = event.target.parentElement.parentElement
-					var uploadFileInput = parentElement.querySelector('input[type="file"]')
-					uploadFileInput.click()
-				})
-			})
+            form.querySelectorAll('input[type="file"]').forEach((fileInput) => {
+                fileInput.addEventListener('change', this.showImageThumbnail)
+            })
 
-			var inputChangedEvent = 'keyup'
+            var uploadBoxes = form.querySelectorAll('.upload-box')
+            uploadBoxes.forEach(function (uploadBox) {
+                uploadBox.addEventListener('click', function (event) {
+                    var parentElement = event.target.parentElement.parentElement
+                    var uploadFileInput = parentElement.querySelector('input[type="file"]')
+                    uploadFileInput.click()
+                })
+            })
 
-			var locationInput = form.querySelector('input[name="location"]')
-			locationInput.addEventListener(inputChangedEvent, function (event) {
-				var target = event.target
-				var text = target.value
-				var preview = form.querySelector('#proofPreview')
+            var inputChangedEvent = 'keyup'
 
-				preview.innerText = text
-			})
+            var locationInput = form.querySelector('input[name="location"]')
+            locationInput.addEventListener(inputChangedEvent, function (event) {
+                var target = event.target
+                var text = target.value
+                var preview = form.querySelector('#proofPreview')
 
-			var hintInput = form.querySelector('input[name="hint"]')
-			hintInput.addEventListener(inputChangedEvent, function (event) {
-				var target = event.target
-				var text = target.value
-				var preview = form.querySelector('#hintPreview')
+                preview.innerText = text
+            })
 
-				preview.innerText = text
-			})
+            var hintInput = form.querySelector('input[name="hint"]')
+            hintInput.addEventListener(inputChangedEvent, function (event) {
+                var target = event.target
+                var text = target.value
+                var preview = form.querySelector('#hintPreview')
 
-			var nameInput = form.querySelector('input[name="name"]')
-			nameInput.addEventListener(inputChangedEvent, function (event) {
-				var target = event.target
-				var text = target.value
-				var previews = form.querySelectorAll('#namePreview')
+                preview.innerText = text
+            })
 
-				previews.forEach(function (preview) {
-					preview.innerText = text
-				})
-			})
+            var nameInput = form.querySelector('input[name="name"]')
+            nameInput.addEventListener(inputChangedEvent, function (event) {
+                var target = event.target
+                var text = target.value
+                var previews = form.querySelectorAll('#namePreview')
 
-			// var tagItButton = document.getElementById('tagItButton')
-			// tagItButton.addEventListener('click', function(){
-			// 	self.showCurrentBikeTag()
-			// })
-		}
-	}
+                previews.forEach(function (preview) {
+                    preview.innerText = text
+                })
+            })
+
+            // var tagItButton = document.getElementById('tagItButton')
+            // tagItButton.addEventListener('click', function(){
+            // 	self.showCurrentBikeTag()
+            // })
+        }
+    }
 
     init(targetSelector, readonly) {
         this.readonly = readonly
@@ -900,31 +902,31 @@ class BikeTag {
         // COVID-19 Banner
         // this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
 
-		var headerLogo = document.querySelector('#header .header--logo')
-		if (headerLogo) {
-			headerLogo.addEventListener('click', () => {
-				window.history.pushState({}, '/', '/')
-				this.showCurrentBikeTag()
-			})
-		}
+        var headerLogo = document.querySelector('#header .header--logo')
+        if (headerLogo) {
+            headerLogo.addEventListener('click', () => {
+                window.history.pushState({}, '/', '/')
+                this.showCurrentBikeTag()
+            })
+        }
 
-		var archiveButtonEl = document.getElementById('archiveButton')
-		if (archiveButtonEl) {
-			archiveButtonEl.addEventListener('click', () => {
-				if (document.body.classList.contains('archive')) {
-					this.showCurrentBikeTag()
-				} else {
-					this.showArchiveTags(10)
-				}
-			})
-		}
+        var archiveButtonEl = document.getElementById('archiveButton')
+        if (archiveButtonEl) {
+            archiveButtonEl.addEventListener('click', () => {
+                if (document.body.classList.contains('archive')) {
+                    this.showCurrentBikeTag()
+                } else {
+                    this.showArchiveTags(10)
+                }
+            })
+        }
 
-		var tagItButton = document.getElementById('tagItButton')
-		if (tagItButton) {
-			tagItButton.addEventListener('click', () => {
-				this.showCurrentBikeTag()
-			})
-		}
+        var tagItButton = document.getElementById('tagItButton')
+        if (tagItButton) {
+            tagItButton.addEventListener('click', () => {
+                this.showCurrentBikeTag()
+            })
+        }
 
         setTimeout(() => {
             imgur.getImgurAlbumPictures(this.albumHash)

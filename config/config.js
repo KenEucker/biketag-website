@@ -8,10 +8,7 @@ try {
 module.exports = {
     ui: true,
     rendering: {
-		overrideViewEngine: [
-			"liquid",
-			"ejs",
-		],
+        overrideViewEngine: ['liquid', 'ejs'],
         liquid: {
             customFilters: {
                 biketag_image: biketagImage,
@@ -24,11 +21,7 @@ module.exports = {
                 fontSrc: [`'self'`, `https://fonts.googleapis.com`, `https://weloveiconfonts.com`],
                 styleSrc: [`'self'`, `'unsafe-inline' https://fonts.googleapis.com`],
                 scriptSrc: [`'unsafe-inline' https://www.googletagmanager.com`],
-                connectSrc: [
-                    `'self'`,
-                    `https://api.imgur.com`,
-                    `https://www.google-analytics.com`,
-                ],
+                connectSrc: [`'self'`, `https://api.imgur.com`, `https://www.google-analytics.com`],
                 imgSrc: [
                     `'self'`,
                     `https://i.imgur.com`,

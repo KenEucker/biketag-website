@@ -28,27 +28,27 @@
 
             var url = 'https://api.imgur.com/3/album/' + albumHash + ''
 
-            fetch(
-                url, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: this.imgurAuthorization,
-					},
-					cors: true,
-					// credentials: 'include',
-				})
-			.then(r => r.json())
-			.then((data) => {
-				console.log(data)
+            const headers = new Headers()
+            headers.append('Content-Type', 'application/json')
+            headers.append('Authorization', this.imgurAuthorization)
+            headers.append('Accept', 'application/json')
+            fetch(url, {
+                method: 'POST',
+                headers,
+                cors: true,
+                // credentials: 'include',
+            })
+                .then((r) => r.json())
+                .then((data) => {
+                    console.log(data)
 
-				if (callback) {
-					callback(data)
-				}
-			})
-			.catch((err) => {
-				console.log('error getting images from imgur', err)
-			})
+                    if (callback) {
+                        callback(data)
+                    }
+                })
+                .catch((err) => {
+                    console.log('error getting images from imgur', err)
+                })
         }
 
         refreshImgurAlbumInfo(albumInfo) {
@@ -66,7 +66,7 @@
             }
         }
 
-        getImgurAlbumImagesByTagNumber(images) {
+        getImgurAlbumImagesByTagNumber(images = []) {
             return images.sort(function (image1, image2) {
                 var tagNumber1 = biketag.getBikeTagNumberFromImage(image1)
                 var tagNumber2 = biketag.getBikeTagNumberFromImage(image2)
@@ -80,7 +80,7 @@
             })
         }
 
-        getImgurAlbumImagesByUploadDate(images, newestFirst) {
+        getImgurAlbumImagesByUploadDate(images = [], newestFirst) {
             if (!newestFirst) {
                 return images.sort(function (image1, image2) {
                     return new Date(image2.datetime) - new Date(image1.datetime)
@@ -104,29 +104,32 @@
             var url = 'https://api.imgur.com/3/album/' + albumHash + '/images'
 
             // console.log({imgurRequestUrl: url})
+            const headers = new Headers()
+            headers.append('Content-Type', 'application/json')
+            headers.append('Authorization', this.imgurAuthorization)
+            headers.append('Accept', 'application/json')
 
-            fetch(
-				url, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: this.imgurAuthorization,
-					},
-					cors: true,
-					// credentials: 'include',
-			})
-				.then(r => r.json())
-				.then((data) => {
-					console.log(data)
-					this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(data.data)
+            fetch(url, {
+                method: 'POST',
+                headers,
+                cors: true,
+                // credentials: 'include',
+            })
+                .then((r) => r.json())
+                .then((data) => {
+                    console.log(data)
+                    this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(data.data)
 
-					if (callback) {
-						callback(data)
-					}
-				})
-				.catch((err) => {
-					console.log('error getting images from imgur', { albumHash, imgurApiError: err })
-				})
+                    if (callback) {
+                        callback(data)
+                    }
+                })
+                .catch((err) => {
+                    console.log('error getting images from imgur', {
+                        albumHash,
+                        imgurApiError: err,
+                    })
+                })
         }
 
         uploadImageToImgur(image, description, next) {
@@ -136,29 +139,29 @@
             var formData = new FormData()
             formData.append('image', image)
             formData.append('album', this.albumHash)
-			formData.append('description', description)
-			
-			const headers = new Headers()
-			headers.append('Content-Type', 'application/json')
-			headers.append('Authorization', this.imgurAuthorization)
-			headers.append('Accept', 'application/json')
-			
-			fetch('https://api.imgur.com/3/image', {
-				method: 'POST',
-				headers,
+            formData.append('description', description)
+
+            const headers = new Headers()
+            headers.append('Content-Type', 'application/json')
+            headers.append('Authorization', this.imgurAuthorization)
+            headers.append('Accept', 'application/json')
+
+            fetch('https://api.imgur.com/3/image', {
+                method: 'POST',
+                headers,
                 body: formData,
-				// credentials: 'include',
+                // credentials: 'include',
                 cors: true,
                 // processData: false,
                 // contentType: false,
                 // mimeType: 'multipart/form-data',
-			})
-				.then(r => r.json())
-				.then(data => {
-					console.log({uploadResponse: data})
-					next()
-				})
-				.catch(err => console.error)
+            })
+                .then((r) => r.json())
+                .then((data) => {
+                    console.log({ uploadResponse: data })
+                    next()
+                })
+                .catch((err) => console.error)
         }
 
         getImgurTokens(done) {
@@ -226,13 +229,13 @@
                         'Your upload was successful! Please wait a few moments for the internet to catch up to you. <a class="close">[close]</a>'
                     wrapper.prepend(notification)
 
-					var close = document.querySelector('#notification .close')
-					if (close) {
-						close.addEventListener('click', function () {
-							var notification = document.getElementById('notification')
-							notification.style.display = 'none'
-						})
-					}
+                    var close = document.querySelector('#notification .close')
+                    if (close) {
+                        close.addEventListener('click', function () {
+                            var notification = document.getElementById('notification')
+                            notification.style.display = 'none'
+                        })
+                    }
                     // this.imgurAlbumPicturesRefreshFrequency = 5000;
                 }
 
@@ -250,12 +253,12 @@
 
                 if (this.imgurAlbumPicturesRefreshFrequency) {
                     setInterval(() => {
-						var logo = document.querySelector('#header .header--logo')
-						if (logo) {
-							logo.attributes.style.animation = 'none'
-							logo.offsetHeight /* trigger reflow */
-							logo.attributes.style.animation = null
-						}
+                        var logo = document.querySelector('#header .header--logo')
+                        if (logo) {
+                            logo.attributes.style.animation = 'none'
+                            logo.offsetHeight /* trigger reflow */
+                            logo.attributes.style.animation = null
+                        }
 
                         this.getImgurAlbumInfo(
                             this.albumHash,
