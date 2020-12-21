@@ -29,7 +29,6 @@
             var url = 'https://api.imgur.com/3/album/' + albumHash + '/'
 
             const headers = new Headers()
-			// headers.append('Content-Type', 'application/json')
             headers.append('Authorization', this.imgurAccessToken || this.imgurAuthorization)
             headers.append('Accept', 'application/json')
             fetch(url, {
@@ -62,7 +61,6 @@
                 console.log('image count has changed, updating most recent tags')
                 /// TODO: Fix a bug at this line
                 this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images)
-                // biketag.showCurrentBikeTag()
             }
         }
 
@@ -103,9 +101,7 @@
 
             var url = 'https://api.imgur.com/3/album/' + albumHash + '/images/'
 
-            // console.log({imgurRequestUrl: url})
             const headers = new Headers()
-            // headers.append('Content-Type', 'application/json')
             headers.append('Authorization', this.imgurAccessToken || this.imgurAuthorization)
             headers.append('Accept', 'application/json')
 
@@ -141,27 +137,45 @@
             formData.append('album', this.albumHash)
             formData.append('description', description)
 
-            const headers = new Headers()
-			headers.append('Content-Type', 'multipart/form-data')
-            headers.append('Authorization', this.imgurAccessToken || this.imgurAuthorization)
-            headers.append('Accept', 'application/json')
+            // const headers = new Headers()
+			// headers.append('Content-Type', 'multipart/form-data')
+            // headers.append('Authorization', this.imgurAccessToken)
+            // headers.append('Accept', 'application/json')
 
-            fetch('https://api.imgur.com/3/image/', {
-                method: 'POST',
-                headers,
-				body: formData,
-				cache: 'no-cache',
-                cors: true,
-                // processData: false,
-                // contentType: false,
-                // mimeType: 'multipart/form-data',
+            // fetch('https://api.imgur.com/3/image/', {
+            //     method: 'POST',
+            //     headers,
+			// 	body: formData,
+			// 	// credentials: 'include',
+            //     cors: true,
+            // })
+            //     .then((r) => r.json())
+            //     .then((data) => {
+            //         console.log({ uploadResponse: data })
+            //         next()
+            //     })
+			// 	.catch((err) => console.error)
+			var settings = {
+                crossDomain: true,
+                processData: false,
+                contentType: false,
+                data: formData,
+                withCredentials: true,
+                type: 'POST',
+                url: 'https://api.imgur.com/3/image',
+                headers: {
+                    Authorization: this.imgurAccessToken,
+                    Accept: 'application/json',
+                },
+                mimeType: 'multipart/form-data',
+            }
+
+            // Response contains stringified JSON
+            // Image URL available at response.data.link
+            $.ajax(settings).done(function (response) {
+                next()
             })
-                .then((r) => r.json())
-                .then((data) => {
-                    console.log({ uploadResponse: data })
-                    next()
-                })
-                .catch((err) => console.error)
+
         }
 
         getImgurTokens(done) {
@@ -177,9 +191,6 @@
                 .then((res) => {
                     return res.json()
                 })
-                // .catch(function (error) {
-                // 	console.error('Error:', error)
-                // })
                 .then((response) => {
                     if (!!response && typeof response == 'object') {
                         this.albumHash = response.albumHash || this.albumHash
