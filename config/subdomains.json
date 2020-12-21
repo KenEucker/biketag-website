@@ -62,7 +62,8 @@
         },
         "reddit": {
             "subreddit": "CyclePDX",
-            "globalPostFlair": "6c1f976a-ab71-11ea-8943-0ef764a8816b"
+			"globalPostFlair": "6c1f976a-ab71-11ea-8943-0ef764a8816b",
+			"postFlair": "8992d99c-956e-11ea-b346-0e8b306ef915"
         },
         "easter": {
             "jingle": "media/biketag-pdx-jingle-1.mp3"
@@ -87,7 +88,8 @@
         },
         "reddit": {
             "subreddit": "CycleDenver",
-            "globalPostFlair": "969832ae-ab71-11ea-a493-0ee0010c70bd"
+			"globalPostFlair": "969832ae-ab71-11ea-a493-0ee0010c70bd",
+			"postFlair": "a687cf8a-9ec9-11ea-931a-0e3eaa6af4fd"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -112,7 +114,8 @@
         },
         "reddit": {
             "subreddit": "BikeIN",
-            "globalPostFlair": "8fc05cfe-ab71-11ea-a3fc-0e40389fd69f"
+			"globalPostFlair": "8fc05cfe-ab71-11ea-a3fc-0e40389fd69f",
+			"postFlair": "06f0e420-6a9f-11e9-9c86-0ef5e67d2978"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -137,7 +140,8 @@
         },
         "reddit": {
             "subreddit": "cycleseattle",
-            "globalPostFlair": "7a0e427c-ab71-11ea-af19-0e48af07c18b"
+			"globalPostFlair": "7a0e427c-ab71-11ea-af19-0e48af07c18b",
+			"postFlair": "b5e05512-c4a1-11ea-894a-0ef8b956a485"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -209,7 +213,8 @@
         },
         "reddit": {
             "subreddit": "vancouvercycling",
-            "globalPostFlair": "27ab68e0-bef7-11ea-bfc0-0e19382dc9fb"
+			"globalPostFlair": "27ab68e0-bef7-11ea-bfc0-0e19382dc9fb",
+			"postFlair": "d7233512-3bea-11eb-9199-0e081d8085af"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -234,7 +239,8 @@
         },
         "reddit": {
             "subreddit": "radwien",
-            "globalPostFlair": "2111c952-bef7-11ea-bf24-0e19c4bd80a7"
+			"globalPostFlair": "2111c952-bef7-11ea-bf24-0e19c4bd80a7",
+			"postFlair": "5273abce-4344-11eb-9962-0e015044e445"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -309,7 +315,8 @@
         },
         "reddit": {
             "subreddit": "SanJose",
-            "globalPostFlair": "b826b47c-431a-11eb-8250-0e021221f709"
+			"globalPostFlair": "b826b47c-431a-11eb-8250-0e021221f709",
+			"postFlair": "7951fe10-2b27-11eb-8675-0e473aaf100d"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -356,7 +363,8 @@
         },
         "reddit": {
             "subreddit": "bikeScotland",
-            "globalPostFlair": "16744180-3aaf-11eb-bf15-0e0ebff4f2fb"
+			"globalPostFlair": "16744180-3aaf-11eb-bf15-0e0ebff4f2fb",
+			"postFlair": "727a2470-4344-11eb-9dc0-0e0d401ff1a1"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
