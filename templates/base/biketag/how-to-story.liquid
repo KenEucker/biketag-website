@@ -1,8 +1,22 @@
-{{ "css/zuck.min.css" | asset_url | stylesheet_tag: nonce }}
+{{ "css/slide-stories.css" | asset_url | stylesheet_tag: nonce }}
 
-<div id="stories"></div>
+<div data-slide="slide" class="slide">
+    <div class="slide-items">
+      <img src="https://source.unsplash.com/V7IJzp_ElQc/1000x1500" alt="Img 1">
+      <img src="https://source.unsplash.com/GJIc8O6sM5M/1000x1500" alt="Img 2">
+      <img src="https://source.unsplash.com/VlMMBxSZuSI/1000x1500" alt="Img 3">
+      <img src="https://source.unsplash.com/xWEHhKYqdlY/1000x1500" alt="Img 4">
+    </div>
+    <nav class="slide-nav">
+      <div class="slide-thumb"></div>
+      <button class="slide-prev">Prev</button>
+      <button class="slide-next">Next</button>
+    </nav>
+  </div>
 
-{{ "js/zuck.css.min.js" | asset_url | javascript_tag: nonce }}
-{{ "js/zuck.min.js" | asset_url | javascript_tag: nonce }}
-
-<script type="text/javascript" nonce="{{nonce}}">let stories = new Zuck("stories", {{page.howToStory | json }})</script>
+  {{ "js/slide-stories.js" | asset_url | javascript_tag: nonce }}
+  <script type="text/javascript" nonce="{{nonce}}">
+	(() => { 
+  		new SlideStories('slide')
+	})()
+  </script>
