@@ -1,0 +1,8 @@
+{{ "css/zuck.min.css" | asset_url | stylesheet_tag: nonce }}
+
+<div id="stories"></div>
+
+{{ "js/zuck.css.min.js" | asset_url | javascript_tag: nonce }}
+{{ "js/zuck.min.js" | asset_url | javascript_tag: nonce }}
+
+<script type="text/javascript" nonce="{{nonce}}">let stories = new Zuck("stories", {{page.howToStory | json }})</script>

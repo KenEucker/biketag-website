@@ -4,6 +4,7 @@
     "page": true,
     "notifications": true,
     "content": true,
+    "howToStory": true,
 
     "imgur": ["albumHash", "queueHash", "imgurClientID"],
     "reddit": ["subreddit", "includeLeaderboardInRedditPost"]
