@@ -46,7 +46,7 @@
         "path": "^0.12.7",
         "request": "^2.88.2",
         "sexpress": "^0.7.58",
-        "snoowrap": "^1.21.0"
+        "snoowrap": "^1.22.0"
     },
     "devDependencies": {
         "prettier": "^2.2.1"
