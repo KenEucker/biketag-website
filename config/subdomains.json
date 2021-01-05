@@ -28,6 +28,17 @@
             "logo": ""
         }
     },
+    "how-to": {
+        "tagline": "BikeTag! A timeline as we know it",
+        "template": "how-to",
+        "imgur": {
+            "albumHash": "JABitEa"
+        },
+        "images": {
+            "header": "../../public/img/Tag-Logo-Stacked-V2.svg",
+            "logo": ""
+        }
+    },
     "tag": {
         "template": "tag",
         "aliases": ["new", "post"],
@@ -221,7 +232,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "VancouverIcon.svg"
+            "logo": "vancouver-bike-tag.svg"
         }
     },
     "vienna": {
@@ -371,7 +382,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "InvernessIcon.svg"
+            "logo": "inverness-bike-tag"
         }
     },
     "chicago": {
