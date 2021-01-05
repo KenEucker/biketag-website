@@ -64,6 +64,7 @@ lib
 temp
 src
 private.config.json
+zzz.config.json
 config.json
 config.json.bak
 #config/subdomains.json
