@@ -232,7 +232,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "vancouver-bike-tag.svg"
+            "logo": "vancouver-bike-tag"
         }
     },
     "vienna": {
