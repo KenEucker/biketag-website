@@ -1,8 +1,15 @@
 {
     "reddit": {
-        "includeLeaderboardInRedditPost": true
-    },
-    "template": "biketag1",
+		"includeLeaderboardInRedditPost": true,
+		"distinguishAsMod": true,
+		"assignFlair": true,
+		"approveNewPost": true,
+		"stickyNewPost": true,
+		"updateUserFlair": true
+	},
+	
+	"template": "biketag1",
+	
     "page": {
         "newGameImage": "https://i.imgur.com/CtJVstG.png",
         "loginImage": "https://i.imgur.com/CtJVstG.png"
