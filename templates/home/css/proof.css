@@ -34,8 +34,8 @@
 }
 
 .bikey {
-	font-family: MonsterBike;
-	font-size: 5rem;
+    font-family: MonsterBike;
+    font-size: 5rem;
 }
 
 .bg-green {
@@ -235,6 +235,14 @@ p {
     color: hsla(0, 0%, 100%, 0.74);
     font-size: 16px;
     font-weight: 300;
+}
+
+.w-nav:before {
+    content: 'BIkeTAG';
+    font-family: 'MonsterBike';
+    font-size: 4rem;
+    padding: 1rem;
+    position: absolute;
 }
 
 .footer-wrapper {
@@ -952,9 +960,19 @@ p {
     }
 }
 
+@media screen and (min-width: 480px) {
+    .w-nav:before {
+        content: ' ';
+    }
+}
+
 @media screen and (max-width: 479px) {
     h1 {
         font-size: 40px;
+    }
+
+    .bIkEtAg {
+        display: none;
     }
 
     .logo {

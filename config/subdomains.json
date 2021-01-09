@@ -226,10 +226,10 @@
             "subreddit": "vancouvercycling",
             "globalPostFlair": "27ab68e0-bef7-11ea-bfc0-0e19382dc9fb",
             "postFlair": "d7233512-3bea-11eb-9199-0e081d8085af",
-			"distinguishAsMod": false,
-			"liveThread": "ktmiuk",
-			"autoPostToliveThread": true,
-			"disableSelfPost": false
+            "distinguishAsMod": false,
+            "liveThread": "ktmiuk",
+            "autoPostToliveThread": true,
+            "disableSelfPost": false
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
