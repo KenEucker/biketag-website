@@ -21,11 +21,7 @@ module.exports = {
                 fontSrc: [`'self'`, `https://fonts.googleapis.com`, `https://weloveiconfonts.com`],
                 styleSrc: [`'self'`, `'unsafe-inline' https://fonts.googleapis.com`],
                 connectSrc: [`'self'`, `https://api.imgur.com`],
-                imgSrc: [
-                    `'self'`,
-                    `https://i.imgur.com`,
-                    `data:`,
-                ],
+                imgSrc: [`'self'`, `https://i.imgur.com`, `data:`],
             },
         },
     },

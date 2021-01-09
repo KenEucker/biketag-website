@@ -50,6 +50,11 @@
     color: _palette(orange);
 }
 
+.bikey {
+	font-family: MonsterBike;
+	font-size: 5rem;
+}
+
 #main {
     @include vendor('flex-grow', '1');
     @include vendor('flex-shrink', '1');
@@ -205,7 +210,8 @@
         h2.major {
             font-size: 3rem;
             max-width: 100%;
-            text-align: center;
+			text-align: center;
+			font-family: _font(special);
         }
 
         .close {

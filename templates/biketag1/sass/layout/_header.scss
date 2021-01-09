@@ -97,7 +97,8 @@
     .header--logo {
         cursor: pointer;
         z-index: 100;
-        max-height: 105px;
+		max-height: 105px;
+		font-family: _font(special);
 
         .headingText h1 {
             font-size: 1.5rem;
@@ -196,7 +197,7 @@
                     padding: 0 1.25rem 0 1.45rem;
                     text-transform: uppercase;
                     letter-spacing: 0.2rem;
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     border-bottom: 0;
                     filter: brightness(0.1) invert(1) drop-shadow(2px 1px 2px black);
 
@@ -305,7 +306,7 @@
                             max-width: 15rem;
 
                             a {
-                                line-height: 2.8rem;
+                                line-height: 2rem;
                             }
                         }
                     }

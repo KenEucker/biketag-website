@@ -8,6 +8,26 @@ $misc: (
     src: url('../../public/fonts/TrashHand.woff2');
 }
 
+@font-face {
+    font-family: AshesAshes;
+    src: url('../../public/fonts/AshesAshesMedium-5wYa.ttf');
+}
+
+@font-face {
+    font-family: MonsterBike;
+    src: url('../../public/fonts/MonsterBike-nRROg.ttf');
+}
+
+@font-face {
+    font-family: RoadBike;
+    src: url('../../public/fonts/TtRoadBikeRegular-X3GWd.ttf');
+}
+
+@font-face {
+    font-family: AvenueX;
+    src: url('../../public/fonts/Avenuex-75oB.otf');
+}
+
 // Duration.
 $duration: (
     transition: 0.2s,
@@ -26,7 +46,9 @@ $size: (
 
 // Font.
 $font: (
-    family: TrashHand,
+    family: AvenueX,
+	special: AshesAshes,
+	bikey: MonsterBike,
     family-fixed: (
         'Courier New',
         monospace,
