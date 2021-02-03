@@ -389,6 +389,30 @@
             "logo": "inverness-bike-tag"
         }
     },
+    "abbotsford": {
+        "meta": {
+            "title": "Abbotsford BikeTag!",
+            "url": "https://abbotsford.biketag.org"
+        },
+        "region": "Abbotsford, British Columbia",
+        "tagline": "The BikeTag game in Abbotsford, British Columbia",
+        "imgur": {
+            "albumHash": "rWOlZgP",
+            "queueAlbumHash": "yNYgqtC"
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "inverness-bike-tag"
+        }
+    },
     "chicago": {
         "readonly": true,
         "aliases": ["illinois"],
