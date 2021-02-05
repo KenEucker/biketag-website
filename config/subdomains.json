@@ -410,7 +410,31 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "inverness-bike-tag"
+            "logo": "abbotsford-bike-tag"
+        }
+    },
+    "comox": {
+        "meta": {
+            "title": "Comox BikeTag!",
+            "url": "https://abbotsford.biketag.org"
+        },
+        "region": "Comox, British Columbia",
+        "tagline": "The BikeTag game in Comox, British Columbia",
+        "imgur": {
+            "albumHash": "DOXfVT0",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "comox-bike-tag"
         }
     },
     "chicago": {
