@@ -44,7 +44,7 @@
         "imgur": "git+https://github.com/KenEucker/node-imgur#keneucker/production",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "git+https://github.com/KenEucker/sexpress#production",
+        "sexpress": "0.7.58",
         "snoowrap": "^1.22.0"
     },
     "devDependencies": {
