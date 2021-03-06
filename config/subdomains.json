@@ -413,21 +413,22 @@
             "logo": "abbotsford-bike-tag"
         }
     },
-    "comox": {
+    "comoxvalley": {
+        "aliases": ["comox"],
         "meta": {
-            "title": "Comox BikeTag!",
-            "url": "https://abbotsford.biketag.org"
+            "title": "Comox Valley BikeTag!",
+            "url": "https://comoxvalley.biketag.org"
         },
-        "region": "Comox, British Columbia",
-        "tagline": "The BikeTag game in Comox, British Columbia",
+        "region": "Comox Valley, British Columbia",
+        "tagline": "The BikeTag game in Comox Valley, British Columbia",
         "imgur": {
             "albumHash": "DOXfVT0",
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "",
-            "globalPostFlair": "",
-            "postFlair": ""
+            "subreddit": "ComoxValleyCycling",
+            "globalPostFlair": "f46ebd74-7148-11eb-9cb5-0ec32090a0d7",
+            "postFlair": "c44deafc-7148-11eb-ada7-0eb258f30e33"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -437,6 +438,54 @@
             "logo": "comox-bike-tag"
         }
     },
+	"cowichanvalley": {
+		"meta": {
+			"title": "Cowichan Valley BikeTag!",
+			"url": "https://cowichanvalley.biketag.org"
+		},
+		"region": "Cowichan Valley, British Columbia",
+		"tagline": "The BikeTag game in the Cowichan Valley, British Columbia",
+		"imgur": {
+			"albumHash": "UwKN9UE",
+			"queueAlbumHash": ""
+		},
+		"reddit": {
+			"subreddit": "",
+			"globalPostFlair": "",
+			"postFlair": ""
+		},
+		"easter": {
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../public/img/biketag-logo-1.png",
+			"logo": ""
+		}
+	},
+	"okc": {
+		"meta": {
+			"title": "Oklahoma City BikeTag!",
+			"url": "https://okc.biketag.org"
+		},
+		"region": "Oklahoma City, Oklahoma",
+		"tagline": "The BikeTag game in the Oklahoma City, Oklahoma",
+		"imgur": {
+			"albumHash": "hKpcYAw",
+			"queueAlbumHash": ""
+		},
+		"reddit": {
+			"subreddit": "",
+			"globalPostFlair": "",
+			"postFlair": ""
+		},
+		"easter": {
+			"jingle": "../../public/media/biketag-jingle-1.mp3"
+		},
+		"images": {
+			"header": "../../public/img/biketag-logo-1.png",
+			"logo": ""
+		}
+	},
     "chicago": {
         "readonly": true,
         "aliases": ["illinois"],

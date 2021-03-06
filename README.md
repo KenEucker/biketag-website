@@ -21,7 +21,7 @@ To allow anyone and everyone to play BikeTag! This site will ingest the Reddit p
 
 # Contribute
 
-If you'd like to contribute to this project you can [file an issue](https://github.com/keneucker/biketag-website/issues), fork the code and [create a pull request](https://github.com/keneucker/biketag-website/pulls), or [donate money towards server costs](https://paypal.me/KenEucker) which currently run between \$5-10/month.
+If you'd like to contribute to this project you can [file an issue](https://github.com/keneucker/biketag-website/issues), fork the code and [create a pull request](https://github.com/keneucker/biketag-website/pulls), or [support this project on patreon](https://www.patreon.com/BikeTag).
 
 # Development
 
@@ -79,5 +79,3 @@ Thank you to HorribleLogos.com for whatever it is that you provided.
 
 [paypal-image]: https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png
 [travis-image]: https://travis-ci.org/KenEucker/biketag-website.svg?branch=master
-
-Trying this one more time.

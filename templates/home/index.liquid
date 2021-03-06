@@ -231,7 +231,7 @@
 	{{ "css/fa-all.min.css" | stylesheet_tag }}
 	{{ "https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js" | ie_script }}
 
-	{% if debug { %}
+	{% if debug %}
 	{{ content.localdev }}
 	{% endif %}
 </body>
