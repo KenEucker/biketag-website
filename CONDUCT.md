@@ -5,7 +5,7 @@ BikeTag’s Mission is to support the game of BikeTag all over the world. Our vo
 
   
 
-This code of conduct outlines our expectations for the images and location information submitted to the biketag.org website as well as representatives and volunteers at official BikeTag events including board meetings.
+This code of conduct outlines our expectations for the images and location information submitted to the biketag.org website as well as representatives and volunteers at official BikeTag events.
 
   
 
@@ -13,7 +13,7 @@ We invite all those who participate in our game of BikeTag, within each of the r
 
   
 
-BikeTag participants are required to agree to the following Code of Conduct. This code will be shared with visitors to the website and BikeTag volunteers will enforce this code throughout the communities where BikeTag is .
+BikeTag participants are required to agree to the following Code of Conduct. This code will be shared with visitors to the website and BikeTag volunteers will enforce this code throughout the communities where BikeTag is.
 
   
 
