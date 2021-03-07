@@ -77,7 +77,7 @@ Sexpress uses [clobfig](https://github.com/KenEucker/clobfig), a configurator li
 
 Thank you to HorribleLogos.com for whatever it is that you provided.
 
-The BikeTag.Org website content is stored using sanity.io
+Structured content powered by Sanity.io
 
 [![Sanity.io][sanity-image]](https://sanity.io)
 
