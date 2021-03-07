@@ -40,6 +40,7 @@
     "keywords": [],
     "dependencies": {
         "@googlemaps/google-maps-services-js": "^3.1.13",
+        "got": "^11.8.2",
         "imgur": "git+https://github.com/KenEucker/node-imgur#keneucker/production",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
