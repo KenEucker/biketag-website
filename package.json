@@ -50,7 +50,7 @@
     "devDependencies": {
         "prettier": "^2.2.1"
     },
-    "license": "Unlicense",
+    "license": "CC-BY-SA-4.0",
     "generate": {
         "enabled": true,
         "copyServerFile": true,

@@ -438,54 +438,54 @@
             "logo": "comox-bike-tag"
         }
     },
-	"cowichanvalley": {
-		"meta": {
-			"title": "Cowichan Valley BikeTag!",
-			"url": "https://cowichanvalley.biketag.org"
-		},
-		"region": "Cowichan Valley, British Columbia",
-		"tagline": "The BikeTag game in the Cowichan Valley, British Columbia",
-		"imgur": {
-			"albumHash": "UwKN9UE",
-			"queueAlbumHash": ""
-		},
-		"reddit": {
-			"subreddit": "",
-			"globalPostFlair": "",
-			"postFlair": ""
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": ""
-		}
-	},
-	"okc": {
-		"meta": {
-			"title": "Oklahoma City BikeTag!",
-			"url": "https://okc.biketag.org"
-		},
-		"region": "Oklahoma City, Oklahoma",
-		"tagline": "The BikeTag game in the Oklahoma City, Oklahoma",
-		"imgur": {
-			"albumHash": "hKpcYAw",
-			"queueAlbumHash": ""
-		},
-		"reddit": {
-			"subreddit": "",
-			"globalPostFlair": "",
-			"postFlair": ""
-		},
-		"easter": {
-			"jingle": "../../public/media/biketag-jingle-1.mp3"
-		},
-		"images": {
-			"header": "../../public/img/biketag-logo-1.png",
-			"logo": ""
-		}
-	},
+    "cowichanvalley": {
+        "meta": {
+            "title": "Cowichan Valley BikeTag!",
+            "url": "https://cowichanvalley.biketag.org"
+        },
+        "region": "Cowichan Valley, British Columbia",
+        "tagline": "The BikeTag game in the Cowichan Valley, British Columbia",
+        "imgur": {
+            "albumHash": "UwKN9UE",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": "cowichan-valley-bike-tag"
+        }
+    },
+    "okc": {
+        "meta": {
+            "title": "Oklahoma City BikeTag!",
+            "url": "https://okc.biketag.org"
+        },
+        "region": "Oklahoma City, Oklahoma",
+        "tagline": "The BikeTag game in the Oklahoma City, Oklahoma",
+        "imgur": {
+            "albumHash": "hKpcYAw",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "chicago": {
         "readonly": true,
         "aliases": ["illinois"],

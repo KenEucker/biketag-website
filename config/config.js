@@ -7,9 +7,9 @@ try {
 
 module.exports = {
     docs: {
-		enabled: true,
-		secureApiDocs: false,
-	},
+        enabled: true,
+        secureApiDocs: false,
+    },
     ui: true,
     rendering: {
         overrideViewEngine: ['liquid', 'ejs'],
@@ -20,7 +20,7 @@ module.exports = {
         },
     },
     ssl: {
-		// enabled: false,
+        // enabled: false,
         contentSecurityPolicy: {
             directives: {
                 fontSrc: [`'self'`, `https://fonts.googleapis.com`, `https://weloveiconfonts.com`],
