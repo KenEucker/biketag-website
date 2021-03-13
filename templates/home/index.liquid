@@ -5,9 +5,9 @@
 	{% include "page/meta" %}
 	{% include "page/css" %}
 
-	{{ "css/normalize.css" | stylesheet_tag }}
-	{{ "css/webflow.css" | stylesheet_tag }}
-	{{ "css/proof.css" | stylesheet_tag }}
+	{{ "css/normalize.css" | stylesheet_tag : nonce }}
+	{{ "css/webflow.css" | stylesheet_tag : nonce }}
+	{{ "css/proof.css" | stylesheet_tag : nonce }}
 
 	{{ "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" | javascript_tag: nonce }}
 	<link rel="preconnect" href="https://fonts.gstatic.com" nonce="{{nonce}}">
@@ -226,9 +226,9 @@
 
 		})(window.refreshCurrentBikeTagImages)
 	</script>
-	{{ "js/jquery.min.js" | javascript_tag }}
-	{{ "js/webflow.js" | javascript_tag }}
-	{{ "css/fa-all.min.css" | stylesheet_tag }}
+	{{ "js/jquery.min.js" | javascript_tag : nonce }}
+	{{ "js/webflow.js" | javascript_tag : nonce }}
+	{{ "css/fa-all.min.css" | stylesheet_tag : nonce }}
 	{{ "https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js" | ie_script }}
 
 	{% if debug %}

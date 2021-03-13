@@ -11,7 +11,7 @@
 	{% include "page/css" %}
 	
 	<!-- Bootstrap -->
-	{{ "/css/bootstrap.min.css" | stylesheet_tag }}
+	{{ "/css/bootstrap.min.css" | stylesheet_tag : nonce }}
 </head>
 
 <body class="is-preload {{ thisSubdomain }}">
@@ -108,7 +108,7 @@
 				{% else %}
 					{% assign logo = page.images.logo | append: '.png' %}
 				{% endif %}
-				<p class="center">{{ "img/" | append: logo | replace: '.png', '-small.png' | asset_url | img_tag }}</p>
+				<p class="center">{{ "img/" | append: logo | replace: '.png', '-small.png' | asset_url | img_tag : nonce }}</p>
 				{{ content.about }}
 
 				<p>
@@ -151,7 +151,7 @@
 		}
 	</script>
 
-	{{ "js/biketag.js" | javascript_tag }}
+	{{ "js/biketag.js" | javascript_tag : nonce }}
 	<script nonce="{{ nonce }}">
 		window.lazyLoadInstance = new LazyLoad()
 
@@ -164,14 +164,14 @@
 	</script>
 
 	<!-- Scripts -->
-	{{ "js/jquery.min.js" | javascript_tag }}
+	{{ "js/jquery.min.js" | javascript_tag : nonce }}
 	<!-- Bootstrap -->
-	{{ "js/bootstrap.min.js" | javascript_tag }}
-	{{ "js/browser.min.js" | javascript_tag }}
-	{{ "js/breakpoints.min.js" | javascript_tag }}
-	{{ "js/util.js" | javascript_tag }}
-	{{ "js/main.js" | javascript_tag }}
-	{{ "js/imgur.js" | javascript_tag }}
+	{{ "js/bootstrap.min.js" | javascript_tag : nonce }}
+	{{ "js/browser.min.js" | javascript_tag : nonce }}
+	{{ "js/breakpoints.min.js" | javascript_tag : nonce }}
+	{{ "js/util.js" | javascript_tag : nonce }}
+	{{ "js/main.js" | javascript_tag : nonce }}
+	{{ "js/imgur.js" | javascript_tag : nonce }}
 
 	<script type="text/javascript" nonce="{{nonce}}">
 		(() => {

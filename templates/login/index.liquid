@@ -39,7 +39,7 @@
         </section>
 
         <!-- Bootstrap -->
-        {{ 'js/bootstrap.min.js' | javascript_tag }}
-        {{ 'js/login.js' | javascript_tag }}
+        {{ 'js/bootstrap.min.js' | javascript_tag : nonce }}
+        {{ 'js/login.js' | javascript_tag : nonce }}
     </body>
 </html>

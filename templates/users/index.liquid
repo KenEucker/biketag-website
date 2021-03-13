@@ -5,8 +5,8 @@
 		{% include "page/css" %}
 		
 		<!-- Bootstrap -->
-		{{ "/css/bootstrap.min.css" | stylesheet_tag }}
-		{{ "/css/fa-all.min.css" | stylesheet_tag }}
+		{{ "/css/bootstrap.min.css" | stylesheet_tag : nonce }}
+		{{ "/css/fa-all.min.css" | stylesheet_tag : nonce }}
 		{{ images | json | console_log: nonce }}
 	</head>
 
@@ -23,8 +23,8 @@
 			</ul>
 		</section>
 
-		{{ "/js/jquery.min.js" | javascript_tag }}
+		{{ "/js/jquery.min.js" | javascript_tag : nonce }}
 		<!-- Bootstrap -->
-		{{ "/js/bootstrap.min.js" | javascript_tag }}
+		{{ "/js/bootstrap.min.js" | javascript_tag : nonce }}
 	</body>
 </html>

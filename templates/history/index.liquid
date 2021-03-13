@@ -11,7 +11,7 @@
 	{% include "page/css" %}
 	
 	<!-- Bootstrap -->
-	{{ "/css/bootstrap.min.css" | stylesheet_tag }}
+	{{ "/css/bootstrap.min.css" | stylesheet_tag : nonce }}
 </head>
 <body>
 
@@ -71,7 +71,7 @@
 </div>
 
 	<!-- Bootstrap -->
-	{{ "js/bootstrap.min.js" | javascript_tag }}
+	{{ "js/bootstrap.min.js" | javascript_tag : nonce }}
 
 </body>
 

@@ -1,4 +1,4 @@
-{{ "css/ie9.css" | ie_style }}
+{{ "css/ie9.css" | ie_style: nonce }}
 {% if page.hasCustomCss %}
-{{ "css/{{ thisSubdomain }}.css" | asset_url | stylesheet_tag }}
+{{ "css/{{ thisSubdomain }}.css" | asset_url | stylesheet_tag : nonce }}
 {% endif %}
