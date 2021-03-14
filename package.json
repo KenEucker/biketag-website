@@ -59,6 +59,7 @@
         "copySource": true,
         "copyConfigJs": false,
         "copySourceConfig": false,
-        "source": "https://github.com/KenEucker/biketag-app/archive/production.zip"
+        "source": "https://github.com/KenEucker/biketag-app/archive/production.zip",
+		"config": "https://biketag-settings.sanity.studio/biketag-website"
     }
 }
