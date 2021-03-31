@@ -6,6 +6,6 @@
     "content": true,
     "howToStory": true,
 
-    "imgur": ["albumHash", "queueHash", "imgurClientID"],
+    "imgur": ["albumHash", "queueAlbumHash", "imgurClientID"],
     "reddit": ["subreddit", "includeLeaderboardInRedditPost"]
 }
