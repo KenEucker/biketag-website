@@ -684,5 +684,24 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+    "peakdistrict": {
+        "meta": {
+            "title": "Peak District BikeTag!",
+            "url": "https://peakdistrict.biketag.org"
+        },
+        "region": "Peak District, UK",
+        "tagline": "The BikeTag game in The Peak District, UK",
+        "imgur": {
+            "albumHash": "",
+            "queueAlbumHash": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
