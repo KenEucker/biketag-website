@@ -486,6 +486,337 @@
             "logo": ""
         }
     },
+    "emporia": {
+        "meta": {
+            "title": "Emporia BikeTag!",
+            "url": "https://okc.biketag.org"
+        },
+        "region": "Emporia, Kansas",
+        "tagline": "The BikeTag game in the Emporia, Kansas",
+        "imgur": {
+            "albumHash": "IIKyfbN",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "dresden": {
+        "meta": {
+            "title": "Dreseden City BikeTag!",
+            "url": "https://dresden.biketag.org"
+        },
+        "region": "Dreseden, Germany",
+        "tagline": "The BikeTag game in the Dreseden, Germany",
+        "imgur": {
+            "albumHash": "MCrgubp",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "charlotte": {
+        "meta": {
+            "title": "Charlotte BikeTag!",
+            "url": "https://charlotte.biketag.org"
+        },
+        "region": "Charlotte, North Carolina",
+        "tagline": "The BikeTag game in the Charlotte, North Carolina",
+        "imgur": {
+            "albumHash": "fNgxVSQ",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "phoenix": {
+        "meta": {
+            "title": "Pheonix BikeTag!",
+            "url": "https://pheonix.biketag.org"
+        },
+        "region": "Pheonix, Arizona",
+        "tagline": "The BikeTag game in the Pheonix, Arizona",
+        "imgur": {
+            "albumHash": "WYfrqH2",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "hull": {
+        "meta": {
+            "title": "Hull BikeTag!",
+            "url": "https://hull.biketag.org"
+        },
+        "region": "Hull, England",
+        "tagline": "The BikeTag game in the Hull, England",
+        "imgur": {
+            "albumHash": "E7ZirUh",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "rome": {
+        "meta": {
+            "title": "Rome BikeTag!",
+            "url": "https://rome.biketag.org"
+        },
+        "region": "Rome, Italy",
+        "tagline": "The BikeTag game in the Rome, Italy",
+        "imgur": {
+            "albumHash": "XdLYmRb",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "edmonton": {
+        "meta": {
+            "title": "Edmonton BikeTag!",
+            "url": "https://edmonton.biketag.org"
+        },
+        "region": "Edmonton, Alberta",
+        "tagline": "The BikeTag game in the Edmonton, Alberta",
+        "imgur": {
+            "albumHash": "lWZe4Py",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "saarbrucken": {
+        "meta": {
+            "title": "Saarbrücken BikeTag!",
+            "url": "https://saarbrucken.biketag.org"
+        },
+        "region": "Saarbrücken, Germany",
+        "tagline": "The BikeTag game in the Saarbrücken, Germany",
+        "imgur": {
+            "albumHash": "3FNGvS0",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "ottawa": {
+        "meta": {
+            "title": "Oklahoma City BikeTag!",
+            "url": "https://okc.biketag.org"
+        },
+        "region": "Oklahoma City, Oklahoma",
+        "tagline": "The BikeTag game in the Oklahoma City, Oklahoma",
+        "imgur": {
+            "albumHash": "3cbAMeq",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "tulsa": {
+        "meta": {
+            "title": "Tulsa BikeTag!",
+            "url": "https://tulsa.biketag.org"
+        },
+        "region": "Tulsa, Oklahoma",
+        "tagline": "The BikeTag game in the Tulsa, Oklahoma",
+        "imgur": {
+            "albumHash": "jXVlwFn",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "montreal": {
+        "meta": {
+            "title": "Montreal BikeTag!",
+            "url": "https://montreal.biketag.org"
+        },
+        "region": "Montreal, Quebec",
+        "tagline": "The BikeTag game in the Montreal, Quebec",
+        "imgur": {
+            "albumHash": "oH46XZd",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "fayetteville": {
+        "meta": {
+            "title": "Fayetteville BikeTag!",
+            "url": "https://tulsa.biketag.org"
+        },
+        "region": "Fayetteville, Arkansas",
+        "tagline": "The BikeTag game in the Fayetteville, Arkansas Metro",
+        "imgur": {
+            "albumHash": "8eAtqXW",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "tokyo": {
+        "meta": {
+            "title": "Tokyo BikeTag!",
+            "url": "https://tulsa.biketag.org"
+        },
+        "region": "Tokyo, Japan",
+        "tagline": "The BikeTag game in the Fayetteville, Arkansas Metro",
+        "imgur": {
+            "albumHash": "Xu8Kkr2",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "peakdistrict": {
+        "meta": {
+            "title": "Peak District BikeTag!",
+            "url": "https://peakdistrict.biketag.org"
+        },
+        "region": "Peak District, UK",
+        "tagline": "The BikeTag game in The Peak District, UK",
+        "imgur": {
+            "albumHash": "V0TWZve",
+            "queueAlbumHash": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "chicago": {
         "readonly": true,
         "aliases": ["illinois"],
