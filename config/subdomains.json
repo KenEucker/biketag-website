@@ -489,7 +489,7 @@
     "emporia": {
         "meta": {
             "title": "Emporia BikeTag!",
-            "url": "https://okc.biketag.org"
+            "url": "https://emporia.biketag.org"
         },
         "region": "Emporia, Kansas",
         "tagline": "The BikeTag game in the Emporia, Kansas",
@@ -512,7 +512,7 @@
     },
     "dresden": {
         "meta": {
-            "title": "Dreseden City BikeTag!",
+            "title": "Dreseden BikeTag!",
             "url": "https://dresden.biketag.org"
         },
         "region": "Dreseden, Germany",
@@ -560,11 +560,11 @@
     },
     "phoenix": {
         "meta": {
-            "title": "Pheonix BikeTag!",
-            "url": "https://pheonix.biketag.org"
+            "title": "Phoenix BikeTag!",
+            "url": "https://phoenix.biketag.org"
         },
-        "region": "Pheonix, Arizona",
-        "tagline": "The BikeTag game in the Pheonix, Arizona",
+        "region": "Phoenix, Arizona",
+        "tagline": "The BikeTag game in the Phoenix, Arizona",
         "imgur": {
             "albumHash": "WYfrqH2",
             "queueAlbumHash": ""
@@ -680,11 +680,11 @@
     },
     "ottawa": {
         "meta": {
-            "title": "Oklahoma City BikeTag!",
-            "url": "https://okc.biketag.org"
+            "title": "Ottawa BikeTag!",
+            "url": "https://ottawa.biketag.org"
         },
-        "region": "Oklahoma City, Oklahoma",
-        "tagline": "The BikeTag game in the Oklahoma City, Oklahoma",
+        "region": "Ottawa, Canada",
+        "tagline": "The BikeTag game in the Ottawa, Canada",
         "imgur": {
             "albumHash": "3cbAMeq",
             "queueAlbumHash": ""
@@ -753,7 +753,7 @@
     "fayetteville": {
         "meta": {
             "title": "Fayetteville BikeTag!",
-            "url": "https://tulsa.biketag.org"
+            "url": "https://fayetteville.biketag.org"
         },
         "region": "Fayetteville, Arkansas",
         "tagline": "The BikeTag game in the Fayetteville, Arkansas Metro",
@@ -774,13 +774,37 @@
             "logo": ""
         }
     },
+    "kansascity": {
+        "meta": {
+            "title": "Kansas City BikeTag!",
+            "url": "https://kansascity.biketag.org"
+        },
+        "region": "Kansas City, Kansas",
+        "tagline": "The BikeTag game in the Kansas City, Kansas/Missouri",
+        "imgur": {
+            "albumHash": "QJgdEH7",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "tokyo": {
         "meta": {
             "title": "Tokyo BikeTag!",
-            "url": "https://tulsa.biketag.org"
+            "url": "https://tokyo.biketag.org"
         },
         "region": "Tokyo, Japan",
-        "tagline": "The BikeTag game in the Fayetteville, Arkansas Metro",
+        "tagline": "The BikeTag game in the Tokyo, Japan",
         "imgur": {
             "albumHash": "Xu8Kkr2",
             "queueAlbumHash": ""
