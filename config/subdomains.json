@@ -798,6 +798,30 @@
             "logo": ""
         }
     },
+    "lexington": {
+        "meta": {
+            "title": "Lexington BikeTag!",
+            "url": "https://lexington.biketag.org"
+        },
+        "region": "Lexington, Kentucky",
+        "tagline": "The BikeTag game in the Lexington, Kentucky",
+        "imgur": {
+            "albumHash": "Pn3gKAV",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "tokyo": {
         "meta": {
             "title": "Tokyo BikeTag!",
@@ -807,6 +831,30 @@
         "tagline": "The BikeTag game in the Tokyo, Japan",
         "imgur": {
             "albumHash": "Xu8Kkr2",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "victoria": {
+        "meta": {
+            "title": "Victoria BikeTag!",
+            "url": "https://victoria.biketag.org"
+        },
+        "region": "Victoria, BC",
+        "tagline": "The BikeTag game in the Victoria, British Columbia",
+        "imgur": {
+            "albumHash": "2T9J6yH",
             "queueAlbumHash": ""
         },
         "reddit": {
