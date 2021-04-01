@@ -870,6 +870,30 @@
             "logo": ""
         }
     },
+    "boston": {
+        "meta": {
+            "title": "Boston BikeTag!",
+            "url": "https://boston.biketag.org"
+        },
+        "region": "Boston, Massachusetts",
+        "tagline": "The BikeTag game in the Boston, Massachusetts",
+        "imgur": {
+            "albumHash": "n5SoGV3",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "peakdistrict": {
         "meta": {
             "title": "Peak District BikeTag!",
