@@ -58,6 +58,30 @@
             "logo": ""
         }
     },
+    "ebike": {
+        "meta": {
+            "title": "r/eBike BikeTag!",
+            "url": "https://edmonton.biketag.org"
+        },
+        "region": "r/eBike",
+        "tagline": "The BikeTag played on r/eBike",
+        "imgur": {
+            "albumHash": "eIXQYKK",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "portland": {
         "template": "biketag1",
         "aliases": ["pdx", "oregon"],
