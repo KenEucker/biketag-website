@@ -630,6 +630,30 @@
             "logo": ""
         }
     },
+    "toulouse": {
+        "meta": {
+            "title": "Toulouse BikeTag!",
+            "url": "https://toulouse.biketag.org"
+        },
+        "region": "Toulouse, France",
+        "tagline": "The BikeTag game in the Toulouse, France",
+        "imgur": {
+            "albumHash": "6UCvYsf",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "edmonton": {
         "meta": {
             "title": "Edmonton BikeTag!",
