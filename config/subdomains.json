@@ -103,7 +103,7 @@
             "postFlair": "a687cf8a-9ec9-11ea-931a-0e3eaa6af4fd"
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/biketag-denver-jingle-1.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
@@ -155,7 +155,7 @@
             "postFlair": "b5e05512-c4a1-11ea-894a-0ef8b956a485"
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/biketag-seattle-jingle-1.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
@@ -495,6 +495,30 @@
         "tagline": "The BikeTag game in the Emporia, Kansas",
         "imgur": {
             "albumHash": "IIKyfbN",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "harrisburg": {
+        "meta": {
+            "title": "Emporia BikeTag!",
+            "url": "https://harrisburg.biketag.org"
+        },
+        "region": "Harrisburg, Pennsylvania",
+        "tagline": "The BikeTag game in the Harrisburg, Pennsylvania",
+        "imgur": {
+            "albumHash": "hrhNBiE",
             "queueAlbumHash": ""
         },
         "reddit": {
