@@ -70,7 +70,7 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "",
+            "subreddit": "ebike",
             "globalPostFlair": "",
             "postFlair": ""
         },
@@ -931,6 +931,30 @@
         },
         "reddit": {
             "subreddit": "CycleVictoria",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "paris": {
+        "meta": {
+            "title": "Paris BikeTag!",
+            "url": "https://paris.biketag.org"
+        },
+        "region": "Paris, France",
+        "tagline": "The BikeTag game in the Paris, France",
+        "imgur": {
+            "albumHash": "MXavFtc",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "CycleParis",
             "globalPostFlair": "",
             "postFlair": ""
         },
