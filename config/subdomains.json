@@ -256,7 +256,7 @@
             "disableSelfPost": false
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/vancouver-jingle-1.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
@@ -623,7 +623,7 @@
             "postFlair": ""
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/phoenix-jingle-1.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
