@@ -726,6 +726,30 @@
             "logo": ""
         }
     },
+    "islamabad": {
+        "meta": {
+            "title": "Islamabad BikeTag!",
+            "url": "https://islamabad.biketag.org"
+        },
+        "region": "Islamabad, Pakistan",
+        "tagline": "The BikeTag game in the Islamabad, Pakistan",
+        "imgur": {
+            "albumHash": "ZPPN6SC",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "",
+            "globalPostFlair": "",
+            "postFlair": ""
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
     "saarbrucken": {
         "meta": {
             "title": "Saarbrücken BikeTag!",
