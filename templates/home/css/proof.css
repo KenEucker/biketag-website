@@ -406,7 +406,6 @@ p {
     text-align: center;
     height: 100%;
     display: inline-block;
-    vertical-align: text-bottom;
 }
 
 .article-text-wrapper {
