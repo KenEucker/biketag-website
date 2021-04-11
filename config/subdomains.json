@@ -738,7 +738,7 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "",
+            "subreddit": "IslamabadCycling",
             "globalPostFlair": "",
             "postFlair": ""
         },
@@ -1218,6 +1218,150 @@
         "tagline": "The BikeTag game in Washington, DC",
         "imgur": {
             "albumHash": "lsDrB9W",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikedc",
+            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "bellingham": {
+        "readonly": true,
+        "meta": {
+            "title": "DC BikeTag!",
+            "url": "https://dc.biketag.org"
+        },
+        "region": "Washington, DC",
+        "tagline": "The BikeTag game in Washington, DC",
+        "imgur": {
+            "albumHash": "vEdTE9i",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikedc",
+            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "munich": {
+        "readonly": true,
+        "meta": {
+            "title": "DC BikeTag!",
+            "url": "https://dc.biketag.org"
+        },
+        "region": "Washington, DC",
+        "tagline": "The BikeTag game in Washington, DC",
+        "imgur": {
+            "albumHash": "NiWLYhp",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikedc",
+            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "saltlakecity": {
+        "readonly": true,
+        "meta": {
+            "title": "DC BikeTag!",
+            "url": "https://dc.biketag.org"
+        },
+        "region": "Washington, DC",
+        "tagline": "The BikeTag game in Washington, DC",
+        "imgur": {
+            "albumHash": "pmqQazX",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikedc",
+            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "berlin": {
+        "readonly": true,
+        "meta": {
+            "title": "DC BikeTag!",
+            "url": "https://dc.biketag.org"
+        },
+        "region": "Washington, DC",
+        "tagline": "The BikeTag game in Washington, DC",
+        "imgur": {
+            "albumHash": "4RghYGa",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikedc",
+            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "hamburg": {
+        "readonly": true,
+        "meta": {
+            "title": "DC BikeTag!",
+            "url": "https://dc.biketag.org"
+        },
+        "region": "Washington, DC",
+        "tagline": "The BikeTag game in Washington, DC",
+        "imgur": {
+            "albumHash": "FpMuRug",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "bikedc",
+            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "prague": {
+        "readonly": true,
+        "meta": {
+            "title": "Prague BikeTag!",
+            "url": "https://dc.biketag.org"
+        },
+        "region": "Prague, Czech Republic",
+        "tagline": "The BikeTag game in Prague, Czech Republic",
+        "imgur": {
+            "albumHash": "IWY7Iv1",
             "queueAlbumHash": ""
         },
         "reddit": {
