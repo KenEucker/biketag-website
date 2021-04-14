@@ -19,10 +19,8 @@ const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain
             }
             out[subdomainName] = subdomainConfig
 
-            out[subdomainName] = subdomainInformation
-
             if (subdomain === subdomainName) {
-                publicData.page = subdomainInformation
+                publicData.page = {...publicData.page, ...subdomainConfig}
             }
 
             return out
