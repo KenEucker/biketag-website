@@ -1235,18 +1235,16 @@
     "bellingham": {
         "readonly": true,
         "meta": {
-            "title": "DC BikeTag!",
-            "url": "https://dc.biketag.org"
+            "title": "Bellingham BikeTag!",
+            "url": "https://bellingham.biketag.org"
         },
-        "region": "Washington, DC",
-        "tagline": "The BikeTag game in Washington, DC",
+        "region": "Bellingham, Washington",
+        "tagline": "The BikeTag game in Bellingham, Washington",
         "imgur": {
             "albumHash": "vEdTE9i",
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "bikedc",
-            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -1259,18 +1257,16 @@
     "munich": {
         "readonly": true,
         "meta": {
-            "title": "DC BikeTag!",
-            "url": "https://dc.biketag.org"
+            "title": "Munich BikeTag!",
+            "url": "https://munich.biketag.org"
         },
-        "region": "Washington, DC",
-        "tagline": "The BikeTag game in Washington, DC",
+        "region": "Munich, Germany",
+        "tagline": "The BikeTag game in Munich, Germany",
         "imgur": {
             "albumHash": "NiWLYhp",
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "bikedc",
-            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -1283,18 +1279,16 @@
     "saltlakecity": {
         "readonly": true,
         "meta": {
-            "title": "DC BikeTag!",
+            "title": "Salt Lake City BikeTag!",
             "url": "https://dc.biketag.org"
         },
-        "region": "Washington, DC",
-        "tagline": "The BikeTag game in Washington, DC",
+        "region": "Salt Lake City, Utah",
+        "tagline": "The BikeTag game in Salt Lake City, Utah",
         "imgur": {
             "albumHash": "pmqQazX",
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "bikedc",
-            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -1307,18 +1301,16 @@
     "berlin": {
         "readonly": true,
         "meta": {
-            "title": "DC BikeTag!",
-            "url": "https://dc.biketag.org"
+            "title": "Berlin BikeTag!",
+            "url": "https://berlin.biketag.org"
         },
-        "region": "Washington, DC",
-        "tagline": "The BikeTag game in Washington, DC",
+        "region": "Berlin, Germany",
+        "tagline": "The BikeTag game in Berlin, Germany",
         "imgur": {
             "albumHash": "4RghYGa",
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "bikedc",
-            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -1331,18 +1323,38 @@
     "hamburg": {
         "readonly": true,
         "meta": {
-            "title": "DC BikeTag!",
-            "url": "https://dc.biketag.org"
+            "title": "Hamburg BikeTag!",
+            "url": "https://hamburg.biketag.org"
         },
-        "region": "Washington, DC",
-        "tagline": "The BikeTag game in Washington, DC",
+        "region": "Hamburg, Germany",
+        "tagline": "The BikeTag game in Hamburg, Germany",
         "imgur": {
             "albumHash": "FpMuRug",
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "bikedc",
-            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "chilliwack": {
+        "readonly": true,
+        "meta": {
+            "title": "Chilliwack BikeTag!",
+            "url": "https://chilliwack.biketag.org"
+        },
+        "region": "Chilliwack, British Columbia",
+        "tagline": "The BikeTag game in Chilliwack, British Columbia",
+        "imgur": {
+            "albumHash": "RaePVjS",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -1365,8 +1377,6 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "bikedc",
-            "globalPostFlair": "9c2f8bee-431b-11eb-b854-0e8da7685a47"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
