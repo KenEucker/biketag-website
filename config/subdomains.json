@@ -531,7 +531,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "Emporia.svg"
         }
     },
     "harrisburg": {
@@ -675,7 +675,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "Rome.svg"
         }
     },
     "toulouse": {
@@ -723,7 +723,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "EdmontonIcon.svg"
         }
     },
     "islamabad": {
@@ -795,7 +795,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "Ottowa.svg"
         }
     },
     "tulsa": {
@@ -843,7 +843,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "Montreal.svg"
         }
     },
     "fayetteville": {
@@ -891,7 +891,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "KansasCity.svg"
         }
     },
     "lexington": {
@@ -963,7 +963,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "Victoria.svg"
         }
     },
     "paris": {
@@ -987,7 +987,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "Paris.svg"
         }
     },
     "boston": {
@@ -1030,7 +1030,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "PeakDistrict.svg"
         }
     },
     "chicago": {
@@ -1229,7 +1229,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "dc"
         }
     },
     "bellingham": {

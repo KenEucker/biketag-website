@@ -1,5 +1,5 @@
 #logo-img,
-#leaderboard,
+#biketag,
 #about,
 #logo-img {
     display: none;
@@ -13,6 +13,15 @@
 .vienna img[src*='vienna-bike-tag'] {
     width: 200px;
     height: 80px;
+}
+
+#biketag {
+    text-align: center;
+
+    img {
+        filter: invert(1) brightness(0.95) drop-shadow(2px 4px 6px black);
+        max-width: 20vw;
+    }
 }
 
 .big-tagline {
