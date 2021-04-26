@@ -1385,5 +1385,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+    "dayton": {
+        "readonly": true,
+        "meta": {
+            "title": "Dayton BikeTag!",
+            "url": "https://dayton.biketag.org"
+        },
+        "region": "Dayton, Ohio",
+        "tagline": "The BikeTag game in Dayton, Ohio",
+        "imgur": {
+            "albumHash": "zAEg3tv",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
