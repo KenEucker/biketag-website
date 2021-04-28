@@ -17,13 +17,12 @@ const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain
                 subdomainConfig.imgur.imgurAuthorization =
                     subdomainInformation.imgur.imgurAuthorization
             }
-			subdomainConfig.region = subdomainInformation.region
-			subdomainConfig.images = subdomainInformation.images
-			subdomainConfig.tagline = subdomainInformation.tagline
-
             out[subdomainName] = subdomainConfig
+
+            out[subdomainName] = subdomainInformation
+
             if (subdomain === subdomainName) {
-                publicData.page = {...publicData.page, ...subdomainConfig}
+                publicData.page = subdomainInformation
             }
 
             return out

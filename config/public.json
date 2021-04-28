@@ -5,7 +5,7 @@
     "notifications": true,
     "content": true,
     "howToStory": true,
-	"easter": true,
+    "easter": true,
 
     "imgur": ["albumHash", "queueAlbumHash", "imgurClientID"],
     "reddit": ["subreddit", "includeLeaderboardInRedditPost"]
