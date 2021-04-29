@@ -1338,7 +1338,6 @@
         }
     },
     "chilliwack": {
-        "readonly": true,
         "meta": {
             "title": "Chilliwack BikeTag!",
             "url": "https://chilliwack.biketag.org"
@@ -1351,11 +1350,11 @@
         },
         "reddit": {},
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/biketag-chilliwack-jingle-1.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "chilliwack-biketag"
         }
     },
     "prague": {
@@ -1380,7 +1379,6 @@
         }
     },
     "dayton": {
-        "readonly": true,
         "meta": {
             "title": "Dayton BikeTag!",
             "url": "https://dayton.biketag.org"
@@ -1389,6 +1387,26 @@
         "tagline": "The BikeTag game in Dayton, Ohio",
         "imgur": {
             "albumHash": "zAEg3tv",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "peoria": {
+        "meta": {
+            "title": "Peoria BikeTag!",
+            "url": "https://peoria.biketag.org"
+        },
+        "region": "Peoria, Illinois",
+        "tagline": "The BikeTag game in Peoria, Illinois",
+        "imgur": {
+            "albumHash": "uCG4inQ",
             "queueAlbumHash": ""
         },
         "reddit": {},
