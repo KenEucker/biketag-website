@@ -173,6 +173,9 @@
             "albumHash": "3CIf8hy",
             "queueAlbumHash": "CF1FtsF"
         },
+		"map": {
+			"url": "https://www.google.com/maps/d/u/0/viewer?hl=en&mid=1ALf0s6IwCar4juuSamKjhZuOBVoPvSfk&ll=47.61061142911373%2C-122.22832335&z=11"
+		},
         "reddit": {
             "subreddit": "cycleseattle",
             "globalPostFlair": "7a0e427c-ab71-11ea-af19-0e48af07c18b",
