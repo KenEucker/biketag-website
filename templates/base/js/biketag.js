@@ -633,16 +633,14 @@ class BikeTag {
 
             if (!!currentTagInfo.hint && currentTagInfo.hint.length) {
                 $('#hintText').text(currentTagInfo.hint)
-                $('#userLeftHintMessage').text('provided the following hint:')
-            } else {
-                $('#hintText').text(`"${currentTagInfo.hint}"`)
-                $('#userLeftHintMessage').text('did not leave a hint :(')
-            }
-            if (!!currentTagInfo.credit && currentTagInfo.credit.length) {
+                // $('#userLeftHintMessage').text('provided the following hint:')
+            } else if (!!currentTagInfo.credit && currentTagInfo.credit.length) {
                 $('#userCredit').text(currentTagInfo.credit)
+                $('#userLeftHintMessage').text('did not leave a hint :(')
             } else {
-                $('#userCredit').text('user did not provide a name')
+                $('#userLeftHintMessage').text('no hint or player information provided')
             }
+			
             if (currentTagInfo.discussionLink && currentTagInfo.discussionLink.length) {
                 $('.discussion a').attr('href', currentTagInfo.discussionLink)
                 $('.discussion').addClass('live')
