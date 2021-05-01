@@ -6,6 +6,7 @@
     "content": true,
     "howToStory": true,
     "easter": true,
+	"map": true,
 
     "imgur": ["albumHash", "queueAlbumHash", "imgurClientID"],
     "reddit": ["subreddit", "includeLeaderboardInRedditPost"]
