@@ -1420,5 +1420,105 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+    "newhaven": {
+        "meta": {
+            "title": "New Haven BikeTag!",
+            "url": "https://newhaven.biketag.org"
+        },
+        "region": "New Haven, Conneticut",
+        "tagline": "The BikeTag game in New Haven, Conneticut",
+        "imgur": {
+            "albumHash": "urOClZv",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "hamilton": {
+        "meta": {
+            "title": "Hamilton BikeTag!",
+            "url": "https://hamilton.biketag.org"
+        },
+        "region": "Hamilton, Ontario",
+        "tagline": "The BikeTag game in Hamilton, Ontario",
+        "imgur": {
+            "albumHash": "H4EY32M",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "sonoma": {
+        "meta": {
+            "title": "Sonoma County BikeTag!",
+            "url": "https://sonoma.biketag.org"
+        },
+        "region": "Sonoma County, California",
+        "tagline": "The BikeTag game in Sonoma County, California",
+        "imgur": {
+            "albumHash": "ig9Tgbl",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "charleston": {
+        "meta": {
+            "title": "Charleston BikeTag!",
+            "url": "https://charleston.biketag.org"
+        },
+        "region": "Charleston, West Virginia",
+        "tagline": "The BikeTag game in Charleston, West Virginia",
+        "imgur": {
+            "albumHash": "DH8pA5p",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "iowacity": {
+        "meta": {
+            "title": "Iowa City BikeTag!",
+            "url": "https://iowacity.biketag.org"
+        },
+        "region": "Iowa City, Iowa",
+        "tagline": "The BikeTag game in Iowa City, Iowa",
+        "imgur": {
+            "albumHash": "9Yb8TyV",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
