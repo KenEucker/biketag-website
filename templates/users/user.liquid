@@ -116,8 +116,8 @@
         const gallery = document.getElementById('image-gallery')
         const pageIndicator = document.getElementById('page')
         const galleryDots = document.getElementById('gallery-dots');
-		const images =  JSON.parse(`{{ images | json }}`)
-
+		const images = {{ images | json }}
+		
         let perPage = 8;
         let page = 1;
         let pages = Math.ceil(images.length / perPage)
