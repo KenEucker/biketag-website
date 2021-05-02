@@ -408,6 +408,19 @@ class BikeTag {
         return tagNumber
     }
 
+	getBikeTagDiscussionLinkFromImage(image) {
+		var tagTitle = image.title || ''
+		var tagDiscussionLinkIndex = tagTitle.indexOf('{')
+		var tagDiscussionLink
+		if (tagDiscussionLinkIndex !== -1) {
+			var tagDisscussionSplit = tagTitle ? tagTitle.split('{') : []
+			var tagDiscussionLinkLength = tagDisscussionSplit[1].indexOf('}')
+			tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength).trim()
+		}
+		
+		return tagDiscussionLink
+	}
+
     biketagImageTemplate(image, title, loadImage = false) {
         var imageLinkStringSplit = image.link.split('.')
         var imageLinkStringEnd = '.' + imageLinkStringSplit[imageLinkStringSplit.length - 1]
@@ -479,14 +492,15 @@ class BikeTag {
                 : []
             var tagNumberString = tagNumberSplit.length ? tagNumberSplit[0].substr(1) : 0
 
-            var tagTitle = tagInformation.currentTag.title || ''
-            var tagDiscussionLinkIndex = tagTitle.indexOf('{')
-            var tagDiscussionLink
-            if (tagDiscussionLinkIndex !== -1) {
-                var tagDisscussionSplit = tagTitle ? tagTitle.split('{') : []
-                var tagDiscussionLinkLength = tagDisscussionSplit[1].indexOf('}')
-                tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength).trim()
-            }
+
+            // var tagTitle = tagInformation.currentTag.title || ''
+            // var tagDiscussionLinkIndex = tagTitle.indexOf('{')
+            var tagDiscussionLink = getBikeTagDiscussionLinkFromImage(tagInformation.currentTag)
+            // if (tagDiscussionLinkIndex !== -1) {
+                // var tagDisscussionSplit = tagTitle ? tagTitle.split('{') : []
+                // var tagDiscussionLinkLength = tagDisscussionSplit[1].indexOf('}')
+                // tagDiscussionLink = tagDisscussionSplit[1].substr(0, tagDiscussionLinkLength).trim()
+            // }
 
             tagInformation.hasTag = true
             tagInformation.currentTagNumber = Number(tagNumberString)
@@ -640,7 +654,7 @@ class BikeTag {
             } else {
                 $('#userLeftHintMessage').text('no hint or player information provided')
             }
-			
+
             if (currentTagInfo.discussionLink && currentTagInfo.discussionLink.length) {
                 $('.discussion a').attr('href', currentTagInfo.discussionLink)
                 $('.discussion').addClass('live')

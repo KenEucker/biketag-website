@@ -50,17 +50,15 @@ footer {
         filter: brightness(0.5) invert(1) drop-shadow(2px 1px 2px black);
     }
 
-	#mapLink a {
-		display: none;
-		&:not([href='']) {
-			display: unset;
-		}
-		
-		border-bottom: none;
-		font-size: 3em;
-	}
-	
-	
+    #mapLink a {
+        display: none;
+        &:not([href='']) {
+            display: unset;
+        }
+
+        border-bottom: none;
+        font-size: 3em;
+    }
 
     #foot {
         ul {

@@ -29,7 +29,7 @@ const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain
         },
         {},
     )
-	
+
     return publicData
 }
 
