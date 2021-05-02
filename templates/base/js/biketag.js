@@ -495,7 +495,7 @@ class BikeTag {
 
             // var tagTitle = tagInformation.currentTag.title || ''
             // var tagDiscussionLinkIndex = tagTitle.indexOf('{')
-            var tagDiscussionLink = getBikeTagDiscussionLinkFromImage(tagInformation.currentTag)
+            var tagDiscussionLink = this.getBikeTagDiscussionLinkFromImage(tagInformation.currentTag)
             // if (tagDiscussionLinkIndex !== -1) {
                 // var tagDisscussionSplit = tagTitle ? tagTitle.split('{') : []
                 // var tagDiscussionLinkLength = tagDisscussionSplit[1].indexOf('}')
