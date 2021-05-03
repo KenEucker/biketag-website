@@ -1520,5 +1520,25 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+    "bangalore": {
+        "meta": {
+            "title": "Bangalore BikeTag!",
+            "url": "https://bangalore.biketag.org"
+        },
+        "region": "Bangalore, Karnataka",
+        "tagline": "The BikeTag game in Bangalore, Karnataka",
+        "imgur": {
+            "albumHash": "OvdVARR",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
