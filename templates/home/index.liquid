@@ -163,15 +163,19 @@
 				hideShowSectionInContainer(path)
 			}
 
-			subs.forEach(function (sub) {
+			var subsCount = subs.length
+			subs.forEach(function (sub, i) {
 				var region = regions[sub]
 				
 				var link = document.createElement('a')
+				link.datetime = 0
+				link.style.order = subsCount
 				link.href = `${window.location.protocol}//${sub}.${window.location.host}`
 				link.className = "article w-clearfix w-inline-block " + sub
 				link.innerHTML =
 					`<div class="image-wrapper">
-						<img class="thumbnail" src="${ !!region.images.logo ? `public/img/${region.images.logo}${region.images.logo.indexOf('.') === -1 ? `-small.png` : ''}` : "public/img/none.png"}" width="109">
+						<img id="thumbnail" class="thumbnail" src="${ !!region.images.logo ? `public/img/${region.images.logo}${region.images.logo.indexOf('.') === -1 ? `-small.png` : ''}` : "public/img/none.png"}" width="109">
+						<span id="num"></span>
 					</div>
 					<section class="article-text-wrapper w-clearfix">
 						<h2 class="arrow">></span></h2>
@@ -224,16 +228,52 @@
 			const refreshCurrentBikeTagImages = () => {
 				const subdomainLinks = document.querySelectorAll('#main > a')
 				subdomainLinks.forEach((link) => {
-					const subdomainImage = link.querySelectorAll('img')
-					const logoImageSrc = subdomainImage[0].src
-					subdomainImage[0].src = `${link.href}current?size=s&t=${new Date().getTime()}`
-					subdomainImage[0].onerror = `this.onerror=null ; this.src='${logoImageSrc}'`
+					const subdomainImage = link.querySelectorAll('img')[0]
+					const subdomainNum = link.getElementsByTagName('span')[0]
+					const logoImageSrc = subdomainImage.src
+
+					var url = `${link.href}current?size=s&t=${new Date().getTime()}&d=true`
+					const headers = new Headers()
+					headers.append('Accept', 'application/json')
+					fetch(url, {
+						method: 'GET',
+						headers,
+						cors: true,
+						cache: 'no-cache',
+					})
+					.then((r) => r.json())
+					.then((imageData)=> {
+						subdomainImage.src = imageData.imageUri
+						subdomainImage.onerror = `this.onerror=null ; this.src='${logoImageSrc}'`
+						subdomainNum.innerHTML = imageData.currentTagNumber
+						link.dataset.datetime = imageData.image.datetime
+					})
+				})
+			}
+
+			const reorderCurrentBikeTagGames = () => {
+				const subdomainLinks = document.querySelectorAll('#main > a')
+				const subdomainLinksArray = Array.prototype.slice.call(subdomainLinks).filter(l => l.dataset.datetime)
+				subdomainLinksArray.sort((a, b) => {
+					const aI = parseInt(a.dataset.datetime)
+					const bI = parseInt(b.dataset.datetime)
+					
+					if (aI === NaN || bI === NaN) {
+						return aI !== NaN ? 1 : (bI !== NaN ? -1 : 0)
+					}
+
+					return bI - aI
+				})
+				subdomainLinksArray.forEach((link, i) => {
+					link.style.order = i + 1
 				})
 			}
 
 			// window.setInterval(window.refreshCurrentBikeTagImages, 600000)
 			window.refreshCurrentBikeTagImages = refreshCurrentBikeTagImages
-			window.setTimeout(window.refreshCurrentBikeTagImages, 5000)
+			window.reorderCurrentBikeTagGames = reorderCurrentBikeTagGames
+			window.setTimeout(window.refreshCurrentBikeTagImages, 3500)
+			window.setTimeout(window.reorderCurrentBikeTagGames, 5000)
 
 		})(window.refreshCurrentBikeTagImages)
 	</script>

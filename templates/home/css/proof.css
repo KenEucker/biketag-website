@@ -221,6 +221,23 @@ p {
     display: block;
 }
 
+#main {
+	display: flex;
+	flex-direction: column;
+}
+
+.image-wrapper {
+	position: relative;
+}
+
+.image-wrapper span#num {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+}
+
 .big-tagline {
     margin-bottom: 68px;
     font-family: AvenueX;
