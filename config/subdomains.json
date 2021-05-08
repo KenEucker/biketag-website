@@ -830,8 +830,8 @@
             "title": "Montreal BikeTag!",
             "url": "https://montreal.biketag.org"
         },
-        "region": "Montreal, Quebec",
-        "tagline": "The BikeTag game in the Montreal, Quebec",
+        "region": "Montreal, Québecc",
+        "tagline": "The BikeTag game in the Montreal, Québec",
         "imgur": {
             "albumHash": "oH46XZd",
             "queueAlbumHash": ""
@@ -1530,6 +1530,26 @@
         "tagline": "The BikeTag game in Bangalore, Karnataka",
         "imgur": {
             "albumHash": "OvdVARR",
+            "queueAlbumHash": ""
+        },
+        "reddit": {},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "gatineau": {
+        "meta": {
+            "title": "Gatineau BikeTag!",
+            "url": "https://gatineau.biketag.org"
+        },
+        "region": "Gatineau, Québec",
+        "tagline": "The BikeTag game in Gatineau, Québec",
+        "imgur": {
+            "albumHash": "VIYu8x0",
             "queueAlbumHash": ""
         },
         "reddit": {},
