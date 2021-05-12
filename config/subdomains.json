@@ -1560,5 +1560,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+	"isleofwight": {
+        "meta": {
+            "title": "Isle Of Wight BikeTag!",
+            "url": "https://isleofwight.biketag.org"
+        },
+        "region": "Isle Of Wight, England",
+        "tagline": "The BikeTag game in Isle Of Wight, England",
+        "imgur": {
+            "albumHash": "3JqX38K",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+			"subreddit": "IsleOfWightCycling"
+		},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
