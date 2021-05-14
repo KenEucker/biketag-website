@@ -1582,5 +1582,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+	"seacoast": {
+        "meta": {
+            "title": "Seacoast BikeTag!",
+            "url": "https://isleofwight.biketag.org"
+        },
+        "region": "Portsmouth, New Hampshire Region",
+        "tagline": "The BikeTag game in the Portsmouth, New Hampshire Region",
+        "imgur": {
+            "albumHash": "jNSEhrZ",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+			"subreddit": "SeacoastCycling"
+		},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
