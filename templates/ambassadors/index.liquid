@@ -1,0 +1,37 @@
+<div class="loader">
+	<div class="loader-inner">
+		<div class="loader-line-wrap">
+			<div class="loader-line"></div>
+		</div>
+		<div class="loader-line-wrap">
+			<div class="loader-line"></div>
+		</div>
+		<div class="loader-line-wrap">
+			<div class="loader-line"></div>
+		</div>
+		<div class="loader-line-wrap">
+			<div class="loader-line"></div>
+		</div>
+		<div class="loader-line-wrap">
+			<div class="loader-line"></div>
+		</div>
+	</div>
+</div>
+<script nonce="{{nonce}}">
+	(() => {
+		const urlParams = new URLSearchParams(window.location.search)
+		const expiry = urlParams.get('expiry')
+
+		if (expiry) {
+			/// Removes the expiry
+			const uri = window.location.toString()
+			const clean_uri = uri.substring(0, uri.indexOf("?"))
+			window.history.replaceState({}, document.title, clean_uri)
+
+			/// Send expiry as POST to the server
+			
+		} else {
+			window.location = "https://{{ host }}"
+		}
+	})()
+</script>

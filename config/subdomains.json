@@ -17,6 +17,9 @@
             "logo": ""
         }
     },
+	"ambassadors": {
+        "template": "ambassadors"
+	},
     "history": {
         "tagline": "BikeTag! A timeline as we know it",
         "template": "history",
@@ -1611,13 +1614,35 @@
             "url": "https://cardiff.biketag.org"
         },
         "region": "Cardiff, Wales",
-        "tagline": "The BikeTag game in the Cardiff, Wales",
+        "tagline": "The BikeTag game in Cardiff, Wales",
         "imgur": {
             "albumHash": "DLx7xeh",
             "queueAlbumHash": ""
         },
         "reddit": {
 			"subreddit": "CardiffCycling"
+		},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+	"princegeorge": {
+        "meta": {
+            "title": "Prince George BikeTag!",
+            "url": "https://princegeorge.biketag.org"
+        },
+        "region": "Prince George, British Columbia",
+        "tagline": "The BikeTag game in Prince George, British Columbia",
+        "imgur": {
+            "albumHash": "e5Uxnrq",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+			"subreddit": "PrinceGeorgeCycling"
 		},
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
