@@ -1651,5 +1651,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+	"calgary": {
+        "meta": {
+            "title": "Calgary BikeTag!",
+            "url": "https://calgary.biketag.org"
+        },
+        "region": "Calgary, Alberta, Canada",
+        "tagline": "The BikeTag game in Calgary, Alberta, Canada",
+        "imgur": {
+            "albumHash": "I0qT0A3",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+			"subreddit": "CycleCalgary"
+		},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
