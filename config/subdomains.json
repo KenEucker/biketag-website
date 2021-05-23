@@ -1673,5 +1673,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+	"toronto": {
+        "meta": {
+            "title": "Toronto BikeTag!",
+            "url": "https://calgary.biketag.org"
+        },
+        "region": "Toronto, Ontario, Canada",
+        "tagline": "The BikeTag game in Toronto, Ontario, Canada",
+        "imgur": {
+            "albumHash": "gqV8Hk8",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+			"subreddit": "torontobiking"
+		},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
