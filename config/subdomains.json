@@ -1695,5 +1695,28 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+    "santabarbara": {
+        "readonly": true,
+        "meta": {
+            "title": "Santa Barbara BikeTag!",
+            "url": "https://santabarbara.biketag.org"
+        },
+        "region": "Santa Barbara, California",
+        "tagline": "The BikeTag game in Santa Barbara, California",
+        "imgur": {
+            "albumHash": "fX958EO",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "SantaBarbaraCycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
