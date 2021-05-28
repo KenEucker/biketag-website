@@ -1718,5 +1718,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+	"boise": {
+        "meta": {
+            "title": "Boise BikeTag!",
+            "url": "https://calgary.biketag.org"
+        },
+        "region": "Boise, Idaho",
+        "tagline": "The BikeTag game in Boise, Idaho",
+        "imgur": {
+            "albumHash": "TYTNCSv",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+			"subreddit": "boisebike"
+		},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
