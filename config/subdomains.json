@@ -1740,5 +1740,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+	"princegeorge": {
+        "meta": {
+            "title": "Prince George BikeTag!",
+            "url": "https://princegeorge.biketag.org"
+        },
+        "region": "Prince George, Alberta, Canada",
+        "tagline": "The BikeTag game in Prince George, Alberta, Canada",
+        "imgur": {
+            "albumHash": "C0T6BwH",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+			"subreddit": "PrinceGeorgeCycling"
+		},
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
