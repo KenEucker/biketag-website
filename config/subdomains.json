@@ -1741,19 +1741,19 @@
             "logo": ""
         }
     },
-	"princegeorge": {
+	"grandeprairie": {
         "meta": {
-            "title": "Prince George BikeTag!",
-            "url": "https://princegeorge.biketag.org"
+            "title": "Grand Prarie BikeTag!",
+            "url": "https://grandeprairie.biketag.org"
         },
-        "region": "Prince George, Alberta, Canada",
-        "tagline": "The BikeTag game in Prince George, Alberta, Canada",
+        "region": "Grand Prarie, Alberta, Canada",
+        "tagline": "The BikeTag game in Grand Prarie, Alberta, Canada",
         "imgur": {
             "albumHash": "C0T6BwH",
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "PrinceGeorgeCycling"
+			"subreddit": "GrandPrarieCycling"
 		},
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
