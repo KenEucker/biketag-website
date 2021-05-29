@@ -128,14 +128,15 @@
                 })
         }
 
-        uploadImageToImgur(image, description, next) {
+        uploadImageToImgur(image, description, callback) {
             // Begin file upload
             console.log('Uploading file to Imgur..')
 
-            var formData = new FormData()
+            var formData = new URLSearchParams()
             formData.append('image', image)
             formData.append('album', this.albumHash)
             formData.append('description', description)
+
 
             // const headers = new Headers()
             // headers.append('Content-Type', 'multipart/form-data')
@@ -155,26 +156,40 @@
             //         next()
             //     })
             // 	.catch((err) => console.error)
-            var settings = {
-                crossDomain: true,
-                processData: false,
-                contentType: false,
-                data: formData,
-                withCredentials: true,
-                type: 'POST',
-                url: 'https://api.imgur.com/3/image',
-                headers: {
-                    Authorization: this.imgurAccessToken,
-                    Accept: 'application/json',
-                },
-                mimeType: 'multipart/form-data',
+	
+			const headers = new Headers()
+			headers.append('Authorization', this.imgurAccessToken || this.imgurAuthorization)
+			headers.append('Accept', 'application/json')
+			var url = 'https://api.imgur.com/3/image/'
+			var settings = {
+				cors: true,
+				// crossDomain: true,
+                // processData: false,
+                // contentType: false,
+                body: formData,
+                // withCredentials: true,
+                // type: 'POST',
+                url,
+				method: 'POST',
+				headers,
+				cache: 'no-cache',
+                // mimeType: 'multipart/form-data',
             }
 
             // Response contains stringified JSON
             // Image URL available at response.data.link
-            $.ajax(settings).done(function (response) {
-                next()
-            })
+            // $.ajax(settings).done(function (response) {
+            //     next(response)
+            // })
+			fetch(url, settings)
+				.then((r) => r.json())
+				.then((data) => {
+					if (data.data && callback) {
+						callback(data.data)
+					}
+
+					throw new Error('Failed to retrieve data')
+				})
         }
 
         getImgurTokens(done) {

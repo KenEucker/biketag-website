@@ -284,7 +284,9 @@ class BikeTag {
 
 			const image1 = files[0]
 			const image2 = files[1]
+			let image1UploadedAttempt = null
 			let image1UploadedSuccess = false
+			let image2UploadedAttempt = null
 			let image2UploadedSuccess = false
 
 			const checkBothImagesUploaded = (preText = '') => {
@@ -294,39 +296,47 @@ class BikeTag {
 					/// TODO: Send message to the server that a new tag has been queued
 					this.sendNotificationEmail(currentTagInfo.mysteryTagNumber).then(function () {
 						window.location.href =
-							window.location.pathname + '?uploadSuccess=true&flushcache=true'
+							`${window.location.pathname}?uploadSuccess=true&flushcache=true&message=${preText}`
 					})
-				} else {
+				} else if (!image1UploadedAttempt && !image2UploadedAttempt) {
 					console.log(`${preText} - both images have not completed uploading`)
+				} else {
+					console.log(`${preText} - image upload failed.`)
+					window.location.href =
+							`${window.location.pathname}?uploadError=true&message=${preText}`
 				}
 			}
 
 			setTimeout(() => {
-				try {
-					imgur.uploadImageToImgur(image1, image1Description, () => {
+				image1UploadedAttempt = false
+				imgur.uploadImageToImgur(image1, image1Description, (response) => {
+					image1UploadedAttempt = true
+					if (response.error) {
+						console.log({ image1UploadError: response.error })
+	
+						checkBothImagesUploaded(`Image 1 upload failed. ${response.error}`)
+					} else {
 						image1UploadedSuccess = true
-
+						
 						checkBothImagesUploaded()
-					})
-				} catch (e) {
-					console.log({ image1UploadError: e })
-
-					checkBothImagesUploaded(`Image 1 upload failed. ${e}`)
-				}
+					}
+				})
 			}, 3)
 
 			setTimeout(() => {
-				try {
-					imgur.uploadImageToImgur(image2, image2Description, () => {
+				image2UploadedAttempt = false
+				imgur.uploadImageToImgur(image2, image2Description, (response) => {
+					image2UploadedAttempt = true
+					if (response.error) {
+						console.log({ image1UploadError: response.error })
+	
+						checkBothImagesUploaded(`Image 2 upload failed. ${response.error}`)
+					} else {
 						image2UploadedSuccess = true
 						
 						checkBothImagesUploaded()
-					})
-				} catch (e) {
-					console.log({ image1UploadError: e })
-
-					checkBothImagesUploaded(`Image 2 upload failed. ${e}`)
-				}
+					}
+				})
 			}, 3000)
         } catch (e) {
             console.error(e)
