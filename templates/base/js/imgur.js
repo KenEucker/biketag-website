@@ -132,7 +132,7 @@
             // Begin file upload
             console.log('Uploading file to Imgur..')
 
-            var formData = new URLSearchParams()
+            var formData = new FormData()
             formData.append('image', image)
             formData.append('album', this.albumHash)
             formData.append('description', description)
@@ -162,14 +162,15 @@
 			headers.append('Accept', 'application/json')
 			var url = 'https://api.imgur.com/3/image/'
 			var settings = {
-				cors: true,
+				// cors: true,
 				// crossDomain: true,
                 // processData: false,
                 // contentType: false,
                 body: formData,
                 // withCredentials: true,
                 // type: 'POST',
-                url,
+                // url,
+				redirect: 'follow',
 				method: 'POST',
 				headers,
 				cache: 'no-cache',
@@ -185,7 +186,7 @@
 				.then((r) => r.json())
 				.then((data) => {
 					if (data.data && callback) {
-						callback(data.data)
+						return callback(data.data)
 					}
 
 					throw new Error('Failed to retrieve data')
