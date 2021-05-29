@@ -57,7 +57,7 @@
                 return
             }
 
-            if (albumInfo.images_count != window.imgur.imgurAlbumPictures.length) {
+            if (albumInfo.images_count != window.imgur?.imgurAlbumPictures?.length) {
                 console.log('image count has changed, updating most recent tags')
                 /// TODO: Fix a bug at this line
                 this.imgurAlbumPictures = this.getImgurAlbumImagesByTagNumber(albumInfo.images)
@@ -233,12 +233,13 @@
         }
 
         init() {
-            const self = this
-
             this.getImgurTokens((response) => {
                 var count = this.getUrlParam('count')
                 var tagnumber = biketag.getTagNumberFromURL()
                 var isArchive = biketag.getLastOfUrlPath().toLowerCase().indexOf('archive') !== -1
+                var isTagIt = biketag.getLastOfUrlPath().toLowerCase().indexOf('tagit') !== -1
+				const error = this.getUrlParam('uploadError') == 'true'
+				const success = this.getUrlParam('uploadSuccess') == 'true'
 				const message = this.getUrlParam('message')
 
                 // console.log({getImgurTokens: response})
@@ -248,7 +249,7 @@
                 // if (!this.albumHash || !this.imgurAuthorization) return
 
                 // If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
-                if (this.getUrlParam('uploadSuccess') == 'true') {
+                if (success) {
                     var wrapper = document.getElementById('wrapper')
                     var notification = document.createElement('div')
                     notification.id = 'notification'
@@ -268,7 +269,7 @@
                 }
 
 				// If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
-                if (this.getUrlParam('uploadError') == 'true') {
+                if (error) {
                     var wrapper = document.getElementById('wrapper')
                     var notification = document.createElement('div')
                     notification.id = 'notification'
@@ -287,7 +288,10 @@
                     // this.imgurAlbumPicturesRefreshFrequency = 5000;
                 }
 
-                if (count) {
+				if (isTagIt) {
+                    this.imgurAlbumPicturesRefreshFrequency = false
+					biketag.showCurrentBikeTag()
+				} else if (count) {
                     this.imgurAlbumPicturesRefreshFrequency = false
                     biketag.showCurrentBikeTag(count)
                 } else if (isArchive) {
@@ -295,8 +299,6 @@
                 } else if (tagnumber) {
                     this.imgurAlbumPicturesRefreshFrequency = false
                     biketag.showBikeTagNumber(tagnumber)
-                } else {
-                    // biketag.showCurrentBikeTag()
                 }
 
                 if (this.imgurAlbumPicturesRefreshFrequency) {
