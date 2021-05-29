@@ -298,7 +298,7 @@ class BikeTag {
 						window.location.href =
 							`${window.location.pathname}?uploadSuccess=true&flushcache=true&message=${preText}`
 					})
-				} else if (!image1UploadedAttempt && !image2UploadedAttempt) {
+				} else if (!image1UploadedAttempt || !image2UploadedAttempt) {
 					console.log(`${preText} - both images have not completed uploading`)
 				} else {
 					console.log(`${preText} - image upload failed.`)
@@ -939,6 +939,11 @@ class BikeTag {
         this.readonly = readonly
         this.targetSelector = targetSelector
         this.target = document.querySelector(this.targetSelector)
+        var resend = this.getUrlParam('resendNotification') === 'true'
+
+		if (resend) {
+			this.sendNotificationEmail()
+		}
 
         if (window.currentBikeTag) {
             console.log('page loaded with current biketag', window.currentBikeTag)
