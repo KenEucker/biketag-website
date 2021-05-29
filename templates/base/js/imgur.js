@@ -224,6 +224,7 @@
                 var count = this.getUrlParam('count')
                 var tagnumber = biketag.getTagNumberFromURL()
                 var isArchive = biketag.getLastOfUrlPath().toLowerCase().indexOf('archive') !== -1
+				const message = this.getUrlParam('message')
 
                 // console.log({getImgurTokens: response})
                 this.albumHash = response.albumHash || this.albumHash
@@ -236,8 +237,29 @@
                     var wrapper = document.getElementById('wrapper')
                     var notification = document.createElement('div')
                     notification.id = 'notification'
+                    notification.className = 'success'
                     notification.innerHTML =
                         'Your upload was successful! Please wait a few moments for the internet to catch up to you. <a class="close">[close]</a>'
+                    wrapper.prepend(notification)
+
+                    var close = document.querySelector('#notification .close')
+                    if (close) {
+                        close.addEventListener('click', function () {
+                            var notification = document.getElementById('notification')
+                            notification.style.display = 'none'
+                        })
+                    }
+                    // this.imgurAlbumPicturesRefreshFrequency = 5000;
+                }
+
+				// If the page was reloaded with an upload success, show the upload successful dialogue in set the refresh frequency to 1s
+                if (this.getUrlParam('uploadError') == 'true') {
+                    var wrapper = document.getElementById('wrapper')
+                    var notification = document.createElement('div')
+                    notification.id = 'notification'
+                    notification.className = 'error'
+                    notification.innerHTML =
+                        `BikeTag did not post due to error: ${message} Please try again or send this error to <a href="mailto:support@biketag.org&subject=BikeTag Error&body=${message}">support@biketag.org</a>. <a class="close">[close]</a>`
                     wrapper.prepend(notification)
 
                     var close = document.querySelector('#notification .close')

@@ -282,15 +282,52 @@ class BikeTag {
             const image2Description =
                 '#' + currentTagInfo.mysteryTagNumber + ' tag' + hintString + ' by ' + user
 
-            imgur.uploadImageToImgur(files[0], image1Description, () => {
-                imgur.uploadImageToImgur(files[1], image2Description, () => {
-                    /// TODO: Send message to the server that a new tag has been queued
-                    this.sendNotificationEmail(currentTagInfo.mysteryTagNumber).then(function () {
-                        window.location.href =
-                            window.location.pathname + '?uploadSuccess=true&flushcache=true'
-                    })
-                })
-            })
+			const image1 = files[0]
+			const image2 = files[1]
+			let image1UploadedSuccess = false
+			let image2UploadedSuccess = false
+
+			const checkBothImagesUploaded = (preText = '') => {
+				if (image1UploadedSuccess && image2UploadedSuccess) {
+					console.log(`${preText} - success!`)
+
+					/// TODO: Send message to the server that a new tag has been queued
+					this.sendNotificationEmail(currentTagInfo.mysteryTagNumber).then(function () {
+						window.location.href =
+							window.location.pathname + '?uploadSuccess=true&flushcache=true'
+					})
+				} else {
+					console.log(`${preText} - both images have not completed uploading`)
+				}
+			}
+
+			setTimeout(() => {
+				try {
+					imgur.uploadImageToImgur(image1, image1Description, () => {
+						image1UploadedSuccess = true
+
+						checkBothImagesUploaded()
+					})
+				} catch (e) {
+					console.log({ image1UploadError: e })
+
+					checkBothImagesUploaded(`Image 1 upload failed. ${e}`)
+				}
+			}, 3)
+
+			setTimeout(() => {
+				try {
+					imgur.uploadImageToImgur(image2, image2Description, () => {
+						image2UploadedSuccess = true
+						
+						checkBothImagesUploaded()
+					})
+				} catch (e) {
+					console.log({ image1UploadError: e })
+
+					checkBothImagesUploaded(`Image 2 upload failed. ${e}`)
+				}
+			}, 3000)
         } catch (e) {
             console.error(e)
             formEl.innerHTML = `<h3>Error</h3><p>Your tag could not be posted. :(</p><p>If this issue persists, please reach out to <a href="hello@biketag.org">hello@biketag.org</a> for help.</p>`

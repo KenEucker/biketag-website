@@ -40,12 +40,22 @@ body.archive {
     }
 
     #notification {
+
+        background: _palette(info);
+		
+		&.success {
+			background: _palette(success) !important;
+		}
+		
+		&.error {
+			background: _palette(error) !important;
+		}
+		
         position: absolute;
         z-index: 101;
         top: 0;
         left: 0;
         right: 0;
-        background: #1cdd4c;
         text-align: center;
         line-height: 2.5;
         overflow: hidden;
