@@ -1,93 +1,556 @@
-.loader {
-    background: #000;
-    background: radial-gradient(#222, #000);
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 99999;
+html {
+    min-height: 100%;
 }
 
-.loader-inner {
-    bottom: 0;
-    height: 60px;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100px;
+.hidden {
+    display: none;
+    visibility: hidden;
 }
 
-.loader-line-wrap {
-    animation: 
-		spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite
-	;
+#loader {
+    .loader {
+        background: #000;
+        background: radial-gradient(#222, #000);
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 99999;
+    }
+    .loader-inner {
+        bottom: 0;
+        height: 60px;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+        transform: scale(8);
+    }
+    .loader-line-wrap {
+        animation: spin 2000ms cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+        box-sizing: border-box;
+        height: 50px;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        transform-origin: 50% 100%;
+        width: 100px;
+    }
+    .loader-line {
+        border: 4px solid transparent;
+        border-radius: 100%;
+        box-sizing: border-box;
+        height: 100px;
+        left: 0;
+        margin: 0 auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+    }
+    .loader-line-wrap:nth-child(1) {
+        animation-delay: -50ms;
+    }
+    .loader-line-wrap:nth-child(2) {
+        animation-delay: -100ms;
+    }
+    .loader-line-wrap:nth-child(3) {
+        animation-delay: -150ms;
+    }
+    .loader-line-wrap:nth-child(4) {
+        animation-delay: -200ms;
+    }
+    .loader-line-wrap:nth-child(5) {
+        animation-delay: -250ms;
+    }
+    .loader-line-wrap:nth-child(1) .loader-line {
+        border-color: hsl(0, 80%, 60%);
+        height: 90px;
+        width: 90px;
+        top: 7px;
+    }
+    .loader-line-wrap:nth-child(2) .loader-line {
+        border-color: hsl(60, 80%, 60%);
+        height: 76px;
+        width: 76px;
+        top: 14px;
+    }
+    .loader-line-wrap:nth-child(3) .loader-line {
+        border-color: hsl(120, 80%, 60%);
+        height: 62px;
+        width: 62px;
+        top: 21px;
+    }
+    .loader-line-wrap:nth-child(4) .loader-line {
+        border-color: hsl(180, 80%, 60%);
+        height: 48px;
+        width: 48px;
+        top: 28px;
+    }
+    .loader-line-wrap:nth-child(5) .loader-line {
+        border-color: hsl(240, 80%, 60%);
+        height: 34px;
+        width: 34px;
+        top: 35px;
+    }
+    @keyframes spin {
+        0%,
+        15% {
+            transform: rotate(0);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+#dialog {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+        z-index: 100;
+    }
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.5)), url('/public/img/nature-forest-trees-fog.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+        background-size: cover;
+        background-position: center;
+    }
+    .modalbox.success,
+    .modalbox.error {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+        background: #fff;
+        padding: 25px 25px 15px;
+        text-align: center;
+    }
+    .modalbox.success.animate .icon,
+    .modalbox.error.animate .icon {
+        -webkit-animation: fall-in 0.75s;
+        -moz-animation: fall-in 0.75s;
+        -o-animation: fall-in 0.75s;
+        animation: fall-in 0.75s;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+    .modalbox.success h1,
+    .modalbox.error h1 {
+        font-family: 'Montserrat', sans-serif;
+    }
+    .modalbox.success p,
+    .modalbox.error p {
+        font-family: 'Open Sans', sans-serif;
+    }
+    .modalbox.success button,
+    .modalbox.error button,
+    .modalbox.success button:active,
+    .modalbox.error button:active,
+    .modalbox.success button:focus,
+    .modalbox.error button:focus {
+        -webkit-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        margin-top: 15px;
+        width: 80%;
+        background: transparent;
+        color: #4caf50;
+        border-color: #4caf50;
+        outline: none;
+    }
+    .modalbox.success button:hover,
+    .modalbox.error button:hover,
+    .modalbox.success button:active:hover,
+    .modalbox.error button:active:hover,
+    .modalbox.success button:focus:hover,
+    .modalbox.error button:focus:hover {
+        color: #fff;
+        background: #4caf50;
+        border-color: transparent;
+    }
+    .modalbox.success .icon,
+    .modalbox.error .icon {
+        position: relative;
+        margin: 0 auto;
+        margin-top: -75px;
+        background: #4caf50;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+    .modalbox.success .icon span,
+    .modalbox.error .icon span {
+        postion: absolute;
+        font-size: 4em;
+        color: #fff;
+        text-align: center;
+        padding-top: 20px;
+    }
+    .modalbox.error button,
+    .modalbox.error button:active,
+    .modalbox.error button:focus {
+        color: #f44336;
+        border-color: #f44336;
+    }
+    .modalbox.error button:hover,
+    .modalbox.error button:active:hover,
+    .modalbox.error button:focus:hover {
+        color: #fff;
+        background: #f44336;
+    }
+    .modalbox.error .icon {
+        background: #f44336;
+    }
+    .modalbox.error .icon span {
+        padding-top: 25px;
+    }
+    .center {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        /* stupid browser compat. smh */
+    }
+    .center .change {
+        clearn: both;
+        display: block;
+        font-size: 10px;
+        color: #ccc;
+        margin-top: 10px;
+    }
+    @-webkit-keyframes fall-in {
+        0% {
+            -ms-transform: scale(3, 3);
+            -webkit-transform: scale(3, 3);
+            transform: scale(3, 3);
+            opacity: 0;
+        }
+        50% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        60% {
+            -ms-transform: scale(1.1, 1.1);
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+        100% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+    @-moz-keyframes fall-in {
+        0% {
+            -ms-transform: scale(3, 3);
+            -webkit-transform: scale(3, 3);
+            transform: scale(3, 3);
+            opacity: 0;
+        }
+        50% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        60% {
+            -ms-transform: scale(1.1, 1.1);
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+        100% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+    @-o-keyframes fall-in {
+        0% {
+            -ms-transform: scale(3, 3);
+            -webkit-transform: scale(3, 3);
+            transform: scale(3, 3);
+            opacity: 0;
+        }
+        50% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        60% {
+            -ms-transform: scale(1.1, 1.1);
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+        100% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+    @-webkit-keyframes plunge {
+        0% {
+            margin-top: -100%;
+        }
+        100% {
+            margin-top: 25%;
+        }
+    }
+    @-moz-keyframes plunge {
+        0% {
+            margin-top: -100%;
+        }
+        100% {
+            margin-top: 25%;
+        }
+    }
+    @-o-keyframes plunge {
+        0% {
+            margin-top: -100%;
+        }
+        100% {
+            margin-top: 25%;
+        }
+    }
+    @-moz-keyframes fall-in {
+        0% {
+            -ms-transform: scale(3, 3);
+            -webkit-transform: scale(3, 3);
+            transform: scale(3, 3);
+            opacity: 0;
+        }
+        50% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        60% {
+            -ms-transform: scale(1.1, 1.1);
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+        100% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+    @-webkit-keyframes fall-in {
+        0% {
+            -ms-transform: scale(3, 3);
+            -webkit-transform: scale(3, 3);
+            transform: scale(3, 3);
+            opacity: 0;
+        }
+        50% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        60% {
+            -ms-transform: scale(1.1, 1.1);
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+        100% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+    @-o-keyframes fall-in {
+        0% {
+            -ms-transform: scale(3, 3);
+            -webkit-transform: scale(3, 3);
+            transform: scale(3, 3);
+            opacity: 0;
+        }
+        50% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        60% {
+            -ms-transform: scale(1.1, 1.1);
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+        100% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+    @keyframes fall-in {
+        0% {
+            -ms-transform: scale(3, 3);
+            -webkit-transform: scale(3, 3);
+            transform: scale(3, 3);
+            opacity: 0;
+        }
+        50% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        60% {
+            -ms-transform: scale(1.1, 1.1);
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+        100% {
+            -ms-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+    @-moz-keyframes plunge {
+        0% {
+            margin-top: -100%;
+        }
+        100% {
+            margin-top: 15%;
+        }
+    }
+    @-webkit-keyframes plunge {
+        0% {
+            margin-top: -100%;
+        }
+        100% {
+            margin-top: 15%;
+        }
+    }
+    @-o-keyframes plunge {
+        0% {
+            margin-top: -100%;
+        }
+        100% {
+            margin-top: 15%;
+        }
+    }
+    @keyframes plunge {
+        0% {
+            margin-top: -100%;
+        }
+        100% {
+            margin-top: 15%;
+        }
+    }
+}
+
+#error {
     box-sizing: border-box;
-    height: 50px;
-    left: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    transform-origin: 50% 100%;
-    width: 100px;
-}
-.loader-line {
-    border: 4px solid transparent;
-    border-radius: 100%;
-    box-sizing: border-box;
-    height: 100px;
-    left: 0;
-    margin: 0 auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100px;
-}
-.loader-line-wrap:nth-child(1) { animation-delay: -50ms; }
-.loader-line-wrap:nth-child(2) { animation-delay: -100ms; }
-.loader-line-wrap:nth-child(3) { animation-delay: -150ms; }
-.loader-line-wrap:nth-child(4) { animation-delay: -200ms; }
-.loader-line-wrap:nth-child(5) { animation-delay: -250ms; }
-
-.loader-line-wrap:nth-child(1) .loader-line {
-    border-color: hsl(0, 80%, 60%);
-    height: 90px;
-    width: 90px;
-    top: 7px;
-}
-.loader-line-wrap:nth-child(2) .loader-line {
-    border-color: hsl(60, 80%, 60%);
-    height: 76px;
-    width: 76px;
-    top: 14px;
-}
-.loader-line-wrap:nth-child(3) .loader-line {
-    border-color: hsl(120, 80%, 60%);
-    height: 62px;
-    width: 62px;
-    top: 21px;
-}
-.loader-line-wrap:nth-child(4) .loader-line {
-    border-color: hsl(180, 80%, 60%);
-    height: 48px;
-    width: 48px;
-    top: 28px;
-}
-.loader-line-wrap:nth-child(5) .loader-line {
-    border-color: hsl(240, 80%, 60%);
-    height: 34px;
-    width: 34px;
-    top: 35px;
-}
-
-@keyframes spin {
-    0%, 15% {
-		transform: rotate(0);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+    height: 100%;
+    background-color: #000000;
+    background-image: radial-gradient(#11581e, #041607), url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Inconsolata', Helvetica, sans-serif;
+    font-size: 1.5rem;
+    color: rgba(128, 255, 128, 0.8);
+    text-shadow: 0 0 1ex rgba(51, 255, 51, 1), 0 0 2px rgba(255, 255, 255, 0.8);
+    .noise {
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif');
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+        opacity: 0.02;
+    }
+    .overlay {
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient( 180deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+        background-size: auto 4px;
+        z-index: 1;
+    }
+    .overlay::before {
+        content: '';
+        pointer-events: none;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient( 0deg, transparent 0%, rgba(32, 128, 32, 0.2) 2%, rgba(32, 128, 32, 0.8) 3%, rgba(32, 128, 32, 0.2) 3%, transparent 100%);
+        background-repeat: no-repeat;
+        animation: scan 7.5s linear 0s infinite;
+    }
+    @keyframes scan {
+        0% {
+            background-position: 0 -100vh;
+        }
+        35%,
+        100% {
+            background-position: 0 100vh;
+        }
+    }
+    .terminal {
+        box-sizing: inherit;
+        position: absolute;
+        height: 100%;
+        width: 1000px;
+        max-width: 100%;
+        padding: 4rem;
+        text-transform: uppercase;
+    }
+    .output {
+        color: rgba(128, 255, 128, 0.8);
+        text-shadow: 0 0 1px rgba(51, 255, 51, 0.4), 0 0 2px rgba(255, 255, 255, 0.8);
+    }
+    .output::before {
+        content: '> ';
+    }
+    /*
+  .input {
+	color: rgba(192, 255, 192, 0.8);
+	text-shadow:
+		0 0 1px rgba(51, 255, 51, 0.4),
+		0 0 2px rgba(255, 255, 255, 0.8);
+  }
+  
+  .input::before {
+	content: "$ ";
+  }
+  */
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+    a::before {
+        content: '[';
+    }
+    a::after {
+        content: ']';
+    }
+    .errorcode {
+        color: white;
+    }
 }

@@ -1,37 +1,221 @@
-<div class="loader">
-	<div class="loader-inner">
-		<div class="loader-line-wrap">
-			<div class="loader-line"></div>
-		</div>
-		<div class="loader-line-wrap">
-			<div class="loader-line"></div>
-		</div>
-		<div class="loader-line-wrap">
-			<div class="loader-line"></div>
-		</div>
-		<div class="loader-line-wrap">
-			<div class="loader-line"></div>
-		</div>
-		<div class="loader-line-wrap">
-			<div class="loader-line"></div>
-		</div>
-	</div>
-</div>
-<script nonce="{{nonce}}">
-	(() => {
-		const urlParams = new URLSearchParams(window.location.search)
-		const expiry = urlParams.get('expiry')
+<head>
+    <!-- Bootstrap -->
+    {{ '/css/bootstrap.3.min.css' | stylesheet_tag: nonce }}
+</head>
 
-		if (expiry) {
-			/// Removes the expiry
-			const uri = window.location.toString()
-			const clean_uri = uri.substring(0, uri.indexOf("?"))
-			window.history.replaceState({}, document.title, clean_uri)
+<body>
+    <div id="loader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dialog" class="hidden">
+        <div class="background"></div>
+        <div class="container">
+            <div class="row">
+                <div class="modalbox success col-sm-8 col-md-6 col-lg-5 center animate">
+                    <div class="icon">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </div>
+                    <!--/.icon-->
+                    <h1>Success!</h1>
+                    <p class="message">We've sent a confirmation to your e-mail <br />for verification.</p>
+                    <button type="button" class="btn go">Go There</button>
+                    <button type="button" class="btn cancel">Close</button>
+                </div>
+                <!--/.success-->
+            </div>
+            <!--/.row-->
+            <div class="row">
+                <div class="modalbox error col-sm-8 col-md-6 col-lg-5 center animate hidden">
+                    <div class="icon">
+                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                    </div>
+                    <!--/.icon-->
+                    <h1>Oh no!</h1>
+                    <p class="message">
+                        Oops! Something went wrong, <br /> you should try again.
+                    </p>
+                    <button type="button" class="btn go">Try again</button>
+                    <button type="button" class="btn cancel">Close</button>
+                </div>
+                <!--/.success-->
+            </div>
+            <!--/.row-->
+        </div>
+        <!--/.container-->
+    </div>
+    <div id="error" class="hidden"></div>
 
-			/// Send expiry as POST to the server
-			
-		} else {
-			window.location = "https://{{ host }}"
-		}
-	})()
-</script>
+    <!-- Scripts -->
+    {{ 'js/jquery.min.js' | javascript_tag: nonce }}
+
+    <script nonce="{{ nonce }}">
+        const urlParams = new URLSearchParams(window.location.search)
+        const expiry = urlParams.get('expiry')
+        const game = urlParams.get('game')
+        const error = urlParams.get('error')
+        const success = urlParams.get('success')
+        const biketagHost = '{{ host }}'
+        const homeUrl = `https://${biketagHost}`
+
+        function dom(tag, id = null, className = null, text = '', inner = [], html = null) {
+            if (typeof tag !== 'undefined') {
+                const el = document.createElement(tag)
+                el.id = id
+                el.className = className
+                el.innerText = text
+                if (html) el.innerHTML = html
+
+                if (inner.length) {
+                    inner.forEach((innerChild) =>
+                        el.appendChild(
+                            dom(
+                                innerChild.tag,
+                                innerChild.className,
+                                innerChild.class,
+                                innerChild.text,
+                                innerChild.inner,
+                                innerChild.html,
+                            ),
+                        ),
+                    )
+                }
+
+                return el
+            }
+
+            return dom('div', id, className, text, inner)
+        }
+
+        function showSuccess(success = {}) {
+            const loaderEl = document.getElementById('loader')
+            if (loaderEl) loaderEl.classList.add('hidden')
+
+            console.log({
+                success,
+            })
+
+            const dialogEl = document.getElementById('dialog')
+            if (dialogEl) {
+                dialogEl.classList.remove('hidden')
+                const successEl = dialogEl.querySelector('.success')
+                let messageContainerEl = successEl
+                let message = success.success
+                let goButtonText = ''
+                let goButtonEvent = () => {
+                    window.location = success.url || homeUrl
+                }
+
+                if (success.error) {
+                    const errorEl = dialogEl.querySelector('.error')
+                    successEl.classList.add('hidden')
+                    errorEl.classList.remove('hidden')
+
+                    messageContainerEl = errorEl
+                    message = success.error
+                    goButtonEvent = () => {
+                        window.location = `https://ambassadors.${biketagHost}?game=${game}&expiry=${expiry}`
+                    }
+                }
+
+                const messageElText = messageContainerEl.querySelector('.message')
+                const goButtonEl = messageContainerEl.querySelector('button.go')
+                const cancelButtonEl = messageContainerEl.querySelector('button.cancel')
+
+                messageElText.innerHTML = message
+                goButtonEl.addEventListener('click', goButtonEvent)
+                cancelButtonEl.addEventListener('click', () => {
+                    window.close()
+                })
+            }
+        }
+
+        function showError(error) {
+            /// hide the loader
+            const loaderEl = document.getElementById('loader')
+            if (loaderEl) loaderEl.classList.add('hidden')
+
+            const errorEl = document.getElementById('error')
+            if (errorEl) {
+                /// Show the error
+                errorEl.classList.remove('hidden')
+
+                const noiseEl = dom('div', 'noise', 'noise')
+                const overlayEl = dom('div', 'overlay', 'overlay')
+                const terminalEl = dom('div', 'terminal', 'terminal', '', [{
+                    tag: 'h1',
+                    text: 'Error',
+                    inner: [{
+                        tag: 'span',
+                        class: 'errorcode',
+                        text: '404',
+                    }, ],
+                }, {
+                    tag: 'p',
+                    className: 'output',
+                    text: error,
+                }, {
+                    tag: 'p',
+                    className: 'output',
+                    html: 'Please try to <a href="#1">go back</a> or <a href="#2">return to the homepage</a>.',
+                }, {
+                    tag: 'p',
+                    className: 'output',
+                    text: 'Good luck.',
+                }, ])
+
+                errorEl.appendChild(noiseEl)
+                errorEl.appendChild(overlayEl)
+                errorEl.appendChild(terminalEl)
+            }
+        }
+
+        ;
+        (() => {
+            /// Remove params from url
+            const uri = window.location.toString()
+            const clean_uri = uri.substring(0, uri.indexOf('?'))
+            window.history.replaceState({}, document.title, clean_uri)
+
+            if (expiry && game) {
+                /// Send expiry as POST to the server
+                const url = `https://${game}.${biketagHost}/api/post/reddit?expiry=${encodeURIComponent(expiry)}`
+                return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(function(res) {
+                        return res.json()
+                    })
+                    .catch(showError)
+                    .then(showSuccess)
+            } else if (success !== null) {
+                showSuccess(success)
+            } else if (error !== null) {
+                showError(error)
+            } else {
+                /// If no parameters were sent, then redirect user to home
+                window.location = homeUrl
+            }
+        })()
+    </script>
+</body>
