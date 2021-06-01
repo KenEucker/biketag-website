@@ -17,9 +17,9 @@
             "logo": ""
         }
     },
-	"ambassadors": {
+    "ambassadors": {
         "template": "ambassadors"
-	},
+    },
     "history": {
         "tagline": "BikeTag! A timeline as we know it",
         "template": "history",
@@ -88,6 +88,9 @@
     "portland": {
         "template": "biketag1",
         "aliases": ["pdx", "oregon"],
+        "bingo": {
+            "url": "https://www.bonus.com/bingo/?bingo_game_id=66053"
+        },
         "meta": {
             "title": "Portland BikeTag!",
             "url": "https://biketag.org"
@@ -1564,7 +1567,7 @@
             "logo": ""
         }
     },
-	"isleofwight": {
+    "isleofwight": {
         "meta": {
             "title": "Isle Of Wight BikeTag!",
             "url": "https://isleofwight.biketag.org"
@@ -1576,8 +1579,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "IsleOfWightCycling"
-		},
+            "subreddit": "IsleOfWightCycling"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
@@ -1586,7 +1589,7 @@
             "logo": ""
         }
     },
-	"seacoast": {
+    "seacoast": {
         "meta": {
             "title": "Seacoast BikeTag!",
             "url": "https://isleofwight.biketag.org"
@@ -1598,8 +1601,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "SeacoastCycling"
-		},
+            "subreddit": "SeacoastCycling"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
@@ -1608,7 +1611,7 @@
             "logo": ""
         }
     },
-	"cardiff": {
+    "cardiff": {
         "meta": {
             "title": "Cardiff BikeTag!",
             "url": "https://cardiff.biketag.org"
@@ -1620,8 +1623,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "CardiffCycling"
-		},
+            "subreddit": "CardiffCycling"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
@@ -1630,7 +1633,7 @@
             "logo": ""
         }
     },
-	"princegeorge": {
+    "princegeorge": {
         "meta": {
             "title": "Prince George BikeTag!",
             "url": "https://princegeorge.biketag.org"
@@ -1642,8 +1645,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "PrinceGeorgeCycling"
-		},
+            "subreddit": "PrinceGeorgeCycling"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
@@ -1652,7 +1655,7 @@
             "logo": ""
         }
     },
-	"calgary": {
+    "calgary": {
         "meta": {
             "title": "Calgary BikeTag!",
             "url": "https://calgary.biketag.org"
@@ -1664,8 +1667,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "CycleCalgary"
-		},
+            "subreddit": "CycleCalgary"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
@@ -1674,7 +1677,7 @@
             "logo": "calgary-bike-tag"
         }
     },
-	"toronto": {
+    "toronto": {
         "meta": {
             "title": "Toronto BikeTag!",
             "url": "https://calgary.biketag.org"
@@ -1686,8 +1689,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "torontobiking"
-		},
+            "subreddit": "torontobiking"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
@@ -1719,7 +1722,7 @@
             "logo": ""
         }
     },
-	"boise": {
+    "boise": {
         "meta": {
             "title": "Boise BikeTag!",
             "url": "https://calgary.biketag.org"
@@ -1731,8 +1734,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "boisebike"
-		},
+            "subreddit": "boisebike"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
@@ -1741,7 +1744,7 @@
             "logo": ""
         }
     },
-	"grandeprairie": {
+    "grandeprairie": {
         "meta": {
             "title": "Grand Prarie BikeTag!",
             "url": "https://grandeprairie.biketag.org"
@@ -1753,8 +1756,8 @@
             "queueAlbumHash": ""
         },
         "reddit": {
-			"subreddit": "GrandPrarieCycling"
-		},
+            "subreddit": "GrandPrarieCycling"
+        },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
         },
