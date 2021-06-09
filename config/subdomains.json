@@ -1831,5 +1831,27 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
-    }
+    },
+    "ldnont": {
+        "meta": {
+            "title": "London, Ontario BikeTag!",
+            "url": "https://ldnont.biketag.org"
+        },
+        "region": "London, Ontario, Canada",
+        "tagline": "The BikeTag game in London, Ontario, Canada",
+        "imgur": {
+            "albumHash": "OnusOJk",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "LdnOntCycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
 }
