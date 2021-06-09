@@ -1765,5 +1765,71 @@
             "header": "../../public/img/biketag-logo-1.png",
             "logo": ""
         }
+    },
+    "capeann": {
+        "meta": {
+            "title": "Cape Ann BikeTag!",
+            "url": "https://capeann.biketag.org"
+        },
+        "region": "Cape Ann, Massachusetts",
+        "tagline": "The BikeTag game in Cape Ann, Massachusetts",
+        "imgur": {
+            "albumHash": "zDGjvJE",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "CapeAnnCycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "bangor": {
+        "meta": {
+            "title": "Bangor BikeTag!",
+            "url": "https://bangor.biketag.org"
+        },
+        "region": "Bangor, Maine",
+        "tagline": "The BikeTag game in Bangor, Maine",
+        "imgur": {
+            "albumHash": "M8MDqdq",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "BangorCycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "salem": {
+        "meta": {
+            "title": "Salem BikeTag!",
+            "url": "https://salem.biketag.org"
+        },
+        "region": "Salem, Oregon",
+        "tagline": "The BikeTag game in Salem, Oregon",
+        "imgur": {
+            "albumHash": "siSNq8Q",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "CycleSalem"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
     }
 }
