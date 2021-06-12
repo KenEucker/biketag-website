@@ -1242,7 +1242,6 @@
         }
     },
     "bellingham": {
-        "readonly": true,
         "meta": {
             "title": "Bellingham BikeTag!",
             "url": "https://bellingham.biketag.org"
@@ -1263,7 +1262,6 @@
         }
     },
     "munich": {
-        "readonly": true,
         "meta": {
             "title": "Munich BikeTag!",
             "url": "https://munich.biketag.org"
@@ -1284,7 +1282,6 @@
         }
     },
     "saltlakecity": {
-        "readonly": true,
         "meta": {
             "title": "Salt Lake City BikeTag!",
             "url": "https://dc.biketag.org"
@@ -1305,7 +1302,6 @@
         }
     },
     "berlin": {
-        "readonly": true,
         "meta": {
             "title": "Berlin BikeTag!",
             "url": "https://berlin.biketag.org"
@@ -1326,7 +1322,6 @@
         }
     },
     "hamburg": {
-        "readonly": true,
         "meta": {
             "title": "Hamburg BikeTag!",
             "url": "https://hamburg.biketag.org"
@@ -1367,7 +1362,6 @@
         }
     },
     "prague": {
-        "readonly": true,
         "meta": {
             "title": "Prague BikeTag!",
             "url": "https://dc.biketag.org"
@@ -1700,7 +1694,6 @@
         }
     },
     "santabarbara": {
-        "readonly": true,
         "meta": {
             "title": "Santa Barbara BikeTag!",
             "url": "https://santabarbara.biketag.org"

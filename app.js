@@ -1,7 +1,7 @@
 const sexpress = require('sexpress')
 
 /// BikeTag App specific configuration filters
-const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain) {
+const onPageDataRequest = function BikeTagPublicData(publicData, appConfig, subdomain) {
     const subdomains = Object.keys(appConfig.subdomains)
 
     publicData.supportedRegions = appConfig.supportedRegions
@@ -26,15 +26,19 @@ const publicFilter = function BikeTagPublicData(publicData, appConfig, subdomain
             }
 
             return out
-        },
-        {},
+        }, {},
     )
 
     return publicData
 }
 
+const appStarted = function BikeTagAppStarted() {}
+
+const onConfigurationLoad = function BikeTagConfigurationLoad(config) {}
+
 const app = sexpress({
-    publicFilter,
+    onPageDataRequest,
+    onConfigurationLoad,
 })
 
-app.run()
+app.run(appStarted)
