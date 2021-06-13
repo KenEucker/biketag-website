@@ -1068,7 +1068,6 @@
     },
     "austin": {
         "readonly": true,
-        "aliases": ["texas"],
         "meta": {
             "title": "Austin BikeTag!",
             "url": "https://austin.biketag.org"
@@ -1093,7 +1092,6 @@
     },
     "houston": {
         "readonly": true,
-        "aliases": ["texas"],
         "meta": {
             "title": "Houston BikeTag!",
             "url": "https://houston.biketag.org"
@@ -1168,7 +1166,7 @@
     },
     "sanantonio": {
         "readonly": true,
-        "aliases": ["texas", "satx"],
+        "aliases": ["satx"],
         "meta": {
             "title": "San Antonio BikeTag!",
             "url": "https://austin.biketag.org"
