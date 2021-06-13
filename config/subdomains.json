@@ -350,7 +350,6 @@
     },
     "sanjose": {
         "readonly": true,
-        "aliases": ["california"],
         "meta": {
             "title": "San Jose BikeTag!",
             "url": "https://sanjose.biketag.org"
@@ -1119,7 +1118,7 @@
     },
     "sanfrancisco": {
         "readonly": true,
-        "aliases": ["california", "sf", "bay"],
+        "aliases": ["sf"],
         "meta": {
             "title": "San Francisco BikeTag!",
             "url": "https://sanfrancisco.biketag.org"
@@ -1194,7 +1193,7 @@
     },
     "losangeles": {
         "readonly": true,
-        "aliases": ["la", "california"],
+        "aliases": ["la"],
         "meta": {
             "title": "DC BikeTag!",
             "url": "https://losangeles.biketag.org"
