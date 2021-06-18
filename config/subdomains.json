@@ -1756,19 +1756,19 @@
             "logo": ""
         }
     },
-    "capeann": {
+    "northshore": {
         "meta": {
-            "title": "Cape Ann BikeTag!",
-            "url": "https://capeann.biketag.org"
+            "title": "Northshore BikeTag!",
+            "url": "https://northshore.biketag.org"
         },
-        "region": "Cape Ann, Massachusetts",
-        "tagline": "The BikeTag game in Cape Ann, Massachusetts",
+        "region": "Northshore, Massachusetts",
+        "tagline": "The BikeTag game in Northshore, Massachusetts",
         "imgur": {
             "albumHash": "zDGjvJE",
             "queueAlbumHash": ""
         },
         "reddit": {
-            "subreddit": "CapeAnnCycling"
+            "subreddit": "NorthshoreCycling"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
@@ -1835,6 +1835,28 @@
         },
         "reddit": {
             "subreddit": "LdnOntCycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "provincetown": {
+        "meta": {
+            "title": "Provincetown, Massachusetts BikeTag!",
+            "url": "https://provincetown.biketag.org"
+        },
+        "region": "provincetown, Massachusetts",
+        "tagline": "The BikeTag game in provincetown, Massachusetts",
+        "imgur": {
+            "albumHash": "Nfnmc2D",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+            "subreddit": "ProvincetownCycling"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
