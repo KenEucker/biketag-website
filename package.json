@@ -49,7 +49,7 @@
         "snoowrap": "^1.22.0"
     },
     "devDependencies": {
-        "prettier": "^2.2.1"
+        "prettier": "^2.3.2"
     },
     "license": "CC-BY-SA-4.0",
     "generate": {
