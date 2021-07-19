@@ -1849,14 +1849,56 @@
             "title": "Provincetown, Massachusetts BikeTag!",
             "url": "https://provincetown.biketag.org"
         },
-        "region": "provincetown, Massachusetts",
-        "tagline": "The BikeTag game in provincetown, Massachusetts",
+        "region": "Provincetown, Massachusetts",
+        "tagline": "The BikeTag game in Provincetown, Massachusetts",
         "imgur": {
             "albumHash": "Nfnmc2D",
             "queueAlbumHash": ""
         },
         "reddit": {
             "subreddit": "ProvincetownCycling"
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "3city": {
+        "meta": {
+            "title": "3city, Poland BikeTag!",
+            "url": "https://provincetown.biketag.org"
+        },
+        "region": "3city, Poland",
+        "tagline": "The BikeTag game in 3city, Poland",
+        "imgur": {
+            "albumHash": "aDZJeZO",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "ventura": {
+        "meta": {
+            "title": "Ventura, California BikeTag!",
+            "url": "https://provincetown.biketag.org"
+        },
+        "region": "Ventura, California",
+        "tagline": "The BikeTag game in Ventura, California",
+        "imgur": {
+            "albumHash": "7sau8fS",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
