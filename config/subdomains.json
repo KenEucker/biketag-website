@@ -563,7 +563,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "harrisburg-bike-tag"
         }
     },
     "dresden": {
@@ -755,7 +755,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "islamabad-bike-tag"
         }
     },
     "saarbrucken": {
@@ -1599,7 +1599,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "seacoast-bike-tag"
         }
     },
     "cardiff": {
@@ -1797,7 +1797,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "bangor-bike-tag"
         }
     },
     "salem": {
