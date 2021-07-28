@@ -1869,7 +1869,7 @@
     "3city": {
         "meta": {
             "title": "3city, Poland BikeTag!",
-            "url": "https://provincetown.biketag.org"
+            "url": "https://3city.biketag.org"
         },
         "region": "3city, Poland",
         "tagline": "The BikeTag game in 3city, Poland",
@@ -1890,10 +1890,31 @@
     "ventura": {
         "meta": {
             "title": "Ventura, California BikeTag!",
-            "url": "https://provincetown.biketag.org"
+            "url": "https://ventura.biketag.org"
         },
         "region": "Ventura, California",
         "tagline": "The BikeTag game in Ventura, California",
+        "imgur": {
+            "albumHash": "7sau8fS",
+            "queueAlbumHash": ""
+        },
+        "reddit": {
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "ljubljana": {
+        "meta": {
+            "title": "Ljubljana, Slovenia BikeTag!",
+            "url": "https://ljubljana.biketag.org"
+        },
+        "region": "Ljubljana, Slovenia",
+        "tagline": "The BikeTag game in Ljubljana, Slovenia",
         "imgur": {
             "albumHash": "7sau8fS",
             "queueAlbumHash": ""
