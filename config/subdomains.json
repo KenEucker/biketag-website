@@ -1899,6 +1899,7 @@
             "queueAlbumHash": ""
         },
         "reddit": {
+			"subreddit": "VenturaCycling"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
