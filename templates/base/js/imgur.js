@@ -135,7 +135,7 @@
 
             var formData = new FormData()
             formData.append('image', image)
-            formData.append('album', this.queueAlbumHash || this.albumHash)
+            formData.append('album', this.albumHash)
             formData.append('description', description)
 
 
