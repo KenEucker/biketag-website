@@ -8,6 +8,8 @@ class BikeTag {
         this.formID = 'biketagUploadForm'
         this.albumHash =
             window.pageData && window.pageData.imgur ? window.pageData.imgur.albumHash : null
+		this.queueAlbumHash =
+			window.pageData && window.pageData.imgur ? window.pageData.imgur.queueAlbumHash : null
     }
 
     closeNotification() {

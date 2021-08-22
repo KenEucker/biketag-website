@@ -8,6 +8,7 @@
 
             if (window.pageData && window.pageData.imgur) {
                 this.albumHash = window.pageData.imgur.albumHash
+                this.queueAlbumHash = window.pageData.imgur.queueAlbumHash
                 this.imgurClientID = window.pageData.imgur.imgurClientID
                 this.imgurAuthorization = !window.pageData.imgur.imgurAuthorization
                     ? 'Client-ID ' + this.imgurClientID
@@ -134,7 +135,7 @@
 
             var formData = new FormData()
             formData.append('image', image)
-            formData.append('album', this.albumHash)
+            formData.append('album', this.queueAlbumHash || this.albumHash)
             formData.append('description', description)
 
 
@@ -209,6 +210,7 @@
                 .then((response) => {
                     if (!!response && typeof response == 'object') {
                         this.albumHash = response.albumHash || this.albumHash
+                        this.queueAlbumHash = response.queueAlbumHash || this.queueAlbumHash
                         this.imgurAccessToken = response.imgurAccessToken
                             ? 'Bearer ' + response.imgurAccessToken
                             : this.imgurAccessToken

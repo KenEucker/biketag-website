@@ -91,6 +91,9 @@
         "bingo": {
             "url": "https://www.bonus.com/bingo/?bingo_game_id=66053"
         },
+		"queue": {
+			"autoPost": 15
+		},
         "meta": {
             "title": "Portland BikeTag!",
             "url": "https://biketag.org"
@@ -99,6 +102,7 @@
         "tagline": "The BikeTag game in Portland, Oregon",
         "imgur": {
             "albumHash": "Y9PKtpI",
+            "bikedexAlbumHash": "7zuIRDu",
             "queueAlbumHash": "KTk7JrK"
         },
         "reddit": {
@@ -121,10 +125,15 @@
             "title": "Denver BikeTag!",
             "url": "https://denver.biketag.org"
         },
+		"queue": {
+			"autoPost": true,
+			"socialPost": true
+		},
         "region": "Denver, Colorado",
         "tagline": "The BikeTag game in Denver, Colorado",
         "imgur": {
             "albumHash": "xTnG1Io",
+            "bikedexAlbumHash": "EZOrjuT",
             "queueAlbumHash": "qEK4ZzI"
         },
         "reddit": {
@@ -151,7 +160,8 @@
         "tagline": "The BikeTag game in Indianapolis, Indiana",
         "imgur": {
             "albumHash": "dr45yWS",
-            "queueAlbumHash": "SMxBk7g"
+            "queueAlbumHash": "SMxBk7g",
+            "bikedexAlbumHash": "TAf97si"
         },
         "reddit": {
             "subreddit": "BikeIN",
@@ -173,10 +183,15 @@
             "title": "Seattle BikeTag!",
             "url": "https://seattle.biketag.org"
         },
+		"queue": {
+			"autoPost": 60,
+			"socialPost": true
+		},
         "region": "Seattle, Washington",
         "tagline": "The BikeTag game in Seattle, Washington",
         "imgur": {
             "albumHash": "3CIf8hy",
+            "bikedexAlbumHash": "z3NoVxe",
             "queueAlbumHash": "CF1FtsF"
         },
         "map": {
@@ -1831,7 +1846,7 @@
         "tagline": "The BikeTag game in London, Ontario, Canada",
         "imgur": {
             "albumHash": "OnusOJk",
-            "queueAlbumHash": ""
+            "queueAlbumHash": "R6Fr5dq"
         },
         "reddit": {
             "subreddit": "LdnOntCycling"
@@ -1875,7 +1890,7 @@
         "tagline": "The BikeTag game in 3city, Poland",
         "imgur": {
             "albumHash": "aDZJeZO",
-            "queueAlbumHash": ""
+            "queueAlbumHash": "EVoQffP"
         },
         "reddit": {
         },
@@ -1896,7 +1911,7 @@
         "tagline": "The BikeTag game in Ventura, California",
         "imgur": {
             "albumHash": "7sau8fS",
-            "queueAlbumHash": ""
+            "queueAlbumHash": "KvIxudE"
         },
         "reddit": {
 			"subreddit": "VenturaCycling"
@@ -1918,9 +1933,31 @@
         "tagline": "The BikeTag game in Ljubljana, Slovenia",
         "imgur": {
             "albumHash": "NCsNdVG",
-            "queueAlbumHash": ""
+            "queueAlbumHash": "GhxlDbM"
         },
         "reddit": {
+        },
+        "easter": {
+            "jingle": "../../public/media/biketag-jingle-1.mp3"
+        },
+        "images": {
+            "header": "../../public/img/biketag-logo-1.png",
+            "logo": ""
+        }
+    },
+    "oahu": {
+        "meta": {
+            "title": "Oahu, Hawaii BikeTag!",
+            "url": "https://oahu.biketag.org"
+        },
+        "region": "Oahu, Hawaii",
+        "tagline": "The BikeTag game in Oahu, Hawaii",
+        "imgur": {
+            "albumHash": "C8KB5iV",
+            "queueAlbumHash": "Qe8Q3Vj"
+        },
+        "reddit": {
+			"subreddit": "OahuCycling"
         },
         "easter": {
             "jingle": "../../public/media/biketag-jingle-1.mp3"
