@@ -199,8 +199,8 @@ class BikeTag {
         target.appendChild(form)
     }
 
-    sendNotificationEmail(tagnumber = 'current') {
-        return fetch('/api/post/email', {
+    sendNewTagNotification(tagnumber = 'current') {
+        return fetch('/api/post/newtag', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -296,7 +296,7 @@ class BikeTag {
 					console.log(`${preText} - success!`)
 
 					/// TODO: Send message to the server that a new tag has been queued
-					this.sendNotificationEmail(currentTagInfo.mysteryTagNumber).then(function () {
+					this.sendNewTagNotification(currentTagInfo.mysteryTagNumber).then(function () {
 						window.location.href =
 							`${window.location.pathname}?uploadSuccess=true&flushcache=true&message=${preText}`
 					})
@@ -944,7 +944,7 @@ class BikeTag {
         var resend = this.getUrlParam('resendNotification') === 'true'
 
 		if (resend) {
-			this.sendNotificationEmail()
+			this.sendNewTagNotification()
 		}
 
         if (window.currentBikeTag) {
