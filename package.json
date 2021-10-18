@@ -46,8 +46,9 @@
         "imgur": "^1.0.0",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "0.7.87",
-        "snoowrap": "^1.22.0"
+        "sexpress": "0.7.97",
+        "snoowrap": "^1.22.0",
+        "uuid": "^8.3.2"
     },
     "devDependencies": {
         "prettier": "^2.2.1"
