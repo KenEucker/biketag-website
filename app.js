@@ -42,24 +42,31 @@ const onLoad = async function onLoad(config) {
 	const supabase = createClient('localhost:5555', config.notifications?.publicKey)
 
 	app.hook('notifications:subscribe', async (subscription) => {
+		const Player = {
+			subscription: JSON.stringify(subscription),
+			uri: subscription.endpoint,
+		}
 		const { data, error } = await supabase
-			.from('Players')
+			.from('PlayerDevice')
 			.insert([
-				subscription,
+				Player,
 			])
 		
 		return !error ? data : error
 	})
 	app.hook('notifications:subscribers', async () => {
 		const { data, error } = await supabase
-			.from('Players')
+			.from('PlayerDevice')
 			.select()
 		
 			return !error ? data : error
 	})
 	app.hook('notifications:unsubscribe', async (subscription) => {
+		const PlayerDevice = {
+			uri: subscription.endpoint
+		}
 		const { data, error } = await supabase
-			.from('Players')
+			.from('PlayerDevice')
 			.delete()
 			.match(subscription)
 	})
