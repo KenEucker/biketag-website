@@ -36,14 +36,7 @@ const onPageDataRequest = function BikeTagPublicData(publicData, appConfig, subd
 }
 
 const appStarted = function BikeTagAppStarted() {
-	app.hook('notifications:admin-subscribers', async (subscribersHook) => {
-		app.sendNotificationToAllSubscribers('BikeTag Server', `Server restarted on ${Date.now().toLocaleString()}`, 'admin')
-		// const subscribers = await subscribersHook[0]()
-
-		// subscribers.map((s) => {
-		// 	app.notifications.sendNotificationToSubscription(s.subscription, 'BikeTag Server', `Server restarted on ${Date.now().toLocaleString()}`)
-		// })
-	}, false)
+	app.hook('notifications:notify', {title: 'BikeTag Server', message: `Server restarted on ${new Date().toDateString()}`, domain: 'admin'})
 }
 
 const onConfigurationLoad = function BikeTagConfigurationLoad(config) {}
