@@ -94,6 +94,7 @@ const onLoad = async function onLoad(config) {
 		const { data, error } = await supabase
 			.from('PlayerDevices')
 			.select()
+
 		
 			return !error ? data : error
 	})
@@ -112,10 +113,6 @@ const onLoad = async function onLoad(config) {
 			.match({uri: subscription.endpoint})
 			
 			return !error ? data : error
-	})
-
-	app.hook('biketag:newtag', (newTag) => {
-		app.hook('notifications:notify', {domain: newTag.subdomain, title: 'A new tag has been played!', message: 'from something'})
 	})
 }
 
