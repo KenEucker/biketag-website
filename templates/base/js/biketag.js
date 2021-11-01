@@ -965,9 +965,6 @@ class BikeTag {
                 "<h3>Region not supported</h3><p>Currently, this version of biketag is being managed elsewhere. If you need to create a biketag post that is not affiliated with any region, go to <a href='Http://post.biketag.org'>here to post a global tag</a>.</p>"
         }
 
-        // COVID-19 Banner
-        // this.createNotification(`BikeTag asks you to play responsibly on <a target="_blank" href="https://www.pedalpalooza.org/post/scavenger-hunt-june-21st-2020">Pedalpalooza Scavenger Hunt Day</a> by wearing masks and staying two bikes apart.`, "bg-orange", 5000)
-
         var headerLogo = document.querySelector('#header .header--logo')
         if (headerLogo) {
             headerLogo.addEventListener('click', () => {

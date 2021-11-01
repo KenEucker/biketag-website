@@ -46,9 +46,8 @@
         "imgur": "^1.0.0",
         "node-cache": "^5.1.2",
         "path": "^0.12.7",
-        "sexpress": "0.7.99",
-        "snoowrap": "^1.22.0",
-        "uuid": "^8.3.2"
+        "sexpress": "0.7.100",
+        "snoowrap": "^1.22.0"
     },
     "devDependencies": {
         "prettier": "^2.2.1"
@@ -62,7 +61,7 @@
         "copySource": true,
         "copyConfigJs": false,
         "copySourceConfig": false,
-        "source": "https://github.com/KenEucker/biketag-app/archive/production.zip",
+        "source": "https://github.com/biketagorg/biketag-app/archive/production.zip",
         "config": "https://biketag-settings.sanity.studio/biketag-website"
     }
 }

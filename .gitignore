@@ -84,3 +84,5 @@ public/js/swagger-client.browser.min.js.map
 public/img/jsoneditor-icons.svg
 public/css/jsoneditor.min.css
 public/js/jsoneditor.min.js
+
+prisma/data.db*
