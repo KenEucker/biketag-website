@@ -39,7 +39,7 @@
     },
     "keywords": [],
     "dependencies": {
-        "@googlemaps/google-maps-services-js": "^3.1.13",
+        "@googlemaps/google-maps-services-js": "^3.3.0",
         "@sanity/client": "^2.2.6",
         "got": "^11.8.2",
         "imgur": "^1.0.0",
