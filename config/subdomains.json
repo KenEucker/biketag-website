@@ -169,7 +169,7 @@
             "postFlair": "06f0e420-6a9f-11e9-9c86-0ef5e67d2978"
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/biketag-indianapolis-jingle.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
@@ -1676,7 +1676,7 @@
             "subreddit": "CycleCalgary"
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/biketag-calgary-jingle.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
