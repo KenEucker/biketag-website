@@ -626,7 +626,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "charlotte-bike-tag"
         }
     },
     "phoenix": {
@@ -818,7 +818,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "Ottowa.svg"
+            "logo": "ottowa-bike-tag"
         }
     },
     "tulsa": {
@@ -914,7 +914,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "KansasCity.svg"
+            "logo": "kansas-city-bike-tag"
         }
     },
     "lexington": {
@@ -986,7 +986,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "Victoria.svg"
+            "logo": "victoria-bike-tag"
         }
     },
     "paris": {
@@ -1010,7 +1010,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "Paris.svg"
+            "logo": "paris-bike-tag"
         }
     },
     "boston": {
@@ -1034,7 +1034,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "boston-bike-tag"
         }
     },
     "peakdistrict": {
@@ -1290,7 +1290,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "munich-bike-tag"
         }
     },
     "saltlakecity": {
@@ -1430,7 +1430,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "peoria-bike-tag"
         }
     },
     "newhaven": {
@@ -1450,7 +1450,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "new-haven-bike-tag"
         }
     },
     "hamilton": {
@@ -1570,7 +1570,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "gatineau-bike-tag"
         }
     },
     "isleofwight": {
@@ -1702,7 +1702,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "toronto-bike-tag"
         }
     },
     "santabarbara": {
@@ -1921,7 +1921,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "ventura-bike-tag"
         }
     },
     "ljubljana": {
