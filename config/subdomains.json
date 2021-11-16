@@ -583,11 +583,11 @@
     },
     "dresden": {
         "meta": {
-            "title": "Dreseden BikeTag!",
+            "title": "Dresden BikeTag!",
             "url": "https://dresden.biketag.org"
         },
-        "region": "Dreseden, Germany",
-        "tagline": "The BikeTag game in the Dreseden, Germany",
+        "region": "Dresden, Germany",
+        "tagline": "The BikeTag game in the Dresden, Germany",
         "imgur": {
             "albumHash": "MCrgubp",
             "queueAlbumHash": ""
