@@ -169,7 +169,7 @@
             "postFlair": "06f0e420-6a9f-11e9-9c86-0ef5e67d2978"
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/biketag-indianapolis-jingle.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
@@ -554,12 +554,12 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "Emporia.svg"
+            "logo": "emporia-bike-tag"
         }
     },
     "harrisburg": {
         "meta": {
-            "title": "Emporia BikeTag!",
+            "title": "Harrisburg BikeTag!",
             "url": "https://harrisburg.biketag.org"
         },
         "region": "Harrisburg, Pennsylvania",
@@ -583,11 +583,11 @@
     },
     "dresden": {
         "meta": {
-            "title": "Dreseden BikeTag!",
+            "title": "Dresden BikeTag!",
             "url": "https://dresden.biketag.org"
         },
-        "region": "Dreseden, Germany",
-        "tagline": "The BikeTag game in the Dreseden, Germany",
+        "region": "Dresden, Germany",
+        "tagline": "The BikeTag game in the Dresden, Germany",
         "imgur": {
             "albumHash": "MCrgubp",
             "queueAlbumHash": ""
@@ -866,7 +866,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "Montreal.svg"
+            "logo": "montreal-bike-tag"
         }
     },
     "fayetteville": {
@@ -1053,7 +1053,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "PeakDistrict.svg"
+            "logo": "peak-district-bike-tag"
         }
     },
     "chicago": {
@@ -1208,7 +1208,7 @@
         "readonly": true,
         "aliases": ["la"],
         "meta": {
-            "title": "DC BikeTag!",
+            "title": "Los Angeles BikeTag!",
             "url": "https://losangeles.biketag.org"
         },
         "region": "Los Angeles, California",
@@ -1296,7 +1296,7 @@
     "saltlakecity": {
         "meta": {
             "title": "Salt Lake City BikeTag!",
-            "url": "https://dc.biketag.org"
+            "url": "https://saltlakecity.biketag.org"
         },
         "region": "Salt Lake City, Utah",
         "tagline": "The BikeTag game in Salt Lake City, Utah",
@@ -1410,7 +1410,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "dayton-bike-tag"
         }
     },
     "peoria": {
@@ -1592,13 +1592,13 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "isle-of-wight-bike-tag"
         }
     },
     "seacoast": {
         "meta": {
             "title": "Seacoast BikeTag!",
-            "url": "https://isleofwight.biketag.org"
+            "url": "https://seacoast.biketag.org"
         },
         "region": "Portsmouth, New Hampshire Region",
         "tagline": "The BikeTag game in the Portsmouth, New Hampshire Region",
@@ -1658,7 +1658,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "prince-george-bike-tag"
         }
     },
     "calgary": {
@@ -1676,7 +1676,7 @@
             "subreddit": "CycleCalgary"
         },
         "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
+            "jingle": "../../public/media/biketag-calgary-jingle.mp3"
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
@@ -1686,13 +1686,13 @@
     "toronto": {
         "meta": {
             "title": "Toronto BikeTag!",
-            "url": "https://calgary.biketag.org"
+            "url": "https://toronto.biketag.org"
         },
         "region": "Toronto, Ontario, Canada",
         "tagline": "The BikeTag game in Toronto, Ontario, Canada",
         "imgur": {
-            "albumHash": "gqV8Hk8",
-            "queueAlbumHash": ""
+            "albumHash": "NUM4ToK",
+            "queueAlbumHash": "gqV8Hk8"
         },
         "reddit": {
             "subreddit": "torontobiking"
@@ -1724,13 +1724,13 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "santa-barbara-bike-tag"
         }
     },
     "boise": {
         "meta": {
             "title": "Boise BikeTag!",
-            "url": "https://calgary.biketag.org"
+            "url": "https://boise.biketag.org"
         },
         "region": "Boise, Idaho",
         "tagline": "The BikeTag game in Boise, Idaho",
@@ -1899,7 +1899,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "3-city-bike-tag"
         }
     },
     "ventura": {
@@ -1942,7 +1942,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": ""
+            "logo": "ljubljana-bike-tag"
         }
     },
     "oahu": {
