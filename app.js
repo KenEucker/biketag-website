@@ -37,7 +37,7 @@ const onPageDataRequest = function BikeTagPublicData(publicData, appConfig, subd
 const onLoad = async function onLoad(config) {	
 	if (config.notifications?.enabled) {
 		console.log('enabling push notifications for new posted BikeTags')
-		const supabase = createClient('localhost:5555', config.notifications?.publicKey)
+		const supabase = createClient('localhost:5555', config.notifications?.gcmApiKey)
 
 		app.hook('notifications:subscribe', async (subscription) => {
 			const { data, error } = await supabase
