@@ -16,6 +16,12 @@ module.exports = {
         liquid: {
             customFilters: {
                 biketag_image: biketagImage,
+				module: (src, nonce, defer) =>
+					`<script src="${src}" type="module" crossorigin ${
+						defer ? 'defer' : ''
+					} nonce="${nonce}"></script>`,
+				custom_link: (href, nonce, rel) =>
+				`<link href="${href}" rel="${rel}" nonce="${nonce}"/>`,
             },
         },
     },
