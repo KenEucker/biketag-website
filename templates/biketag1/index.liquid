@@ -118,7 +118,11 @@
 
 				<p>
 					{% for region in supportedRegions %}
-					<a href="https://{{ region }}.{{host}}">BikeTag in {{ subdomains[region].region }}</a><br>
+					<a href="https://{{ region }}.{{host}}">
+						{{ "img/" | append: subdomains[region].images.logo | replace: '.png', '' | append: '-small.png' | asset_url | img_tag : nonce }}
+						<br>
+						<span>BikeTag in {{ subdomains[region].region }}</span>
+					</a><br>
 					{% endfor %}
 				</p>
 

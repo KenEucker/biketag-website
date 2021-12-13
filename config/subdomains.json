@@ -86,8 +86,8 @@
         }
     },
     "portland": {
-        "template": "biketag1",
-        "aliases": ["pdx", "oregon"],
+		"template": "biketag-vue",
+		"aliases": ["pdx", "oregon"],
         "bingo": {
             "url": "https://www.bonus.com/bingo/?bingo_game_id=66053"
         },
@@ -818,7 +818,7 @@
         },
         "images": {
             "header": "../../public/img/biketag-logo-1.png",
-            "logo": "ottowa-bike-tag"
+            "logo": "ottawa-bike-tag"
         }
     },
     "tulsa": {
