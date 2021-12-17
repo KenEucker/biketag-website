@@ -316,7 +316,7 @@ class BikeTag {
 					if (response.error) {
 						console.log({ image1UploadError: response.error })
 	
-						checkBothImagesUploaded(`Image 1 upload failed. ${response.error}`)
+						checkBothImagesUploaded(`Image 1 upload failed. ${response.error.message}`)
 					} else {
 						image1UploadedSuccess = true
 						
@@ -332,7 +332,7 @@ class BikeTag {
 					if (response.error) {
 						console.log({ image1UploadError: response.error })
 	
-						checkBothImagesUploaded(`Image 2 upload failed. ${response.error}`)
+						checkBothImagesUploaded(`Image 2 upload failed. ${response.error.message}`)
 					} else {
 						image2UploadedSuccess = true
 						
