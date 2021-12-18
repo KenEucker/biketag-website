@@ -19,9 +19,19 @@ footer {
     text-align: center;
 
     img {
-        filter: invert(1) brightness(0.95) drop-shadow(2px 4px 6px black);
+        // filter: invert(1) brightness(0.95) drop-shadow(2px 4px 6px black);
         max-width: 20vw;
     }
+
+	margin: 4rem 0 0 0;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+	span {
+		background-color:white;
+	}
+
 }
 
 #header {
@@ -119,4 +129,15 @@ body.archive {
             font-size: 1.3rem;
         }
     }
+}
+
+.game-circle {
+    background-color: white;
+    border-radius: 50%;
+    width: 100%;
+    max-width: 50%;
+    max-height: 50%;
+    height: 100%;
+    color: black;
+	align-self: center;
 }

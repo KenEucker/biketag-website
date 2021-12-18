@@ -86,7 +86,7 @@
         }
     },
     "portland": {
-		"template": "biketag-vue",
+		"template": "biketag1",
 		"aliases": ["pdx", "oregon"],
         "bingo": {
             "url": "https://www.bonus.com/bingo/?bingo_game_id=66053"
