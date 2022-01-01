@@ -103,6 +103,7 @@ class BikeTag {
                 namePlaceholder:
                     'e.g. Your Reddit (u/) or Instagram handle (@), nickname, team name, real name',
                 playButtonText: 'Play BikeTag!',
+                tosText: 'When using biketag.org, you agree to our Terms Of Service. <a href="https://biketag.bike/2021/12/31/biketag-terms-of-service/">You can read those here.</a>',
             },
             window.pageData.page,
         )
@@ -121,6 +122,7 @@ class BikeTag {
         var nameMessage = pageData.nameMessage
         var namePlaceholder = pageData.namePlaceholder
         var playButtonText = pageData.playButtonText
+        var tosText = pageData.tosText
 
         // var uploadBox = `<div class="upload-box">
         // 	<i class="fa fa-icon fa-bicycle"></i>
@@ -176,7 +178,7 @@ class BikeTag {
         jameson.innerHTML = `<h3>${nameTitle}</h3><label for="name">${nameMessage}</label>
 		<input type="text" name="name" id="name" placeholder="${namePlaceholder}" required />`
 
-        submit.innerHTML = `<li><button id="submit">${playButtonText}</button></li>`
+        submit.innerHTML = `<li><button id="submit">${playButtonText}</button><p>${tosText}</p></li>`
 
         heading.id = 'heading'
         first.id = 'proofTag'
