@@ -1683,28 +1683,6 @@
             "logo": "calgary-bike-tag"
         }
     },
-    "toronto": {
-        "meta": {
-            "title": "Toronto BikeTag!",
-            "url": "https://toronto.biketag.org"
-        },
-        "region": "Toronto, Ontario, Canada",
-        "tagline": "The BikeTag game in Toronto, Ontario, Canada",
-        "imgur": {
-            "albumHash": "NUM4ToK",
-            "queueAlbumHash": "gqV8Hk8"
-        },
-        "reddit": {
-            "subreddit": "torontobiking"
-        },
-        "easter": {
-            "jingle": "../../public/media/biketag-jingle-1.mp3"
-        },
-        "images": {
-            "header": "../../public/img/biketag-logo-1.png",
-            "logo": "toronto-bike-tag"
-        }
-    },
     "santabarbara": {
         "meta": {
             "title": "Santa Barbara BikeTag!",
