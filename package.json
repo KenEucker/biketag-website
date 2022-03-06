@@ -52,7 +52,7 @@
     "devDependencies": {
         "prettier": "^2.2.1"
     },
-    "license": "CC-BY-SA-4.0",
+    "license": "AGPL-3.0-or-later",
     "generate": {
         "enabled": true,
         "copyServerFile": true,
