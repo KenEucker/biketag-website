@@ -8,7 +8,7 @@ A website for biketag.org
 
 ## Why?
 
-To allow anyone and everyone to play BikeTag! This site will ingest the Reddit posts playing biketag for a configured subreddit, and display them on biketag. Conversely, using the site you can create a new tag and will be automagically posted to Reddit! This lets anyone play the game without needing to know how to imgur or having a reddit account, while continuing to support those who have been playing biketag on reddit as well!
+To allow anyone and everyone to play BikeTag! This site will ingest the Reddit posts playing biketag for a configured subreddit, and display them on biketag. Conversely, using the site you can create a new tag that will be automatically posted to Reddit! This lets anyone play the game without needing to know how to imgur or have a reddit account, while continuing to support those who have been playing biketag on reddit as well!
 
 ## Features of the webapp
 
