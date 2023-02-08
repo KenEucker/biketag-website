@@ -11,7 +11,7 @@
     "files.trimFinalNewlines": false,
     "prettier.printWidth": 100,
     "files.insertFinalNewline": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "prettier.semi": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
