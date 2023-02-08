@@ -1,3 +1,12 @@
+# ⚠️ End Of Life ⚠️
+<p align="center">	
+The `biketag-website` project has reached end of life. We are no longer accepting pull requests or providing support for community users of this code and supporting software. This project started as a tool for people to be able to more easily play BikeTag in Portland, Oregon, socially on Reddit. This code lived much longer than it could have and I, Ken, am so happy that it worked so well for the community of BikeTag Players all over the world. Please see the new [BikeTag App][biketag-vue] for the continued free and open source offering by the BikeTag Project.
+</p>
+	
+<p align="center">	
+(THANK YOU!)
+</p>
+
 # biketag-website
 
 [![Build Status][travis-image]](https://travis-ci.org/KenEucker/biketag-website)
@@ -84,3 +93,4 @@ Structured content powered by Sanity.io
 [sanity-image]: https://raw.githubusercontent.com/keneucker/biketag-website/production/public/img/sanity-logo.png
 [paypal-image]: https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png
 [travis-image]: https://travis-ci.org/KenEucker/biketag-website.svg?branch=master
+[biketag-vue]: https://github.com/KenEucker/biketag-vue
